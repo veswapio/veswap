@@ -1,0 +1,6 @@
+$red: red;
+$blue: blue;
+
+@function rhythm($n) {
+  @return 8px * $n;
+}

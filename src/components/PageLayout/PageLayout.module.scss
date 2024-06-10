@@ -1,0 +1,74 @@
+.root {
+  width: 100vw;
+  min-height: 100vh;
+  padding-top: 96px;
+  user-select: none;
+}
+
+.nav {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: rhythm(12);
+  padding: rhythm(3) rhythm(6);
+  backdrop-filter: blur(20px);
+
+  &__logo {
+    height: rhythm(3);
+    margin-right: rhythm(8);
+  }
+
+  &__link,
+  &__wallet {
+    height: rhythm(6);
+    display: flex;
+    align-items: center;
+    padding: 0 rhythm(2.5);
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 12px;
+
+    &[aria-current] {
+      background: #252525;
+    }
+  }
+
+  &__link {
+    margin-right: rhythm(1);
+  }
+
+  &__wallet {
+    margin-left: auto;
+    background: #252525;
+
+    &:hover {
+      background: rgba(#fff, 0.25);
+    }
+  }
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #c7c7c7;
+  padding: rhythm(5) rhythm(10);
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+    margin-left: rhythm(2.5);
+    margin-right: rhythm(0.5);
+  }
+
+  &__version {
+    margin-left: rhythm(2.5);
+  }
+}

@@ -1,0 +1,153 @@
+.page {
+  padding: rhythm(5) rhythm(2);
+  max-width: 1040px;
+  margin: auto;
+}
+
+.section {
+  margin-bottom: rhythm(10);
+
+  &__heading {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    margin-bottom: rhythm(3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.viewMore {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.overviewGroup {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: rhythm(3);
+}
+
+.overviewCard {
+  padding: rhythm(3);
+  background: rgba(#fff, 0.1);
+  border-radius: 12px;
+
+  &__title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: rgba(#fff, 0.7);
+  }
+
+  &__value {
+    margin-top: rhythm(1);
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(#fff, 0.2);
+    margin-right: rhythm(1);
+  }
+}
+
+.overviewStatus {
+  margin-top: rhythm(3);
+  padding: rhythm(2) rhythm(3);
+  border-radius: 12px;
+  background: rgba(#fff, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+
+  &__title {
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: rhythm(1);
+  }
+
+  &__value {
+    font-weight: 700;
+  }
+
+  &__token {
+    margin-left: rhythm(1);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(#fff, 0.2);
+  }
+}
+
+.tabList {
+  display: flex;
+  align-items: center;
+  margin-bottom: rhythm(3);
+}
+
+.tabButton {
+  font-weight: 500;
+  line-height: 22px;
+  font-size: 16px;
+  padding: 10px 16px;
+  border-radius: 37px;
+  outline: none;
+  cursor: pointer;
+  margin-left: 8px;
+  margin-right: 8px;
+
+  &[aria-selected="true"] {
+    background: rgba(#fff, 0.1);
+  }
+}
+
+.tokens {
+  vertical-align: -4px;
+  display: inline-flex;
+  margin-right: rhythm(1);
+}
+
+.token {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(#fff, 0.2);
+  margin-right: 2px;
+}
+
+.link {
+  border-bottom: 1px solid;
+}
+
+.iconPlus,
+.iconArrow {
+  width: 20px;
+  height: 20px;
+  margin-right: rhythm(4);
+}
+
+.iconExternal {
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
+  margin-left: rhythm(0.5);
+}

@@ -1,0 +1,22 @@
+.DataEntry {
+  width: 100%;
+  display: flex;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: rhythm(1.75);
+  margin-bottom: rhythm(1.75);
+
+  &__title {
+    font-weight: 500;
+  }
+
+  &__icon {
+    margin-top: 2px;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  &__content {
+    margin-left: auto;
+  }
+}

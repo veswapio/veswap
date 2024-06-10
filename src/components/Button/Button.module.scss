@@ -1,0 +1,15 @@
+.Button {
+  width: 100%;
+  height: rhythm(8);
+  border-radius: 12px;
+  background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+
+  &.outline {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+  }
+}
