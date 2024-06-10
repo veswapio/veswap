@@ -12,4 +12,8 @@
     border: 1px solid #fff;
     color: #fff;
   }
+
+  &:disabled {
+    opacity: 0.5;
+  }
 }

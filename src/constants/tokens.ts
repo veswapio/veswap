@@ -3,7 +3,7 @@ import sdk from "~/sdk";
 const { Token, ChainId } = sdk;
 
 export default [
-  new Token(ChainId.MAINNET, "0x45429a2255e7248e57fce99e7239aed3f84b7a53", 18, "VET", "Vechain"),
+  new Token(ChainId.MAINNET, "0x45429A2255e7248e57fce99E7239aED3f84B7a53", 18, "VET", "Vechain"),
   new Token(ChainId.MAINNET, "0x0000000000000000000000000000456E65726779", 18, "VTHO", "VeThor")
   // new Token(ChainId.MAINNET, "0x0CE6661b4ba86a0EA7cA2Bd86a0De87b0B860F14", 18, "OCE", "OceanEx"),
   // new Token(ChainId.MAINNET, "0x1b8EC6C2A45ccA481Da6F243Df0d7A5744aFc1f8", 18, "DBET", "Decent.bet"),

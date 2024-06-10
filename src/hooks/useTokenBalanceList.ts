@@ -16,11 +16,12 @@ export default function useTokenBalanceList() {
   return useQuery({
     queryKey: ["token-balance-list"],
     enabled: !!account,
+    refetchInterval: 1000 * 30,
     queryFn: () => {
       return Promise.all(
         tokens.map(async (token) => {
           // TODO: native token
-          const isNativeToken = token.address === "0x45429a2255e7248e57fce99e7239aed3f84b7a53";
+          const isNativeToken = token.address === "0x45429A2255e7248e57fce99E7239aED3f84B7a53";
           const tokenContract = connex.thor.account(token.address);
 
           let balance;

@@ -238,6 +238,10 @@
     background: rgba(#fff, 0.1);
     border-radius: 12px;
     padding: rhythm(2);
+
+    &.error {
+      background: #ff00002a;
+    }
   }
 
   &__input {

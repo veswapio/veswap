@@ -6,12 +6,13 @@ type ButtonProps = {
   className?: string;
   outline?: boolean;
   onPress?: () => void;
+  disabled?: boolean;
   children: React.ReactNode;
 };
 
-export default function Button({ className, outline, onPress, children }: ButtonProps) {
+export default function Button({ className, outline, onPress, disabled, children }: ButtonProps) {
   return (
-    <AriaButton onPress={onPress} className={clsx(css.Button, outline && css.outline, className)}>
+    <AriaButton onPress={onPress} className={clsx(css.Button, outline && css.outline, className)} isDisabled={disabled}>
       {children}
     </AriaButton>
   );

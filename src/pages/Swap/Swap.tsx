@@ -28,6 +28,7 @@ import sdk from "~/sdk";
 import tokens from "~/constants/tokens";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
 import useTokenBalanceList from "~/hooks/useTokenBalanceList";
+import { toWei } from "~/utils/helpers";
 // import { queryClient } from "~/query";
 
 import Card from "~/components/Card";
@@ -137,11 +138,18 @@ function TokenInput({
   className?: string;
 }) {
   const { data: tokenBalanceMap } = useTokenBalanceList();
+  const [error, setError] = useState(false);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       onAmountChange(value);
+
+      if (+value > +tokenBalanceMap?.[token.symbol!].displayBalance!) {
+        setError(true);
+      } else {
+        setError(false);
+      }
     }
   };
 
@@ -151,7 +159,7 @@ function TokenInput({
         <h3 className={css.tokenInput__label}>{label}</h3>
         <TokenModal label={label.toLowerCase()} token={token} tokenList={tokenList} setToken={onTokenChange} />
       </div>
-      <TextField aria-label={label + " token amount"} className={css.tokenInput__bottom}>
+      <TextField aria-label={label + " token amount"} className={clsx(css.tokenInput__bottom, error && css.error)}>
         <Input
           className={css.tokenInput__input}
           value={amount}
@@ -283,7 +291,7 @@ function PoolListPane({ setActivePane }: { setActivePane: (name: string) => void
   return (
     <div className={css.poolPanel}>
       <Card className={css.card}>
-        <h2 className={css.card__poolHeading}>All Pool (51)</h2>
+        <h2 className={css.card__poolHeading}>All Pool (1)</h2>
 
         <SearchBox
           className={css.card__search}
@@ -297,7 +305,7 @@ function PoolListPane({ setActivePane }: { setActivePane: (name: string) => void
             <div className={css.pool__token}></div>
             <div className={css.pool__token}></div>
           </div>
-          <div className={css.pool__name}>VTHO/VET</div>
+          <div className={css.pool__name}>VET / VTHO</div>
           <div className={css.pool__value}>18,758,639 / 1,739,424</div>
         </div>
 
@@ -364,21 +372,36 @@ function PoolDetailPane({ setActivePane }: { setActivePane: (name: string) => vo
   );
 }
 
-function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => void }) {
+function AddLiquidityPane({
+  fromToken,
+  toToken,
+  setActivePane
+}: {
+  fromToken: sdk.Token;
+  toToken: sdk.Token;
+  setActivePane: (name: string) => void;
+}) {
   const { open } = useWalletModal();
   const { account } = useWallet();
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const connex = useConnex();
 
-  console.log(tokenBalanceMap);
-
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
+
+  const [fromTokenError, setFromTokenError] = useState(false);
+  const [toTokenError, setToTokenError] = useState(false);
 
   const handleFromTokenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       setFromTokenAmount(value);
+
+      if (+value > +tokenBalanceMap?.[fromToken.symbol!].displayBalance!) {
+        setFromTokenError(true);
+      } else {
+        setFromTokenError(false);
+      }
     }
   };
 
@@ -386,6 +409,12 @@ function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => 
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       setToTokenAmount(value);
+
+      if (+value > +tokenBalanceMap?.[toToken.symbol!].displayBalance!) {
+        setToTokenError(true);
+      } else {
+        setToTokenError(false);
+      }
     }
   };
 
@@ -402,9 +431,9 @@ function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => 
   // };
 
   const handleApprove = async () => {
-    const VTHO_ADDRESS = tokens[1].address;
+    const VTHO_ADDRESS = toToken.address;
     const approveMethod = connex.thor.account(VTHO_ADDRESS).method(find(ABI_ERC20, { name: "approve" }));
-    const clause = approveMethod.asClause(ROUTER_ADDRESS, (10 * 1e18).toString());
+    const clause = approveMethod.asClause(ROUTER_ADDRESS, (10n ** 24n).toString());
 
     connex.vendor
       .sign("tx", [{ ...clause }])
@@ -470,20 +499,33 @@ function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => 
   // };
 
   const handleAddLiquidity = () => {
-    const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
-    const addLiquidityMethod = connex.thor
-      .account(ROUTER_ADDRESS)
-      .method(addLiquidityABI)
-      .value((1 * 1e18).toString());
+    const fromTokenAmountWei = toWei(fromTokenAmount, fromToken.decimals);
+    const toTokenAmountWei = toWei(toTokenAmount, toToken.decimals);
 
-    const clause = addLiquidityMethod.asClause(
-      tokens[1].address,
-      (10 * 1e18).toString(),
-      (0 * 1e18).toString(),
-      (1 * 1e18).toString(),
+    const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
+    const addLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).value(fromTokenAmountWei);
+
+    // TODO: Add slippage tolerance
+    const addLiquidityArugments = [
+      toToken.address,
+      toTokenAmountWei,
+      toTokenAmountWei,
+      fromTokenAmountWei,
       account,
       Math.ceil(Date.now() / 1000) + 60 * 20
-    );
+    ];
+
+    // TODO: can not detect error
+    // connex.thor
+    //   .account(ROUTER_ADDRESS)
+    //   .method(addLiquidityABI)
+    //   .value(fromTokenAmountWei)
+    //   .call(...addLiquidityArugments)
+    //   .then((res: any) => {
+    //     console.log(res.data);
+    //   });
+
+    const clause = addLiquidityMethod.asClause(...addLiquidityArugments);
 
     connex.vendor
       .sign("tx", [{ ...clause }])
@@ -518,9 +560,12 @@ function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => 
         <div className={css.liquidityInput}>
           <button className={clsx(css.tokenTrigger, css.disabled)} tabIndex={-1}>
             <div className={css.tokenTrigger__icon}></div>
-            <div className={css.tokenTrigger__name}>VET</div>
+            <div className={css.tokenTrigger__name}>{fromToken.symbol}</div>
           </button>
-          <TextField className={css.tokenInput__bottom} aria-label="From token amount">
+          <TextField
+            className={clsx(css.tokenInput__bottom, fromTokenError && css.error)}
+            aria-label="From token amount"
+          >
             <Input
               className={css.tokenInput__input}
               value={fromTokenAmount}
@@ -528,7 +573,9 @@ function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => 
               onBlur={() => (fromTokenAmount === "" || fromTokenAmount === ".") && setFromTokenAmount("0")}
               onFocus={() => fromTokenAmount === "0" && setFromTokenAmount("")}
             />
-            <div className={css.tokenInput__balance}>Balance: {tokenBalanceMap?.VET.displayBalance || "0"}</div>
+            <div className={css.tokenInput__balance}>
+              Balance: {tokenBalanceMap?.[fromToken.symbol!].displayBalance || "0"}
+            </div>
           </TextField>
         </div>
 
@@ -537,9 +584,9 @@ function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => 
         <div className={css.liquidityInput}>
           <button className={clsx(css.tokenTrigger, css.disabled)} tabIndex={-1}>
             <div className={css.tokenTrigger__icon}></div>
-            <div className={css.tokenTrigger__name}>VTHO</div>
+            <div className={css.tokenTrigger__name}>{toToken.symbol}</div>
           </button>
-          <TextField className={css.tokenInput__bottom} aria-label="To token amount">
+          <TextField className={clsx(css.tokenInput__bottom, toTokenError && css.error)} aria-label="To token amount">
             <Input
               className={css.tokenInput__input}
               value={toTokenAmount}
@@ -547,14 +594,28 @@ function AddLiquidityPane({ setActivePane }: { setActivePane: (name: string) => 
               onBlur={() => (toTokenAmount === "" || toTokenAmount === ".") && setToTokenAmount("0")}
               onFocus={() => toTokenAmount === "0" && setToTokenAmount("")}
             />
-            <div className={css.tokenInput__balance}>Balance: {tokenBalanceMap?.VTHO.displayBalance || "0"}</div>
+            <div className={css.tokenInput__balance}>
+              Balance: {tokenBalanceMap?.[toToken.symbol!].displayBalance || "0"}
+            </div>
           </TextField>
         </div>
       </Card>
       {account ? (
         <div>
           {tokenBalanceMap?.VTHO.allowance !== 0n ? (
-            <Button onPress={handleAddLiquidity}>Add Liquidity</Button>
+            <Button
+              onPress={handleAddLiquidity}
+              disabled={
+                !fromTokenAmount ||
+                !toTokenAmount ||
+                fromTokenAmount === "0" ||
+                toTokenAmount === "0" ||
+                fromTokenError ||
+                toTokenError
+              }
+            >
+              Add Liquidity
+            </Button>
           ) : (
             <Button onPress={handleApprove}>Approve VTHO</Button>
           )}
@@ -608,7 +669,7 @@ function PoolPanel() {
   }
 
   if (activePane === "ADD_LIQUIDITY") {
-    return <AddLiquidityPane setActivePane={setActivePane} />;
+    return <AddLiquidityPane fromToken={tokens[0]} toToken={tokens[1]} setActivePane={setActivePane} />;
   }
 
   if (activePane === "REMOVE_LIQUIDITY") {
