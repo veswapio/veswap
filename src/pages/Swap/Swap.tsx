@@ -28,7 +28,9 @@ import sdk from "~/sdk";
 import tokens from "~/constants/tokens";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
 import useTokenBalanceList from "~/hooks/useTokenBalanceList";
-import { toWei } from "~/utils/helpers";
+import usePairList from "~/hooks/usePairList";
+import useMyPairShare from "~/hooks/useMyPairShare";
+import { toWei, truncateAddress } from "~/utils/helpers";
 // import { queryClient } from "~/query";
 
 import Card from "~/components/Card";
@@ -186,10 +188,20 @@ function SwapPanel() {
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
   const [slippage, setSlippage] = useState("0.01");
+  const [pairData, setPairData] = useState<sdk.Pair | undefined>(undefined);
 
   const tokenList = useMemo(() => {
     return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
   }, [fromToken.symbol, toToken.symbol]);
+
+  const _price = useMemo(() => {
+    if (!pairData) return "--";
+
+    const reserveA = pairData.token0.symbol === fromToken.symbol ? pairData.reserve0 : pairData.reserve1;
+    const reserveB = pairData.token1.symbol === toToken.symbol ? pairData.reserve1 : pairData.reserve0;
+
+    return (+reserveA.toExact() / +reserveB.toExact()).toFixed(6).replace(/(\.0*|0+)$/, "");
+  }, [fromToken, toToken, pairData]);
 
   const handleSwap = () => {
     const _fromToken = fromToken;
@@ -203,11 +215,11 @@ function SwapPanel() {
       const tokenB = new sdk.Token(1, toToken.address, toToken.decimals, toToken.symbol);
 
       const pairData = await sdk.Fetcher.fetchPairData(tokenA, tokenB, connex);
-      console.log(pairData);
+      setPairData(pairData);
     }
 
     fetchData();
-  }, [fromToken, toToken, connex]);
+  }, [fromToken, toToken, connex, setPairData]);
 
   return (
     <div className={css.swapPanel}>
@@ -255,8 +267,12 @@ function SwapPanel() {
             </Radio>
           </RadioGroup>
         </DataEntry>
-        <DataEntry title="Price">VTHO per VET</DataEntry>
-        <DataEntry title="Route">VTHO &gt; VET</DataEntry>
+        <DataEntry title="Price">
+          {_price} {fromToken.symbol} per {toToken.symbol}
+        </DataEntry>
+        <DataEntry title="Route">
+          {fromToken.symbol} &gt; {toToken.symbol}
+        </DataEntry>
         <DataEntry
           title="Swap Fees"
           tooltip="Same as Uniswap-v2, distributed pro-rata to all in-range liquidity and the protocol at the time of the swap."
@@ -278,7 +294,7 @@ function SwapPanel() {
   );
 }
 
-function PoolListPane({ setActivePane }: { setActivePane: (name: string) => void }) {
+function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setActivePane: (name: string) => void }) {
   const [searchKeyword, setSearchKeyword] = useState("");
   const { open } = useWalletModal();
   const { account } = useWallet();
@@ -300,14 +316,20 @@ function PoolListPane({ setActivePane }: { setActivePane: (name: string) => void
           onChange={setSearchKeyword}
         />
 
-        <div className={css.pool} onClick={handlePoolClick}>
-          <div className={css.pool__tokens}>
-            <div className={css.pool__token}></div>
-            <div className={css.pool__token}></div>
+        {pairList.map((pair: sdk.Pair) => (
+          <div className={css.pool} onClick={handlePoolClick} key={pair.liquidityToken.address}>
+            <div className={css.pool__tokens}>
+              <div className={css.pool__token}></div>
+              <div className={css.pool__token}></div>
+            </div>
+            <div className={css.pool__name}>
+              {pair.token0.symbol} / {pair.token1.symbol}
+            </div>
+            <div className={css.pool__value}>
+              {pair.reserve0.toExact()} / {pair.reserve1.toExact()}
+            </div>
           </div>
-          <div className={css.pool__name}>VET / VTHO</div>
-          <div className={css.pool__value}>18,758,639 / 1,739,424</div>
-        </div>
+        ))}
 
         <div className={css.card__help}>
           <a href="">Need help? View the user&apos;s guide</a>
@@ -318,9 +340,12 @@ function PoolListPane({ setActivePane }: { setActivePane: (name: string) => void
   );
 }
 
-function PoolDetailPane({ setActivePane }: { setActivePane: (name: string) => void }) {
+function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane: (name: string) => void }) {
   const { open } = useWalletModal();
   const { account } = useWallet();
+
+  const { data: myPairShare } = useMyPairShare(account, pair);
+  console.log("my share", myPairShare);
 
   return (
     <div className={css.poolPanel}>
@@ -334,7 +359,7 @@ function PoolDetailPane({ setActivePane }: { setActivePane: (name: string) => vo
         <section className={css.poolSection}>
           <DataEntry title="Smart Contract">
             <a href="">
-              <IconLink /> 0x29a9...5ed3
+              <IconLink /> {truncateAddress(pair.liquidityToken.address)}
             </a>
           </DataEntry>
         </section>
@@ -345,14 +370,14 @@ function PoolDetailPane({ setActivePane }: { setActivePane: (name: string) => vo
               <IconLink /> View Activties
             </a>
           </h3>
-          <DataEntry title="VTHO">0</DataEntry>
-          <DataEntry title="VET">0</DataEntry>
+          <DataEntry title={pair.token0.symbol!}>0</DataEntry>
+          <DataEntry title={pair.token1.symbol!}>0</DataEntry>
           <DataEntry title="My pool share">0%</DataEntry>
         </section>
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>Pool Status</h3>
-          <DataEntry title="VTHO">18,792,243.123</DataEntry>
-          <DataEntry title="VET">1,734,823.123</DataEntry>
+          <DataEntry title={pair.token0.symbol!}>{pair.reserve0.toExact()}</DataEntry>
+          <DataEntry title={pair.token1.symbol!}>{pair.reserve1.toExact()}</DataEntry>
         </section>
         <div className={css.card__help}>
           <a href="">Need help? View the user&apos;s guide</a>
@@ -372,19 +397,14 @@ function PoolDetailPane({ setActivePane }: { setActivePane: (name: string) => vo
   );
 }
 
-function AddLiquidityPane({
-  fromToken,
-  toToken,
-  setActivePane
-}: {
-  fromToken: sdk.Token;
-  toToken: sdk.Token;
-  setActivePane: (name: string) => void;
-}) {
+function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane: (name: string) => void }) {
   const { open } = useWalletModal();
   const { account } = useWallet();
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const connex = useConnex();
+
+  const fromToken = pair.token0;
+  const toToken = pair.token1;
 
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
@@ -430,9 +450,8 @@ function AddLiquidityPane({
   //     });
   // };
 
-  const handleApprove = async () => {
-    const VTHO_ADDRESS = toToken.address;
-    const approveMethod = connex.thor.account(VTHO_ADDRESS).method(find(ABI_ERC20, { name: "approve" }));
+  const handleApprove = async (address: string) => {
+    const approveMethod = connex.thor.account(address).method(find(ABI_ERC20, { name: "approve" }));
     const clause = approveMethod.asClause(ROUTER_ADDRESS, (10n ** 24n).toString());
 
     connex.vendor
@@ -602,23 +621,31 @@ function AddLiquidityPane({
       </Card>
       {account ? (
         <div>
-          {tokenBalanceMap?.VTHO.allowance !== 0n ? (
-            <Button
-              onPress={handleAddLiquidity}
-              disabled={
-                !fromTokenAmount ||
-                !toTokenAmount ||
-                fromTokenAmount === "0" ||
-                toTokenAmount === "0" ||
-                fromTokenError ||
-                toTokenError
-              }
-            >
-              Add Liquidity
+          {tokenBalanceMap?.[fromToken.symbol!].needApprove && (
+            <Button onPress={() => handleApprove(tokenBalanceMap?.[fromToken.symbol!].address)}>
+              Approve {fromToken.symbol}
             </Button>
-          ) : (
-            <Button onPress={handleApprove}>Approve VTHO</Button>
           )}
+
+          {tokenBalanceMap?.[toToken.symbol!].needApprove && (
+            <Button onPress={() => handleApprove(tokenBalanceMap?.[toToken.symbol!].address)}>
+              Approve {toToken.symbol}
+            </Button>
+          )}
+
+          <Button
+            onPress={handleAddLiquidity}
+            disabled={
+              !fromTokenAmount ||
+              !toTokenAmount ||
+              fromTokenAmount === "0" ||
+              toTokenAmount === "0" ||
+              fromTokenError ||
+              toTokenError
+            }
+          >
+            Add Liquidity
+          </Button>
         </div>
       ) : (
         <Button onPress={open}>Connect Wallet</Button>
@@ -627,7 +654,12 @@ function AddLiquidityPane({
   );
 }
 
-function RemoveLiquidityPane({ setActivePane }: { setActivePane: (name: string) => void }) {
+function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane: (name: string) => void }) {
+  const [value, setValue] = useState(0);
+
+  const fromToken = pair.token0;
+  const toToken = pair.token1;
+
   return (
     <div className={css.poolPanel}>
       <Card className={css.card}>
@@ -638,7 +670,8 @@ function RemoveLiquidityPane({ setActivePane }: { setActivePane: (name: string) 
           Remove Liquidity
         </h2>
 
-        <Slider className={css.slider} defaultValue={30} aria-label="Remove liquidity percentage">
+        <Slider className={css.slider} value={value} onChange={setValue} aria-label="Remove liquidity percentage">
+          <h4 className={css.slider__heading}>Amount</h4>
           <SliderOutput className={css.slider__output} />
           <SliderTrack className={css.slider__track}>
             {({ state }) => (
@@ -649,11 +682,43 @@ function RemoveLiquidityPane({ setActivePane }: { setActivePane: (name: string) 
             )}
           </SliderTrack>
         </Slider>
+        <div className={css.sliderButtonGroup}>
+          <button
+            className={clsx(css.sliderButtonGroup__button, value === 0 && css.active)}
+            onMouseDown={() => setValue(0)}
+          >
+            0%
+          </button>
+          <button
+            className={clsx(css.sliderButtonGroup__button, value === 25 && css.active)}
+            onMouseDown={() => setValue(25)}
+          >
+            25%
+          </button>
+          <button
+            className={clsx(css.sliderButtonGroup__button, value === 50 && css.active)}
+            onMouseDown={() => setValue(50)}
+          >
+            50%
+          </button>
+          <button
+            className={clsx(css.sliderButtonGroup__button, value === 75 && css.active)}
+            onMouseDown={() => setValue(75)}
+          >
+            75%
+          </button>
+          <button
+            className={clsx(css.sliderButtonGroup__button, value === 100 && css.active)}
+            onMouseDown={() => setValue(100)}
+          >
+            100%
+          </button>
+        </div>
 
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>You will receive</h3>
-          <DataEntry title="VTHO">0.00</DataEntry>
-          <DataEntry title="VET">0.00</DataEntry>
+          <DataEntry title={fromToken.symbol!}>0.00</DataEntry>
+          <DataEntry title={toToken.symbol!}>0.00</DataEntry>
         </section>
       </Card>
       <Button>Remove</Button>
@@ -663,20 +728,25 @@ function RemoveLiquidityPane({ setActivePane }: { setActivePane: (name: string) 
 
 function PoolPanel() {
   const [activePane, setActivePane] = useState("");
+  const { data: pairList, isPending } = usePairList();
+
+  if (isPending) {
+    return null;
+  }
 
   if (activePane === "POOL") {
-    return <PoolDetailPane setActivePane={setActivePane} />;
+    return <PoolDetailPane pair={pairList![0]} setActivePane={setActivePane} />;
   }
 
   if (activePane === "ADD_LIQUIDITY") {
-    return <AddLiquidityPane fromToken={tokens[0]} toToken={tokens[1]} setActivePane={setActivePane} />;
+    return <AddLiquidityPane pair={pairList![0]} setActivePane={setActivePane} />;
   }
 
   if (activePane === "REMOVE_LIQUIDITY") {
-    return <RemoveLiquidityPane setActivePane={setActivePane} />;
+    return <RemoveLiquidityPane pair={pairList![0]} setActivePane={setActivePane} />;
   }
 
-  return <PoolListPane setActivePane={setActivePane} />;
+  return <PoolListPane pairList={pairList!} setActivePane={setActivePane} />;
 }
 
 function ClaimPanel() {

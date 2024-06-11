@@ -20,41 +20,39 @@ export default function useTokenBalanceList() {
     queryFn: () => {
       return Promise.all(
         tokens.map(async (token) => {
-          // TODO: native token
-          const isNativeToken = token.address === "0x45429A2255e7248e57fce99E7239aED3f84B7a53";
-          const tokenContract = connex.thor.account(token.address);
-
-          let balance;
-
-          if (isNativeToken) {
+          if (token.address === "0x45429A2255e7248e57fce99E7239aED3f84B7a53") {
             const accountData = await connex.thor.account(account).get();
-            balance = BigInt(accountData.balance).toString();
+
+            return {
+              symbol: token.symbol!,
+              address: token.address,
+              balance: BigInt(accountData.balance).toString(),
+              needApprove: false
+            };
           } else {
-            const balanceData = await tokenContract.method(ABI_BALANCE_OF).call(account);
-            balance = balanceData.decoded.balance;
+            const contract = connex.thor.account(token.address);
+            const balanceData = await contract.method(ABI_BALANCE_OF).call(account);
+            const allowanceData = await contract.method(ABI_ALLOWANCE).call(account, ROUTER_ADDRESS);
+
+            return {
+              symbol: token.symbol!,
+              address: token.address,
+              balance: balanceData.decoded.balance,
+              needApprove: allowanceData.decoded["0"] === 0
+            };
           }
-
-          const allowanceData = await connex.thor
-            .account(token.address)
-            .method(ABI_ALLOWANCE)
-            .call(account, ROUTER_ADDRESS);
-
-          return {
-            balance,
-            symbol: token.symbol!,
-            allowance: allowanceData.decoded["0"]
-          };
         })
       );
     },
-    select: (data: { symbol: string; balance: string; allowance: string }[]) => {
+    select: (data: { symbol: string; address: string; balance: string; needApprove: boolean }[]) => {
       return data.reduce(
         (a, c) => {
           const value = BigInt(c.balance);
           a[c.symbol] = {
             rawBalance: value,
             displayBalance: bigintToDecimalString(value, tokens.find((t) => t.symbol === c.symbol)!.decimals),
-            allowance: BigInt(c.allowance)
+            needApprove: c.needApprove,
+            address: c.address
           };
           return a;
         },
@@ -63,7 +61,8 @@ export default function useTokenBalanceList() {
           {
             rawBalance: bigint;
             displayBalance: string;
-            allowance: bigint;
+            needApprove: boolean;
+            address: string;
           }
         >
       );

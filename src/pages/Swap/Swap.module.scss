@@ -427,11 +427,19 @@
     "label output"
     "track track";
   grid-template-columns: 1fr auto;
-  margin-bottom: rhythm(4);
+
+  &__heading {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 36px;
+  }
 
   &__output {
     grid-area: output;
     font-weight: 500;
+    padding: 10px 16px;
+    background: #ffffff1a;
+    border-radius: 8px;
 
     &::after {
       content: "%";
@@ -441,6 +449,10 @@
   &__track {
     grid-area: track;
     position: relative;
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-right: 12px;
+    width: calc(100% - 24px) !important;
 
     &:before {
       content: "";
@@ -457,15 +469,15 @@
     top: 0;
     bottom: 0;
     left: 0;
-    height: 3px;
+    height: 4px;
     margin: auto;
     border-radius: 2px;
     background: #00ffcb;
   }
 
   &__thumb {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: #fff;
     forced-color-adjust: none;
@@ -489,15 +501,40 @@
       width: 100%;
 
       &:before {
-        height: 3px;
+        height: 4px;
         width: 100%;
         top: 50%;
         transform: translateY(-50%);
+        background: #ffffff3a;
       }
     }
 
     .slider__thumb {
       top: 50%;
+    }
+  }
+}
+
+.sliderButtonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff80;
+  margin-top: rhythm(1);
+  margin-bottom: rhythm(5);
+
+  &__button {
+    text-align: center;
+    border: 1px solid transparent;
+    padding: rhythm(0.25) rhythm(1);
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+
+    &.active {
+      border: 1px solid #ffffff80;
     }
   }
 }

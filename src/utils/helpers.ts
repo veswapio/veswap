@@ -1,3 +1,8 @@
+export function truncateAddress(address: string) {
+  if (!address) return "";
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
+}
+
 export function bigintToDecimalString(bigintValue: bigint, decimalPlaces: number) {
   const bigintStr = bigintValue.toString();
   const integerPart = bigintStr.slice(0, -decimalPlaces) || "0";
