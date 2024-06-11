@@ -130,6 +130,7 @@ function TokenInput({
   onAmountChange,
   onTokenChange,
   tokenList,
+  error,
   className
 }: {
   label: string;
@@ -138,21 +139,15 @@ function TokenInput({
   onAmountChange: (value: string) => void;
   onTokenChange: (token: sdk.Token) => void;
   tokenList: sdk.Token[];
+  error?: boolean;
   className?: string;
 }) {
   const { data: tokenBalanceMap } = useTokenBalanceList();
-  const [error, setError] = useState(false);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       onAmountChange(value);
-
-      if (+value > +tokenBalanceMap?.[token.symbol!].displayBalance!) {
-        setError(true);
-      } else {
-        setError(false);
-      }
     }
   };
 
@@ -182,6 +177,7 @@ function TokenInput({
 function SwapPanel() {
   const { open } = useWalletModal();
   const { account } = useWallet();
+  const { data: tokenBalanceMap } = useTokenBalanceList();
   const connex = useConnex();
 
   const [fromToken, setFromToken] = useState(tokens[0]);
@@ -231,10 +227,22 @@ function SwapPanel() {
     setIsExactIn(false);
   };
 
+  const _fromTokenError = useMemo(() => {
+    return BigNumber(fromTokenAmount).isGreaterThan(tokenBalanceMap?.[fromToken.symbol!].displayBalance!);
+  }, [fromTokenAmount, fromToken, tokenBalanceMap]);
+
+  const _toTokenError = useMemo(() => {
+    return BigNumber(toTokenAmount).isGreaterThan(tokenBalanceMap?.[toToken.symbol!].displayBalance!);
+  }, [toTokenAmount, toToken, tokenBalanceMap]);
+
   const handleSwapTokens = () => {
     const _fromToken = fromToken;
     setFromToken(toToken);
     setToToken(_fromToken);
+
+    const amountOut = BigNumber(fromTokenAmount).times(_price);
+    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6).replace(/(\.?0+)$/, ""));
+    setIsExactIn(true);
   };
 
   const handleSwap = () => {
@@ -251,7 +259,6 @@ function SwapPanel() {
     async function fetchData() {
       const tokenA = new sdk.Token(1, fromToken.address, fromToken.decimals, fromToken.symbol);
       const tokenB = new sdk.Token(1, toToken.address, toToken.decimals, toToken.symbol);
-
       const pairData = await sdk.Fetcher.fetchPairData(tokenA, tokenB, connex);
       setPairData(pairData);
     }
@@ -269,6 +276,7 @@ function SwapPanel() {
           onAmountChange={handleFromTokenChange}
           onTokenChange={setFromToken}
           tokenList={tokenList}
+          error={_fromTokenError}
         />
         <button className={css.swapButton} onClick={handleSwapTokens} tabIndex={-1}>
           <IconSwap />
@@ -281,6 +289,7 @@ function SwapPanel() {
           onTokenChange={setToToken}
           tokenList={tokenList}
           className={css.card__swapToPane}
+          error={_toTokenError}
         />
 
         <DataEntry
@@ -327,7 +336,23 @@ function SwapPanel() {
           <a href="">Need help? View the user&apos;s guide</a>
         </div>
       </Card>
-      {account ? <Button onPress={handleSwap}>Swap</Button> : <Button onPress={open}>Connect Wallet</Button>}
+      {account ? (
+        <Button
+          onPress={handleSwap}
+          disabled={
+            !fromTokenAmount ||
+            !toTokenAmount ||
+            fromTokenAmount === "0" ||
+            toTokenAmount === "0" ||
+            _fromTokenError ||
+            _toTokenError
+          }
+        >
+          Swap
+        </Button>
+      ) : (
+        <Button onPress={open}>Connect Wallet</Button>
+      )}
     </div>
   );
 }
@@ -464,19 +489,10 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
   const [token0Amount, setToken0Amount] = useState("0");
   const [token1Amount, setToken1Amount] = useState("0");
 
-  const [token0Error, setToken0Error] = useState(false);
-  const [token1Error, setToken1Error] = useState(false);
-
   const handleToken0Input = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       setToken0Amount(value);
-
-      if (+value > +tokenBalanceMap?.[token0.symbol!].displayBalance!) {
-        setToken0Error(true);
-      } else {
-        setToken0Error(false);
-      }
     }
   };
 
@@ -484,14 +500,16 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       setToken1Amount(value);
-
-      if (+value > +tokenBalanceMap?.[token1.symbol!].displayBalance!) {
-        setToken1Error(true);
-      } else {
-        setToken1Error(false);
-      }
     }
   };
+
+  const _token0Error = useMemo(() => {
+    return BigNumber(token0Amount).isGreaterThan(tokenBalanceMap?.[token0.symbol!].displayBalance!);
+  }, [token0Amount, token0, tokenBalanceMap]);
+
+  const _token1Error = useMemo(() => {
+    return BigNumber(token1Amount).isGreaterThan(tokenBalanceMap?.[token1.symbol!].displayBalance!);
+  }, [token1Amount, token1, tokenBalanceMap]);
 
   // const calculatePairAddr = async () => {
   //   const FACTORY = "0x814ab84a151662c6d1f8142abce02ca25c05905e";
@@ -579,7 +597,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
     const addLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).value(token0AmountWei);
     if (token0.symbol === "VET" || token1.symbol === "VET") {
-      // TODO: Add slippage tolerance
+      // TODO: Add slippage tolerance?
       const addLiquidityArugments =
         token0.symbol === "VET"
           ? [
@@ -615,16 +633,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     } else {
       // TODO: addLiquidty without ETH token
     }
-
-    // TODO: estimate gas, on error return
-    // connex.thor
-    //   .account(ROUTER_ADDRESS)
-    //   .method(addLiquidityABI)
-    //   .value(token0AmountWei)
-    //   .call(...addLiquidityArugments)
-    //   .then((res: any) => {
-    //     console.log(res.data);
-    //   });
   };
 
   // const handleAddLiquidity = () => {
@@ -649,7 +657,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
             <div className={css.tokenTrigger__icon}></div>
             <div className={css.tokenTrigger__name}>{token0.symbol}</div>
           </button>
-          <TextField className={clsx(css.tokenInput__bottom, token0Error && css.error)} aria-label="Token amount">
+          <TextField className={clsx(css.tokenInput__bottom, _token0Error && css.error)} aria-label="Token amount">
             <Input
               className={css.tokenInput__input}
               value={token0Amount}
@@ -670,7 +678,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
             <div className={css.tokenTrigger__icon}></div>
             <div className={css.tokenTrigger__name}>{token1.symbol}</div>
           </button>
-          <TextField className={clsx(css.tokenInput__bottom, token1Error && css.error)} aria-label="Token amount">
+          <TextField className={clsx(css.tokenInput__bottom, _token1Error && css.error)} aria-label="Token amount">
             <Input
               className={css.tokenInput__input}
               value={token1Amount}
@@ -705,8 +713,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
               !token1Amount ||
               token0Amount === "0" ||
               token1Amount === "0" ||
-              token0Error ||
-              token1Error
+              _token0Error ||
+              _token1Error
             }
           >
             Add Liquidity
