@@ -368,7 +368,6 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
   const { account } = useWallet();
 
   const { data: myPairShare } = useMyPairShare(account, pair);
-  console.log("my share", myPairShare);
 
   return (
     <div className={css.poolPanel}>
@@ -381,7 +380,11 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
         </h2>
         <section className={css.poolSection}>
           <DataEntry title="Smart Contract">
-            <a href="">
+            <a
+              href={`https://explore.vechain.org/accounts/${pair.liquidityToken.address}/`}
+              target="_blank"
+              rel="noopener"
+            >
               <IconLink /> {truncateAddress(pair.liquidityToken.address)}
             </a>
           </DataEntry>
@@ -389,13 +392,17 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>
             My Holdings
-            <a href="">
+            <a href={`https://explore.vechain.org/accounts/${account}/`} target="_blank" rel="noopener">
               <IconLink /> View Activties
             </a>
           </h3>
-          <DataEntry title={pair.token0.symbol!}>0</DataEntry>
-          <DataEntry title={pair.token1.symbol!}>0</DataEntry>
-          <DataEntry title="My pool share">0%</DataEntry>
+          <DataEntry title={pair.token0.symbol!}>
+            {myPairShare ? (+pair.reserve0.toExact() * myPairShare).toFixed(2) : "0"}
+          </DataEntry>
+          <DataEntry title={pair.token1.symbol!}>
+            {myPairShare ? (+pair.reserve1.toExact() * myPairShare).toFixed(2) : "0"}
+          </DataEntry>
+          <DataEntry title="My Pool Share">{myPairShare ? (myPairShare * 100).toFixed(2) : "0"}%</DataEntry>
         </section>
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>Pool Status</h3>
@@ -764,7 +771,11 @@ function PoolPanel() {
   const { data: pairList, isPending } = usePairList();
 
   if (isPending) {
-    return null;
+    return (
+      <div className={css.loadingPanel}>
+        <Card className={css.card}>Loading...</Card>
+      </div>
+    );
   }
 
   if (activePane === "POOL") {
@@ -795,7 +806,7 @@ function ClaimPanel() {
         </h2>
         <div className={css.card__claimValue}>0.00</div>
       </Card>
-      {account ? <Button>Claim</Button> : <Button onPress={open}>Connect Wallet</Button>}
+      {account ? <Button disabled>Claim</Button> : <Button onPress={open}>Connect Wallet</Button>}
     </div>
   );
 }

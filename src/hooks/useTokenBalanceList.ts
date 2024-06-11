@@ -16,7 +16,7 @@ export default function useTokenBalanceList() {
   return useQuery({
     queryKey: ["token-balance-list"],
     enabled: !!account,
-    refetchInterval: 1000 * 30,
+    refetchInterval: 1000 * 10,
     queryFn: () => {
       return Promise.all(
         tokens.map(async (token) => {

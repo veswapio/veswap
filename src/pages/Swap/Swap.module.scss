@@ -8,13 +8,25 @@
 }
 
 .poolPanel {
-  max-width: 544px;
+  max-width: 520px;
   margin: auto;
 }
 
 .claimPanel {
   max-width: 400px;
   margin: auto;
+}
+
+.loadingPanel {
+  max-width: 520px;
+  margin: auto;
+
+  > .card {
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .tabList {
