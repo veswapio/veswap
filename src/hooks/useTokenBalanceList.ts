@@ -20,7 +20,7 @@ export default function useTokenBalanceList() {
     queryFn: () => {
       return Promise.all(
         tokens.map(async (token) => {
-          if (token.address === "0x45429A2255e7248e57fce99E7239aED3f84B7a53") {
+          if (token.symbol === "VET") {
             const accountData = await connex.thor.account(account).get();
 
             return {

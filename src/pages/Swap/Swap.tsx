@@ -403,37 +403,37 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const connex = useConnex();
 
-  const fromToken = pair.token0;
-  const toToken = pair.token1;
+  const token0 = pair.token0;
+  const token1 = pair.token1;
 
-  const [fromTokenAmount, setFromTokenAmount] = useState("0");
-  const [toTokenAmount, setToTokenAmount] = useState("0");
+  const [token0Amount, setToken0Amount] = useState("0");
+  const [token1Amount, setToken1Amount] = useState("0");
 
-  const [fromTokenError, setFromTokenError] = useState(false);
-  const [toTokenError, setToTokenError] = useState(false);
+  const [token0Error, setToken0Error] = useState(false);
+  const [token1Error, setToken1Error] = useState(false);
 
-  const handleFromTokenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleToken0Input = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
-      setFromTokenAmount(value);
+      setToken0Amount(value);
 
-      if (+value > +tokenBalanceMap?.[fromToken.symbol!].displayBalance!) {
-        setFromTokenError(true);
+      if (+value > +tokenBalanceMap?.[token0.symbol!].displayBalance!) {
+        setToken0Error(true);
       } else {
-        setFromTokenError(false);
+        setToken0Error(false);
       }
     }
   };
 
-  const handleToTokenInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleToken1Input = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
-      setToTokenAmount(value);
+      setToken1Amount(value);
 
-      if (+value > +tokenBalanceMap?.[toToken.symbol!].displayBalance!) {
-        setToTokenError(true);
+      if (+value > +tokenBalanceMap?.[token1.symbol!].displayBalance!) {
+        setToken1Error(true);
       } else {
-        setToTokenError(false);
+        setToken1Error(false);
       }
     }
   };
@@ -518,45 +518,58 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
   // };
 
   const handleAddLiquidity = () => {
-    const fromTokenAmountWei = toWei(fromTokenAmount, fromToken.decimals);
-    const toTokenAmountWei = toWei(toTokenAmount, toToken.decimals);
+    const token0AmountWei = toWei(token0Amount, token0.decimals);
+    const token1AmountWei = toWei(token1Amount, token1.decimals);
 
     const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
-    const addLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).value(fromTokenAmountWei);
+    const addLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).value(token0AmountWei);
+    if (token0.symbol === "VET" || token1.symbol === "VET") {
+      // TODO: Add slippage tolerance
+      const addLiquidityArugments =
+        token0.symbol === "VET"
+          ? [
+              token1.address,
+              token1AmountWei,
+              token1AmountWei,
+              token0AmountWei,
+              account,
+              Math.ceil(Date.now() / 1000) + 60 * 20
+            ]
+          : [
+              token0.address,
+              token0AmountWei,
+              token0AmountWei,
+              token1AmountWei,
+              account,
+              Math.ceil(Date.now() / 1000) + 60 * 20
+            ];
 
-    // TODO: Add slippage tolerance
-    const addLiquidityArugments = [
-      toToken.address,
-      toTokenAmountWei,
-      toTokenAmountWei,
-      fromTokenAmountWei,
-      account,
-      Math.ceil(Date.now() / 1000) + 60 * 20
-    ];
+      const clause = addLiquidityMethod.asClause(...addLiquidityArugments);
 
-    // TODO: can not detect error
+      connex.vendor
+        .sign("tx", [{ ...clause }])
+        .comment("Add Liquidity")
+        .request()
+        .then((tx: any) => {
+          console.log("result: ", tx);
+        })
+        .catch((err: any) => {
+          console.log("ERROR");
+          console.log(err);
+        });
+    } else {
+      // TODO: addLiquidty without ETH token
+    }
+
+    // TODO: estimate gas, on error return
     // connex.thor
     //   .account(ROUTER_ADDRESS)
     //   .method(addLiquidityABI)
-    //   .value(fromTokenAmountWei)
+    //   .value(token0AmountWei)
     //   .call(...addLiquidityArugments)
     //   .then((res: any) => {
     //     console.log(res.data);
     //   });
-
-    const clause = addLiquidityMethod.asClause(...addLiquidityArugments);
-
-    connex.vendor
-      .sign("tx", [{ ...clause }])
-      .comment("Add Liquidity")
-      .request()
-      .then((tx: any) => {
-        console.log("result: ", tx);
-      })
-      .catch((err: any) => {
-        console.log("ERROR");
-        console.log(err);
-      });
   };
 
   // const handleAddLiquidity = () => {
@@ -579,21 +592,18 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
         <div className={css.liquidityInput}>
           <button className={clsx(css.tokenTrigger, css.disabled)} tabIndex={-1}>
             <div className={css.tokenTrigger__icon}></div>
-            <div className={css.tokenTrigger__name}>{fromToken.symbol}</div>
+            <div className={css.tokenTrigger__name}>{token0.symbol}</div>
           </button>
-          <TextField
-            className={clsx(css.tokenInput__bottom, fromTokenError && css.error)}
-            aria-label="From token amount"
-          >
+          <TextField className={clsx(css.tokenInput__bottom, token0Error && css.error)} aria-label="Token amount">
             <Input
               className={css.tokenInput__input}
-              value={fromTokenAmount}
-              onChange={handleFromTokenInput}
-              onBlur={() => (fromTokenAmount === "" || fromTokenAmount === ".") && setFromTokenAmount("0")}
-              onFocus={() => fromTokenAmount === "0" && setFromTokenAmount("")}
+              value={token0Amount}
+              onChange={handleToken0Input}
+              onBlur={() => (token0Amount === "" || token0Amount === ".") && setToken0Amount("0")}
+              onFocus={() => token0Amount === "0" && setToken0Amount("")}
             />
             <div className={css.tokenInput__balance}>
-              Balance: {tokenBalanceMap?.[fromToken.symbol!].displayBalance || "0"}
+              Balance: {tokenBalanceMap?.[token0.symbol!].displayBalance || "0"}
             </div>
           </TextField>
         </div>
@@ -603,45 +613,45 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
         <div className={css.liquidityInput}>
           <button className={clsx(css.tokenTrigger, css.disabled)} tabIndex={-1}>
             <div className={css.tokenTrigger__icon}></div>
-            <div className={css.tokenTrigger__name}>{toToken.symbol}</div>
+            <div className={css.tokenTrigger__name}>{token1.symbol}</div>
           </button>
-          <TextField className={clsx(css.tokenInput__bottom, toTokenError && css.error)} aria-label="To token amount">
+          <TextField className={clsx(css.tokenInput__bottom, token1Error && css.error)} aria-label="Token amount">
             <Input
               className={css.tokenInput__input}
-              value={toTokenAmount}
-              onChange={handleToTokenInput}
-              onBlur={() => (toTokenAmount === "" || toTokenAmount === ".") && setToTokenAmount("0")}
-              onFocus={() => toTokenAmount === "0" && setToTokenAmount("")}
+              value={token1Amount}
+              onChange={handleToken1Input}
+              onBlur={() => (token1Amount === "" || token1Amount === ".") && setToken1Amount("0")}
+              onFocus={() => token1Amount === "0" && setToken1Amount("")}
             />
             <div className={css.tokenInput__balance}>
-              Balance: {tokenBalanceMap?.[toToken.symbol!].displayBalance || "0"}
+              Balance: {tokenBalanceMap?.[token1.symbol!].displayBalance || "0"}
             </div>
           </TextField>
         </div>
       </Card>
       {account ? (
         <div>
-          {tokenBalanceMap?.[fromToken.symbol!].needApprove && (
-            <Button onPress={() => handleApprove(tokenBalanceMap?.[fromToken.symbol!].address)}>
-              Approve {fromToken.symbol}
+          {tokenBalanceMap?.[token0.symbol!].needApprove && (
+            <Button onPress={() => handleApprove(tokenBalanceMap?.[token0.symbol!].address)}>
+              Approve {token0.symbol}
             </Button>
           )}
 
-          {tokenBalanceMap?.[toToken.symbol!].needApprove && (
-            <Button onPress={() => handleApprove(tokenBalanceMap?.[toToken.symbol!].address)}>
-              Approve {toToken.symbol}
+          {tokenBalanceMap?.[token1.symbol!].needApprove && (
+            <Button onPress={() => handleApprove(tokenBalanceMap?.[token1.symbol!].address)}>
+              Approve {token1.symbol}
             </Button>
           )}
 
           <Button
             onPress={handleAddLiquidity}
             disabled={
-              !fromTokenAmount ||
-              !toTokenAmount ||
-              fromTokenAmount === "0" ||
-              toTokenAmount === "0" ||
-              fromTokenError ||
-              toTokenError
+              !token0Amount ||
+              !token1Amount ||
+              token0Amount === "0" ||
+              token1Amount === "0" ||
+              token0Error ||
+              token1Error
             }
           >
             Add Liquidity

@@ -12,7 +12,7 @@ export default function useTokenBalanceList(account: any, pair: any) {
   return useQuery({
     queryKey: ["my-pair-share", pair.token0.symbol, pair.token1.symbol],
     enabled: !!account,
-    refetchInterval: 1000 * 180,
+    refetchInterval: 1000 * 60,
     queryFn: () => {
       return connex.thor.account(pair.liquidityToken.address).method(ABI_BALANCE_OF).call(account);
     }
