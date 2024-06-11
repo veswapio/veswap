@@ -189,6 +189,7 @@ function SwapPanel() {
   const [toTokenAmount, setToTokenAmount] = useState("0");
   const [slippage, setSlippage] = useState("0.01");
   const [pairData, setPairData] = useState<sdk.Pair | undefined>(undefined);
+  const [isExactIn, setIsExactIn] = useState(true);
 
   const tokenList = useMemo(() => {
     return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
@@ -203,10 +204,32 @@ function SwapPanel() {
     return (+reserveA.toExact() / +reserveB.toExact()).toFixed(6).replace(/(\.0*|0+)$/, "");
   }, [fromToken, toToken, pairData]);
 
-  const handleSwap = () => {
+  const handleFromTokenChange = (value: string) => {
+    setFromTokenAmount(value);
+    setToTokenAmount((+value / +_price).toFixed(6).replace(/(\.0*|0+)$/, ""));
+    setIsExactIn(true);
+  };
+
+  const handleToTokenChange = (value: string) => {
+    setToTokenAmount(value);
+    setFromTokenAmount((+value * +_price).toFixed(6).replace(/(\.0*|0+)$/, ""));
+    setIsExactIn(false);
+  };
+
+  const handleSwapTokens = () => {
     const _fromToken = fromToken;
     setFromToken(toToken);
     setToToken(_fromToken);
+  };
+
+  const handleSwap = () => {
+    console.log("swap");
+    console.log("fromTokenAddress", fromToken.address);
+    console.log("fromTokenAmount", toWei(fromTokenAmount, fromToken.decimals));
+    console.log("toTokenAddress", toToken.address);
+    console.log("toTokenAmount", toWei(toTokenAmount, toToken.decimals));
+    console.log("slippage", slippage);
+    console.log("isExactIn", isExactIn);
   };
 
   useEffect(() => {
@@ -228,18 +251,18 @@ function SwapPanel() {
           label="From"
           token={fromToken}
           amount={fromTokenAmount}
-          onAmountChange={setFromTokenAmount}
+          onAmountChange={handleFromTokenChange}
           onTokenChange={setFromToken}
           tokenList={tokenList}
         />
-        <button className={css.swapButton} onClick={handleSwap}>
+        <button className={css.swapButton} onClick={handleSwapTokens}>
           <IconSwap />
         </button>
         <TokenInput
           label="To"
           token={toToken}
           amount={toTokenAmount}
-          onAmountChange={setToTokenAmount}
+          onAmountChange={handleToTokenChange}
           onTokenChange={setToToken}
           tokenList={tokenList}
           className={css.card__swapToPane}
@@ -289,7 +312,7 @@ function SwapPanel() {
           <a href="">Need help? View the user&apos;s guide</a>
         </div>
       </Card>
-      {account ? <Button>Swap</Button> : <Button onPress={open}>Connect Wallet</Button>}
+      {account ? <Button onPress={handleSwap}>Swap</Button> : <Button onPress={open}>Connect Wallet</Button>}
     </div>
   );
 }
