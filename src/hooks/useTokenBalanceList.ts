@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useWallet, useConnex } from "@vechain/dapp-kit-react";
 import { find } from "lodash";
+import BigNumber from "bignumber.js";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
-import { bigintToDecimalString } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import ABI_ERC20 from "~/abis/erc20.json";
 
@@ -47,10 +47,11 @@ export default function useTokenBalanceList() {
     select: (data: { symbol: string; address: string; balance: string; needApprove: boolean }[]) => {
       return data.reduce(
         (a, c) => {
-          const value = BigInt(c.balance);
+          const value = BigNumber(c.balance);
+          const decimals = tokens.find((t) => t.symbol === c.symbol)!.decimals;
           a[c.symbol] = {
             rawBalance: value,
-            displayBalance: bigintToDecimalString(value, tokens.find((t) => t.symbol === c.symbol)!.decimals),
+            displayBalance: value.div(10 ** decimals).toFormat(6),
             needApprove: c.needApprove,
             address: c.address
           };
@@ -59,7 +60,7 @@ export default function useTokenBalanceList() {
         {} as Record<
           string,
           {
-            rawBalance: bigint;
+            rawBalance: BigNumber;
             displayBalance: string;
             needApprove: boolean;
             address: string;

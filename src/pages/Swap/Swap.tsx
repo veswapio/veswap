@@ -46,6 +46,7 @@ import IconSwap from "~/assets/swap.svg?react";
 import IconClose from "~/assets/close.svg?react";
 import IconLink from "~/assets/link.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
+import BigNumber from "bignumber.js";
 
 function TokenModal({
   label,
@@ -191,28 +192,42 @@ function SwapPanel() {
   const [pairData, setPairData] = useState<sdk.Pair | undefined>(undefined);
   const [isExactIn, setIsExactIn] = useState(true);
 
+  const _reserveA = useMemo(() => {
+    if (!pairData) return;
+    const value = pairData.token0.symbol === fromToken.symbol ? pairData.reserve0 : pairData.reserve1;
+    return BigNumber(value.raw.toString());
+  }, [pairData, fromToken]);
+
+  const _reserveB = useMemo(() => {
+    if (!pairData) return;
+    const value = pairData.token1.symbol === toToken.symbol ? pairData.reserve1 : pairData.reserve0;
+    return BigNumber(value.raw.toString());
+  }, [pairData, toToken]);
+
+  const _price = useMemo(() => {
+    if (!_reserveA || !_reserveB) return BigNumber("0");
+    return _reserveA.div(_reserveB);
+  }, [_reserveA, _reserveB]);
+
   const tokenList = useMemo(() => {
     return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
   }, [fromToken.symbol, toToken.symbol]);
 
-  const _price = useMemo(() => {
-    if (!pairData) return "--";
-
-    const reserveA = pairData.token0.symbol === fromToken.symbol ? pairData.reserve0 : pairData.reserve1;
-    const reserveB = pairData.token1.symbol === toToken.symbol ? pairData.reserve1 : pairData.reserve0;
-
-    return (+reserveA.toExact() / +reserveB.toExact()).toFixed(6).replace(/(\.0*|0+)$/, "");
-  }, [fromToken, toToken, pairData]);
-
   const handleFromTokenChange = (value: string) => {
+    if (!_reserveA || !_reserveB) return;
+
+    const amountOut = BigNumber(value).div(_price);
     setFromTokenAmount(value);
-    setToTokenAmount((+value / +_price).toFixed(6).replace(/(\.0*|0+)$/, ""));
+    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6).replace(/(\.?0+)$/, ""));
     setIsExactIn(true);
   };
 
   const handleToTokenChange = (value: string) => {
+    if (!_reserveA || !_reserveB) return;
+
+    const amountIn = BigNumber(value).times(_price);
     setToTokenAmount(value);
-    setFromTokenAmount((+value * +_price).toFixed(6).replace(/(\.0*|0+)$/, ""));
+    setFromTokenAmount(amountIn.isNaN() ? "0" : amountIn.toFixed(6).replace(/(\.?0+)$/, ""));
     setIsExactIn(false);
   };
 
@@ -255,7 +270,7 @@ function SwapPanel() {
           onTokenChange={setFromToken}
           tokenList={tokenList}
         />
-        <button className={css.swapButton} onClick={handleSwapTokens}>
+        <button className={css.swapButton} onClick={handleSwapTokens} tabIndex={-1}>
           <IconSwap />
         </button>
         <TokenInput
@@ -291,7 +306,7 @@ function SwapPanel() {
           </RadioGroup>
         </DataEntry>
         <DataEntry title="Price">
-          {_price} {fromToken.symbol} per {toToken.symbol}
+          {_price.toFormat(6).replace(/\.?0+$/, "")} {fromToken.symbol} per {toToken.symbol}
         </DataEntry>
         <DataEntry title="Route">
           {fromToken.symbol} &gt; {toToken.symbol}
@@ -383,7 +398,7 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
             <a
               href={`https://explore.vechain.org/accounts/${pair.liquidityToken.address}/`}
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
             >
               <IconLink /> {truncateAddress(pair.liquidityToken.address)}
             </a>
@@ -392,17 +407,27 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>
             My Holdings
-            <a href={`https://explore.vechain.org/accounts/${account}/`} target="_blank" rel="noopener">
+            <a href={`https://explore.vechain.org/accounts/${account}/`} target="_blank" rel="noreferrer">
               <IconLink /> View Activties
             </a>
           </h3>
           <DataEntry title={pair.token0.symbol!}>
-            {myPairShare ? (+pair.reserve0.toExact() * myPairShare).toFixed(2) : "0"}
+            {myPairShare
+              ? myPairShare
+                  .times(pair.reserve0.toExact())
+                  .toFixed(6)
+                  .replace(/(\.?0+)$/, "")
+              : "0"}
           </DataEntry>
           <DataEntry title={pair.token1.symbol!}>
-            {myPairShare ? (+pair.reserve1.toExact() * myPairShare).toFixed(2) : "0"}
+            {myPairShare
+              ? myPairShare
+                  .times(pair.reserve1.toExact())
+                  .toFixed(6)
+                  .replace(/(\.?0+)$/, "")
+              : "0"}
           </DataEntry>
-          <DataEntry title="My Pool Share">{myPairShare ? (myPairShare * 100).toFixed(2) : "0"}%</DataEntry>
+          <DataEntry title="My Pool Share">{myPairShare ? myPairShare.times(100).toFixed(2) : "0"}%</DataEntry>
         </section>
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>Pool Status</h3>
