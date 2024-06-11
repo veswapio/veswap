@@ -48,6 +48,15 @@ import IconLink from "~/assets/link.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
 import BigNumber from "bignumber.js";
 
+// token icons
+import TokenIconVet from "~/assets/tokens/vet.svg?react";
+import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
+
+const TOKEN_ICONS: { [key: string]: any } = {
+  VET: <TokenIconVet />,
+  VTHO: <TokenIconVtho />
+};
+
 function TokenModal({
   label,
   token,
@@ -70,7 +79,7 @@ function TokenModal({
   return (
     <DialogTrigger>
       <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap || true}>
-        <div className={css.tokenTrigger__icon}></div>
+        <div className={css.tokenTrigger__icon}>{token.symbol && TOKEN_ICONS[token.symbol]}</div>
         <div className={css.tokenTrigger__name}>{token.symbol}</div>
         {/* <IconArrow className={css.tokenTrigger__arrow} /> */}
       </AriaButton>
@@ -106,7 +115,7 @@ function TokenModal({
                       setSearchKeyword("");
                     }}
                   >
-                    <div className={css.tokenEntry__icon}></div>
+                    <div className={css.tokenEntry__icon}>{i.symbol && TOKEN_ICONS[i.symbol]}</div>
                     <div className={css.tokenEntry__name}>
                       <strong>{i.symbol}</strong>
                       <span>{i.name}</span>
@@ -382,8 +391,8 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
         {pairList.map((pair: sdk.Pair) => (
           <div className={css.pool} onClick={handlePoolClick} key={pair.liquidityToken.address}>
             <div className={css.pool__tokens}>
-              <div className={css.pool__token}></div>
-              <div className={css.pool__token}></div>
+              <div className={css.pool__token}>{pair.token0.symbol && TOKEN_ICONS[pair.token0.symbol]}</div>
+              <div className={css.pool__token}>{pair.token1.symbol && TOKEN_ICONS[pair.token1.symbol]}</div>
             </div>
             <div className={css.pool__name}>
               {pair.token0.symbol} / {pair.token1.symbol}
@@ -654,7 +663,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
 
         <div className={css.liquidityInput}>
           <button className={clsx(css.tokenTrigger, css.disabled)} tabIndex={-1}>
-            <div className={css.tokenTrigger__icon}></div>
+            <div className={css.tokenTrigger__icon}>{token0.symbol && TOKEN_ICONS[token0.symbol]}</div>
             <div className={css.tokenTrigger__name}>{token0.symbol}</div>
           </button>
           <TextField className={clsx(css.tokenInput__bottom, _token0Error && css.error)} aria-label="Token amount">
@@ -675,7 +684,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
 
         <div className={css.liquidityInput}>
           <button className={clsx(css.tokenTrigger, css.disabled)} tabIndex={-1}>
-            <div className={css.tokenTrigger__icon}></div>
+            <div className={css.tokenTrigger__icon}>{token1.symbol && TOKEN_ICONS[token1.symbol]}</div>
             <div className={css.tokenTrigger__name}>{token1.symbol}</div>
           </button>
           <TextField className={clsx(css.tokenInput__bottom, _token1Error && css.error)} aria-label="Token amount">
