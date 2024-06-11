@@ -30,7 +30,7 @@ import { ROUTER_ADDRESS } from "~/constants/addresses";
 import useTokenBalanceList from "~/hooks/useTokenBalanceList";
 import usePairList from "~/hooks/usePairList";
 import useMyPairShare from "~/hooks/useMyPairShare";
-import { truncateAddress } from "~/utils/helpers";
+import { truncateAddress, formatBigNumber, fixedBigNumber, bigNumberToWei } from "~/utils/helpers";
 // import { queryClient } from "~/query";
 
 import Card from "~/components/Card";
@@ -223,7 +223,7 @@ function SwapPanel() {
 
     const amountOut = BigNumber(value).div(_price);
     setFromTokenAmount(value);
-    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6, 1).replace(/(\.?0+)$/, ""));
+    setToTokenAmount(amountOut.isNaN() ? "0" : fixedBigNumber(amountOut));
     setIsExactIn(true);
   };
 
@@ -232,7 +232,7 @@ function SwapPanel() {
 
     const amountIn = BigNumber(value).times(_price);
     setToTokenAmount(value);
-    setFromTokenAmount(amountIn.isNaN() ? "0" : amountIn.toFixed(6, 1).replace(/(\.?0+)$/, ""));
+    setFromTokenAmount(amountIn.isNaN() ? "0" : fixedBigNumber(amountIn));
     setIsExactIn(false);
   };
 
@@ -250,26 +250,16 @@ function SwapPanel() {
     setToToken(_fromToken);
 
     const amountOut = BigNumber(fromTokenAmount).times(_price);
-    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6, 1).replace(/(\.?0+)$/, ""));
+    setToTokenAmount(amountOut.isNaN() ? "0" : fixedBigNumber(amountOut));
     setIsExactIn(true);
   };
 
   const handleSwap = () => {
     console.log("swap");
     console.log("fromTokenAddress", fromToken.address);
-    console.log(
-      "fromTokenAmount",
-      BigNumber(fromTokenAmount)
-        .times(10 ** fromToken.decimals)
-        .toFixed(0, 1)
-    );
+    console.log("fromTokenAmount", bigNumberToWei(fromTokenAmount, fromToken.decimals));
     console.log("toTokenAddress", toToken.address);
-    console.log(
-      "toTokenAmount",
-      BigNumber(toTokenAmount)
-        .times(10 ** toToken.decimals)
-        .toFixed(0, 1)
-    );
+    console.log("toTokenAmount", bigNumberToWei(toTokenAmount, toToken.decimals));
     console.log("slippage", slippage);
     console.log("isExactIn", isExactIn);
   };
@@ -334,7 +324,7 @@ function SwapPanel() {
           </RadioGroup>
         </DataEntry>
         <DataEntry title="Price">
-          {_price.toFormat(6).replace(/\.?0+$/, "")} {fromToken.symbol} per {toToken.symbol}
+          {formatBigNumber(_price)} {fromToken.symbol} per {toToken.symbol}
         </DataEntry>
         <DataEntry title="Route">
           {fromToken.symbol} &gt; {toToken.symbol}
@@ -408,13 +398,7 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
               {pair.token0.symbol} / {pair.token1.symbol}
             </div>
             <div className={css.pool__value}>
-              {BigNumber(pair.reserve0.toExact())
-                .toFixed(6, 1)
-                .replace(/(\.?0+)$/, "")}{" "}
-              /{" "}
-              {BigNumber(pair.reserve1.toExact())
-                .toFixed(6, 1)
-                .replace(/(\.?0+)$/, "")}
+              {formatBigNumber(pair.reserve0.toExact())} / {formatBigNumber(pair.reserve1.toExact())}
             </div>
           </div>
         ))}
@@ -461,20 +445,10 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
             </a>
           </h3>
           <DataEntry title={pair.token0.symbol!}>
-            {myPairShare
-              ? myPairShare.percentage
-                  .times(pair.reserve0.toExact())
-                  .toFixed(6, 1)
-                  .replace(/(\.?0+)$/, "")
-              : "0"}
+            {myPairShare ? formatBigNumber(myPairShare.percentage.times(pair.reserve0.toExact())) : "0"}
           </DataEntry>
           <DataEntry title={pair.token1.symbol!}>
-            {myPairShare
-              ? myPairShare.percentage
-                  .times(pair.reserve1.toExact())
-                  .toFixed(6, 1)
-                  .replace(/(\.?0+)$/, "")
-              : "0"}
+            {myPairShare ? formatBigNumber(myPairShare.percentage.times(pair.reserve1.toExact())) : "0"}
           </DataEntry>
           <DataEntry title="My Pool Share">
             {myPairShare ? myPairShare.percentage.times(100).toFixed(2, 1) : "0"}%
@@ -482,16 +456,8 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
         </section>
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>Pool Status</h3>
-          <DataEntry title={pair.token0.symbol!}>
-            {BigNumber(pair.reserve0.toExact())
-              .toFixed(6, 1)
-              .replace(/(\.?0+)$/, "")}
-          </DataEntry>
-          <DataEntry title={pair.token1.symbol!}>
-            {BigNumber(pair.reserve1.toExact())
-              .toFixed(6, 1)
-              .replace(/(\.?0+)$/, "")}
-          </DataEntry>
+          <DataEntry title={pair.token0.symbol!}>{formatBigNumber(pair.reserve0.toExact())}</DataEntry>
+          <DataEntry title={pair.token1.symbol!}>{formatBigNumber(pair.reserve1.toExact())}</DataEntry>
         </section>
         <div className={css.card__help}>
           <a href="">Need help? View the user&apos;s guide</a>
@@ -625,12 +591,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
   // };
 
   const handleAddLiquidity = () => {
-    const token0AmountWei = BigNumber(token0Amount)
-      .times(10 ** token0.decimals)
-      .toFixed(0, 1);
-    const token1AmountWei = BigNumber(token1Amount)
-      .times(10 ** token1.decimals)
-      .toFixed(0, 1);
+    const token0AmountWei = bigNumberToWei(token0Amount, token0.decimals);
+    const token1AmountWei = bigNumberToWei(token1Amount, token1.decimals);
 
     if (token0.symbol === "VET" || token1.symbol === "VET") {
       const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
@@ -788,14 +750,8 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
       const removeLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(removeLiquidityABI);
 
       const removeLpWei = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
-      const receiveToken0Wei = _receiveToken0
-        .times(10 ** pair.token0.decimals)
-        .times(0.97)
-        .toFixed(0, 1);
-      const receiveToken1Wei = _receiveToken1
-        .times(10 ** pair.token1.decimals)
-        .times(0.97)
-        .toFixed(0, 1);
+      const receiveToken0Wei = bigNumberToWei(_receiveToken0.times(0.97), pair.token0.decimals);
+      const receiveToken1Wei = bigNumberToWei(_receiveToken1.times(0.97), pair.token1.decimals);
 
       const removeLiquidityArugments =
         pair.token0.symbol === "VET"
@@ -891,8 +847,8 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
 
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>You will receive</h3>
-          <DataEntry title={pair.token0.symbol!}>{_receiveToken0.toFormat(6).replace(/(\.?0+)$/, "")}</DataEntry>
-          <DataEntry title={pair.token1.symbol!}>{_receiveToken1.toFormat(6).replace(/(\.?0+)$/, "")}</DataEntry>
+          <DataEntry title={pair.token0.symbol!}>{formatBigNumber(_receiveToken0)}</DataEntry>
+          <DataEntry title={pair.token1.symbol!}>{formatBigNumber(_receiveToken1)}</DataEntry>
         </section>
       </Card>
 
