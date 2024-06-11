@@ -30,7 +30,7 @@ import { ROUTER_ADDRESS } from "~/constants/addresses";
 import useTokenBalanceList from "~/hooks/useTokenBalanceList";
 import usePairList from "~/hooks/usePairList";
 import useMyPairShare from "~/hooks/useMyPairShare";
-import { toWei, truncateAddress } from "~/utils/helpers";
+import { truncateAddress } from "~/utils/helpers";
 // import { queryClient } from "~/query";
 
 import Card from "~/components/Card";
@@ -223,7 +223,7 @@ function SwapPanel() {
 
     const amountOut = BigNumber(value).div(_price);
     setFromTokenAmount(value);
-    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6).replace(/(\.?0+)$/, ""));
+    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6, 1).replace(/(\.?0+)$/, ""));
     setIsExactIn(true);
   };
 
@@ -232,7 +232,7 @@ function SwapPanel() {
 
     const amountIn = BigNumber(value).times(_price);
     setToTokenAmount(value);
-    setFromTokenAmount(amountIn.isNaN() ? "0" : amountIn.toFixed(6).replace(/(\.?0+)$/, ""));
+    setFromTokenAmount(amountIn.isNaN() ? "0" : amountIn.toFixed(6, 1).replace(/(\.?0+)$/, ""));
     setIsExactIn(false);
   };
 
@@ -250,16 +250,26 @@ function SwapPanel() {
     setToToken(_fromToken);
 
     const amountOut = BigNumber(fromTokenAmount).times(_price);
-    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6).replace(/(\.?0+)$/, ""));
+    setToTokenAmount(amountOut.isNaN() ? "0" : amountOut.toFixed(6, 1).replace(/(\.?0+)$/, ""));
     setIsExactIn(true);
   };
 
   const handleSwap = () => {
     console.log("swap");
     console.log("fromTokenAddress", fromToken.address);
-    console.log("fromTokenAmount", toWei(fromTokenAmount, fromToken.decimals));
+    console.log(
+      "fromTokenAmount",
+      BigNumber(fromTokenAmount)
+        .times(10 ** fromToken.decimals)
+        .toFixed(0, 1)
+    );
     console.log("toTokenAddress", toToken.address);
-    console.log("toTokenAmount", toWei(toTokenAmount, toToken.decimals));
+    console.log(
+      "toTokenAmount",
+      BigNumber(toTokenAmount)
+        .times(10 ** toToken.decimals)
+        .toFixed(0, 1)
+    );
     console.log("slippage", slippage);
     console.log("isExactIn", isExactIn);
   };
@@ -398,7 +408,13 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
               {pair.token0.symbol} / {pair.token1.symbol}
             </div>
             <div className={css.pool__value}>
-              {pair.reserve0.toExact()} / {pair.reserve1.toExact()}
+              {BigNumber(pair.reserve0.toExact())
+                .toFixed(6, 1)
+                .replace(/(\.?0+)$/, "")}{" "}
+              /{" "}
+              {BigNumber(pair.reserve1.toExact())
+                .toFixed(6, 1)
+                .replace(/(\.?0+)$/, "")}
             </div>
           </div>
         ))}
@@ -415,7 +431,6 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
 function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane: (name: string) => void }) {
   const { open } = useWalletModal();
   const { account } = useWallet();
-
   const { data: myPairShare } = useMyPairShare(account, pair);
 
   return (
@@ -425,7 +440,7 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
           <button className={css.card__poolBackButton} onClick={() => setActivePane("")}>
             <IconArrow2 />
           </button>
-          Pool Name
+          {pair.token0.symbol} / {pair.token1.symbol}
         </h2>
         <section className={css.poolSection}>
           <DataEntry title="Smart Contract">
@@ -447,26 +462,36 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
           </h3>
           <DataEntry title={pair.token0.symbol!}>
             {myPairShare
-              ? myPairShare
+              ? myPairShare.percentage
                   .times(pair.reserve0.toExact())
-                  .toFixed(6)
+                  .toFixed(6, 1)
                   .replace(/(\.?0+)$/, "")
               : "0"}
           </DataEntry>
           <DataEntry title={pair.token1.symbol!}>
             {myPairShare
-              ? myPairShare
+              ? myPairShare.percentage
                   .times(pair.reserve1.toExact())
-                  .toFixed(6)
+                  .toFixed(6, 1)
                   .replace(/(\.?0+)$/, "")
               : "0"}
           </DataEntry>
-          <DataEntry title="My Pool Share">{myPairShare ? myPairShare.times(100).toFixed(2) : "0"}%</DataEntry>
+          <DataEntry title="My Pool Share">
+            {myPairShare ? myPairShare.percentage.times(100).toFixed(2, 1) : "0"}%
+          </DataEntry>
         </section>
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>Pool Status</h3>
-          <DataEntry title={pair.token0.symbol!}>{pair.reserve0.toExact()}</DataEntry>
-          <DataEntry title={pair.token1.symbol!}>{pair.reserve1.toExact()}</DataEntry>
+          <DataEntry title={pair.token0.symbol!}>
+            {BigNumber(pair.reserve0.toExact())
+              .toFixed(6, 1)
+              .replace(/(\.?0+)$/, "")}
+          </DataEntry>
+          <DataEntry title={pair.token1.symbol!}>
+            {BigNumber(pair.reserve1.toExact())
+              .toFixed(6, 1)
+              .replace(/(\.?0+)$/, "")}
+          </DataEntry>
         </section>
         <div className={css.card__help}>
           <a href="">Need help? View the user&apos;s guide</a>
@@ -600,12 +625,17 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
   // };
 
   const handleAddLiquidity = () => {
-    const token0AmountWei = toWei(token0Amount, token0.decimals);
-    const token1AmountWei = toWei(token1Amount, token1.decimals);
+    const token0AmountWei = BigNumber(token0Amount)
+      .times(10 ** token0.decimals)
+      .toFixed(0, 1);
+    const token1AmountWei = BigNumber(token1Amount)
+      .times(10 ** token1.decimals)
+      .toFixed(0, 1);
 
-    const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
-    const addLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).value(token0AmountWei);
     if (token0.symbol === "VET" || token1.symbol === "VET") {
+      const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
+      const addLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).value(token0AmountWei);
+
       // TODO: Add slippage tolerance?
       const addLiquidityArugments =
         token0.symbol === "VET"
@@ -640,7 +670,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           console.log(err);
         });
     } else {
-      // TODO: addLiquidty without ETH token
+      // TODO: addLiquidity
     }
   };
 
@@ -702,7 +732,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
         </div>
       </Card>
       {account ? (
-        <div>
+        <div className={css.verticalButtonGroup}>
           {tokenBalanceMap?.[token0.symbol!].needApprove && (
             <Button onPress={() => handleApprove(tokenBalanceMap?.[token0.symbol!].address)}>
               Approve {token0.symbol}
@@ -738,9 +768,71 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
 
 function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane: (name: string) => void }) {
   const [value, setValue] = useState(0);
+  const { account } = useWallet();
+  const { data: myPairShare } = useMyPairShare(account, pair);
+  const connex = useConnex();
 
-  const fromToken = pair.token0;
-  const toToken = pair.token1;
+  const _receiveToken0 = useMemo(() => {
+    return myPairShare ? myPairShare.percentage.times(pair.reserve0.toExact()).times(value / 100) : BigNumber("0");
+  }, [myPairShare, pair, value]);
+
+  const _receiveToken1 = useMemo(() => {
+    return myPairShare ? myPairShare.percentage.times(pair.reserve1.toExact()).times(value / 100) : BigNumber("0");
+  }, [myPairShare, pair, value]);
+
+  const handleRemoveLiquidity = () => {
+    if (!myPairShare) return;
+
+    if (pair.token0.symbol === "VET" || pair.token1.symbol === "VET") {
+      const removeLiquidityABI = find(IUniswapV2Router.abi, { name: "removeLiquidityETH" });
+      const removeLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(removeLiquidityABI);
+
+      const removeLpWei = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
+      const receiveToken0Wei = _receiveToken0
+        .times(10 ** pair.token0.decimals)
+        .times(0.97)
+        .toFixed(0, 1);
+      const receiveToken1Wei = _receiveToken1
+        .times(10 ** pair.token1.decimals)
+        .times(0.97)
+        .toFixed(0, 1);
+
+      const removeLiquidityArugments =
+        pair.token0.symbol === "VET"
+          ? [
+              pair.token1.address,
+              removeLpWei,
+              receiveToken1Wei,
+              receiveToken0Wei,
+              account,
+              Math.ceil(Date.now() / 1000) + 60 * 20
+            ]
+          : [
+              pair.token0.address,
+              removeLpWei,
+              receiveToken0Wei,
+              receiveToken1Wei,
+              account,
+              Math.ceil(Date.now() / 1000) + 60 * 20
+            ];
+
+      const clause = removeLiquidityMethod.asClause(...removeLiquidityArugments);
+
+      connex.vendor
+        .sign("tx", [{ ...clause }])
+        .comment("Remove Liquidity")
+        .request()
+        .then((tx: any) => {
+          console.log("result: ", tx);
+        })
+        .catch((err: any) => {
+          console.log("ERROR");
+          console.log(err);
+        });
+    } else {
+      // TODO: removeLiquidity
+    }
+  };
 
   return (
     <div className={css.poolPanel}>
@@ -799,11 +891,14 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
 
         <section className={css.poolSection}>
           <h3 className={css.poolSection__heading}>You will receive</h3>
-          <DataEntry title={fromToken.symbol!}>0.00</DataEntry>
-          <DataEntry title={toToken.symbol!}>0.00</DataEntry>
+          <DataEntry title={pair.token0.symbol!}>{_receiveToken0.toFormat(6).replace(/(\.?0+)$/, "")}</DataEntry>
+          <DataEntry title={pair.token1.symbol!}>{_receiveToken1.toFormat(6).replace(/(\.?0+)$/, "")}</DataEntry>
         </section>
       </Card>
-      <Button>Remove</Button>
+
+      <Button onPress={handleRemoveLiquidity} disabled={!value || !myPairShare?.percentage || myPairShare?.needApprove}>
+        Remove Liquidity
+      </Button>
     </div>
   );
 }

@@ -6,9 +6,6 @@ import { ROUTER_ADDRESS } from "~/constants/addresses";
 import tokens from "~/constants/tokens";
 import ABI_ERC20 from "~/abis/erc20.json";
 
-const ABI_BALANCE_OF = find(ABI_ERC20, { name: "balanceOf" });
-const ABI_ALLOWANCE = find(ABI_ERC20, { name: "allowance" });
-
 export default function useTokenBalanceList() {
   const connex = useConnex();
   const { account } = useWallet();
@@ -31,14 +28,16 @@ export default function useTokenBalanceList() {
             };
           } else {
             const contract = connex.thor.account(token.address);
-            const balanceData = await contract.method(ABI_BALANCE_OF).call(account);
-            const allowanceData = await contract.method(ABI_ALLOWANCE).call(account, ROUTER_ADDRESS);
+            const balanceData = await contract.method(find(ABI_ERC20, { name: "balanceOf" })).call(account);
+            const allowanceData = await contract
+              .method(find(ABI_ERC20, { name: "allowance" }))
+              .call(account, ROUTER_ADDRESS);
 
             return {
               symbol: token.symbol!,
               address: token.address,
               balance: balanceData.decoded.balance,
-              needApprove: allowanceData.decoded["0"] === 0
+              needApprove: allowanceData.decoded["0"] === "0"
             };
           }
         })

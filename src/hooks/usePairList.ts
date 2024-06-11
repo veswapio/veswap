@@ -8,7 +8,7 @@ export default function useTokenBalanceList() {
 
   return useQuery({
     queryKey: ["pair-list"],
-    refetchInterval: 1000 * 30,
+    refetchInterval: 1000 * 15,
     queryFn: () => {
       return Promise.all([sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex)]);
     }
