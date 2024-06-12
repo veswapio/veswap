@@ -743,30 +743,40 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     const token1AmountWei = bigNumberToWei(token1Amount, token1.decimals);
 
     if (token0.symbol === "VET" || token1.symbol === "VET") {
-      const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
-      const addLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).value(token0AmountWei);
+      const addLiquidityMethod = connex.thor
+        .account(ROUTER_ADDRESS)
+        .method(find(IUniswapV2Router.abi, { name: "addLiquidityETH" }))
+        .value(token0.symbol === "VET" ? token0AmountWei : token1AmountWei);
 
-      // TODO: Add slippage tolerance?
-      const addLiquidityArugments =
-        token0.symbol === "VET"
-          ? [
-              token1.address,
-              token1AmountWei,
-              BigNumber(token1AmountWei).times(0.997).toFixed(0, 1),
-              BigNumber(token0AmountWei).times(0.997).toFixed(0, 1),
-              account,
-              Math.ceil(Date.now() / 1000) + 60 * 20
-            ]
-          : [
-              token0.address,
-              token0AmountWei,
-              BigNumber(token0AmountWei).times(0.997).toFixed(0, 1),
-              BigNumber(token1AmountWei).times(0.997).toFixed(0, 1),
-              account,
-              Math.ceil(Date.now() / 1000) + 60 * 20
-            ];
+      let clause;
 
-      const clause = addLiquidityMethod.asClause(...addLiquidityArugments);
+      if (token0.symbol === "VET") {
+        const tokenAddress = token1.address;
+        const amountTokenDesired = token1AmountWei;
+        const amountTokenMin = BigNumber(token1AmountWei).times(0.97).toFixed(0, 1);
+        const amountETHMin = BigNumber(token0AmountWei).times(0.97).toFixed(0, 1);
+        clause = addLiquidityMethod.asClause(
+          tokenAddress,
+          amountTokenDesired,
+          amountTokenMin,
+          amountETHMin,
+          account,
+          Math.ceil(Date.now() / 1000) + 60 * 20
+        );
+      } else {
+        const tokenAddress = token0.address;
+        const amountTokenDesired = token0AmountWei;
+        const amountTokenMin = BigNumber(token0AmountWei).times(0.97).toFixed(0, 1);
+        const amountETHMin = BigNumber(token1AmountWei).times(0.97).toFixed(0, 1);
+        clause = addLiquidityMethod.asClause(
+          tokenAddress,
+          amountTokenDesired,
+          amountTokenMin,
+          amountETHMin,
+          account,
+          Math.ceil(Date.now() / 1000) + 60 * 20
+        );
+      }
 
       connex.vendor
         .sign("tx", [{ ...clause }])
@@ -896,33 +906,37 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
     if (!myPairShare) return;
 
     if (pair.token0.symbol === "VET" || pair.token1.symbol === "VET") {
-      const removeLiquidityABI = find(IUniswapV2Router.abi, { name: "removeLiquidityETH" });
-      const removeLiquidityMethod = connex.thor.account(ROUTER_ADDRESS).method(removeLiquidityABI);
+      const removeLiquidityMethod = connex.thor
+        .account(ROUTER_ADDRESS)
+        .method(find(IUniswapV2Router.abi, { name: "removeLiquidityETH" }));
 
-      const removeLpWei = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
-      const receiveToken0Wei = bigNumberToWei(_receiveToken0.times(0.97), pair.token0.decimals);
-      const receiveToken1Wei = bigNumberToWei(_receiveToken1.times(0.97), pair.token1.decimals);
+      let clause;
 
-      const removeLiquidityArugments =
-        pair.token0.symbol === "VET"
-          ? [
-              pair.token1.address,
-              removeLpWei,
-              receiveToken1Wei,
-              receiveToken0Wei,
-              account,
-              Math.ceil(Date.now() / 1000) + 60 * 20
-            ]
-          : [
-              pair.token0.address,
-              removeLpWei,
-              receiveToken0Wei,
-              receiveToken1Wei,
-              account,
-              Math.ceil(Date.now() / 1000) + 60 * 20
-            ];
-
-      const clause = removeLiquidityMethod.asClause(...removeLiquidityArugments);
+      if (pair.token0.symbol === "VET") {
+        const balance = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
+        const amountETHMin = bigNumberToWei(_receiveToken0.times(0.97), pair.token0.decimals);
+        const amountTokenMin = bigNumberToWei(_receiveToken1.times(0.97), pair.token1.decimals);
+        clause = removeLiquidityMethod.asClause(
+          pair.token1.address,
+          balance,
+          amountTokenMin,
+          amountETHMin,
+          account,
+          Math.ceil(Date.now() / 1000) + 60 * 20
+        );
+      } else {
+        const balance = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
+        const amountETHMin = bigNumberToWei(_receiveToken1.times(0.97), pair.token1.decimals);
+        const amountTokenMin = bigNumberToWei(_receiveToken0.times(0.97), pair.token0.decimals);
+        clause = removeLiquidityMethod.asClause(
+          pair.token0.address,
+          balance,
+          amountTokenMin,
+          amountETHMin,
+          account,
+          Math.ceil(Date.now() / 1000) + 60 * 20
+        );
+      }
 
       connex.vendor
         .sign("tx", [{ ...clause }])
