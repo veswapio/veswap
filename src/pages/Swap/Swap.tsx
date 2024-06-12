@@ -271,14 +271,118 @@ function SwapPanel() {
     setIsExactIn(true);
   };
 
+  const swapTokensForExactETH = () => {
+    const clause = connex.thor
+      .account(ROUTER_ADDRESS)
+      .method(find(IUniswapV2Router.abi, { name: "swapTokensForExactETH" }))
+      .asClause(
+        bigNumberToWei(toTokenAmount, toToken.decimals),
+        bigNumberToWei(BigNumber(fromTokenAmount).times(1 + +slippage), fromToken.decimals),
+        [fromToken.address, toToken.address],
+        account,
+        Math.ceil(Date.now() / 1000) + 60 * 20
+      );
+
+    connex.vendor
+      .sign("tx", [{ ...clause }])
+      .comment("swapTokensForExactETH")
+      .request()
+      .then((tx: any) => {
+        console.log("result: ", tx);
+      })
+      .catch((err: any) => {
+        console.log("ERROR");
+        console.log(err);
+      });
+  };
+
+  const swapExactTokensForETH = () => {
+    const clause = connex.thor
+      .account(ROUTER_ADDRESS)
+      .method(find(IUniswapV2Router.abi, { name: "swapExactTokensForETH" }))
+      .asClause(
+        bigNumberToWei(fromTokenAmount, fromToken.decimals),
+        bigNumberToWei(BigNumber(toTokenAmount).times(1 - +slippage), toToken.decimals),
+        [fromToken.address, toToken.address],
+        account,
+        Math.ceil(Date.now() / 1000) + 60 * 20
+      );
+
+    connex.vendor
+      .sign("tx", [{ ...clause }])
+      .comment("swapExactTokensForETH")
+      .request()
+      .then((tx: any) => {
+        console.log("result: ", tx);
+      })
+      .catch((err: any) => {
+        console.log("ERROR");
+        console.log(err);
+      });
+  };
+
+  const swapExactETHForTokens = () => {
+    const clause = connex.thor
+      .account(ROUTER_ADDRESS)
+      .method(find(IUniswapV2Router.abi, { name: "swapExactETHForTokens" }))
+      .asClause(
+        bigNumberToWei(BigNumber(toTokenAmount).times(1 - +slippage), toToken.decimals),
+        [fromToken.address, toToken.address],
+        account,
+        Math.ceil(Date.now() / 1000) + 60 * 20
+      );
+
+    connex.vendor
+      .sign("tx", [{ ...clause }])
+      .comment("swapExactETHForTokens")
+      .request()
+      .then((tx: any) => {
+        console.log("result: ", tx);
+      })
+      .catch((err: any) => {
+        console.log("ERROR");
+        console.log(err);
+      });
+  };
+
+  const swapETHForExactTokens = () => {
+    const clause = connex.thor
+      .account(ROUTER_ADDRESS)
+      .method(find(IUniswapV2Router.abi, { name: "swapETHForExactTokens" }))
+      .asClause(
+        bigNumberToWei(toTokenAmount, toToken.decimals),
+        [fromToken.address, toToken.address],
+        account,
+        Math.ceil(Date.now() / 1000) + 60 * 20
+      );
+
+    connex.vendor
+      .sign("tx", [{ ...clause }])
+      .comment("swapETHForExactTokens")
+      .request()
+      .then((tx: any) => {
+        console.log("result: ", tx);
+      })
+      .catch((err: any) => {
+        console.log("ERROR");
+        console.log(err);
+      });
+  };
+
   const handleSwap = () => {
-    console.log("swap");
-    console.log("fromTokenAddress", fromToken.address);
-    console.log("fromTokenAmount", bigNumberToWei(fromTokenAmount, fromToken.decimals));
-    console.log("toTokenAddress", toToken.address);
-    console.log("toTokenAmount", bigNumberToWei(toTokenAmount, toToken.decimals));
-    console.log("slippage", slippage);
-    console.log("isExactIn", isExactIn);
+    if (isExactIn) {
+      if (fromToken.symbol === "VET") {
+        swapExactETHForTokens();
+      } else {
+        swapExactTokensForETH();
+      }
+    } else {
+      if (fromToken.symbol === "VET") {
+        swapETHForExactTokens();
+      } else {
+        swapTokensForExactETH();
+      }
+    }
   };
 
   useEffect(() => {
