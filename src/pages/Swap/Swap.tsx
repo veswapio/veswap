@@ -326,6 +326,7 @@ function SwapPanel() {
       .account(ROUTER_ADDRESS)
       .method(find(IUniswapV2Router.abi, { name: "swapExactETHForTokens" }))
       .asClause(
+        // TODO: fix calculation
         bigNumberToWei(BigNumber(toTokenAmount).times(1 - +slippage), toToken.decimals),
         [fromToken.address, toToken.address],
         account,
@@ -333,7 +334,7 @@ function SwapPanel() {
       );
 
     connex.vendor
-      .sign("tx", [{ ...clause }])
+      .sign("tx", [{ ...clause, value: bigNumberToWei(fromTokenAmount, 18) }])
       .comment("swapExactETHForTokens")
       .request()
       .then((tx: any) => {
