@@ -189,8 +189,8 @@ function SwapPanel() {
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const connex = useConnex();
 
-  const [fromToken, setFromToken] = useState(tokens[0]);
-  const [toToken, setToToken] = useState(tokens[1]);
+  const [fromToken, setFromToken] = useState(tokens[1]);
+  const [toToken, setToToken] = useState(tokens[0]);
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
   const [slippage, setSlippage] = useState("0.01");
@@ -325,8 +325,8 @@ function SwapPanel() {
     const clause = connex.thor
       .account(ROUTER_ADDRESS)
       .method(find(IUniswapV2Router.abi, { name: "swapExactETHForTokens" }))
+      .value(bigNumberToWei(fromTokenAmount, fromToken.decimals))
       .asClause(
-        // TODO: fix calculation
         bigNumberToWei(BigNumber(toTokenAmount).times(1 - +slippage), toToken.decimals),
         [fromToken.address, toToken.address],
         account,
@@ -334,7 +334,7 @@ function SwapPanel() {
       );
 
     connex.vendor
-      .sign("tx", [{ ...clause, value: bigNumberToWei(fromTokenAmount, 18) }])
+      .sign("tx", [{ ...clause }])
       .comment("swapExactETHForTokens")
       .request()
       .then((tx: any) => {
@@ -350,6 +350,7 @@ function SwapPanel() {
     const clause = connex.thor
       .account(ROUTER_ADDRESS)
       .method(find(IUniswapV2Router.abi, { name: "swapETHForExactTokens" }))
+      .value(bigNumberToWei(BigNumber(fromTokenAmount).times(1 + +slippage), fromToken.decimals))
       .asClause(
         bigNumberToWei(toTokenAmount, toToken.decimals),
         [fromToken.address, toToken.address],
@@ -463,6 +464,7 @@ function SwapPanel() {
         >
           0.1%
         </DataEntry>
+        <DataEntry title="Swap Type">{isExactIn ? "Exact In" : "Exact Out"}</DataEntry>
         <div className={css.card__help}>
           <a href="">Need help? View the user&apos;s guide</a>
         </div>
