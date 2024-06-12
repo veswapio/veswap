@@ -244,6 +244,23 @@ function SwapPanel() {
     return BigNumber(toTokenAmount).isGreaterThan(tokenBalanceMap?.[toToken.symbol!].displayBalance!);
   }, [toTokenAmount, toToken, tokenBalanceMap]);
 
+  const handleApprove = async (address: string) => {
+    const approveMethod = connex.thor.account(address).method(find(ABI_ERC20, { name: "approve" }));
+    const clause = approveMethod.asClause(ROUTER_ADDRESS, (10n ** 24n).toString());
+
+    connex.vendor
+      .sign("tx", [{ ...clause }])
+      .comment("Approve")
+      .request()
+      .then((tx: any) => {
+        console.log(tx);
+      })
+      .catch((err: any) => {
+        console.log("ERROR");
+        console.log(err);
+      });
+  };
+
   const handleSwapTokens = () => {
     const _fromToken = fromToken;
     setFromToken(toToken);
@@ -346,19 +363,35 @@ function SwapPanel() {
         </div>
       </Card>
       {account ? (
-        <Button
-          onPress={handleSwap}
-          disabled={
-            !fromTokenAmount ||
-            !toTokenAmount ||
-            fromTokenAmount === "0" ||
-            toTokenAmount === "0" ||
-            _fromTokenError ||
-            _toTokenError
-          }
-        >
-          Swap
-        </Button>
+        <div className={css.verticalButtonGroup}>
+          {tokenBalanceMap?.[fromToken.symbol!].needApprove && (
+            <Button onPress={() => handleApprove(tokenBalanceMap?.[fromToken.symbol!].address)}>
+              Approve {fromToken.symbol}
+            </Button>
+          )}
+
+          {tokenBalanceMap?.[toToken.symbol!].needApprove && (
+            <Button onPress={() => handleApprove(tokenBalanceMap?.[toToken.symbol!].address)}>
+              Approve {toToken.symbol}
+            </Button>
+          )}
+
+          <Button
+            onPress={handleSwap}
+            disabled={
+              !fromTokenAmount ||
+              !toTokenAmount ||
+              fromTokenAmount === "0" ||
+              toTokenAmount === "0" ||
+              _fromTokenError ||
+              _toTokenError ||
+              tokenBalanceMap?.[fromToken.symbol!].needApprove ||
+              tokenBalanceMap?.[toToken.symbol!].needApprove
+            }
+          >
+            Swap
+          </Button>
+        </div>
       ) : (
         <Button onPress={open}>Connect Wallet</Button>
       )}
@@ -451,7 +484,7 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
             {myPairShare ? formatBigNumber(myPairShare.percentage.times(pair.reserve1.toExact())) : "0"}
           </DataEntry>
           <DataEntry title="My Pool Share">
-            {myPairShare ? myPairShare.percentage.times(100).toFixed(2, 1) : "0"}%
+            {myPairShare ? fixedBigNumber(myPairShare.percentage.times(100), 2) : "0"}%
           </DataEntry>
         </section>
         <section className={css.poolSection}>
@@ -715,7 +748,9 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
               token0Amount === "0" ||
               token1Amount === "0" ||
               _token0Error ||
-              _token1Error
+              _token1Error ||
+              tokenBalanceMap?.[token0.symbol!].needApprove ||
+              tokenBalanceMap?.[token1.symbol!].needApprove
             }
           >
             Add Liquidity
