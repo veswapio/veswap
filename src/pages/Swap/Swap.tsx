@@ -626,10 +626,17 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
   const [token0Amount, setToken0Amount] = useState("0");
   const [token1Amount, setToken1Amount] = useState("0");
 
+  const _price = useMemo(() => {
+    return BigNumber(pair.reserve0.toExact()).div(pair.reserve1.toExact());
+  }, [pair]);
+
   const handleToken0Input = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       setToken0Amount(value);
+      const rawToken1Amount = BigNumber(value).div(_price);
+      const token1Amount = rawToken1Amount.isNaN() ? "0" : fixedBigNumber(rawToken1Amount);
+      setToken1Amount(token1Amount);
     }
   };
 
@@ -637,6 +644,9 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     const value = e.target.value;
     if (/^\d*\.?\d*$/.test(value)) {
       setToken1Amount(value);
+      const rawToken0Amount = BigNumber(value).times(_price);
+      const token0Amount = rawToken0Amount.isNaN() ? "0" : fixedBigNumber(rawToken0Amount);
+      setToken0Amount(token0Amount);
     }
   };
 
@@ -741,16 +751,16 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           ? [
               token1.address,
               token1AmountWei,
-              token1AmountWei,
-              token0AmountWei,
+              BigNumber(token1AmountWei).times(0.997).toFixed(0, 1),
+              BigNumber(token0AmountWei).times(0.997).toFixed(0, 1),
               account,
               Math.ceil(Date.now() / 1000) + 60 * 20
             ]
           : [
               token0.address,
               token0AmountWei,
-              token0AmountWei,
-              token1AmountWei,
+              BigNumber(token0AmountWei).times(0.997).toFixed(0, 1),
+              BigNumber(token1AmountWei).times(0.997).toFixed(0, 1),
               account,
               Math.ceil(Date.now() / 1000) + 60 * 20
             ];
