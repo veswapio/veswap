@@ -221,6 +221,16 @@ function SwapPanel() {
     return _fromReserve.div(_toReserve);
   }, [_fromReserve, _toReserve]);
 
+  const _priceImpact = useMemo(() => {
+    const k = _fromReserve.times(_toReserve);
+    const newFromReserve = _fromReserve.plus(bigNumberToWei(fromTokenAmount, fromToken.decimals));
+    const newToReserve = k.div(newFromReserve);
+    const receive = _toReserve.minus(newToReserve);
+    const impact = receive.div(newToReserve);
+
+    return impact.isNaN() ? "0" : fixedBigNumber(impact.times(100), 2);
+  }, [_fromReserve, _toReserve, fromTokenAmount, fromToken]);
+
   const tokenList = useMemo(() => {
     return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
   }, [fromToken.symbol, toToken.symbol]);
@@ -469,7 +479,7 @@ function SwapPanel() {
           title="Price Impact"
           tooltip="The price you get vs. the ideal price. Split the orders to make less impact to achieve better price."
         >
-          0.1%
+          {_priceImpact}%
         </DataEntry>
         <DataEntry title="Swap Type">{isExactIn ? "Exact In" : "Exact Out"}</DataEntry>
         <div className={css.card__help}>
