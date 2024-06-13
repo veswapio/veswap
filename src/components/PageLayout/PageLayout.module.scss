@@ -1,7 +1,7 @@
 .root {
   width: 100vw;
   min-height: 100vh;
-  padding-top: 96px;
+  padding-top: 80px;
   user-select: none;
 }
 
@@ -13,8 +13,8 @@
   right: 0;
   display: flex;
   align-items: center;
-  height: rhythm(12);
-  padding: rhythm(3) rhythm(6);
+  height: rhythm(10);
+  padding: rhythm(2) rhythm(6);
   backdrop-filter: blur(20px);
 
   &__logo {

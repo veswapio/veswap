@@ -481,7 +481,6 @@ function SwapPanel() {
         >
           {_priceImpact}%
         </DataEntry>
-        <DataEntry title="Swap Type">{isExactIn ? "Exact In" : "Exact Out"}</DataEntry>
         <div className={css.card__help}>
           <a href="">Need help? View the user&apos;s guide</a>
         </div>

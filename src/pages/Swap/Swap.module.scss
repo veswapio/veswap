@@ -1,5 +1,5 @@
 .page {
-  padding: rhythm(5) rhythm(2);
+  padding: rhythm(3) rhythm(2);
 }
 
 .swapPanel {
@@ -8,12 +8,12 @@
 }
 
 .poolPanel {
-  max-width: 520px;
+  max-width: 448px;
   margin: auto;
 }
 
 .claimPanel {
-  max-width: 400px;
+  max-width: 448px;
   margin: auto;
 }
 
@@ -38,14 +38,14 @@
 
 .tabButton {
   font-weight: 500;
-  line-height: 22px;
+  line-height: 24px;
   font-size: 16px;
-  padding: 10px 16px;
-  border-radius: 37px;
+  padding: 8px 20px;
+  border-radius: 38px;
   outline: none;
   cursor: pointer;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 4px;
+  margin-right: 4px;
 
   &[aria-selected="true"] {
     background: rgba(#fff, 0.1);
@@ -53,14 +53,14 @@
 }
 
 .card {
-  margin-bottom: rhythm(4);
+  margin-bottom: rhythm(3);
 
   &__poolHeading {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 32px;
     font-weight: 500;
     text-align: center;
-    margin-bottom: rhythm(4);
+    margin-bottom: rhythm(2);
     position: relative;
   }
 
@@ -79,8 +79,8 @@
   }
 
   &__claimHeading {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 20px;
     font-weight: 500;
     display: grid;
     grid-template-columns: max-content auto;
@@ -101,7 +101,7 @@
   }
 
   &__search {
-    margin-bottom: rhythm(3);
+    margin-bottom: rhythm(2);
   }
 
   &__help {
@@ -134,7 +134,7 @@
   display: block;
   width: 20px;
   height: 20px;
-  margin: rhythm(3) auto rhythm(2);
+  margin: rhythm(2.5) auto rhythm(1);
   cursor: pointer;
 }
 
@@ -143,10 +143,10 @@
   align-items: center;
 
   &__option {
-    padding: 4px 16px;
+    padding: 4px 12px;
     border-radius: rhythm(2);
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 13px;
+    line-height: 16px;
     font-weight: 500;
     cursor: pointer;
 
@@ -160,10 +160,12 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  padding: rhythm(2);
+  padding: rhythm(1.75) rhythm(2);
   border-radius: 12px;
   background: rgba(#fff, 0.1);
   cursor: pointer;
+  font-size: 15px;
+  line-height: 16px;
 
   &__tokens {
     display: flex;
@@ -174,11 +176,17 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    margin-right: 6px;
+    margin-right: 2px;
+  }
+
+  &__name {
+    font-weight: 500;
   }
 
   &__value {
     margin-left: auto;
+    font-size: 13px;
+    font-weight: 500;
   }
 
   &:hover {
@@ -209,9 +217,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 16px;
     line-height: 24px;
+    margin-bottom: rhythm(2);
 
     > a {
       font-size: 14px;
@@ -245,10 +254,10 @@
   }
 
   &__bottom {
-    margin-top: rhythm(2);
+    margin-top: rhythm(1);
     background: rgba(#fff, 0.1);
     border-radius: 12px;
-    padding: rhythm(2);
+    padding: rhythm(1.5) rhythm(2);
 
     &.error {
       background: #ff00002a;
@@ -294,9 +303,10 @@
   }
 
   &__name {
-    font-size: 16px;
-    line-height: 18px;
+    font-size: 15px;
+    line-height: 16px;
     letter-spacing: 0.25px;
+    font-weight: 500;
   }
 
   &__arrow {

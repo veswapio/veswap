@@ -3,8 +3,8 @@
   display: flex;
   font-size: 14px;
   line-height: 20px;
-  margin-top: rhythm(1.75);
-  margin-bottom: rhythm(1.75);
+  margin-top: rhythm(1.25);
+  margin-bottom: rhythm(1.25);
 
   &__title {
     font-weight: 500;
@@ -18,5 +18,7 @@
 
   &__content {
     margin-left: auto;
+    font-size: 13px;
+    font-weight: 500;
   }
 }
