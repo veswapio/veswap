@@ -197,29 +197,36 @@ function SwapPanel() {
   const [pairData, setPairData] = useState<sdk.Pair | undefined>(undefined);
   const [isExactIn, setIsExactIn] = useState(true);
 
-  const _reserveA = useMemo(() => {
-    if (!pairData) return;
+  const _fromReserve = useMemo(() => {
+    if (!pairData) return BigNumber(0);
     const value = pairData.token0.symbol === fromToken.symbol ? pairData.reserve0 : pairData.reserve1;
     return BigNumber(value.raw.toString());
   }, [pairData, fromToken]);
 
-  const _reserveB = useMemo(() => {
-    if (!pairData) return;
+  const _toReserve = useMemo(() => {
+    if (!pairData) return BigNumber(0);
     const value = pairData.token1.symbol === toToken.symbol ? pairData.reserve1 : pairData.reserve0;
     return BigNumber(value.raw.toString());
   }, [pairData, toToken]);
 
+  const _insufficient_liquidity = useMemo(() => {
+    return (
+      BigNumber(fromTokenAmount).isGreaterThan(fixedBigNumber(_fromReserve.div(10 ** fromToken.decimals))) ||
+      BigNumber(toTokenAmount).isGreaterThan(fixedBigNumber(_toReserve.div(10 ** toToken.decimals)))
+    );
+  }, [_fromReserve, fromTokenAmount, fromToken, _toReserve, toTokenAmount, toToken]);
+
   const _price = useMemo(() => {
-    if (!_reserveA || !_reserveB) return BigNumber("0");
-    return _reserveA.div(_reserveB);
-  }, [_reserveA, _reserveB]);
+    if (!_fromReserve || !_toReserve) return BigNumber("0");
+    return _fromReserve.div(_toReserve);
+  }, [_fromReserve, _toReserve]);
 
   const tokenList = useMemo(() => {
     return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
   }, [fromToken.symbol, toToken.symbol]);
 
   const handleFromTokenChange = (value: string) => {
-    if (!_reserveA || !_reserveB) return;
+    if (!_fromReserve || !_toReserve) return;
 
     const amountOut = BigNumber(value).div(_price);
     setFromTokenAmount(value);
@@ -228,7 +235,7 @@ function SwapPanel() {
   };
 
   const handleToTokenChange = (value: string) => {
-    if (!_reserveA || !_reserveB) return;
+    if (!_fromReserve || !_toReserve) return;
 
     const amountIn = BigNumber(value).times(_price);
     setToTokenAmount(value);
@@ -493,10 +500,11 @@ function SwapPanel() {
               _fromTokenError ||
               _toTokenError ||
               tokenBalanceMap?.[fromToken.symbol!].needApprove ||
-              tokenBalanceMap?.[toToken.symbol!].needApprove
+              tokenBalanceMap?.[toToken.symbol!].needApprove ||
+              _insufficient_liquidity
             }
           >
-            Swap
+            {_insufficient_liquidity ? "Insufficient Liquidity" : "Swap"}
           </Button>
         </div>
       ) : (
