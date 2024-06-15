@@ -2,6 +2,7 @@
   position: relative;
   min-height: 100vh;
   padding: 0 rhythm(3);
+  overflow: hidden;
 
   &__spaceship {
     width: 480px;
@@ -10,6 +11,11 @@
     top: 15vh;
     left: calc(50% + 148px);
     pointer-events: none;
+
+    @include responsive("mobile") {
+      width: 320px;
+      left: 50%;
+    }
   }
 
   &__star {
@@ -26,6 +32,11 @@
     &.p2 {
       top: 40vh;
       left: 40vh;
+
+      @include responsive("mobile") {
+        top: 70vh;
+        left: 20vh;
+      }
     }
 
     &.p3 {
@@ -57,20 +68,37 @@
   height: rhythm(12);
   padding: rhythm(3);
 
+  @include responsive("tablet") {
+    padding: rhythm(3) 0;
+  }
+
   &__logo {
     height: rhythm(3);
-    margin-right: rhythm(8);
+    min-width: max-content;
+    margin-right: rhythm(3);
   }
 
   &__links {
     display: flex;
-    gap: rhythm(8);
+    gap: rhythm(5);
+
+    @include responsive("tablet") {
+      gap: rhythm(3);
+    }
+
+    @include responsive("mobile") {
+      gap: rhythm(2);
+    }
   }
 
   &__link {
     font-size: 16px;
     line-height: 24px;
     font-weight: 500;
+
+    @include responsive("mobile") {
+      font-size: 14px;
+    }
   }
 
   &__button {
@@ -78,14 +106,15 @@
     font-weight: 500;
     line-height: 26px;
     display: flex;
-    width: 155px;
     height: 50px;
-    padding: 16px;
+    padding: 16px 24px;
     justify-content: center;
     align-items: center;
     border-radius: 60px;
     background: #000;
     position: relative;
+    margin-left: rhythm(3);
+    white-space: nowrap;
 
     &::before {
       content: "";
@@ -95,11 +124,19 @@
       background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
       border-radius: 50px;
     }
+
+    @include responsive("mobile") {
+      display: none;
+    }
   }
 }
 
 .hero {
   padding-top: 21vh;
+
+  @include responsive("mobile") {
+    padding-top: 10vh;
+  }
 
   &__heading {
     font-size: 64px;
@@ -108,6 +145,12 @@
     text-align: center;
     max-width: 800px;
     margin: 0 auto rhythm(8);
+
+    @include responsive("mobile") {
+      font-size: 36px;
+      line-height: 48px;
+      margin-bottom: rhythm(3);
+    }
   }
 
   &__subheading {
@@ -117,14 +160,26 @@
     text-align: center;
     max-width: 600px;
     margin: 0 auto rhythm(10);
+
+    @include responsive("mobile") {
+      font-size: 17px;
+      line-height: 24px;
+      margin-bottom: rhythm(8);
+    }
   }
 
   &__bGroup {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: rhythm(6);
+    gap: rhythm(4);
     margin-bottom: rhythm(10);
+
+    @include responsive("mobile") {
+      flex-direction: column;
+      gap: rhythm(1.5);
+      margin-bottom: rhythm(4);
+    }
   }
 
   &__button {
@@ -136,8 +191,12 @@
     border-radius: 50px;
     font-size: 16px;
     line-height: 26px;
-    font-weight: 500;
+    font-weight: 600;
     background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+
+    @include responsive("mobile") {
+      width: 80%;
+    }
   }
 }
 
@@ -147,6 +206,11 @@
   justify-content: center;
   padding-top: rhythm(10);
   padding-bottom: rhythm(10);
+
+  @include responsive("mobile") {
+    padding-top: rhythm(6);
+    padding-bottom: rhythm(6);
+  }
 }
 
 .link {

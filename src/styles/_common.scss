@@ -1,6 +1,17 @@
-$red: red;
-$blue: blue;
+@use "sass:map";
 
 @function rhythm($n) {
   @return 8px * $n;
+}
+
+$_breakpoints: (
+  tablet: 768px,
+  mobile: 599px,
+  mobile-s: 375px
+);
+
+@mixin responsive($key, $reverse: false) {
+  @media (if($reverse, min-width, max-width): map.get($_breakpoints, $key)) {
+    @content;
+  }
 }
