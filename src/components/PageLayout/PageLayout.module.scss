@@ -14,12 +14,12 @@
   display: flex;
   align-items: center;
   height: rhythm(10);
-  padding: rhythm(2) rhythm(6);
+  padding: 0 rhythm(6);
   backdrop-filter: blur(20px);
 
   &__logo {
     flex: none;
-    min-height: rhythm(3);
+    max-height: rhythm(3);
     margin-right: rhythm(8);
   }
 
@@ -51,23 +51,30 @@
     }
   }
 
+  @include responsive("tablet") {
+    padding: 0 rhythm(3);
+
+    &__logo {
+      margin-right: auto;
+    }
+
+    &__wallet {
+      display: none;
+    }
+  }
+
   @include responsive("mobile") {
-    padding: rhythm(2) rhythm(3);
+    height: rhythm(8);
 
     &__logo {
       height: rhythm(2.75);
       min-height: rhythm(2.75);
-      margin-right: auto;
     }
 
     &__link {
       margin-right: 0;
       padding-left: rhythm(1.5);
       padding-right: rhythm(1.5);
-    }
-
-    &__wallet {
-      display: none;
     }
   }
 }
@@ -102,5 +109,25 @@
     &__icon:first-child {
       margin-left: 0;
     }
+  }
+}
+
+.mobileWallet {
+  height: rhythm(5);
+  align-items: center;
+  justify-content: center;
+  padding: 0 rhythm(2.5);
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 10px;
+  background: #252525;
+  height: rhythm(7);
+  margin: rhythm(-1) auto 0;
+  width: calc(100% - 32px);
+  max-width: 448px;
+  display: none;
+
+  @include responsive("tablet") {
+    display: flex;
   }
 }

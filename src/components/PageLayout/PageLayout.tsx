@@ -63,6 +63,10 @@ export default function Home() {
 
       <Outlet />
 
+      <button className={css.mobileWallet} onClick={open}>
+        {buttonText}
+      </button>
+
       <div className={css.status}>
         <IconBlock className={css.status__icon} />
         <span>{blockNumber}</span>
