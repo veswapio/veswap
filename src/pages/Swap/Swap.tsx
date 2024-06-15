@@ -551,11 +551,13 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
               <div className={css.pool__token}>{pair.token0.symbol && TOKEN_ICONS[pair.token0.symbol]}</div>
               <div className={css.pool__token}>{pair.token1.symbol && TOKEN_ICONS[pair.token1.symbol]}</div>
             </div>
-            <div className={css.pool__name}>
-              {pair.token0.symbol} / {pair.token1.symbol}
-            </div>
-            <div className={css.pool__value}>
-              {formatBigNumber(pair.reserve0.toExact())} / {formatBigNumber(pair.reserve1.toExact())}
+            <div className={css.pool__text}>
+              <div className={css.pool__name}>
+                {pair.token0.symbol} / {pair.token1.symbol}
+              </div>
+              <div className={css.pool__value}>
+                {formatBigNumber(pair.reserve0.toExact())} / {formatBigNumber(pair.reserve1.toExact())}
+              </div>
             </div>
           </div>
         ))}

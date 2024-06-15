@@ -65,9 +65,9 @@ export default function Home() {
 
       <div className={css.status}>
         <IconBlock className={css.status__icon} />
-        <span className={css.status__value}>{blockNumber}</span>
+        <span>{blockNumber}</span>
         <IconChain className={css.status__icon} />
-        <span className={css.status__value}>Main</span>
+        <span>Main</span>
         <span className={css.status__version}>Version: {__COMMIT_HASH__}</span>
       </div>
     </div>
