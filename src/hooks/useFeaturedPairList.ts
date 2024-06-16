@@ -3,11 +3,11 @@ import { useConnex } from "@vechain/dapp-kit-react";
 import tokens from "~/constants/tokens";
 import sdk from "~/sdk";
 
-export default function useTokenBalanceList() {
+export default function useFeaturedPairList() {
   const connex = useConnex();
 
   return useQuery({
-    queryKey: ["pair-list"],
+    queryKey: ["featured-pair-list"],
     refetchInterval: 1000 * 15,
     queryFn: () => {
       return Promise.all([sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex)]);

@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
 import Table from "~/components/Table";
+import useAllPairList from "~/hooks/useAllPairList";
+import useTokenPrice from "~/hooks/useTokenPrice";
 import css from "./Overview.module.scss";
 
 import IconArrow2 from "~/assets/arrow2.svg?react";
@@ -8,6 +10,12 @@ import IconPlus from "~/assets/plus.svg?react";
 import IconExternal from "~/assets/external.svg?react";
 
 export default function Overview() {
+  const { data: allPairList } = useAllPairList();
+  const { data: tokenPrice } = useTokenPrice();
+
+  console.log("allPairList: ", allPairList);
+  console.log("tokenPrice: ", tokenPrice);
+
   return (
     <div className={css.page}>
       <section className={css.section}>

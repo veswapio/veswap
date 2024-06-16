@@ -5,7 +5,7 @@ import BigNumber from "bignumber.js";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
 import ABI_ERC20 from "~/abis/erc20.json";
 
-export default function useTokenBalanceList(account: any, pair: any) {
+export default function useMyPairShare(account: any, pair: any) {
   const connex = useConnex();
 
   return useQuery({

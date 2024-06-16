@@ -28,7 +28,7 @@ import sdk from "~/sdk";
 import tokens from "~/constants/tokens";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
 import useTokenBalanceList from "~/hooks/useTokenBalanceList";
-import usePairList from "~/hooks/usePairList";
+import useFeaturedPairList from "~/hooks/useFeaturedPairList";
 import useMyPairShare from "~/hooks/useMyPairShare";
 import { truncateAddress, formatBigNumber, fixedBigNumber, bigNumberToWei } from "~/utils/helpers";
 // import { queryClient } from "~/query";
@@ -1046,7 +1046,7 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
 
 function PoolPanel() {
   const [activePane, setActivePane] = useState("");
-  const { data: pairList, isPending } = usePairList();
+  const { data: pairList, isPending } = useFeaturedPairList();
 
   if (isPending) {
     return (
