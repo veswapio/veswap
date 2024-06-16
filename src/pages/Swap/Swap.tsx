@@ -27,10 +27,11 @@ import ABI_ERC20 from "~/abis/erc20.json";
 import sdk from "~/sdk";
 import tokens from "~/constants/tokens";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
+import { DEFAULT_DEADLINE_FROM_NOW, INITIAL_ALLOWED_SLIPPAGE } from "~/constants/config";
 import useTokenBalanceList from "~/hooks/useTokenBalanceList";
 import useFeaturedPairList from "~/hooks/useFeaturedPairList";
 import useMyPairShare from "~/hooks/useMyPairShare";
-import { truncateAddress, formatBigNumber, fixedBigNumber, bigNumberToWei } from "~/utils/helpers";
+import { truncateAddress, formatBigNumber, fixedBigNumber, bigNumberToWei, Field } from "~/utils/helpers";
 // import { queryClient } from "~/query";
 
 import Card from "~/components/Card";
@@ -51,6 +52,11 @@ import BigNumber from "bignumber.js";
 // token icons
 import TokenIconVet from "~/assets/tokens/vet.svg?react";
 import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
+import { useTokenAllowance } from "~/hooks/useTokenAllowance";
+import { useSwapCallback } from "~/hooks/useSwapCallback";
+import { useApproveCallbackFromTrade } from "~/hooks/useApproveCallback";
+import useDerivedSwapInfo from "~/hooks/useDerivedSwapInfo";
+import { useETHBalances } from "~/hooks/useBalances";
 
 const TOKEN_ICONS: { [key: string]: any } = {
   VET: <TokenIconVet />,
@@ -196,6 +202,7 @@ function SwapPanel() {
   const [slippage, setSlippage] = useState("0.01");
   const [pairData, setPairData] = useState<sdk.Pair | undefined>(undefined);
   const [isExactIn, setIsExactIn] = useState(true);
+  const [deadline, setDeadline] = useState<number>(DEFAULT_DEADLINE_FROM_NOW);
 
   const _fromReserve = useMemo(() => {
     if (!pairData) return BigNumber(0);
@@ -297,7 +304,7 @@ function SwapPanel() {
         bigNumberToWei(BigNumber(fromTokenAmount).times(1 + +slippage), fromToken.decimals),
         [fromToken.address, toToken.address],
         account,
-        Math.ceil(Date.now() / 1000) + 60 * 20
+        Math.ceil(Date.now() / 1000) + DEFAULT_DEADLINE_FROM_NOW
       );
 
     connex.vendor
@@ -313,13 +320,37 @@ function SwapPanel() {
       });
   };
 
+  const [allowedSlippage, setAllowedSlippage] = useState<number>(INITIAL_ALLOWED_SLIPPAGE);
+  const {
+    bestTrade,
+    tokenBalances,
+    parsedAmounts,
+    tokens: tokensDerived,
+    error
+  } = useDerivedSwapInfo(Field.INPUT, fromTokenAmount, fromToken.address, toToken.address);
+
+  const swapCallback = useSwapCallback(bestTrade!, allowedSlippage, deadline);
+  const myVetBalance = useETHBalances([account!])?.[account!]
+  console.log(tokenBalances, 'tokenBalances', parsedAmounts)
+
+
   const swapExactTokensForETH = () => {
+    // Multi Clause
+    // console.log(bigNumberToWei(toTokenAmount, toToken.decimals),
+    //     bigNumberToWei(BigNumber(fromTokenAmount).times(1 + +slippage), fromToken.decimals),
+    //     [fromToken.address, toToken.address],
+    //     account,
+    //     Math.ceil(Date.now() / 1000) + 60 * 20)
+    //   console.log(connex.thor.account(tokenBalanceMap?.[fromToken.symbol!].address), 'jjjj')
+    //     const approveMethod = connex.thor.account(tokenBalanceMap?.[fromToken.symbol!].address).method(find(ABI_ERC20, { name: "approve" }));
+    // const clause1 = approveMethod.asClause(ROUTER_ADDRESS, (10n ** 24n).toString());
+
     const clause = connex.thor
       .account(ROUTER_ADDRESS)
       .method(find(IUniswapV2Router.abi, { name: "swapExactTokensForETH" }))
       .asClause(
         bigNumberToWei(fromTokenAmount, fromToken.decimals),
-        bigNumberToWei(BigNumber(toTokenAmount).times(1 - +slippage), toToken.decimals),
+        bigNumberToWei(bestTrade?.outputAmount?.toFixed(6), toToken.decimals),
         [fromToken.address, toToken.address],
         account,
         Math.ceil(Date.now() / 1000) + 60 * 20
@@ -411,9 +442,17 @@ function SwapPanel() {
       const pairData = await sdk.Fetcher.fetchPairData(tokenA, tokenB, connex);
       setPairData(pairData);
     }
-
     fetchData();
   }, [fromToken, toToken, connex, setPairData]);
+
+  // check whether the user has approved the router on the input token
+  const [approval, approveCallback] = useApproveCallbackFromTrade(bestTrade!, allowedSlippage);
+
+  const currentAllowance = useTokenAllowance(
+    new sdk.Token(1, fromToken.address, fromToken.decimals, fromToken.symbol),
+    account,
+    ROUTER_ADDRESS
+  );
 
   return (
     <div className={css.swapPanel}>
@@ -680,18 +719,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     return BigNumber(token1Amount).isGreaterThan(tokenBalanceMap?.[token1.symbol!].displayBalance!);
   }, [token1Amount, token1, tokenBalanceMap]);
 
-  // const calculatePairAddr = async () => {
-  //   const FACTORY = "0x814ab84a151662c6d1f8142abce02ca25c05905e";
-  //   const VVET = "0x45429a2255e7248e57fce99e7239aed3f84b7a53";
-  //   connex.thor
-  //     .account(FACTORY)
-  //     .method(find(ABI_FACTORY, { name: "createPair" }))
-  //     .call(tokens[1].address, VVET)
-  //     .then((res: any) => {
-  //       console.log(res);
-  //     });
-  // };
-
   const handleApprove = async (address: string) => {
     const approveMethod = connex.thor.account(address).method(find(ABI_ERC20, { name: "approve" }));
     const clause = approveMethod.asClause(ROUTER_ADDRESS, (10n ** 24n).toString());
@@ -708,56 +735,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
         console.log(err);
       });
   };
-
-  // const approvePair = async () => {
-  //   const PAIR = "0x3946ad2ca036489f5a90dbb4c72fb31aff98ef11";
-  //   const VTHO = "0x0000000000000000000000000000456E65726779";
-  //   const approveMethod = connex.thor.account(VTHO).method(find(ABI_ERC20, { name: "approve" }));
-  //   const clause = approveMethod.asClause(PAIR, (10 * 1e18).toString());
-
-  //   connex.vendor
-  //     .sign("tx", [{ ...clause }])
-  //     .comment("Approve")
-  //     .request()
-  //     .then((tx: any) => {
-  //       console.log(tx);
-  //     })
-  //     .catch((err: any) => {
-  //       console.log("ERROR");
-  //       console.log(err);
-  //     });
-  // };
-
-  // const simulateAddLiquidity = () => {
-  //   const addLiquidityABI = find(IUniswapV2Router.abi, { name: "addLiquidityETH" });
-
-  //   connex.thor
-  //     .account(ROUTER_ADDRESS)
-  //     .method(addLiquidityABI)
-  //     .value((1 * 1e18).toString())
-  //     .call(
-  //       tokens[1].address,
-  //       (10 * 1e18).toString(),
-  //       (0 * 1e18).toString(),
-  //       (1 * 1e18).toString(),
-  //       account,
-  //       Math.ceil(Date.now() / 1000) + 60 * 20
-  //     )
-  //     .then((res: any) => {
-  //       console.log(res.data);
-  //     });
-  // };
-
-  // const checkConstructor = async () => {
-  //   const addLiquidityABI = find(IUniswapV2Router.abi, { name: "WETH" });
-  //   const WETH = await connex.thor.account(ROUTER_ADDRESS).method(addLiquidityABI).call();
-  //   const factory = await connex.thor
-  //     .account(ROUTER_ADDRESS)
-  //     .method(find(IUniswapV2Router.abi, { name: "factory" }))
-  //     .call();
-  //   console.log(WETH);
-  //   console.log(factory);
-  // };
 
   const handleAddLiquidity = () => {
     const token0AmountWei = bigNumberToWei(token0Amount, token0.decimals);
