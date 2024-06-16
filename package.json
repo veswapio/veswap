@@ -19,6 +19,7 @@
     "@tanstack/react-query": "^5.37.1",
     "@uniswap/v2-core": "^1.0.1",
     "@vechain/dapp-kit-react": "^1.0.12",
+    "@vechain/sdk-core": "1.0.0-beta.16",
     "big.js": "^6.2.1",
     "bignumber.js": "^9.1.2",
     "clsx": "^2.1.1",
