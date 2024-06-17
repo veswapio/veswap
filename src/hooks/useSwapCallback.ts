@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { find } from "lodash";
 import { abi as IUniswapV2RouterABI } from "~/abis/IUniswapV2Router02.json";
-import { useTokenAllowance } from "~/hooks/useTokenAllowance";
-import { isAddress, bigNumberToWei, Field, computeSlippageAdjustedAmounts } from "~/utils/helpers";
+// import { useTokenAllowance } from "~/hooks/useTokenAllowance";
+import { isAddress, Field, computeSlippageAdjustedAmounts } from "~/utils/helpers";
 import { useConnex, useWallet } from "@vechain/dapp-kit-react";
 import { DEFAULT_DEADLINE_FROM_NOW, INITIAL_ALLOWED_SLIPPAGE, VVET } from "~/constants/config";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
@@ -72,7 +72,8 @@ export function useSwapCallback(
   const chainId = 1;
   const { account } = useWallet();
   const connex = useConnex();
-  const inputAllowance = useTokenAllowance(trade?.inputAmount?.token, account, ROUTER_ADDRESS);
+  // FIXME: Clause Wrap Approve and Swap Tx In one, so skip this
+  // const inputAllowance = useTokenAllowance(trade?.inputAmount?.token, account, ROUTER_ADDRESS);
   const recipient = to ? isAddress(to) : account;
 
   return useMemo(() => {
@@ -107,7 +108,6 @@ export function useSwapCallback(
 
       let args, value, abi;
 
-      console.log(swapType, "swapType");
       switch (swapType) {
         case SwapType.EXACT_TOKENS_FOR_TOKENS:
           abi = find(IUniswapV2RouterABI, { name: "swapExactTokensForTokens" });
@@ -229,5 +229,5 @@ export function useSwapCallback(
           console.error(`Swap or gas estimate failed`, error);
         });
     };
-  }, [allowedSlippage, chainId, deadline, inputAllowance, trade, recipient, connex.vendor, connex.thor]);
+  }, [allowedSlippage, chainId, deadline, trade, recipient, connex.vendor, connex.thor]);
 }
