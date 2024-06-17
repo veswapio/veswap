@@ -1,13 +1,17 @@
 import sdk, { Token } from '~/sdk'
-import { WVET } from '~/constants/config'
+import { VVET } from '~/constants/config'
 import { useMemo } from 'react'
 import { findKey } from 'lodash'
 
-import MAINNET_TOKENS from "~/constants/tokens"
+// import MAINNET_TOKENS from "~/constants/tokens"
+
+const MAINNET_TOKENS = [
+  new sdk.Token(sdk.ChainId.MAINNET, "0x0000000000000000000000000000456E65726779", 18, "VTHO", "VeThor")
+]
 
 export const ALL_TOKENS = [
-  // WVET on all chains
-  ...Object.values(WVET),
+  // VVET on all chains
+  ...Object.values(VVET),
   // chain-specific tokens
   ...MAINNET_TOKENS
 ]

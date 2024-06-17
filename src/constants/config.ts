@@ -14,12 +14,19 @@ export const DUMMY_VET = {
   3: new Token(ChainId.MAINNET, '0x0000000000000000000000000000000000000000', 18, 'VET', 'Vechain')
 }
 
-export const WVET = {
+export const VVET = {
+  // [ChainId.MAINNET]: new Token(
+  //   ChainId.MAINNET,
+  //   '0xD8CCDD85abDbF68DFEc95f06c973e87B1b5A9997',
+  //   18,
+  //   'VVET',
+  //   'Wrapped VET'
+  // ),
   [ChainId.MAINNET]: new Token(
     ChainId.MAINNET,
-    '0xD8CCDD85abDbF68DFEc95f06c973e87B1b5A9997',
+    '0x45429A2255e7248e57fce99E7239aED3f84B7a53',
     18,
-    'WVET',
+    'VVET',
     'Wrapped VET'
   ),
   // [ChainId.TESTNET]: new Token(
