@@ -1,4 +1,3 @@
-// @ts-nocheck
 import sdk from "~/sdk";
 import { find } from "lodash";
 import { useCallback, useMemo } from "react";
@@ -56,6 +55,7 @@ export function useApproveCallback(
       .comment(`Unlock ${amountToApprove?.token?.symbol}`)
       .request()
       .then((response: any) => {
+        console.debug(response)
         // addTransaction(response, {
         //   summary: 'Unlock ' + amountToApprove?.token?.symbol,
         //   approvalOfToken: amountToApprove?.token?.address
