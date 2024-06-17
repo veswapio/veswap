@@ -19,8 +19,13 @@
 
   &__logo {
     flex: none;
-    max-height: rhythm(3);
     margin-right: rhythm(8);
+    display: block;
+    height: rhythm(3);
+
+    > svg {
+      height: rhythm(3);
+    }
   }
 
   &__link,

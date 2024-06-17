@@ -5,9 +5,9 @@ import css from "./LandingPage.module.scss";
 
 import IconLogo from "~/assets/logo.svg?react";
 import IconTwitter from "~/assets/twitter.svg?react";
-import IconDiscord from "~/assets/discord.svg?react";
+import IconLinktree from "~/assets/linktree.svg?react";
 import IconTelegram from "~/assets/telegram.svg?react";
-import IconGithub from "~/assets/github.svg?react";
+import IconMedium from "~/assets/medium.svg?react";
 
 export default function LandingPage() {
   return (
@@ -55,17 +55,17 @@ export default function LandingPage() {
         </div>
       </div>
       <div className={css.iconLinks}>
-        <a href="" className={css.link}>
+        <a href="https://twitter.com/veswaporg_" className={css.link}>
           <IconTwitter />
         </a>
-        <a href="" className={css.link}>
-          <IconDiscord />
-        </a>
-        <a href="" className={css.link}>
+        <a href="https://t.me/VeSwap" className={css.link}>
           <IconTelegram />
         </a>
-        <a href="" className={css.link}>
-          <IconGithub />
+        <a href="https://medium.com/@VeSwaporg" className={css.link}>
+          <IconMedium />
+        </a>
+        <a href="https://linktr.ee/VeSwaporg" className={css.link}>
+          <IconLinktree />
         </a>
       </div>
     </div>

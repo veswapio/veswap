@@ -43,7 +43,9 @@ export default function Home() {
   return (
     <div className={css.root}>
       <nav className={css.nav}>
-        <IconLogo className={css.nav__logo} />
+        <NavLink to="/" className={css.nav__logo}>
+          <IconLogo />
+        </NavLink>
         <NavLink to="/swap" className={css.nav__link}>
           Swap
         </NavLink>
