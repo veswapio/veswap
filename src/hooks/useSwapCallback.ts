@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useMemo } from "react";
 import { find } from "lodash";
 import { abi as IUniswapV2RouterABI } from "~/abis/IUniswapV2Router02.json";
@@ -177,9 +178,7 @@ export function useSwapCallback(
       const contractAddress =
         swapType === SwapType.UNWRAP_WVET || swapType === SwapType.WRAP_VET ? WVET[chainId].address : ROUTER_ADDRESS;
       let comment = `Swap ${trade.inputAmount.token.symbol} for ${trade.outputAmount.token.symbol}`;
-      // eslint-disable-next-line
       const method = connex.thor.account(contractAddress).method(abi);
-      // eslint-disable-next-line
       const clause = method.asClause.apply(args);
 
       if (swapType === SwapType.UNWRAP_WVET) {

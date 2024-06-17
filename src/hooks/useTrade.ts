@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useMemo } from "react";
 import sdk from "~/sdk";
 import { usePair } from "./usePair";

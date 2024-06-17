@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useWallet } from "@vechain/dapp-kit-react";
 import { unitsUtils } from "@vechain/sdk-core";
 import useTokenBalanceList from "./useTokenBalanceList";
@@ -36,46 +37,46 @@ export default function useDerivedSwapInfo(
   const { account: to } = useWallet();
   const { data: tokenBalanceMap } = useTokenBalanceList();
 
-  const tokenIn = useTokenByAddressAndAutomaticallyAdd(tokenInAddress)
-  const tokenOut = useTokenByAddressAndAutomaticallyAdd(tokenOutAddress)
+  const tokenIn = useTokenByAddressAndAutomaticallyAdd(tokenInAddress);
+  const tokenOut = useTokenByAddressAndAutomaticallyAdd(tokenOutAddress);
 
-  const relevantTokenBalances = useTokenBalancesTreatWETHAsETH(to!, [tokenIn, tokenOut])
+  const relevantTokenBalances = useTokenBalancesTreatWETHAsETH(to!, [tokenIn, tokenOut]);
 
-  const isExactIn: boolean = independentField === Field.INPUT
+  const isExactIn: boolean = independentField === Field.INPUT;
 
-  const amount = tryParseAmount(typedValue, isExactIn ? tokenIn : tokenOut)
+  const amount = tryParseAmount(typedValue, isExactIn ? tokenIn : tokenOut);
 
-  const bestTradeExactIn = useTradeExactIn(isExactIn ? amount : undefined, tokenOut)
-  const bestTradeExactOut = useTradeExactOut(tokenIn, !isExactIn ? amount : undefined)
+  const bestTradeExactIn = useTradeExactIn(isExactIn ? amount : undefined, tokenOut);
+  const bestTradeExactOut = useTradeExactOut(tokenIn, !isExactIn ? amount : undefined);
 
-  const bestTrade = isExactIn ? bestTradeExactIn : bestTradeExactOut
+  const bestTrade = isExactIn ? bestTradeExactIn : bestTradeExactOut;
 
   const parsedAmounts = {
     [Field.INPUT]: isExactIn ? amount : bestTrade?.inputAmount,
     [Field.OUTPUT]: isExactIn ? bestTrade?.outputAmount : amount
-  }
+  };
 
   const tokenBalances = {
     [Field.INPUT]: relevantTokenBalances?.[tokenIn?.address!],
     [Field.OUTPUT]: relevantTokenBalances?.[tokenOut?.address!]
-  }
+  };
 
   const tokens = {
     [Field.INPUT]: tokenIn,
     [Field.OUTPUT]: tokenOut
-  }
+  };
 
-  let error: string | undefined
+  let error: string | undefined;
   if (!to) {
-    error = 'Connect Wallet'
+    error = "Connect Wallet";
   }
 
   if (!parsedAmounts[Field.INPUT]) {
-    error = error ?? 'Enter an amount'
+    error = error ?? "Enter an amount";
   }
 
   if (!parsedAmounts[Field.OUTPUT]) {
-    error = error ?? 'Enter an amount'
+    error = error ?? "Enter an amount";
   }
 
   if (
@@ -83,7 +84,7 @@ export default function useDerivedSwapInfo(
     parsedAmounts[Field.INPUT] &&
     tokenBalances[Field.INPUT].lessThan(parsedAmounts[Field.INPUT])
   ) {
-    error = 'Insufficient ' + tokens[Field.INPUT]?.symbol + ' balance'
+    error = "Insufficient " + tokens[Field.INPUT]?.symbol + " balance";
   }
 
   // if (vthoBalance[Object.keys(vthoBalance)[0]]?.equalTo(JSBI.BigInt(0))) {

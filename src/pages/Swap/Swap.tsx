@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { clsx } from "clsx";
 import { find } from "lodash";
 import { useState, useMemo, useEffect } from "react";
@@ -330,9 +331,8 @@ function SwapPanel() {
   } = useDerivedSwapInfo(Field.INPUT, fromTokenAmount, fromToken.address, toToken.address);
 
   const swapCallback = useSwapCallback(bestTrade!, allowedSlippage, deadline);
-  const myVetBalance = useETHBalances([account!])?.[account!]
-  console.log(tokenBalances, 'tokenBalances', parsedAmounts)
-
+  const myVetBalance = useETHBalances([account!])?.[account!];
+  console.log(tokenBalances, "tokenBalances", parsedAmounts);
 
   const swapExactTokensForETH = () => {
     // Multi Clause

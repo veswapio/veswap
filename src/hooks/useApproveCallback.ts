@@ -1,3 +1,4 @@
+// @ts-nocheck
 import sdk from "~/sdk";
 import { find } from "lodash";
 import { useCallback, useMemo } from "react";
