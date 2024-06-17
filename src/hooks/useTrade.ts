@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import sdk from "~/sdk";
 import { usePair } from "./usePair";
-import { DUMMY_VET, WVET } from "~/constants/config";
+import { DUMMY_VET, VVET } from "~/constants/config";
 
 const VTHO = new sdk.Token(sdk.ChainId.MAINNET, "0x0000000000000000000000000000456E65726779", 18, "VTHO", "VeThor");
 
@@ -12,16 +12,16 @@ function useAllCommonPairs(tokenA?: sdk.Token, tokenB?: sdk.Token): sdk.Pair[] {
   // check for direct pair between tokens
   const pairBetween = usePair(tokenA, tokenB);
 
-  // get token<->WVET pairs
-  const aToWVET = usePair(tokenA, WVET[chainId]);
-  const bToWVET = usePair(tokenB, WVET[chainId]);
+  // get token<->VVET pairs
+  const aToWVET = usePair(tokenA, VVET[chainId]);
+  const bToWVET = usePair(tokenB, VVET[chainId]);
 
   // get token<->VTHO pairs
   const aToVTHO = usePair(tokenA, chainId === sdk.ChainId.MAINNET ? VTHO : undefined);
   const bToVTHO = usePair(tokenB, chainId === sdk.ChainId.MAINNET ? VTHO : undefined);
 
   // get connecting pairs
-  const VTHOToWVET = usePair(chainId === sdk.ChainId.MAINNET ? VTHO : undefined, WVET[chainId]);
+  const VTHOToWVET = usePair(chainId === sdk.ChainId.MAINNET ? VTHO : undefined, VVET[chainId]);
 
   // only pass along valid pairs, non-duplicated pairs
   // @ts-ignore
@@ -48,15 +48,15 @@ export function useTradeExactIn(amountIn?: sdk.TokenAmount, tokenOut?: sdk.Token
   const tokenOutVet = tokenOut?.equals(DUMMY_VET[1]);
   const tokenInVet = inputToken?.equals(DUMMY_VET[1]);
 
-  const tokenOutWvet = tokenOut?.equals(WVET[1]);
-  const tokenInWvet = inputToken?.equals(WVET[1]);
+  const tokenOutWvet = tokenOut?.equals(VVET[1]);
+  const tokenInWvet = inputToken?.equals(VVET[1]);
 
   const allowedPairs = useAllCommonPairs(inputToken, outputToken);
 
   return useMemo(() => {
     if (amountIn && tokenOut && allowedPairs.length > 0) {
       if (tokenInVet && !tokenOutVet && !tokenOutWvet) {
-        amountIn.token = WVET[1];
+        amountIn.token = VVET[1];
         const trade =
           sdk.Trade.bestTradeExactIn(allowedPairs, amountIn, tokenOut, {
             maxHops: 1,
@@ -70,7 +70,7 @@ export function useTradeExactIn(amountIn?: sdk.TokenAmount, tokenOut?: sdk.Token
         }
       } else if (!tokenInVet && !tokenInWvet && tokenOutVet) {
         const trade =
-          sdk.Trade.bestTradeExactIn(allowedPairs, amountIn, WVET[1], {
+          sdk.Trade.bestTradeExactIn(allowedPairs, amountIn, VVET[1], {
             maxHops: 1,
             maxNumResults: 1
           })[0] ?? null;
@@ -109,15 +109,15 @@ export function useTradeExactOut(tokenIn?: sdk.Token, amountOut?: sdk.TokenAmoun
   const tokenOutVet = outputToken?.equals(DUMMY_VET[1]);
   const tokenInVet = inputToken?.equals(DUMMY_VET[1]);
 
-  const tokenOutWvet = outputToken?.equals(WVET[1]);
-  const tokenInWvet = inputToken?.equals(WVET[1]);
+  const tokenOutWvet = outputToken?.equals(VVET[1]);
+  const tokenInWvet = inputToken?.equals(VVET[1]);
 
   const allowedPairs = useAllCommonPairs(inputToken, outputToken);
 
   return useMemo(() => {
     if (tokenIn && amountOut && allowedPairs.length > 0) {
       if (tokenOutVet && !tokenInVet && !tokenInWvet) {
-        amountOut.token = WVET[1];
+        amountOut.token = VVET[1];
         const trade =
           sdk.Trade.bestTradeExactOut(allowedPairs, tokenIn, amountOut, {
             maxHops: 1,
@@ -131,7 +131,7 @@ export function useTradeExactOut(tokenIn?: sdk.Token, amountOut?: sdk.TokenAmoun
         }
       } else if (tokenInVet && !tokenOutWvet && !tokenOutVet) {
         const trade =
-          sdk.Trade.bestTradeExactOut(allowedPairs, WVET[1], amountOut, {
+          sdk.Trade.bestTradeExactOut(allowedPairs, VVET[1], amountOut, {
             maxHops: 1,
             maxNumResults: 1
           })[0] ?? null;
