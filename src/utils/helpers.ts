@@ -1,6 +1,8 @@
 import BigNumber from "bignumber.js";
 import { getAddress } from '@ethersproject/address'
 import sdk from "~/sdk"
+import { abi as IUniswapV2Pair } from "~/abis/IUniswapV2Pair.json";
+import { find } from "lodash";
 
 export enum Field {
   INPUT = 'INPUT',
@@ -59,4 +61,42 @@ export function computeSlippageAdjustedAmounts(
 
 export function basisPointsToPercent(num: number): sdk.Percent {
   return new sdk.Percent(sdk.JSBI.BigInt(num), sdk.JSBI.BigInt(10000))
+}
+
+// computes price breakdown for the trade
+export function computeTradePriceBreakdown(
+  trade?: sdk.Trade,
+  swapFee?: sdk.Percent
+): { priceImpactWithoutFee?: sdk.Percent; realizedLPFee?: sdk.TokenAmount } {
+  swapFee = !trade ? undefined : swapFee
+  // remove lp fees from price impact
+  const priceImpactWithoutFeeFraction = trade?.slippage?.subtract(swapFee!)
+
+  // the x*y=k impact
+  const priceImpactWithoutFeePercent = priceImpactWithoutFeeFraction
+    ? new sdk.Percent(priceImpactWithoutFeeFraction?.numerator, priceImpactWithoutFeeFraction?.denominator)
+    : undefined
+
+  // the amount of the input that accrues to LPs
+  const realizedLPFeeAmount =
+    swapFee && new sdk.TokenAmount(trade?.inputAmount.token!, swapFee.multiply(trade?.inputAmount.raw!).quotient)
+
+  return { priceImpactWithoutFee: priceImpactWithoutFeePercent, realizedLPFee: realizedLPFeeAmount }
+}
+
+// Not used
+export async function FetchSwapFee(pairAddress?: string, connex?: any): Promise<sdk.Percent> {
+  const abi = find(IUniswapV2Pair, { name: 'swapFee' })
+
+  return new Promise(async (resolve, reject) => {
+    const account = connex.thor.account(pairAddress)
+    const method = account.method(abi)
+
+    try {
+      const res = await method.call()
+      resolve(basisPointsToPercent(res.decoded[0]))
+    } catch (error) {
+      reject(error)
+    }
+  })
 }
