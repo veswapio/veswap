@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
+import BigNumber from "bignumber.js";
 import Table from "~/components/Table";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
@@ -10,8 +11,6 @@ import css from "./Overview.module.scss";
 import IconArrow2 from "~/assets/arrow2.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
 import IconExternal from "~/assets/external.svg?react";
-import BigNumber from "bignumber.js";
-
 import TokenIconVet from "~/assets/tokens/vet.svg?react";
 import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
 
