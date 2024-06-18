@@ -7,5 +7,9 @@ type TableProps = {
 };
 
 export default function Table({ className, children }: TableProps) {
-  return <table className={clsx(css.Table, className)}>{children}</table>;
+  return (
+    <div className={css.tableWrapper}>
+      <table className={clsx(css.Table, className)}>{children}</table>
+    </div>
+  );
 }

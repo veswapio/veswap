@@ -1,5 +1,10 @@
+.tableWrapper {
+  overflow-x: auto;
+}
+
 .Table {
-  width: 100%;
+  min-width: 100%;
+  width: max-content;
 
   th,
   td {
@@ -10,8 +15,8 @@
     text-align: left;
 
     th {
-      font-size: 18px;
-      line-height: 18px;
+      font-size: 16px;
+      line-height: 20px;
       font-weight: 700;
     }
   }

@@ -1,33 +1,70 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
 import Table from "~/components/Table";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
+import tokens from "~/constants/tokens";
 import css from "./Overview.module.scss";
 
 import IconArrow2 from "~/assets/arrow2.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
 import IconExternal from "~/assets/external.svg?react";
+import BigNumber from "bignumber.js";
+
 import TokenIconVet from "~/assets/tokens/vet.svg?react";
 import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
 
-const TOKENADDRESS_ICONS: { [key: string]: any } = {
-  "0x45429a2255e7248e57fce99e7239aed3f84b7a53": {
-    icon: <TokenIconVet />,
-    name: "VET",
-  },
-  "0x0000000000000000000000000000456e65726779": {
-    icon: <TokenIconVtho />,
-    name: "VTHO"
-  }
+const TOKEN_ICONS: { [key: string]: any } = {
+  VET: <TokenIconVet />,
+  VTHO: <TokenIconVtho />
 };
+
+function getCurrentDateFormatted() {
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}/${month}/${day}`;
+}
 
 export default function Overview() {
   const { data: allPairList } = useAllPairList();
   const { data: tokenPrice } = useTokenPrice();
 
-  console.log("allPairList: ", allPairList);
-  console.log("tokenPrice: ", tokenPrice);
+  const _data = useMemo(() => {
+    if (!tokenPrice || !allPairList) return null;
+
+    const pairList = allPairList.map((pair: any, idx: number) => {
+      const token0 = tokens.find((token) => token.address.toLowerCase() === pair.token0Address.toLowerCase())!;
+      const token1 = tokens.find((token) => token.address.toLowerCase() === pair.token1Address.toLowerCase())!;
+
+      const token0Price = tokenPrice[token0.symbol!.toLowerCase() as "vet" | "vtho"];
+      const token1Price = tokenPrice[token1.symbol!.toLowerCase() as "vet" | "vtho"];
+
+      const token0Amount = new BigNumber(pair.reserve0).div(10 ** token0.decimals).times(token0Price);
+      const token1Amount = new BigNumber(pair.reserve1).div(10 ** token1.decimals).times(token1Price);
+
+      const tvl = token0Amount.plus(token1Amount);
+      const displayTVL = tvl.toFormat(2);
+      const lpSupply = new BigNumber(pair.lpTotalSupply).div(10 ** 18);
+
+      return {
+        id: idx + 1,
+        token0,
+        token1,
+        tvl,
+        displayTVL,
+        lpSupply
+      };
+    });
+
+    return {
+      pairList,
+      totalTVL: pairList.reduce((acc: BigNumber, pair: any) => acc.plus(pair.tvl), new BigNumber(0)).toFormat(2),
+      totalLP: pairList.reduce((acc: BigNumber, pair: any) => acc.plus(pair.lpSupply), new BigNumber(0)).toFormat(2)
+    };
+  }, [tokens, allPairList, tokenPrice]);
 
   return (
     <div className={css.page}>
@@ -35,36 +72,30 @@ export default function Overview() {
         <h2 className={css.section__heading}>Overview</h2>
         <div className={css.overviewGroup}>
           <div className={css.overviewCard}>
-            <div className={css.overviewCard__title}>TVL (2024/03/21)</div>
-            <div className={css.overviewCard__value}>
-              <div className={css.overviewCard__icon}></div> 559.8K
-            </div>
+            <div className={css.overviewCard__title}>TVL ({getCurrentDateFormatted()})</div>
+            <div className={css.overviewCard__value}>${_data?.totalTVL}</div>
           </div>
           <div className={css.overviewCard}>
-            <div className={css.overviewCard__title}>TVL (2024/03/21)</div>
-            <div className={css.overviewCard__value}>
-              <div className={css.overviewCard__icon}></div> 559.8K
-            </div>
+            <div className={css.overviewCard__title}>Volume ({getCurrentDateFormatted()})</div>
+            <div className={css.overviewCard__value}>0</div>
           </div>
         </div>
         <div className={css.overviewStatus}>
           <div className={css.status}>
             <div className={css.status__title}>Traders:</div>
-            <div className={css.status__value}>20.32K</div>
+            <div className={css.status__value}>0</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>LPs:</div>
-            <div className={css.status__value}>8.13K</div>
+            <div className={css.status__value}>{_data?.totalLP}</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>Volume Today:</div>
-            <div className={css.status__value}>2.11K</div>
-            <div className={css.status__token}></div>
+            <div className={css.status__value}>0</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>Claimed VTHO:</div>
-            <div className={css.status__value}>1.3M</div>
-            <div className={css.status__token}></div>
+            <div className={css.status__value}>0</div>
           </div>
         </div>
       </section>
@@ -87,37 +118,19 @@ export default function Overview() {
             </tr>
           </thead>
           <tbody>
-            {allPairList?.map((pair: any) => (
-              <tr key={pair.address}>
-                <td>1</td>
-                <td>
-                  <div className={css.tokenTrigger}>
-                    <div className={css.tokenTrigger__icon}>
-                      {pair.token0Address && TOKENADDRESS_ICONS[pair.token0Address].icon}
-                    </div>
-                    <div className={css.tokenTrigger__icon}>
-                      {pair.token1Address && TOKENADDRESS_ICONS[pair.token1Address].icon}
-                    </div>
-                    <div className={css.tokenTrigger__name}>
-                      {pair.token0Address && TOKENADDRESS_ICONS[pair.token0Address].name}
-                      {" / "}
-                      {pair.token1Address && TOKENADDRESS_ICONS[pair.token1Address].name}
-                    </div>
-                  </div>
-                </td>
+            {_data?.pairList.map((i: any) => (
+              <tr key={i.id}>
+                <td>{i.id}</td>
                 <td>
                   <div className={css.tokens}>
-                    <div className={css.token}></div>
+                    <div className={css.token}>{TOKEN_ICONS[i.token0.symbol]}</div>
+                    <div className={css.token}>{TOKEN_ICONS[i.token1.symbol]}</div>
                   </div>
-                  234.8K
+                  {i.token0.symbol} / {i.token1.symbol}
                 </td>
-                <td>12.95%</td>
-                <td>
-                  <div className={css.tokens}>
-                    <div className={css.token}></div>
-                  </div>
-                  234.8K
-                </td>
+                <td>${i.displayTVL}</td>
+                <td>0</td>
+                <td>0</td>
               </tr>
             ))}
           </tbody>
@@ -159,7 +172,7 @@ export default function Overview() {
                     <div className={css.tokens}>
                       <div className={css.token}></div>
                     </div>
-                    234.8
+                    0
                   </td>
                   <td>
                     <IconArrow2 className={css.iconArrow} />
@@ -168,7 +181,7 @@ export default function Overview() {
                     <div className={css.tokens}>
                       <div className={css.token}></div>
                     </div>
-                    12.98
+                    0
                   </td>
                   <td>
                     10 mins ago
@@ -204,7 +217,7 @@ export default function Overview() {
                     <div className={css.tokens}>
                       <div className={css.token}></div>
                     </div>
-                    234.8
+                    0
                   </td>
                   <td>
                     <IconPlus className={css.iconPlus} />
@@ -213,7 +226,7 @@ export default function Overview() {
                     <div className={css.tokens}>
                       <div className={css.token}></div>
                     </div>
-                    12.98
+                    0
                   </td>
                   <td>
                     10 mins ago
