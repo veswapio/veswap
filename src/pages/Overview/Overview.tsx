@@ -63,7 +63,7 @@ export default function Overview() {
       totalTVL: pairList.reduce((acc: BigNumber, pair: any) => acc.plus(pair.tvl), new BigNumber(0)).toFormat(2),
       totalLP: pairList.reduce((acc: BigNumber, pair: any) => acc.plus(pair.lpSupply), new BigNumber(0)).toFormat(2)
     };
-  }, [tokens, allPairList, tokenPrice]);
+  }, [allPairList, tokenPrice]);
 
   return (
     <div className={css.page}>
