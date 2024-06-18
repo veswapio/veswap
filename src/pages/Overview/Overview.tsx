@@ -8,6 +8,19 @@ import css from "./Overview.module.scss";
 import IconArrow2 from "~/assets/arrow2.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
 import IconExternal from "~/assets/external.svg?react";
+import TokenIconVet from "~/assets/tokens/vet.svg?react";
+import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
+
+const TOKENADDRESS_ICONS: { [key: string]: any } = {
+  "0x45429a2255e7248e57fce99e7239aed3f84b7a53": {
+    icon: <TokenIconVet />,
+    name: "VET",
+  },
+  "0x0000000000000000000000000000456e65726779": {
+    icon: <TokenIconVtho />,
+    name: "VTHO"
+  }
+};
 
 export default function Overview() {
   const { data: allPairList } = useAllPairList();
@@ -74,29 +87,39 @@ export default function Overview() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <div className={css.tokens}>
-                  <div className={css.token}></div>
-                  <div className={css.token}></div>
-                </div>
-                VTHO / VET
-              </td>
-              <td>
-                <div className={css.tokens}>
-                  <div className={css.token}></div>
-                </div>
-                234.8K
-              </td>
-              <td>12.95%</td>
-              <td>
-                <div className={css.tokens}>
-                  <div className={css.token}></div>
-                </div>
-                234.8K
-              </td>
-            </tr>
+            {allPairList?.map((pair: any) => (
+              <tr key={pair.address}>
+                <td>1</td>
+                <td>
+                  <div className={css.tokenTrigger}>
+                    <div className={css.tokenTrigger__icon}>
+                      {pair.token0Address && TOKENADDRESS_ICONS[pair.token0Address].icon}
+                    </div>
+                    <div className={css.tokenTrigger__icon}>
+                      {pair.token1Address && TOKENADDRESS_ICONS[pair.token1Address].icon}
+                    </div>
+                    <div className={css.tokenTrigger__name}>
+                      {pair.token0Address && TOKENADDRESS_ICONS[pair.token0Address].name}
+                      {" / "}
+                      {pair.token1Address && TOKENADDRESS_ICONS[pair.token1Address].name}
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div className={css.tokens}>
+                    <div className={css.token}></div>
+                  </div>
+                  234.8K
+                </td>
+                <td>12.95%</td>
+                <td>
+                  <div className={css.tokens}>
+                    <div className={css.token}></div>
+                  </div>
+                  234.8K
+                </td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </section>

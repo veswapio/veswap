@@ -62,7 +62,8 @@ export default function useAllPairList() {
         reserve1: i[0].decoded["reserve1"],
         lpTotalSupply: i[1].decoded["0"],
         token0Address: i[2].decoded["0"],
-        token1Address: i[3].decoded["0"]
+        token1Address: i[3].decoded["0"],
+        pairAddress: i[4],
       }));
     }
   });

@@ -151,3 +151,36 @@
   height: 16px;
   margin-left: rhythm(0.5);
 }
+
+.tokenTrigger {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &.disabled,
+  &[data-disabled] {
+    cursor: default;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    flex: row;
+    border-radius: 50%;
+    margin-right: 2px;
+  }
+
+  &__name {
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    font-weight: 500;
+    margin-left: 8px;
+  }
+
+  &__arrow {
+    width: 14px;
+    height: 8px;
+    margin-left: rhythm(1.5);
+  }
+}
