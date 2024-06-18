@@ -186,9 +186,14 @@ export function useSwapCallback(
         //   break
       }
 
+      let comment;
       const contractAddress =
         swapType === SwapType.UNWRAP_WVET || swapType === SwapType.WRAP_VET ? VVET[chainId].address : ROUTER_ADDRESS;
-      let comment = `Swap ${trade.inputAmount.token.symbol} for ${trade.outputAmount.token.symbol}`;
+      if (trade.inputAmount.token.symbol === "VVET") {
+        comment = `Swap VET for ${trade.outputAmount.token.symbol}`;
+      } else if (trade.outputAmount.token.symbol === "VVET") {
+        comment = `Swap ${trade.inputAmount.token.symbol} for VET`;
+      }
       const method = connex.thor.account(contractAddress).method(abi);
       const clause = method.asClause(...args!);
 
