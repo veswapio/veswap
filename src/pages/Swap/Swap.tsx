@@ -214,7 +214,7 @@ function SwapPanel() {
   const [toToken, setToToken] = useState(tokens[0]);
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
-  const [slippage, setSlippage] = useState("0.01"); // FIXME: not use
+  const [slippage, setSlippage] = useState("0.03"); // FIXME: not use
   const [pairData, setPairData] = useState<sdk.Pair | undefined>(undefined);
   const [isExactIn, setIsExactIn] = useState(true);
   const [deadline, _setDeadline] = useState<number>(DEFAULT_DEADLINE_FROM_NOW);
@@ -497,14 +497,14 @@ function SwapPanel() {
             onChange={setSlippage}
             aria-label="slippage"
           >
-            <Radio className={css.slippage__option} value="0.001">
-              0.1%
-            </Radio>
-            <Radio className={css.slippage__option} value="0.005">
-              0.5%
-            </Radio>
             <Radio className={css.slippage__option} value="0.01">
               1%
+            </Radio>
+            <Radio className={css.slippage__option} value="0.03">
+              3%
+            </Radio>
+            <Radio className={css.slippage__option} value="0.05">
+              5%
             </Radio>
           </RadioGroup>
         </DataEntry>
