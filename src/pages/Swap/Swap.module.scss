@@ -103,22 +103,6 @@
   &__search {
     margin-bottom: rhythm(2);
   }
-
-  &__help {
-    margin-top: rhythm(3);
-    text-align: center;
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 500;
-    color: #c7c7c7;
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
 }
 
 .loadingCard {

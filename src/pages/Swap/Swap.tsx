@@ -516,9 +516,6 @@ function SwapPanel() {
         >
           {_priceImpact}%
         </DataEntry>
-        <div className={css.card__help}>
-          <a href="">Need help? View the user&apos;s guide</a>
-        </div>
       </Card>
       {account ? (
         <div className={css.verticalButtonGroup}>
@@ -582,10 +579,6 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
             </div>
           </div>
         ))}
-
-        <div className={css.card__help}>
-          <a href="">Need help? View the user&apos;s guide</a>
-        </div>
       </Card>
       {!account && <Button onPress={open}>Connect Wallet</Button>}
     </div>
@@ -639,9 +632,6 @@ function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane
           <DataEntry title={pair.token0.symbol!}>{formatBigNumber(pair.reserve0.toExact())}</DataEntry>
           <DataEntry title={pair.token1.symbol!}>{formatBigNumber(pair.reserve1.toExact())}</DataEntry>
         </section>
-        <div className={css.card__help}>
-          <a href="">Need help? View the user&apos;s guide</a>
-        </div>
       </Card>
       {account ? (
         <div className={css.buttonGroup}>
