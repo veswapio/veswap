@@ -248,10 +248,20 @@ function SwapPanel() {
     const newFromReserve = _fromReserve.plus(bigNumberToWei(fromTokenAmount, fromToken.decimals));
     const newToReserve = k.div(newFromReserve);
     const receive = _toReserve.minus(newToReserve);
-    const impact = receive.div(newToReserve);
+    const _impact = receive.div(newToReserve);
+    const impact = _impact.isNaN() ? BigNumber(0) : _impact.times(100);
 
-    return impact.isNaN() ? "0" : fixedBigNumber(impact.times(100), 2);
+    return {
+      displayValue: fixedBigNumber(impact, 2),
+      isDangerous: impact.isGreaterThanOrEqualTo(10)
+    };
   }, [_fromReserve, _toReserve, fromTokenAmount, fromToken]);
+
+  const _swapButtonText = useMemo(() => {
+    if (_insufficient_liquidity) return "Insufficient Liquidity";
+    if (_priceImpact.isDangerous) return "Price Impact Too High";
+    return "Swap";
+  }, [_priceImpact, _insufficient_liquidity]);
 
   const tokenList = useMemo(() => {
     return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
@@ -514,7 +524,7 @@ function SwapPanel() {
           title="Price Impact"
           tooltip="The price you get vs. the ideal price. Split the orders to make less impact to achieve better price."
         >
-          {_priceImpact}%
+          <span className={_priceImpact.isDangerous ? css.red : undefined}>{_priceImpact.displayValue}%</span>
         </DataEntry>
       </Card>
       {account ? (
@@ -528,10 +538,11 @@ function SwapPanel() {
               toTokenAmount === "0" ||
               _fromTokenError ||
               _toTokenError ||
-              _insufficient_liquidity
+              _insufficient_liquidity ||
+              _priceImpact.isDangerous
             }
           >
-            {_insufficient_liquidity ? "Insufficient Liquidity" : "Swap"}
+            {_swapButtonText}
           </Button>
         </div>
       ) : (
