@@ -1,10 +1,6 @@
 import { clsx } from "clsx";
-import {
-  Button,
-  OverlayArrow,
-  Tooltip as AriaTooltip,
-  TooltipTrigger
-} from "react-aria-components";
+import { useState } from "react";
+import { Button, OverlayArrow, Tooltip as AriaTooltip, TooltipTrigger } from "react-aria-components";
 import css from "./Tooltip.module.scss";
 
 import IconInfo from "~/assets/info.svg?react";
@@ -15,9 +11,11 @@ type TooltipProps = {
 };
 
 export default function Tooltip({ className, content }: TooltipProps) {
+  const [show, setShow] = useState(false);
+
   return (
-    <TooltipTrigger delay={0}>
-      <Button className={clsx(css.TooltipTrigger, className)}>
+    <TooltipTrigger delay={0} isOpen={show} onOpenChange={setShow}>
+      <Button className={clsx(css.TooltipTrigger, className)} onPress={() => setShow(!show)}>
         <IconInfo className={css.TooltipTrigger__icon} />
       </Button>
       <AriaTooltip placement="end" className={css.Tooltip}>
