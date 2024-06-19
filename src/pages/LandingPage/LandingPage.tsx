@@ -26,13 +26,10 @@ export default function LandingPage() {
           <Link to="/overview" className={css.nav__link}>
             Charts
           </Link>
-          <Link to="/" className={css.nav__link}>
+          <Link to="https://medium.com/@VeSwaporg" className={css.nav__link}>
             Blogs
           </Link>
-          <Link to="/" className={css.nav__link}>
-            Helps
-          </Link>
-          <Link to="/" className={css.nav__link}>
+          <Link to="https://t.me/VeSwap" className={css.nav__link}>
             Chat
           </Link>
         </div>
@@ -41,10 +38,8 @@ export default function LandingPage() {
         </Link>
       </nav>
       <div className={css.hero}>
-        <h1 className={css.hero__heading}>Audited, One-Click Token Swap on VeChain</h1>
-        <p className={css.hero__subheading}>
-          Fast VeChain native Dex with multi-task transaction, fee delation, automatic VTHO generation features enabled.
-        </p>
+        <h1 className={css.hero__heading}>The No.1 Sustainable DEX built on VeChain</h1>
+        <p className={css.hero__subheading}>A Secure Platform for Swapping and Managing Sustainable Assets</p>
         <div className={css.hero__bGroup}>
           <Link to="/swap" className={css.hero__button}>
             Launch App
