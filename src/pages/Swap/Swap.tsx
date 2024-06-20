@@ -723,13 +723,15 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     const token0AmountWei = bigNumberToWei(token0Amount, token0.decimals);
     const token1AmountWei = bigNumberToWei(token1Amount, token1.decimals);
 
+    // TODO: Multi Token Approve
+
     if (token0.symbol === "VET" || token1.symbol === "VET") {
       const addLiquidityMethod = connex.thor
         .account(ROUTER_ADDRESS)
         .method(find(IUniswapV2Router.abi, { name: "addLiquidityETH" }))
         .value(token0.symbol === "VET" ? token0AmountWei : token1AmountWei);
 
-      let clause;
+      let clause, approveClause, clauses;
 
       if (token0.symbol === "VET") {
         const tokenAddress = token1.address;
@@ -744,6 +746,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           account,
           Math.ceil(Date.now() / 1000) + 60 * 20
         );
+        clauses = [{ ...clause }]
       } else {
         const tokenAddress = token0.address;
         const amountTokenDesired = token0AmountWei;
@@ -757,10 +760,14 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           account,
           Math.ceil(Date.now() / 1000) + 60 * 20
         );
+
+        const approveMethod = connex.thor.account(token0.address).method(find(ABI_ERC20, { name: "approve" }));
+        approveClause = approveMethod.asClause(ROUTER_ADDRESS, token0AmountWei);
+        clauses = [{...approveClause }, { ...clause }]
       }
 
       connex.vendor
-        .sign("tx", [{ ...clause }])
+        .sign("tx", clauses)
         .comment("Add Liquidity")
         .request()
         .then((tx: any) => {
@@ -834,7 +841,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
       </Card>
       {account ? (
         <div className={css.verticalButtonGroup}>
-          {tokenBalanceMap?.[token0.symbol!].needApprove && (
+          {/* TODO: Multi Token Approve */}
+          {/* {tokenBalanceMap?.[token0.symbol!].needApprove && (
             <Button onPress={() => handleApprove(tokenBalanceMap?.[token0.symbol!].address)}>
               Approve {token0.symbol}
             </Button>
@@ -844,7 +852,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
             <Button onPress={() => handleApprove(tokenBalanceMap?.[token1.symbol!].address)}>
               Approve {token1.symbol}
             </Button>
-          )}
+          )} */}
 
           <Button
             onPress={handleAddLiquidity}
@@ -854,9 +862,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
               token0Amount === "0" ||
               token1Amount === "0" ||
               _token0Error ||
-              _token1Error ||
-              tokenBalanceMap?.[token0.symbol!].needApprove ||
-              tokenBalanceMap?.[token1.symbol!].needApprove
+              _token1Error
             }
           >
             Add Liquidity
