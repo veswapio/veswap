@@ -215,6 +215,9 @@ function SwapPanel() {
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
   const [slippage, setSlippage] = useState("0.03"); // FIXME: not use
+  const [customSlippage, setCustomSlippage] = useState("");
+  const [showSlippageWarn, setShowSlippageWarn] = useState(false);
+  const [isSlippageWarnShown, setIsSlippageWarnShown] = useState(false);
   const [pairData, setPairData] = useState<sdk.Pair | undefined>(undefined);
   const [isExactIn, setIsExactIn] = useState(true);
   const [deadline, _setDeadline] = useState<number>(DEFAULT_DEADLINE_FROM_NOW);
@@ -266,6 +269,13 @@ function SwapPanel() {
   const tokenList = useMemo(() => {
     return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
   }, [fromToken.symbol, toToken.symbol]);
+
+  const handleCustomSlippageWarnModalDisplay = () => {
+    if (!isSlippageWarnShown) {
+      setShowSlippageWarn(true);
+      setIsSlippageWarnShown(true);
+    }
+  };
 
   const handleFromTokenChange = (value: string) => {
     if (!_fromReserve || !_toReserve) return;
@@ -462,6 +472,20 @@ function SwapPanel() {
 
   return (
     <div className={css.swapPanel}>
+      {showSlippageWarn && (
+        <div className={css.warningModal}>
+          <div className={css.warningModal__box}>
+            <h2 className={css.warningModal__heading}>Warning</h2>
+            <p className={css.warningModal__subheading}>
+              Custom slippage is not protected. Set a reasonable upper limit to avoid losses.
+            </p>
+            <div className={css.warningModal__bgroup}>
+              <Button onPress={() => setShowSlippageWarn(false)}>Confirm</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Card className={css.card}>
         <TokenInput
           label="From"
@@ -490,23 +514,39 @@ function SwapPanel() {
           title="Slippage"
           tooltip="Your transaction will be reverted if the price changes unfavorably by more than this percentage."
         >
-          <RadioGroup
-            orientation="horizontal"
-            defaultValue={slippage}
-            className={css.slippage}
-            onChange={setSlippage}
-            aria-label="slippage"
-          >
-            <Radio className={css.slippage__option} value="0.01">
-              1%
-            </Radio>
-            <Radio className={css.slippage__option} value="0.03">
-              3%
-            </Radio>
-            <Radio className={css.slippage__option} value="0.05">
-              5%
-            </Radio>
-          </RadioGroup>
+          <div className={css.slippageGroup}>
+            <RadioGroup
+              orientation="horizontal"
+              value={customSlippage || slippage}
+              className={css.slippage}
+              onChange={(v) => {
+                setSlippage(v);
+                setCustomSlippage("");
+              }}
+              aria-label="slippage"
+            >
+              <Radio className={css.slippage__option} value="0.01">
+                1%
+              </Radio>
+              <Radio className={css.slippage__option} value="0.03">
+                3%
+              </Radio>
+              <Radio className={css.slippage__option} value="0.05">
+                5%
+              </Radio>
+            </RadioGroup>
+            <label className={css.customSlippage}>
+              <input
+                type="text"
+                className={css.customSlippage__input}
+                value={customSlippage}
+                onChange={(e) => setCustomSlippage(e.target.value)}
+                onFocus={handleCustomSlippageWarnModalDisplay}
+                placeholder="Custom"
+              />
+              <span className={css.customSlippage__unit}>%</span>
+            </label>
+          </div>
         </DataEntry>
         <DataEntry title="Price">
           {formatBigNumber(_price)} {fromToken.symbol} per {toToken.symbol}
@@ -729,7 +769,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           account,
           Math.ceil(Date.now() / 1000) + 60 * 20
         );
-        clauses = [{ ...clause }]
+        clauses = [{ ...clause }];
       } else {
         const tokenAddress = token0.address;
         const amountTokenDesired = token0AmountWei;
@@ -746,7 +786,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
 
         const approveMethod = connex.thor.account(token0.address).method(find(ABI_ERC20, { name: "approve" }));
         approveClause = approveMethod.asClause(ROUTER_ADDRESS, token0AmountWei);
-        clauses = [{...approveClause }, { ...clause }]
+        clauses = [{ ...approveClause }, { ...clause }];
       }
 
       connex.vendor
