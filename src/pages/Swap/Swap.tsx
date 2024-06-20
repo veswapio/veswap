@@ -19,6 +19,7 @@ import {
   TextField,
   Input
 } from "react-aria-components";
+import { toast } from "react-hot-toast";
 import { useWallet, useWalletModal, useConnex } from "@vechain/dapp-kit-react";
 import IUniswapV2Router from "~/abis/IUniswapV2Router02.json";
 import ABI_ERC20 from "~/abis/erc20.json";
@@ -77,6 +78,21 @@ const TOKEN_ICONS: { [key: string]: any } = {
 //   "VET-VVET": new sdk.Percent(sdk.JSBI.BigInt(0)),
 //   "VVET-VET": new sdk.Percent(sdk.JSBI.BigInt(0))
 // };
+
+function showTransactionToast(txid: any) {
+  toast.success((t) => (
+    <div className={css.successToast}>
+      Transaction sent,{" "}
+      <a href={`https://explore.vechain.org/transactions/${txid}#info`} target="_blank" rel="noreferrer">
+        view on explorer
+      </a>
+      .
+      <button onClick={() => toast.dismiss(t.id)}>
+        <IconClose />
+      </button>
+    </div>
+  ));
+}
 
 function TokenModal({
   label,
@@ -359,7 +375,7 @@ function SwapPanel() {
     swapCallback?.()
       .then((hash) => {
         // TODO: Catch Hash here
-        console.log(hash);
+        if (hash) showTransactionToast(hash);
       })
       .catch((error: any) => {
         console.log(error);
@@ -794,7 +810,7 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
         .comment("Add Liquidity")
         .request()
         .then((tx: any) => {
-          console.log("result: ", tx);
+          showTransactionToast(tx.txid);
         })
         .catch((err: any) => {
           console.log("ERROR");
@@ -953,7 +969,7 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
         .comment("Remove Liquidity")
         .request()
         .then((tx: any) => {
-          console.log("result: ", tx);
+          showTransactionToast(tx.txid);
         })
         .catch((err: any) => {
           console.log("ERROR");

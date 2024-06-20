@@ -656,3 +656,9 @@
     justify-content: center;
   }
 }
+
+.successToast {
+  > a {
+    text-decoration: underline;
+  }
+}

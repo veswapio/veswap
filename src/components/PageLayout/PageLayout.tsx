@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { useWallet, useWalletModal, useConnex } from "@vechain/dapp-kit-react";
+import { Toaster } from "react-hot-toast";
 import css from "./PageLayout.module.scss";
 
 import IconLogo from "~/assets/logo.svg?react";
@@ -78,6 +79,19 @@ export default function Home() {
         <span>Main</span>
         <span className={css.status__version}>Version: {__COMMIT_HASH__}</span>
       </div>
+
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          className: "toast",
+          duration: 10000,
+          style: {
+            borderRadius: "8px",
+            padding: "8px 12px",
+            fontSize: "14px"
+          }
+        }}
+      />
     </div>
   );
 }
