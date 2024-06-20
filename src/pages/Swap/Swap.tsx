@@ -845,10 +845,10 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
         .account(ROUTER_ADDRESS)
         .method(find(IUniswapV2Router.abi, { name: "removeLiquidityETH" }));
 
-      let clause;
+      let clause, balance;
 
       if (pair.token0.symbol === "VET") {
-        const balance = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
+        balance = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
         const amountETHMin = bigNumberToWei(_receiveToken0.times(0.97), pair.token0.decimals);
         const amountTokenMin = bigNumberToWei(_receiveToken1.times(0.97), pair.token1.decimals);
         clause = removeLiquidityMethod.asClause(
@@ -860,7 +860,7 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
           Math.ceil(Date.now() / 1000) + 60 * 20
         );
       } else {
-        const balance = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
+        balance = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
         const amountETHMin = bigNumberToWei(_receiveToken1.times(0.97), pair.token1.decimals);
         const amountTokenMin = bigNumberToWei(_receiveToken0.times(0.97), pair.token0.decimals);
         clause = removeLiquidityMethod.asClause(
@@ -873,8 +873,16 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
         );
       }
 
+      let approveClause;
+      if (BigNumber(balance).isGreaterThan(myPairShare.myLpAllowance)) {
+        const approveMethod = connex.thor
+          .account(pair.liquidityToken.address)
+          .method(find(ABI_ERC20, { name: "approve" }));
+        approveClause = approveMethod.asClause(ROUTER_ADDRESS, balance);
+      }
+
       connex.vendor
-        .sign("tx", [{ ...clause }])
+        .sign("tx", approveClause ? [{ ...approveClause }, { ...clause }] : [{ ...clause }])
         .comment("Remove Liquidity")
         .request()
         .then((tx: any) => {
@@ -951,7 +959,7 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
         </section>
       </Card>
 
-      <Button onPress={handleRemoveLiquidity} disabled={!value || !myPairShare?.percentage || myPairShare?.needApprove}>
+      <Button onPress={handleRemoveLiquidity} disabled={!value || !myPairShare?.percentage}>
         Remove Liquidity
       </Button>
     </div>

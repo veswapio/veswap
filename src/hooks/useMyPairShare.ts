@@ -23,11 +23,12 @@ export default function useMyPairShare(account: any, pair: any) {
     select: (data: any) => {
       const myLpBalance = BigNumber(data[0].decoded["0"]);
       const totalLpSupply = BigNumber(data[1].decoded["0"]);
+      const myLpAllowance = BigNumber(data[2].decoded["0"]);
       return {
         myLpBalance,
         totalLpSupply,
-        percentage: myLpBalance.div(totalLpSupply),
-        needApprove: data[2].decoded["0"] === "0"
+        myLpAllowance,
+        percentage: myLpBalance.div(totalLpSupply)
       };
     }
   });
