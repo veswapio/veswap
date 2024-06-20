@@ -702,23 +702,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     return BigNumber(token1Amount).isGreaterThan(tokenBalanceMap?.[token1.symbol!].displayBalance!);
   }, [token1Amount, token1, tokenBalanceMap]);
 
-  const handleApprove = async (address: string) => {
-    const approveMethod = connex.thor.account(address).method(find(ABI_ERC20, { name: "approve" }));
-    const clause = approveMethod.asClause(ROUTER_ADDRESS, (10n ** 18n).toString());
-
-    connex.vendor
-      .sign("tx", [{ ...clause }])
-      .comment("Approve")
-      .request()
-      .then((tx: any) => {
-        console.log(tx);
-      })
-      .catch((err: any) => {
-        console.log("ERROR");
-        console.log(err);
-      });
-  };
-
   const handleAddLiquidity = () => {
     const token0AmountWei = bigNumberToWei(token0Amount, token0.decimals);
     const token1AmountWei = bigNumberToWei(token1Amount, token1.decimals);
