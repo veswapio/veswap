@@ -375,7 +375,11 @@ function SwapPanel() {
     swapCallback?.()
       .then((hash) => {
         // TODO: Catch Hash here
-        if (hash) showTransactionToast(hash);
+        if (hash) {
+          showTransactionToast(hash);
+          setFromTokenAmount("0");
+          setToTokenAmount("0");
+        }
       })
       .catch((error: any) => {
         console.log(error);
