@@ -447,13 +447,16 @@ function SwapPanel() {
       {showSlippageWarn && (
         <div className={css.ModalOverlay}>
           <div className={css.Modal}>
-            <h2 className={css.Modal__heading}>Warning</h2>
+            <>
+              <IconError className={css.Modal__errorIcon} />
+              <h2 className={clsx(css.Modal__heading, css.center)}>Warning</h2>
+            </>
             <p className={css.Modal__subheading}>
               Custom slippage is not protected. Set a reasonable upper limit to avoid losses.
             </p>
-            <div className={css.Modal__bgroup}>
-              <Button onPress={() => setShowSlippageWarn(false)}>Confirm</Button>
-            </div>
+            <Button small onPress={() => setShowSlippageWarn(false)}>
+              Confirm
+            </Button>
           </div>
         </div>
       )}

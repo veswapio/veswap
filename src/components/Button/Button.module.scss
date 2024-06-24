@@ -13,6 +13,12 @@
     color: #fff;
   }
 
+  &.small {
+    border-radius: 8px;
+    height: rhythm(5);
+    font-size: 14px;
+  }
+
   &:disabled {
     opacity: 0.5;
   }
