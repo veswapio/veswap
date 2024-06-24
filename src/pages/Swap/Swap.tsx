@@ -1,5 +1,7 @@
 import { clsx } from "clsx";
-import { find } from "lodash";
+import { find, stubTrue } from "lodash";
+import { atom, useAtom } from "jotai";
+import BigNumber from "bignumber.js";
 import { useState, useMemo, useEffect } from "react";
 import {
   Button as AriaButton,
@@ -19,7 +21,6 @@ import {
   TextField,
   Input
 } from "react-aria-components";
-import { toast } from "react-hot-toast";
 import { useWallet, useWalletModal, useConnex } from "@vechain/dapp-kit-react";
 import IUniswapV2Router from "~/abis/IUniswapV2Router02.json";
 import ABI_ERC20 from "~/abis/erc20.json";
@@ -49,7 +50,8 @@ import IconSwap from "~/assets/swap.svg?react";
 import IconClose from "~/assets/close.svg?react";
 import IconLink from "~/assets/link.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
-import BigNumber from "bignumber.js";
+import IconSuccess from "~/assets/success.svg?react";
+import IconError from "~/assets/error.svg?react";
 
 // token icons
 import TokenIconVet from "~/assets/tokens/vet.svg?react";
@@ -79,19 +81,37 @@ const TOKEN_ICONS: { [key: string]: any } = {
 //   "VVET-VET": new sdk.Percent(sdk.JSBI.BigInt(0))
 // };
 
-function showTransactionToast(txid: any) {
-  toast.success((t) => (
-    <div className={css.successToast}>
-      Transaction sent,{" "}
-      <a href={`https://explore.vechain.org/transactions/${txid}#info`} target="_blank" rel="noreferrer">
-        view on explorer
-      </a>
-      .
-      <button onClick={() => toast.dismiss(t.id)}>
-        <IconClose />
-      </button>
-    </div>
-  ));
+const transactionStatusAtom = atom<
+  | {
+      isPending: boolean;
+      isSuccessful: boolean;
+      isFailed: boolean;
+      transactionHash: string | null;
+      message: string | null;
+    }
+  | undefined
+>(undefined);
+
+function poll(fn: any) {
+  const endTime = Number(new Date()) + 1000 * 60 * 5;
+  const interval = 3000;
+
+  const checkCondition = (resolve: any, reject: any) => {
+    if (Number(new Date()) > endTime) {
+      return reject(new Error("Timed out"));
+    }
+
+    const result = fn();
+    result.then((res: any) => {
+      if (res) {
+        resolve(res);
+      } else {
+        setTimeout(checkCondition, interval, resolve, reject);
+      }
+    });
+  };
+
+  return new Promise(checkCondition);
 }
 
 function TokenModal({
@@ -226,6 +246,7 @@ function SwapPanel() {
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const connex = useConnex();
 
+  const [, setTransactionStatus] = useAtom(transactionStatusAtom);
   const [fromToken, setFromToken] = useState(tokens[1]);
   const [toToken, setToToken] = useState(tokens[0]);
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
@@ -372,13 +393,35 @@ function SwapPanel() {
   const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(bestTrade!, swapFee);
 
   function onSwap() {
+    setTransactionStatus({
+      isPending: true,
+      isSuccessful: false,
+      isFailed: false,
+      transactionHash: null,
+      message: `Swap ${fromTokenAmount} ${fromToken.symbol} for ${toTokenAmount} ${toToken.symbol}`
+    });
     swapCallback?.()
       .then((hash) => {
         // TODO: Catch Hash here
         if (hash) {
-          showTransactionToast(hash);
           setFromTokenAmount("0");
           setToTokenAmount("0");
+
+          return poll(() => connex.thor.transaction(hash).getReceipt());
+        } else {
+          setTransactionStatus(undefined);
+        }
+      })
+      .then((result: any) => {
+        const isSuccess = result.reverted === false;
+        if (result) {
+          setTransactionStatus({
+            isPending: false,
+            isSuccessful: isSuccess,
+            isFailed: !isSuccess,
+            transactionHash: result.meta.txID,
+            message: null
+          });
         }
       })
       .catch((error: any) => {
@@ -402,13 +445,13 @@ function SwapPanel() {
   return (
     <div className={css.swapPanel}>
       {showSlippageWarn && (
-        <div className={css.warningModal}>
-          <div className={css.warningModal__box}>
-            <h2 className={css.warningModal__heading}>Warning</h2>
-            <p className={css.warningModal__subheading}>
+        <div className={css.ModalOverlay}>
+          <div className={css.Modal}>
+            <h2 className={css.Modal__heading}>Warning</h2>
+            <p className={css.Modal__subheading}>
               Custom slippage is not protected. Set a reasonable upper limit to avoid losses.
             </p>
-            <div className={css.warningModal__bgroup}>
+            <div className={css.Modal__bgroup}>
               <Button onPress={() => setShowSlippageWarn(false)}>Confirm</Button>
             </div>
           </div>
@@ -633,6 +676,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const connex = useConnex();
 
+  const [, setTransactionStatus] = useAtom(transactionStatusAtom);
+
   const token0 = pair.token0;
   const token1 = pair.token1;
 
@@ -718,16 +763,39 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
         clauses = [{ ...approveClause }, { ...clause }];
       }
 
+      setTransactionStatus({
+        isPending: true,
+        isSuccessful: false,
+        isFailed: false,
+        transactionHash: null,
+        message: `Add liquidity ${token0Amount} ${token0.symbol} and ${token1Amount} ${token1.symbol}`
+      });
+
       connex.vendor
         .sign("tx", clauses)
         .comment("Add Liquidity")
         .request()
         .then((tx: any) => {
-          showTransactionToast(tx.txid);
+          return poll(() => connex.thor.transaction(tx.txid).getReceipt());
+        })
+        .then((result: any) => {
+          const isSuccess = result.reverted === false;
+          setTransactionStatus({
+            isPending: false,
+            isSuccessful: isSuccess,
+            isFailed: !isSuccess,
+            transactionHash: result.meta.txID,
+            message: null
+          });
+          if (isSuccess) {
+            setToken0Amount("0");
+            setToken1Amount("0");
+          }
         })
         .catch((err: any) => {
           console.log("ERROR");
           console.log(err);
+          setTransactionStatus(undefined);
         });
     } else {
       // TODO: addLiquidity
@@ -833,6 +901,8 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
   const { data: myPairShare } = useMyPairShare(account, pair);
   const connex = useConnex();
 
+  const [, setTransactionStatus] = useAtom(transactionStatusAtom);
+
   const _receiveToken0 = useMemo(() => {
     return myPairShare ? myPairShare.percentage.times(pair.reserve0.toExact()).times(value / 100) : BigNumber("0");
   }, [myPairShare, pair, value]);
@@ -885,16 +955,36 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
         approveClause = approveMethod.asClause(ROUTER_ADDRESS, balance);
       }
 
+      setTransactionStatus({
+        isPending: true,
+        isSuccessful: false,
+        isFailed: false,
+        transactionHash: null,
+        message: `Remove liquidity ${value}%`
+      });
+
       connex.vendor
         .sign("tx", approveClause ? [{ ...approveClause }, { ...clause }] : [{ ...clause }])
         .comment("Remove Liquidity")
         .request()
         .then((tx: any) => {
-          showTransactionToast(tx.txid);
+          return poll(() => connex.thor.transaction(tx.txid).getReceipt());
+        })
+        .then((result: any) => {
+          const isSuccess = result.reverted === false;
+          setTransactionStatus({
+            isPending: false,
+            isSuccessful: isSuccess,
+            isFailed: !isSuccess,
+            transactionHash: result.meta.txID,
+            message: null
+          });
+          if (isSuccess) setValue(0);
         })
         .catch((err: any) => {
           console.log("ERROR");
           console.log(err);
+          setTransactionStatus(undefined);
         });
     } else {
       // TODO: removeLiquidity
@@ -1016,8 +1106,51 @@ function ClaimPanel() {
 }
 
 export default function Swap() {
+  const [transactionStatus, setTransactionStatus] = useAtom(transactionStatusAtom);
+
   return (
     <div className={css.page}>
+      {transactionStatus && (
+        <div className={css.ModalOverlay}>
+          <div className={css.Modal}>
+            {transactionStatus.isPending && (
+              <>
+                <div className={css.loader} />
+                <h2 className={clsx(css.Modal__heading, css.center)}>Waiting for confirmation...</h2>
+              </>
+            )}
+            {transactionStatus.isSuccessful && (
+              <>
+                <IconSuccess className={css.Modal__successIcon} />
+                <h2 className={clsx(css.Modal__heading, css.center)}>Transaction Successful</h2>
+              </>
+            )}
+            {transactionStatus.isFailed && (
+              <>
+                <IconError className={css.Modal__errorIcon} />
+                <h2 className={clsx(css.Modal__heading, css.center)}>Transaction Failed</h2>
+              </>
+            )}
+            {!!transactionStatus.message && <p className={css.Modal__subheading}>{transactionStatus.message}</p>}
+            {!transactionStatus.isPending && (
+              <div className={css.Modal__bgroup}>
+                <a
+                  className={css.Modal__link}
+                  href={`https://explore.vechain.org/transactions/${transactionStatus.transactionHash}#info`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View on explorer
+                </a>
+                <button className={css.Modal__close} onClick={() => setTransactionStatus(undefined)}>
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       <Tabs>
         <TabList className={css.tabList} aria-label="Swap Tabs">
           <Tab className={css.tabButton} id="Swap">

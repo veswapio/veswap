@@ -378,6 +378,11 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 24px;
+
+    &.center {
+      justify-content: center;
+      font-weight: 600;
+    }
   }
 
   &__search {
@@ -388,6 +393,65 @@
     overflow: auto;
     margin: 0 rhythm(-3);
     padding: 0 rhythm(3);
+  }
+
+  &__subheading {
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    margin-top: rhythm(-2);
+    opacity: 0.75;
+    margin-bottom: rhythm(2);
+  }
+
+  &__bgroup {
+    display: flex;
+    gap: rhythm(2);
+    justify-content: center;
+    margin-top: rhythm(-1);
+    margin-bottom: rhythm(1);
+  }
+
+  &__link {
+    flex: 1;
+    text-align: center;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+    font-size: 14px;
+    line-height: 40px;
+    font-weight: 600;
+    padding-left: rhythm(3);
+    padding-right: rhythm(3);
+  }
+
+  &__close {
+    flex: 1;
+    font-size: 14px;
+    line-height: 40px;
+    font-weight: 600;
+    padding-left: rhythm(3);
+    padding-right: rhythm(3);
+    border-radius: 8px;
+    background: rgba(#fff, 0.1);
+  }
+
+  &__successIcon,
+  &__errorIcon {
+    width: 40px;
+    height: 40px;
+    margin: rhythm(1) auto rhythm(2);
+  }
+
+  &__successIcon {
+    path {
+      fill: #00ffcb;
+    }
+  }
+
+  &__errorIcon {
+    path {
+      fill: #ff0000cc;
+    }
   }
 }
 
@@ -619,46 +683,28 @@
   }
 }
 
-.warningModal {
-  position: fixed;
-  z-index: 1000;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: rhythm(2);
-  overflow: auto;
-  backdrop-filter: blur(4px);
-
-  &__box {
-    background: #000;
-    border-radius: 16px;
-    padding: rhythm(3);
-    max-width: 420px;
-  }
-
-  &__heading {
-    font-size: 20px;
-    line-height: 32px;
-    font-weight: 600;
-    margin-bottom: rhythm(2);
-  }
-
-  &__subheading {
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 500;
-    margin-bottom: rhythm(3);
-  }
-
-  &__bgroup {
-    display: flex;
-    justify-content: center;
-  }
-}
-
 .successToast {
   > a {
     text-decoration: underline;
+  }
+}
+
+.loader {
+  --b: 8px;
+  width: 50px;
+  margin: 16px auto 24px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%, #00ffcb) content-box;
+  -webkit-mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+    radial-gradient(farthest-side, #0000 calc(100% - var(--b) - 1px), #000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: l4 1s infinite steps(10);
+}
+@keyframes l4 {
+  to {
+    transform: rotate(1turn);
   }
 }
