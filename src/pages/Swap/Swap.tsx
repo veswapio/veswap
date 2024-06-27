@@ -1,5 +1,5 @@
 import { clsx } from "clsx";
-import { find, stubTrue } from "lodash";
+import { find } from "lodash";
 import { atom, useAtom } from "jotai";
 import BigNumber from "bignumber.js";
 import { useState, useMemo, useEffect } from "react";
@@ -34,7 +34,7 @@ import useTokenBalanceList from "~/hooks/useTokenBalanceList";
 import useFeaturedPairList from "~/hooks/useFeaturedPairList";
 import useMyPairShare from "~/hooks/useMyPairShare";
 import { truncateAddress, formatBigNumber, fixedBigNumber, bigNumberToWei, Field } from "~/utils/helpers";
-// import { queryClient } from "~/query";
+import { queryClient } from "~/query";
 import { basisPointsToPercent, computeTradePriceBreakdown } from "~/utils/helpers";
 
 import Card from "~/components/Card";
@@ -404,23 +404,28 @@ function SwapPanel() {
       .then((hash) => {
         // TODO: Catch Hash here
         if (hash) {
-          setFromTokenAmount("0");
-          setToTokenAmount("0");
-
           return poll(() => connex.thor.transaction(hash).getReceipt());
         } else {
           setTransactionStatus(undefined);
         }
       })
       .then((result: any) => {
+        if (!result) return;
+
         const isSuccess = result.reverted === false;
-        if (result) {
-          setTransactionStatus({
-            isPending: false,
-            isSuccessful: isSuccess,
-            isFailed: !isSuccess,
-            transactionHash: result.meta.txID,
-            message: null
+        setTransactionStatus({
+          isPending: false,
+          isSuccessful: isSuccess,
+          isFailed: !isSuccess,
+          transactionHash: result.meta.txID,
+          message: null
+        });
+
+        if (isSuccess) {
+          setFromTokenAmount("0");
+          setToTokenAmount("0");
+          queryClient.refetchQueries({
+            queryKey: ["token-balance-list"]
           });
         }
       })
@@ -793,6 +798,9 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           if (isSuccess) {
             setToken0Amount("0");
             setToken1Amount("0");
+            queryClient.refetchQueries({
+              queryKey: ["token-balance-list"]
+            });
           }
         })
         .catch((err: any) => {
@@ -982,7 +990,12 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
             transactionHash: result.meta.txID,
             message: null
           });
-          if (isSuccess) setValue(0);
+          if (isSuccess) {
+            setValue(0);
+            queryClient.refetchQueries({
+              queryKey: ["token-balance-list"]
+            });
+          }
         })
         .catch((err: any) => {
           console.log("ERROR");
