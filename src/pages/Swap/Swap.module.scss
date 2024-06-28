@@ -344,7 +344,7 @@
   display: flex;
   align-items: start;
   justify-content: center;
-  padding: 17.5vh 24px 24px;
+  padding: 17.5vh rhythm(2.5) rhythm(2.5);
   z-index: 100;
 
   &[data-entering] {
@@ -365,7 +365,7 @@
   max-width: 428px;
   max-height: 70vh;
   width: 100%;
-  padding: rhythm(3);
+  padding: rhythm(2.5);
   overflow: hidden;
   display: grid;
   grid-template-rows: max-content max-content 1fr;
@@ -420,8 +420,9 @@
     font-size: 14px;
     line-height: 40px;
     font-weight: 600;
-    padding-left: rhythm(3);
-    padding-right: rhythm(3);
+    padding-left: rhythm(2);
+    padding-right: rhythm(2);
+    white-space: nowrap;
   }
 
   &__close {
