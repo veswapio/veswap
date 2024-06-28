@@ -5,6 +5,7 @@ import BigNumber from "bignumber.js";
 import Table from "~/components/Table";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
+import useOverviewData from "~/hooks/useOverviewData";
 import tokens from "~/constants/tokens";
 import css from "./Overview.module.scss";
 
@@ -30,6 +31,9 @@ function getCurrentDateFormatted() {
 export default function Overview() {
   const { data: allPairList } = useAllPairList();
   const { data: tokenPrice } = useTokenPrice();
+  const { data: overviewData } = useOverviewData();
+
+  console.log("!!!overview: !!!", overviewData);
 
   const _data = useMemo(() => {
     if (!tokenPrice || !allPairList) return null;
@@ -90,10 +94,6 @@ export default function Overview() {
           </div>
           <div className={css.status}>
             <div className={css.status__title}>Volume Today:</div>
-            <div className={css.status__value}>0</div>
-          </div>
-          <div className={css.status}>
-            <div className={css.status__title}>Claimed VTHO:</div>
             <div className={css.status__value}>0</div>
           </div>
         </div>
