@@ -29,7 +29,7 @@ import ABI_ERC20 from "~/abis/erc20.json";
 import sdk from "~/sdk";
 import tokens from "~/constants/tokens";
 import { ROUTER_ADDRESS } from "~/constants/addresses";
-import { DEFAULT_DEADLINE_FROM_NOW, INITIAL_ALLOWED_SLIPPAGE } from "~/constants/config";
+import { DEFAULT_DEADLINE_FROM_NOW } from "~/constants/config";
 import useTokenBalanceList from "~/hooks/useTokenBalanceList";
 import useFeaturedPairList from "~/hooks/useFeaturedPairList";
 import useMyPairShare from "~/hooks/useMyPairShare";
@@ -251,7 +251,7 @@ function SwapPanel() {
   const [toToken, setToToken] = useState(tokens[0]);
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
-  const [slippage, setSlippage] = useState("0.03"); // FIXME: not use
+  const [slippage, setSlippage] = useState("3");
   const [customSlippage, setCustomSlippage] = useState("");
   const [showSlippageWarn, setShowSlippageWarn] = useState(false);
   const [isSlippageWarnShown, setIsSlippageWarnShown] = useState(false);
@@ -375,7 +375,6 @@ function SwapPanel() {
   //     });
   // };
 
-  const [allowedSlippage, _setAllowedSlippage] = useState<number>(INITIAL_ALLOWED_SLIPPAGE);
   const {
     bestTrade,
     tokenBalances: _tokenBalances,
@@ -384,6 +383,10 @@ function SwapPanel() {
     error: _error
   } = useDerivedSwapInfo(isExactIn ? Field.INPUT : Field.OUTPUT, fromTokenAmount, fromToken.address, toToken.address);
 
+  const allowedSlippage = useMemo(
+    () => (!!customSlippage ? +customSlippage * 100 : +slippage * 100),
+    [slippage, customSlippage]
+  );
   const swapCallback = useSwapCallback(bestTrade!, allowedSlippage, deadline);
   // const myVetBalance = useETHBalances([account!])?.[account!];
 
@@ -505,13 +508,13 @@ function SwapPanel() {
               }}
               aria-label="slippage"
             >
-              <Radio className={css.slippage__option} value="0.01">
+              <Radio className={css.slippage__option} value="1">
                 1%
               </Radio>
-              <Radio className={css.slippage__option} value="0.03">
+              <Radio className={css.slippage__option} value="3">
                 3%
               </Radio>
-              <Radio className={css.slippage__option} value="0.05">
+              <Radio className={css.slippage__option} value="5">
                 5%
               </Radio>
             </RadioGroup>
