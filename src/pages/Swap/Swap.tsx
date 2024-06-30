@@ -111,12 +111,14 @@ function TokenModal({
   label,
   token,
   setToken,
-  tokenList
+  tokenList,
+  disabled
 }: {
   label: string;
   token: sdk.Token;
   setToken: (token: sdk.Token) => void;
   tokenList: sdk.Token[];
+  disabled?: boolean;
 }) {
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -128,7 +130,7 @@ function TokenModal({
 
   return (
     <DialogTrigger>
-      <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap}>
+      <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap || disabled}>
         <div className={css.tokenTrigger__icon}>{token.symbol && TOKEN_ICONS[token.symbol]}</div>
         <div className={css.tokenTrigger__name}>{token.symbol}</div>
         {/* <IconArrow className={css.tokenTrigger__arrow} /> */}
@@ -190,7 +192,8 @@ function TokenInput({
   onTokenChange,
   tokenList,
   error,
-  className
+  className,
+  disabled
 }: {
   label: string;
   token: sdk.Token;
@@ -200,6 +203,7 @@ function TokenInput({
   tokenList: sdk.Token[];
   error?: boolean;
   className?: string;
+  disabled?: boolean;
 }) {
   const { data: tokenBalanceMap } = useTokenBalanceList();
 
@@ -214,7 +218,13 @@ function TokenInput({
     <div className={clsx(css.tokenInput, className)}>
       <div className={css.tokenInput__top}>
         <h3 className={css.tokenInput__label}>{label}</h3>
-        <TokenModal label={label.toLowerCase()} token={token} tokenList={tokenList} setToken={onTokenChange} />
+        <TokenModal
+          label={label.toLowerCase()}
+          token={token}
+          tokenList={tokenList}
+          setToken={onTokenChange}
+          disabled={disabled}
+        />
       </div>
       <TextField aria-label={label + " token amount"} className={clsx(css.tokenInput__bottom, error && css.error)}>
         <Input
@@ -464,9 +474,16 @@ function SwapPanel() {
           token={fromToken}
           amount={fromTokenAmount}
           onAmountChange={handleFromTokenChange}
-          onTokenChange={setFromToken}
+          onTokenChange={(token: sdk.Token) => {
+            // TODO: remove later
+            setFromToken(token);
+            if (token.symbol === "B3TR") {
+              setToToken(tokens[0]);
+            }
+          }}
           tokenList={tokenList}
           error={_fromTokenError}
+          disabled={toToken.symbol === "B3TR" || toToken.symbol === "VTHO"}
         />
         <button className={css.swapButton} onClick={handleSwapTokens} tabIndex={-1}>
           <IconSwap />
@@ -476,9 +493,16 @@ function SwapPanel() {
           token={toToken}
           amount={toTokenAmount}
           onAmountChange={handleToTokenChange}
-          onTokenChange={setToToken}
+          onTokenChange={(token: sdk.Token) => {
+            // TODO: remove later
+            setToToken(token);
+            if (token.symbol === "B3TR") {
+              setFromToken(tokens[0]);
+            }
+          }}
           tokenList={tokenList}
           className={css.card__swapToPane}
+          disabled={fromToken.symbol === "B3TR" || fromToken.symbol === "VTHO"}
         />
 
         <DataEntry
