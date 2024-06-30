@@ -7,18 +7,12 @@ import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
 import useOverviewData from "~/hooks/useOverviewData";
 import tokens from "~/constants/tokens";
+import TOKEN_ICONS from "~/constants/tokenIcons";
 import css from "./Overview.module.scss";
 
 import IconArrow2 from "~/assets/arrow2.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
 import IconExternal from "~/assets/external.svg?react";
-import TokenIconVet from "~/assets/tokens/vet.svg?react";
-import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
-
-const TOKEN_ICONS: { [key: string]: any } = {
-  VET: <TokenIconVet />,
-  VTHO: <TokenIconVtho />
-};
 
 function getCurrentDateFormatted() {
   const date = new Date();

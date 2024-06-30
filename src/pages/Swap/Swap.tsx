@@ -36,6 +36,7 @@ import useMyPairShare from "~/hooks/useMyPairShare";
 import { truncateAddress, formatBigNumber, fixedBigNumber, bigNumberToWei, Field } from "~/utils/helpers";
 import { queryClient } from "~/query";
 import { basisPointsToPercent, computeTradePriceBreakdown } from "~/utils/helpers";
+import TOKEN_ICONS from "~/constants/tokenIcons";
 
 import Card from "~/components/Card";
 import Button from "~/components/Button";
@@ -53,19 +54,11 @@ import IconPlus from "~/assets/plus.svg?react";
 import IconSuccess from "~/assets/success.svg?react";
 import IconError from "~/assets/error.svg?react";
 
-// token icons
-import TokenIconVet from "~/assets/tokens/vet.svg?react";
-import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
 // import { useTokenAllowance } from "~/hooks/useTokenAllowance";
 import { useSwapCallback } from "~/hooks/useSwapCallback";
 // import { useApproveCallbackFromTrade } from "~/hooks/useApproveCallback";
 import useDerivedSwapInfo from "~/hooks/useDerivedSwapInfo";
 // import { useETHBalances } from "~/hooks/useBalances";
-
-const TOKEN_ICONS: { [key: string]: any } = {
-  VET: <TokenIconVet />,
-  VTHO: <TokenIconVtho />
-};
 
 // let lockSwapFeeFetch = false;
 
@@ -135,7 +128,7 @@ function TokenModal({
 
   return (
     <DialogTrigger>
-      <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap || true}>
+      <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap}>
         <div className={css.tokenTrigger__icon}>{token.symbol && TOKEN_ICONS[token.symbol]}</div>
         <div className={css.tokenTrigger__name}>{token.symbol}</div>
         {/* <IconArrow className={css.tokenTrigger__arrow} /> */}
@@ -569,14 +562,23 @@ function SwapPanel() {
   );
 }
 
-function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setActivePane: (name: string) => void }) {
+function PoolListPane({
+  pairList,
+  setActivePane,
+  setActivePairIndex
+}: {
+  pairList: sdk.Pair[];
+  setActivePane: (name: string) => void;
+  setActivePairIndex: (idx: number) => void;
+}) {
   const [searchKeyword, setSearchKeyword] = useState("");
   const { open } = useWalletModal();
   const { account } = useWallet();
 
-  const handlePoolClick = () => {
+  const handlePoolClick = (idx: number) => {
     if (!account) return;
     setActivePane("POOL");
+    setActivePairIndex(idx);
   };
 
   return (
@@ -591,8 +593,8 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
           onChange={setSearchKeyword}
         />
 
-        {pairList.map((pair: sdk.Pair) => (
-          <div className={css.pool} onClick={handlePoolClick} key={pair.liquidityToken.address}>
+        {pairList.map((pair: sdk.Pair, idx: number) => (
+          <div className={css.pool} onClick={() => handlePoolClick(idx)} key={pair.liquidityToken.address}>
             <div className={css.pool__tokens}>
               <div className={css.pool__token}>{pair.token0.symbol && TOKEN_ICONS[pair.token0.symbol]}</div>
               <div className={css.pool__token}>{pair.token1.symbol && TOKEN_ICONS[pair.token1.symbol]}</div>
@@ -725,8 +727,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     const token0AmountWei = bigNumberToWei(token0Amount, token0.decimals);
     const token1AmountWei = bigNumberToWei(token1Amount, token1.decimals);
 
-    // TODO: Multi Token Approve
-
     if (token0.symbol === "VET" || token1.symbol === "VET") {
       const addLiquidityMethod = connex.thor
         .account(ROUTER_ADDRESS)
@@ -806,16 +806,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           setTransactionStatus(undefined);
         });
     } else {
-      // TODO: addLiquidity
     }
   };
-
-  // const handleAddLiquidity = () => {
-  //   const transaction = connex.thor.transaction("0x4a629aed45d89f3611bc04b9860557b9d1f1d5bd2dd6bdaea3c1a6286af4cf89");
-  //   transaction.getReceipt().then((tx: any) => {
-  //     console.log(tx);
-  //   });
-  // };
 
   return (
     <div className={css.poolPanel}>
@@ -869,19 +861,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
       </Card>
       {account ? (
         <div className={css.verticalButtonGroup}>
-          {/* TODO: Multi Token Approve */}
-          {/* {tokenBalanceMap?.[token0.symbol!].needApprove && (
-            <Button onPress={() => handleApprove(tokenBalanceMap?.[token0.symbol!].address)}>
-              Approve {token0.symbol}
-            </Button>
-          )}
-
-          {tokenBalanceMap?.[token1.symbol!].needApprove && (
-            <Button onPress={() => handleApprove(tokenBalanceMap?.[token1.symbol!].address)}>
-              Approve {token1.symbol}
-            </Button>
-          )} */}
-
           <Button
             onPress={handleAddLiquidity}
             disabled={
@@ -1075,6 +1054,7 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
 
 function PoolPanel() {
   const [activePane, setActivePane] = useState("");
+  const [activePairIndex, setActivePairIndex] = useState(0);
   const { data: pairList, isPending } = useFeaturedPairList();
 
   if (isPending) {
@@ -1086,18 +1066,18 @@ function PoolPanel() {
   }
 
   if (activePane === "POOL") {
-    return <PoolDetailPane pair={pairList![0]} setActivePane={setActivePane} />;
+    return <PoolDetailPane pair={pairList![activePairIndex]} setActivePane={setActivePane} />;
   }
 
   if (activePane === "ADD_LIQUIDITY") {
-    return <AddLiquidityPane pair={pairList![0]} setActivePane={setActivePane} />;
+    return <AddLiquidityPane pair={pairList![activePairIndex]} setActivePane={setActivePane} />;
   }
 
   if (activePane === "REMOVE_LIQUIDITY") {
-    return <RemoveLiquidityPane pair={pairList![0]} setActivePane={setActivePane} />;
+    return <RemoveLiquidityPane pair={pairList![activePairIndex]} setActivePane={setActivePane} />;
   }
 
-  return <PoolListPane pairList={pairList!} setActivePane={setActivePane} />;
+  return <PoolListPane pairList={pairList!} setActivePane={setActivePane} setActivePairIndex={setActivePairIndex} />;
 }
 
 function ClaimPanel() {

@@ -8,9 +8,12 @@ export default function useFeaturedPairList() {
 
   return useQuery({
     queryKey: ["featured-pair-list"],
-    refetchInterval: 1000 * 15,
+    refetchInterval: 1000 * 60 * 10,
     queryFn: () => {
-      return Promise.all([sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex)]);
+      return Promise.all([
+        sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex),
+        sdk.Fetcher.fetchPairData(tokens[0], tokens[2], connex)
+      ]);
     }
   });
 }
