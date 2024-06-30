@@ -36,6 +36,7 @@ import useMyPairShare from "~/hooks/useMyPairShare";
 import { truncateAddress, formatBigNumber, fixedBigNumber, bigNumberToWei, Field } from "~/utils/helpers";
 import { queryClient } from "~/query";
 import { basisPointsToPercent, computeTradePriceBreakdown } from "~/utils/helpers";
+import TOKEN_ICONS from "~/constants/tokenIcons";
 
 import Card from "~/components/Card";
 import Button from "~/components/Button";
@@ -53,19 +54,11 @@ import IconPlus from "~/assets/plus.svg?react";
 import IconSuccess from "~/assets/success.svg?react";
 import IconError from "~/assets/error.svg?react";
 
-// token icons
-import TokenIconVet from "~/assets/tokens/vet.svg?react";
-import TokenIconVtho from "~/assets/tokens/vtho.svg?react";
 // import { useTokenAllowance } from "~/hooks/useTokenAllowance";
 import { useSwapCallback } from "~/hooks/useSwapCallback";
 // import { useApproveCallbackFromTrade } from "~/hooks/useApproveCallback";
 import useDerivedSwapInfo from "~/hooks/useDerivedSwapInfo";
 // import { useETHBalances } from "~/hooks/useBalances";
-
-const TOKEN_ICONS: { [key: string]: any } = {
-  VET: <TokenIconVet />,
-  VTHO: <TokenIconVtho />
-};
 
 // let lockSwapFeeFetch = false;
 
@@ -118,12 +111,14 @@ function TokenModal({
   label,
   token,
   setToken,
-  tokenList
+  tokenList,
+  disabled
 }: {
   label: string;
   token: sdk.Token;
   setToken: (token: sdk.Token) => void;
   tokenList: sdk.Token[];
+  disabled?: boolean;
 }) {
   const { data: tokenBalanceMap } = useTokenBalanceList();
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -135,7 +130,7 @@ function TokenModal({
 
   return (
     <DialogTrigger>
-      <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap || true}>
+      <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap || disabled}>
         <div className={css.tokenTrigger__icon}>{token.symbol && TOKEN_ICONS[token.symbol]}</div>
         <div className={css.tokenTrigger__name}>{token.symbol}</div>
         {/* <IconArrow className={css.tokenTrigger__arrow} /> */}
@@ -197,7 +192,8 @@ function TokenInput({
   onTokenChange,
   tokenList,
   error,
-  className
+  className,
+  disabled
 }: {
   label: string;
   token: sdk.Token;
@@ -207,6 +203,7 @@ function TokenInput({
   tokenList: sdk.Token[];
   error?: boolean;
   className?: string;
+  disabled?: boolean;
 }) {
   const { data: tokenBalanceMap } = useTokenBalanceList();
 
@@ -221,7 +218,13 @@ function TokenInput({
     <div className={clsx(css.tokenInput, className)}>
       <div className={css.tokenInput__top}>
         <h3 className={css.tokenInput__label}>{label}</h3>
-        <TokenModal label={label.toLowerCase()} token={token} tokenList={tokenList} setToken={onTokenChange} />
+        <TokenModal
+          label={label.toLowerCase()}
+          token={token}
+          tokenList={tokenList}
+          setToken={onTokenChange}
+          disabled={disabled}
+        />
       </div>
       <TextField aria-label={label + " token amount"} className={clsx(css.tokenInput__bottom, error && css.error)}>
         <Input
@@ -471,9 +474,16 @@ function SwapPanel() {
           token={fromToken}
           amount={fromTokenAmount}
           onAmountChange={handleFromTokenChange}
-          onTokenChange={setFromToken}
+          onTokenChange={(token: sdk.Token) => {
+            // TODO: remove later
+            setFromToken(token);
+            if (token.symbol === "B3TR") {
+              setToToken(tokens[0]);
+            }
+          }}
           tokenList={tokenList}
           error={_fromTokenError}
+          disabled={toToken.symbol === "B3TR" || toToken.symbol === "VTHO"}
         />
         <button className={css.swapButton} onClick={handleSwapTokens} tabIndex={-1}>
           <IconSwap />
@@ -483,9 +493,16 @@ function SwapPanel() {
           token={toToken}
           amount={toTokenAmount}
           onAmountChange={handleToTokenChange}
-          onTokenChange={setToToken}
+          onTokenChange={(token: sdk.Token) => {
+            // TODO: remove later
+            setToToken(token);
+            if (token.symbol === "B3TR") {
+              setFromToken(tokens[0]);
+            }
+          }}
           tokenList={tokenList}
           className={css.card__swapToPane}
+          disabled={fromToken.symbol === "B3TR" || fromToken.symbol === "VTHO"}
         />
 
         <DataEntry
@@ -569,14 +586,23 @@ function SwapPanel() {
   );
 }
 
-function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setActivePane: (name: string) => void }) {
+function PoolListPane({
+  pairList,
+  setActivePane,
+  setActivePairIndex
+}: {
+  pairList: sdk.Pair[];
+  setActivePane: (name: string) => void;
+  setActivePairIndex: (idx: number) => void;
+}) {
   const [searchKeyword, setSearchKeyword] = useState("");
   const { open } = useWalletModal();
   const { account } = useWallet();
 
-  const handlePoolClick = () => {
+  const handlePoolClick = (idx: number) => {
     if (!account) return;
     setActivePane("POOL");
+    setActivePairIndex(idx);
   };
 
   return (
@@ -591,8 +617,8 @@ function PoolListPane({ pairList, setActivePane }: { pairList: sdk.Pair[]; setAc
           onChange={setSearchKeyword}
         />
 
-        {pairList.map((pair: sdk.Pair) => (
-          <div className={css.pool} onClick={handlePoolClick} key={pair.liquidityToken.address}>
+        {pairList.map((pair: sdk.Pair, idx: number) => (
+          <div className={css.pool} onClick={() => handlePoolClick(idx)} key={pair.liquidityToken.address}>
             <div className={css.pool__tokens}>
               <div className={css.pool__token}>{pair.token0.symbol && TOKEN_ICONS[pair.token0.symbol]}</div>
               <div className={css.pool__token}>{pair.token1.symbol && TOKEN_ICONS[pair.token1.symbol]}</div>
@@ -725,8 +751,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     const token0AmountWei = bigNumberToWei(token0Amount, token0.decimals);
     const token1AmountWei = bigNumberToWei(token1Amount, token1.decimals);
 
-    // TODO: Multi Token Approve
-
     if (token0.symbol === "VET" || token1.symbol === "VET") {
       const addLiquidityMethod = connex.thor
         .account(ROUTER_ADDRESS)
@@ -748,7 +772,10 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           account,
           Math.ceil(Date.now() / 1000) + 60 * 20
         );
-        clauses = [{ ...clause }];
+
+        const approveMethod = connex.thor.account(token1.address).method(find(ABI_ERC20, { name: "approve" }));
+        approveClause = approveMethod.asClause(ROUTER_ADDRESS, token1AmountWei);
+        clauses = [{ ...approveClause }, { ...clause }];
       } else {
         const tokenAddress = token0.address;
         const amountTokenDesired = token0AmountWei;
@@ -806,16 +833,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           setTransactionStatus(undefined);
         });
     } else {
-      // TODO: addLiquidity
     }
   };
-
-  // const handleAddLiquidity = () => {
-  //   const transaction = connex.thor.transaction("0x4a629aed45d89f3611bc04b9860557b9d1f1d5bd2dd6bdaea3c1a6286af4cf89");
-  //   transaction.getReceipt().then((tx: any) => {
-  //     console.log(tx);
-  //   });
-  // };
 
   return (
     <div className={css.poolPanel}>
@@ -869,19 +888,6 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
       </Card>
       {account ? (
         <div className={css.verticalButtonGroup}>
-          {/* TODO: Multi Token Approve */}
-          {/* {tokenBalanceMap?.[token0.symbol!].needApprove && (
-            <Button onPress={() => handleApprove(tokenBalanceMap?.[token0.symbol!].address)}>
-              Approve {token0.symbol}
-            </Button>
-          )}
-
-          {tokenBalanceMap?.[token1.symbol!].needApprove && (
-            <Button onPress={() => handleApprove(tokenBalanceMap?.[token1.symbol!].address)}>
-              Approve {token1.symbol}
-            </Button>
-          )} */}
-
           <Button
             onPress={handleAddLiquidity}
             disabled={
@@ -1075,6 +1081,7 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
 
 function PoolPanel() {
   const [activePane, setActivePane] = useState("");
+  const [activePairIndex, setActivePairIndex] = useState(0);
   const { data: pairList, isPending } = useFeaturedPairList();
 
   if (isPending) {
@@ -1086,18 +1093,18 @@ function PoolPanel() {
   }
 
   if (activePane === "POOL") {
-    return <PoolDetailPane pair={pairList![0]} setActivePane={setActivePane} />;
+    return <PoolDetailPane pair={pairList![activePairIndex]} setActivePane={setActivePane} />;
   }
 
   if (activePane === "ADD_LIQUIDITY") {
-    return <AddLiquidityPane pair={pairList![0]} setActivePane={setActivePane} />;
+    return <AddLiquidityPane pair={pairList![activePairIndex]} setActivePane={setActivePane} />;
   }
 
   if (activePane === "REMOVE_LIQUIDITY") {
-    return <RemoveLiquidityPane pair={pairList![0]} setActivePane={setActivePane} />;
+    return <RemoveLiquidityPane pair={pairList![activePairIndex]} setActivePane={setActivePane} />;
   }
 
-  return <PoolListPane pairList={pairList!} setActivePane={setActivePane} />;
+  return <PoolListPane pairList={pairList!} setActivePane={setActivePane} setActivePairIndex={setActivePairIndex} />;
 }
 
 function ClaimPanel() {

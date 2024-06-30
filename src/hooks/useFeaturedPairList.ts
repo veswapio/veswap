@@ -8,9 +8,24 @@ export default function useFeaturedPairList() {
 
   return useQuery({
     queryKey: ["featured-pair-list"],
-    refetchInterval: 1000 * 15,
+    refetchInterval: 1000 * 60 * 10,
     queryFn: () => {
-      return Promise.all([sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex)]);
+      return Promise.all([
+        sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex),
+        sdk.Fetcher.fetchPairData(tokens[0], tokens[2], connex)
+      ]);
+    },
+    select: (data: any) => {
+      return data.map((i: any) => {
+        if (i.liquidityToken.address.toLowerCase() === "0xc6de3b8e4a9bf4a6756e60f5cb6705cb7d3c1649") {
+          // swap VET/B3TR to B3TR/VET
+          const _i = Object.assign(Object.create(Object.getPrototypeOf(i)), i);
+          _i.tokenAmounts = [i.tokenAmounts[1], i.tokenAmounts[0]];
+          return _i;
+        } else {
+          return i;
+        }
+      });
     }
   });
 }

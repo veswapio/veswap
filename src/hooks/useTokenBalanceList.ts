@@ -23,8 +23,7 @@ export default function useTokenBalanceList() {
             return {
               symbol: token.symbol!,
               address: token.address,
-              balance: BigInt(accountData.balance).toString(),
-              needApprove: false
+              balance: BigInt(accountData.balance).toString()
             };
           } else {
             const contract = connex.thor.account(token.address);
@@ -37,13 +36,13 @@ export default function useTokenBalanceList() {
               symbol: token.symbol!,
               address: token.address,
               balance: balanceData.decoded.balance,
-              needApprove: allowanceData.decoded["0"] === "0"
+              allowance: BigNumber(allowanceData.decoded["0"])
             };
           }
         })
       );
     },
-    select: (data: { symbol: string; address: string; balance: string; needApprove: boolean }[]) => {
+    select: (data: { symbol: string; address: string; balance: string; allowance?: BigNumber }[]) => {
       return data.reduce(
         (a, c) => {
           const value = BigNumber(c.balance);
@@ -51,8 +50,8 @@ export default function useTokenBalanceList() {
           a[c.symbol] = {
             rawBalance: value,
             displayBalance: value.div(10 ** decimals).toFormat(6),
-            needApprove: c.needApprove,
-            address: c.address
+            address: c.address,
+            allowance: c.allowance
           };
           return a;
         },
@@ -61,8 +60,8 @@ export default function useTokenBalanceList() {
           {
             rawBalance: BigNumber;
             displayBalance: string;
-            needApprove: boolean;
             address: string;
+            allowance?: BigNumber;
           }
         >
       );
