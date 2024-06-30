@@ -33,7 +33,7 @@ export default function Overview() {
   const { data: tokenPrice } = useTokenPrice();
   const { data: overviewData } = useOverviewData();
 
-  console.log("!!!overview: !!!", overviewData);
+  console.log(overviewData);
 
   const _data = useMemo(() => {
     if (!tokenPrice || !allPairList) return null;
@@ -136,109 +136,109 @@ export default function Overview() {
         </Table>
       </section>
 
-      <section className={css.section}>
-        <h2 className={css.section__heading}>Transactions</h2>
-        <Tabs>
-          <TabList className={css.tabList} aria-label="Transactions Tabs">
-            <Tab className={css.tabButton} id="Swaps">
-              Swaps
-            </Tab>
-            <Tab className={css.tabButton} id="Liquidity">
-              Liquidity
-            </Tab>
-          </TabList>
-          <TabPanel id="Swaps">
-            <Table>
-              <thead>
-                <tr>
-                  <th>Actions</th>
-                  <th>Account</th>
-                  <th>Token Amount</th>
-                  <th></th>
-                  <th>Token Amount</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Swap</td>
-                  <td>
-                    <a href="" className={css.link}>
-                      0xabcd...1234
-                    </a>
-                  </td>
-                  <td>
-                    <div className={css.tokens}>
-                      <div className={css.token}></div>
-                    </div>
-                    0
-                  </td>
-                  <td>
-                    <IconArrow2 className={css.iconArrow} />
-                  </td>
-                  <td>
-                    <div className={css.tokens}>
-                      <div className={css.token}></div>
-                    </div>
-                    0
-                  </td>
-                  <td>
-                    10 mins ago
-                    <a href="">
-                      <IconExternal className={css.iconExternal} />
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </TabPanel>
-          <TabPanel id="Liquidity">
-            <Table>
-              <thead>
-                <tr>
-                  <th>Actions</th>
-                  <th>Account</th>
-                  <th>Token Amount</th>
-                  <th></th>
-                  <th>Token Amount</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Add</td>
-                  <td>
-                    <a href="" className={css.link}>
-                      0xabcd...1234
-                    </a>
-                  </td>
-                  <td>
-                    <div className={css.tokens}>
-                      <div className={css.token}></div>
-                    </div>
-                    0
-                  </td>
-                  <td>
-                    <IconPlus className={css.iconPlus} />
-                  </td>
-                  <td>
-                    <div className={css.tokens}>
-                      <div className={css.token}></div>
-                    </div>
-                    0
-                  </td>
-                  <td>
-                    10 mins ago
-                    <a href="">
-                      <IconExternal className={css.iconExternal} />
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </TabPanel>
-        </Tabs>
-      </section>
+      {/* <section className={css.section}>
+      <h2 className={css.section__heading}>Transactions</h2>
+      <Tabs>
+      <TabList className={css.tabList} aria-label="Transactions Tabs">
+      <Tab className={css.tabButton} id="Swaps">
+      Swaps
+      </Tab>
+      <Tab className={css.tabButton} id="Liquidity">
+      Liquidity
+      </Tab>
+      </TabList>
+      <TabPanel id="Swaps">
+      <Table>
+      <thead>
+      <tr>
+      <th>Actions</th>
+      <th>Account</th>
+      <th>Token Amount</th>
+      <th></th>
+      <th>Token Amount</th>
+      <th>Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Swap</td>
+      <td>
+      <a href="" className={css.link}>
+      0xabcd...1234
+      </a>
+      </td>
+      <td>
+      <div className={css.tokens}>
+      <div className={css.token}></div>
+      </div>
+      0
+      </td>
+      <td>
+      <IconArrow2 className={css.iconArrow} />
+      </td>
+      <td>
+      <div className={css.tokens}>
+      <div className={css.token}></div>
+      </div>
+      0
+      </td>
+      <td>
+      10 mins ago
+      <a href="">
+      <IconExternal className={css.iconExternal} />
+      </a>
+      </td>
+      </tr>
+      </tbody>
+      </Table>
+      </TabPanel>
+      <TabPanel id="Liquidity">
+      <Table>
+      <thead>
+      <tr>
+      <th>Actions</th>
+      <th>Account</th>
+      <th>Token Amount</th>
+      <th></th>
+      <th>Token Amount</th>
+      <th>Time</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Add</td>
+      <td>
+      <a href="" className={css.link}>
+      0xabcd...1234
+      </a>
+      </td>
+      <td>
+      <div className={css.tokens}>
+      <div className={css.token}></div>
+      </div>
+      0
+      </td>
+      <td>
+      <IconPlus className={css.iconPlus} />
+      </td>
+      <td>
+      <div className={css.tokens}>
+      <div className={css.token}></div>
+      </div>
+      0
+      </td>
+      <td>
+      10 mins ago
+      <a href="">
+      <IconExternal className={css.iconExternal} />
+      </a>
+      </td>
+      </tr>
+      </tbody>
+      </Table>
+      </TabPanel>
+      </Tabs>
+      </section> */}
     </div>
   );
 }
