@@ -336,10 +336,6 @@ function SwapPanel() {
     return BigNumber(fromTokenAmount).isGreaterThan(tokenBalanceMap?.[fromToken.symbol!].displayBalance!);
   }, [fromTokenAmount, fromToken, tokenBalanceMap]);
 
-  const _toTokenError = useMemo(() => {
-    return BigNumber(toTokenAmount).isGreaterThan(tokenBalanceMap?.[toToken.symbol!].displayBalance!);
-  }, [toTokenAmount, toToken, tokenBalanceMap]);
-
   const handleSwapTokens = () => {
     const _fromToken = fromToken;
     setFromToken(toToken);
@@ -490,7 +486,6 @@ function SwapPanel() {
           onTokenChange={setToToken}
           tokenList={tokenList}
           className={css.card__swapToPane}
-          error={_toTokenError}
         />
 
         <DataEntry
@@ -560,7 +555,6 @@ function SwapPanel() {
               fromTokenAmount === "0" ||
               toTokenAmount === "0" ||
               _fromTokenError ||
-              _toTokenError ||
               _insufficient_liquidity ||
               _priceImpact.isDangerous
             }
