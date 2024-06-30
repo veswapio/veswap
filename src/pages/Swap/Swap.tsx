@@ -772,7 +772,10 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           account,
           Math.ceil(Date.now() / 1000) + 60 * 20
         );
-        clauses = [{ ...clause }];
+
+        const approveMethod = connex.thor.account(token1.address).method(find(ABI_ERC20, { name: "approve" }));
+        approveClause = approveMethod.asClause(ROUTER_ADDRESS, token1AmountWei);
+        clauses = [{ ...approveClause }, { ...clause }];
       } else {
         const tokenAddress = token0.address;
         const amountTokenDesired = token0AmountWei;
