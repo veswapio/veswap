@@ -262,6 +262,10 @@ function SwapPanel() {
   const [isExactIn, setIsExactIn] = useState(true);
   const [deadline, _setDeadline] = useState<number>(DEFAULT_DEADLINE_FROM_NOW);
 
+  const tokenList = useMemo(() => {
+    return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
+  }, [fromToken.symbol, toToken.symbol]);
+
   const _fromReserve = useMemo(() => {
     if (!pairData) return BigNumber(0);
     const value = pairData.token0.symbol === fromToken.symbol ? pairData.reserve0 : pairData.reserve1;
@@ -306,73 +310,9 @@ function SwapPanel() {
     return "Swap";
   }, [_priceImpact, _insufficient_liquidity]);
 
-  const tokenList = useMemo(() => {
-    return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
-  }, [fromToken.symbol, toToken.symbol]);
-
-  const handleCustomSlippageWarnModalDisplay = () => {
-    if (!isSlippageWarnShown) {
-      setShowSlippageWarn(true);
-      setIsSlippageWarnShown(true);
-    }
-  };
-
-  const handleFromTokenChange = (value: string) => {
-    if (!_fromReserve || !_toReserve) return;
-
-    const amountOut = BigNumber(value).div(_price);
-    setFromTokenAmount(value);
-    setToTokenAmount(amountOut.isNaN() ? "0" : fixedBigNumber(amountOut));
-    setIsExactIn(true);
-  };
-
-  const handleToTokenChange = (value: string) => {
-    if (!_fromReserve || !_toReserve) return;
-
-    const amountIn = BigNumber(value).times(_price);
-    setToTokenAmount(value);
-    setFromTokenAmount(amountIn.isNaN() ? "0" : fixedBigNumber(amountIn));
-    setIsExactIn(false);
-  };
-
   const _fromTokenError = useMemo(() => {
     return BigNumber(fromTokenAmount).isGreaterThan(tokenBalanceMap?.[fromToken.symbol!].displayBalance!);
   }, [fromTokenAmount, fromToken, tokenBalanceMap]);
-
-  const handleSwapTokens = () => {
-    const _fromToken = fromToken;
-    setFromToken(toToken);
-    setToToken(_fromToken);
-
-    const amountOut = BigNumber(fromTokenAmount).times(_price);
-    setToTokenAmount(amountOut.isNaN() ? "0" : fixedBigNumber(amountOut));
-    setIsExactIn(true);
-  };
-
-  // const swapTokensForExactETH = () => {
-  //   const clause = connex.thor
-  //     .account(ROUTER_ADDRESS)
-  //     .method(find(IUniswapV2Router.abi, { name: "swapTokensForExactETH" }))
-  //     .asClause(
-  //       bigNumberToWei(toTokenAmount, toToken.decimals),
-  //       bigNumberToWei(BigNumber(fromTokenAmount).times(1 + +slippage), fromToken.decimals),
-  //       [fromToken.address, toToken.address],
-  //       account,
-  //       Math.ceil(Date.now() / 1000) + DEFAULT_DEADLINE_FROM_NOW
-  //     );
-
-  //   connex.vendor
-  //     .sign("tx", [{ ...clause }])
-  //     .comment("swapTokensForExactETH")
-  //     .request()
-  //     .then((tx: any) => {
-  //       console.log("result: ", tx);
-  //     })
-  //     .catch((err: any) => {
-  //       console.log("ERROR");
-  //       console.log(err);
-  //     });
-  // };
 
   const {
     bestTrade,
@@ -381,6 +321,16 @@ function SwapPanel() {
     tokens: _tokensDerived,
     error: _error
   } = useDerivedSwapInfo(isExactIn ? Field.INPUT : Field.OUTPUT, fromTokenAmount, fromToken.address, toToken.address);
+
+  const _amountIn = useMemo(() => {
+    if (!bestTrade || isExactIn) return fromTokenAmount;
+    return bestTrade.inputAmount.toSignificant(6);
+  }, [bestTrade, isExactIn, fromTokenAmount]);
+
+  const _amountOut = useMemo(() => {
+    if (!bestTrade || !isExactIn) return toTokenAmount;
+    return bestTrade.outputAmount.toSignificant(6);
+  }, [bestTrade, isExactIn, toTokenAmount]);
 
   const allowedSlippage = useMemo(
     () => (!!customSlippage ? +customSlippage * 100 : +slippage * 100),
@@ -393,6 +343,39 @@ function SwapPanel() {
   const [swapFee, _setSwapFee] = useState(basisPointsToPercent(100));
   // @ts-ignore
   const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(bestTrade!, swapFee);
+
+  const handleCustomSlippageWarnModalDisplay = () => {
+    if (!isSlippageWarnShown) {
+      setShowSlippageWarn(true);
+      setIsSlippageWarnShown(true);
+    }
+  };
+
+  const handleFromTokenChange = (value: string) => {
+    if (!_fromReserve || !_toReserve) return;
+    setFromTokenAmount(value);
+    setIsExactIn(true);
+  };
+
+  const handleToTokenChange = (value: string) => {
+    if (!_fromReserve || !_toReserve) return;
+    setToTokenAmount(value);
+    setIsExactIn(false);
+  };
+
+  const handleSwapTokens = () => {
+    const _fromToken = fromToken;
+    setFromToken(toToken);
+    setToToken(_fromToken);
+
+    if (isExactIn) {
+      setToTokenAmount(fromTokenAmount);
+    } else {
+      setFromTokenAmount(toTokenAmount);
+    }
+
+    setIsExactIn(!isExactIn);
+  };
 
   function onSwap() {
     setTransactionStatus({
@@ -472,7 +455,7 @@ function SwapPanel() {
         <TokenInput
           label="From"
           token={fromToken}
-          amount={fromTokenAmount}
+          amount={_amountIn}
           onAmountChange={handleFromTokenChange}
           onTokenChange={(token: sdk.Token) => {
             // TODO: remove later
@@ -491,7 +474,7 @@ function SwapPanel() {
         <TokenInput
           label="To"
           token={toToken}
-          amount={toTokenAmount}
+          amount={_amountOut}
           onAmountChange={handleToTokenChange}
           onTokenChange={(token: sdk.Token) => {
             // TODO: remove later
@@ -547,6 +530,7 @@ function SwapPanel() {
           {formatBigNumber(_price)} {fromToken.symbol} per {toToken.symbol}
         </DataEntry>
         <DataEntry title="Route">
+          {/*bestTrade?.route.path.map(i => i.symbol).join(" > ")*/}
           {fromToken.symbol} &gt; {toToken.symbol}
         </DataEntry>
         <DataEntry
