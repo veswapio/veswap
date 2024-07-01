@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useQuery } from "@tanstack/react-query";
+import BigNumber from "bignumber.js";
 
 dayjs.extend(relativeTime);
 
@@ -49,6 +50,51 @@ export function useSwapRecords() {
           toToken: i.pair.token1
         };
       });
+    }
+  });
+}
+
+export function useOverviewData() {
+  return useQuery({
+    queryKey: ["overview-data"],
+    refetchInterval: 1000 * 60 * 10,
+    queryFn: () => {
+      return Promise.all([
+        fetch("https://34.92.107.27:8000/subgraphs/name/swap/swap", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            query: `{
+	pairs {
+    token0 {
+      symbol
+    }
+    volumeToken0,
+    token1 {
+      symbol
+    }
+    volumeToken1
+  }
+}`
+          })
+        }).then((res: any) => res.json())
+      ]);
+    },
+    select: (data: any) => {
+      return {
+        totalVolume: data[0].data.pairs
+          .filter((i: any) => i.token0.symbol !== "B3TR" && i.token1.symbol !== "B3TR")
+          .map((i: any) => {
+            return {
+              token0: i.token0.symbol,
+              volume0: BigNumber(i.volumeToken0),
+              token1: i.token1.symbol,
+              volume1: BigNumber(i.volumeToken1)
+            };
+          })
+      };
     }
   });
 }

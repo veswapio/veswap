@@ -11,8 +11,9 @@ export default function useTokenPrice() {
         })
         .then((data: any) => {
           return {
-            vet: data.vechain.usd,
-            vtho: data["vethor-token"].usd
+            VET: data.vechain.usd,
+            VVET: data.vechain.usd,
+            VTHO: data["vethor-token"].usd
           };
         });
     }

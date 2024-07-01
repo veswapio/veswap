@@ -5,7 +5,8 @@ import BigNumber from "bignumber.js";
 import Table from "~/components/Table";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
-import { useSwapRecords } from "~/hooks/useOverviewData";
+import { useSwapRecords, useOverviewData } from "~/hooks/useOverviewData";
+import { fixedBigNumber } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
 import css from "./Overview.module.scss";
@@ -26,6 +27,23 @@ export default function Overview() {
   const { data: allPairList } = useAllPairList();
   const { data: tokenPrice } = useTokenPrice();
   const { data: swapRecords } = useSwapRecords();
+  const { data: overviewData } = useOverviewData();
+
+  const _totalVolume = useMemo(() => {
+    if (!tokenPrice || !overviewData) return null;
+    return fixedBigNumber(
+      overviewData.totalVolume.reduce((a: BigNumber, c: any) => {
+        console.log(
+          c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]).toString(),
+          c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]).toString()
+        );
+        return a
+          .plus(c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]))
+          .plus(c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]));
+      }, BigNumber(0)),
+      2
+    );
+  }, [overviewData, tokenPrice]);
 
   const _data = useMemo(() => {
     if (!tokenPrice || !allPairList) return null;
@@ -34,8 +52,8 @@ export default function Overview() {
       const token0 = tokens.find((token) => token.address.toLowerCase() === pair.token0Address.toLowerCase())!;
       const token1 = tokens.find((token) => token.address.toLowerCase() === pair.token1Address.toLowerCase())!;
 
-      const token0Price = tokenPrice[token0.symbol!.toLowerCase() as "vet" | "vtho"];
-      const token1Price = tokenPrice[token1.symbol!.toLowerCase() as "vet" | "vtho"];
+      const token0Price = tokenPrice[token0.symbol as "VET" | "VTHO"];
+      const token1Price = tokenPrice[token1.symbol as "VET" | "VTHO"];
 
       const token0Amount = new BigNumber(pair.reserve0).div(10 ** token0.decimals).times(token0Price);
       const token1Amount = new BigNumber(pair.reserve1).div(10 ** token1.decimals).times(token1Price);
@@ -72,13 +90,13 @@ export default function Overview() {
           </div>
           <div className={css.overviewCard}>
             <div className={css.overviewCard__title}>Volume ({getCurrentDateFormatted()})</div>
-            <div className={css.overviewCard__value}>0</div>
+            <div className={css.overviewCard__value}>${_totalVolume}</div>
           </div>
         </div>
         <div className={css.overviewStatus}>
           <div className={css.status}>
             <div className={css.status__title}>Traders:</div>
-            <div className={css.status__value}>0</div>
+            <div className={css.status__value}>-</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>LPs:</div>
@@ -86,7 +104,7 @@ export default function Overview() {
           </div>
           <div className={css.status}>
             <div className={css.status__title}>Volume Today:</div>
-            <div className={css.status__value}>0</div>
+            <div className={css.status__value}>-</div>
           </div>
         </div>
       </section>
@@ -120,8 +138,8 @@ export default function Overview() {
                   {i.token0.symbol} / {i.token1.symbol}
                 </td>
                 <td>${i.displayTVL}</td>
-                <td>0</td>
-                <td>0</td>
+                <td>-</td>
+                <td>-</td>
               </tr>
             ))}
           </tbody>
