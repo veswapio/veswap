@@ -23,6 +23,7 @@
     "big.js": "^6.2.1",
     "bignumber.js": "^9.1.2",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.11",
     "decimal.js-light": "^2.5.1",
     "jotai": "^2.8.3",
     "jsbi": "^4.3.0",

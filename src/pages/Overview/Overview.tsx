@@ -1,18 +1,18 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
+// import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
 import BigNumber from "bignumber.js";
 import Table from "~/components/Table";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
-import useOverviewData from "~/hooks/useOverviewData";
+import { useSwapRecords } from "~/hooks/useOverviewData";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
 import css from "./Overview.module.scss";
 
 import IconArrow2 from "~/assets/arrow2.svg?react";
-import IconPlus from "~/assets/plus.svg?react";
-import IconExternal from "~/assets/external.svg?react";
+// import IconPlus from "~/assets/plus.svg?react";
+// import IconExternal from "~/assets/external.svg?react";
 
 function getCurrentDateFormatted() {
   const date = new Date();
@@ -25,9 +25,7 @@ function getCurrentDateFormatted() {
 export default function Overview() {
   const { data: allPairList } = useAllPairList();
   const { data: tokenPrice } = useTokenPrice();
-  const { data: overviewData } = useOverviewData();
-
-  console.log(overviewData);
+  const { data: swapRecords } = useSwapRecords();
 
   const _data = useMemo(() => {
     if (!tokenPrice || !allPairList) return null;
@@ -130,109 +128,146 @@ export default function Overview() {
         </Table>
       </section>
 
-      {/* <section className={css.section}>
-      <h2 className={css.section__heading}>Transactions</h2>
-      <Tabs>
-      <TabList className={css.tabList} aria-label="Transactions Tabs">
-      <Tab className={css.tabButton} id="Swaps">
-      Swaps
-      </Tab>
-      <Tab className={css.tabButton} id="Liquidity">
-      Liquidity
-      </Tab>
-      </TabList>
-      <TabPanel id="Swaps">
-      <Table>
-      <thead>
-      <tr>
-      <th>Actions</th>
-      <th>Account</th>
-      <th>Token Amount</th>
-      <th></th>
-      <th>Token Amount</th>
-      <th>Time</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-      <td>Swap</td>
-      <td>
-      <a href="" className={css.link}>
-      0xabcd...1234
-      </a>
-      </td>
-      <td>
-      <div className={css.tokens}>
-      <div className={css.token}></div>
-      </div>
-      0
-      </td>
-      <td>
-      <IconArrow2 className={css.iconArrow} />
-      </td>
-      <td>
-      <div className={css.tokens}>
-      <div className={css.token}></div>
-      </div>
-      0
-      </td>
-      <td>
-      10 mins ago
-      <a href="">
-      <IconExternal className={css.iconExternal} />
-      </a>
-      </td>
-      </tr>
-      </tbody>
-      </Table>
-      </TabPanel>
-      <TabPanel id="Liquidity">
-      <Table>
-      <thead>
-      <tr>
-      <th>Actions</th>
-      <th>Account</th>
-      <th>Token Amount</th>
-      <th></th>
-      <th>Token Amount</th>
-      <th>Time</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-      <td>Add</td>
-      <td>
-      <a href="" className={css.link}>
-      0xabcd...1234
-      </a>
-      </td>
-      <td>
-      <div className={css.tokens}>
-      <div className={css.token}></div>
-      </div>
-      0
-      </td>
-      <td>
-      <IconPlus className={css.iconPlus} />
-      </td>
-      <td>
-      <div className={css.tokens}>
-      <div className={css.token}></div>
-      </div>
-      0
-      </td>
-      <td>
-      10 mins ago
-      <a href="">
-      <IconExternal className={css.iconExternal} />
-      </a>
-      </td>
-      </tr>
-      </tbody>
-      </Table>
-      </TabPanel>
-      </Tabs>
-      </section> */}
+      <section className={css.section}>
+        <h2 className={css.section__heading}>Transactions</h2>
+        <Table>
+          <thead>
+            <tr>
+              <th>Actions</th>
+              <th>Account</th>
+              <th>Token Amount</th>
+              <th></th>
+              <th>Token Amount</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {swapRecords?.map((record: any) => (
+              <tr key={record.id}>
+                <td>Swap</td>
+                <td>
+                  <a href="" className={css.link}>
+                    {record.account}
+                  </a>
+                </td>
+                <td>
+                  <div className={css.tokens}>
+                    <div className={css.token}>{TOKEN_ICONS[record.fromToken.symbol]}</div>
+                  </div>
+                  {record.amountIn}
+                </td>
+                <td>
+                  <IconArrow2 className={css.iconArrow} />
+                </td>
+                <td>
+                  <div className={css.tokens}>
+                    <div className={css.token}>{TOKEN_ICONS[record.toToken.symbol]}</div>
+                  </div>
+                  {record.amountOut}
+                </td>
+                <td>{record.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        {/*<Tabs>
+        <TabList className={css.tabList} aria-label="Transactions Tabs">
+        <Tab className={css.tabButton} id="Swaps">
+        Swaps
+            </Tab>
+            <Tab className={css.tabButton} id="Liquidity">
+            Liquidity
+            </Tab>
+            </TabList>
+            <TabPanel id="Swaps">
+            <Table>
+            <thead>
+            <tr>
+            <th>Actions</th>
+            <th>Account</th>
+            <th>Token Amount</th>
+            <th></th>
+            <th>Token Amount</th>
+            <th>Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            {swapRecords?.map((record: any) => (
+            <tr key={record.id}>
+            <td>Swap</td>
+            <td>
+            <a href="" className={css.link}>
+            {record.account}
+            </a>
+            </td>
+            <td>
+            <div className={css.tokens}>
+            <div className={css.token}>{TOKEN_ICONS[record.fromToken.symbol]}</div>
+            </div>
+            {record.amountIn}
+            </td>
+            <td>
+            <IconArrow2 className={css.iconArrow} />
+            </td>
+            <td>
+            <div className={css.tokens}>
+            <div className={css.token}>{TOKEN_ICONS[record.toToken.symbol]}</div>
+            </div>
+            {record.amountOut}
+            </td>
+            <td>{record.date}</td>
+            </tr>
+            ))}
+              </tbody>
+            </Table>
+          </TabPanel>
+          <TabPanel id="Liquidity">
+            <Table>
+              <thead>
+                <tr>
+                  <th>Actions</th>
+                  <th>Account</th>
+                  <th>Token Amount</th>
+                  <th></th>
+                  <th>Token Amount</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Add</td>
+                  <td>
+                    <a href="" className={css.link}>
+                      0xabcd...1234
+                     </a>
+                   </td>
+                   <td>
+                     <div className={css.tokens}>
+                       <div className={css.token}></div>
+                     </div>
+                     0
+                   </td>
+                   <td>
+                     <IconPlus className={css.iconPlus} />
+                   </td>
+                   <td>
+                     <div className={css.tokens}>
+                       <div className={css.token}></div>
+                     </div>
+                     0
+                   </td>
+                   <td>
+                     10 mins ago
+                     <a href="">
+          <IconExternal className={css.iconExternal} />
+          </a>
+          </td>
+          </tr>
+          </tbody>
+          </Table>
+          </TabPanel>
+    </Tabs>*/}
+      </section>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import IconB3TR from "~/assets/tokens/b3tr.svg?react";
 
 const TOKEN_ICONS: { [key: string]: any } = {
   VET: <IconVET />,
+  VVET: <IconVET />,
   VTHO: <IconVTHO />,
   B3TR: <IconB3TR />
 };
