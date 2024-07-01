@@ -596,8 +596,18 @@ function PoolListPane({
   setActivePairIndex: (idx: number) => void;
 }) {
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchResults, setSearchResults] = useState(pairList)
   const { open } = useWalletModal();
   const { account } = useWallet();
+
+  useEffect( () => {
+    let results = pairList.filter((pair: sdk.Pair) =>
+    	pair.token0?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+      pair.token1?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
+
+    setSearchResults(results);
+  }, [pairList, searchKeyword] );
 
   const handlePoolClick = (idx: number) => {
     if (!account) return;
@@ -619,7 +629,7 @@ function PoolListPane({
           onChange={setSearchKeyword}
         />
 
-        {pairList.map((pair: sdk.Pair, idx: number) => (
+        {searchResults.map((pair: sdk.Pair, idx: number) => (
           <div className={css.pool} onClick={() => handlePoolClick(idx)} key={pair.liquidityToken.address}>
             <div className={css.pool__tokens}>
               <div className={css.pool__token}>{pair.token0.symbol && TOKEN_ICONS[pair.token0.symbol]}</div>
