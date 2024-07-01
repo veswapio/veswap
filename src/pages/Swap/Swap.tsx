@@ -409,7 +409,7 @@ function SwapPanel() {
       isSuccessful: false,
       isFailed: false,
       transactionHash: null,
-      message: `Swap ${fromTokenAmount} ${fromToken.symbol} for ${toTokenAmount} ${toToken.symbol}`
+      message: `Swap ${_amountIn} ${fromToken.symbol} for ${_amountOut} ${toToken.symbol}`
     });
     swapCallback?.()
       .then((hash) => {
