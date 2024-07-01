@@ -605,10 +605,12 @@ function PoolListPane({
     setActivePairIndex(idx);
   };
 
+  const poolsLength = pairList?.length || 0
+
   return (
     <div className={css.poolPanel}>
       <Card className={css.card}>
-        <h2 className={css.card__poolHeading}>All Pool (1)</h2>
+        <h2 className={css.card__poolHeading}>All Pool ({poolsLength})</h2>
 
         <SearchBox
           className={css.card__search}
