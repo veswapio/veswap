@@ -53,9 +53,9 @@ export default function Home() {
         <NavLink to="/overview" className={css.nav__link}>
           Overview
         </NavLink>
-        <NavLink to="/pools" className={css.nav__link}>
+        {/* <NavLink to="/pools" className={css.nav__link}>
           Pools
-        </NavLink>
+        </NavLink> */}
         {/*<NavLink to="/search" className={css.nav__link}>
         Search
         </NavLink>*/}
