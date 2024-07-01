@@ -45,7 +45,7 @@ import Tooltip from "~/components/Tooltip";
 import SearchBox from "~/components/SearchBox";
 import css from "./Swap.module.scss";
 
-// import IconArrow from "~/assets/arrow.svg?react";
+import IconArrow from "~/assets/arrow.svg?react";
 import IconArrow2 from "~/assets/arrow2.svg?react";
 import IconSwap from "~/assets/swap.svg?react";
 import IconClose from "~/assets/close.svg?react";
@@ -133,7 +133,7 @@ function TokenModal({
       <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap || disabled}>
         <div className={css.tokenTrigger__icon}>{token.symbol && TOKEN_ICONS[token.symbol]}</div>
         <div className={css.tokenTrigger__name}>{token.symbol}</div>
-        {/* <IconArrow className={css.tokenTrigger__arrow} /> */}
+        {token.symbol !== 'VET' && (<IconArrow className={css.tokenTrigger__arrow} />)}
       </AriaButton>
       <Modal className={css.ModalOverlay}>
         <Dialog className={css.Modal}>
