@@ -220,6 +220,13 @@ function TokenInput({
     onAmountChange(value);
   };
 
+  const percentageList = [
+    { name: "25%", value: 0.25 },
+    { name: "50%", value: 0.5 },
+    { name: "75%", value: 0.75 },
+    { name: "Max", value: 1 }
+  ];
+
   return (
     <div className={clsx(css.tokenInput, className)}>
       <div className={css.tokenInput__top}>
@@ -242,18 +249,15 @@ function TokenInput({
           placeholder="0"
         />
         <div className={css.tokenInput__row}>
-          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(0.25)}>
-            25%
-          </button>
-          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(0.5)}>
-            50%
-          </button>
-          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(0.75)}>
-            75%
-          </button>
-          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(1)}>
-            Max
-          </button>
+          {percentageList.map((item) => (
+            <button
+              key={item.value}
+              className={css.tokenInput__button}
+              onClick={() => handlePercentageClick(item.value)}
+            >
+              {item.name}
+            </button>
+          ))}
           <div className={css.tokenInput__balance}>
             Balance: {tokenBalanceMap ? tokenBalanceMap[token.symbol!].displayBalance : "0"}
           </div>
@@ -337,7 +341,12 @@ function SwapPanel() {
     parsedAmounts: _parsedAmounts,
     tokens: _tokensDerived,
     error: _error
-  } = useDerivedSwapInfo(isExactIn ? Field.INPUT : Field.OUTPUT, fromTokenAmount, fromToken.address, toToken.address);
+  } = useDerivedSwapInfo(
+    isExactIn ? Field.INPUT : Field.OUTPUT,
+    isExactIn ? fromTokenAmount : toTokenAmount,
+    fromToken.address,
+    toToken.address
+  );
 
   const _amountIn = useMemo(() => {
     if (!bestTrade || isExactIn) return fromTokenAmount;
