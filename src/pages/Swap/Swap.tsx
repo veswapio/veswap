@@ -133,7 +133,7 @@ function TokenModal({
       <AriaButton className={css.tokenTrigger} isDisabled={!tokenBalanceMap || disabled}>
         <div className={css.tokenTrigger__icon}>{token.symbol && TOKEN_ICONS[token.symbol]}</div>
         <div className={css.tokenTrigger__name}>{token.symbol}</div>
-        {token.symbol !== 'VET' && (<IconArrow className={css.tokenTrigger__arrow} />)}
+        {token.symbol !== "VET" && <IconArrow className={css.tokenTrigger__arrow} />}
       </AriaButton>
       <Modal className={css.ModalOverlay}>
         <Dialog className={css.Modal}>
@@ -299,11 +299,8 @@ function SwapPanel() {
   }, [pairData, toToken]);
 
   const _insufficient_liquidity = useMemo(() => {
-    return (
-      BigNumber(fromTokenAmount).isGreaterThan(fixedBigNumber(_fromReserve.div(10 ** fromToken.decimals))) ||
-      BigNumber(toTokenAmount).isGreaterThan(fixedBigNumber(_toReserve.div(10 ** toToken.decimals)))
-    );
-  }, [_fromReserve, fromTokenAmount, fromToken, _toReserve, toTokenAmount, toToken]);
+    return BigNumber(toTokenAmount).isGreaterThan(fixedBigNumber(_toReserve.div(10 ** toToken.decimals)));
+  }, [_toReserve, toTokenAmount, toToken]);
 
   const _price = useMemo(() => {
     if (!_fromReserve || !_toReserve) return BigNumber("0");
@@ -571,10 +568,8 @@ function SwapPanel() {
           <Button
             onPress={onSwap}
             disabled={
-              !fromTokenAmount ||
-              !toTokenAmount ||
-              fromTokenAmount === "0" ||
-              toTokenAmount === "0" ||
+              (isExactIn && (!fromTokenAmount || fromTokenAmount === "0")) ||
+              (!isExactIn && (!toTokenAmount || toTokenAmount === "0")) ||
               _fromTokenError ||
               _insufficient_liquidity ||
               _priceImpact.isDangerous
