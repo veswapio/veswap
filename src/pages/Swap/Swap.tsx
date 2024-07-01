@@ -214,6 +214,12 @@ function TokenInput({
     }
   };
 
+  const handlePercentageClick = (percentage: number) => {
+    if (!tokenBalanceMap) return;
+    const value = fixedBigNumber(tokenBalanceMap[token.symbol!].rawBalance.times(percentage).div(10 ** token.decimals));
+    onAmountChange(value);
+  };
+
   return (
     <div className={clsx(css.tokenInput, className)}>
       <div className={css.tokenInput__top}>
@@ -235,8 +241,22 @@ function TokenInput({
           onFocus={() => amount === "0" && onAmountChange("")}
           placeholder="0"
         />
-        <div className={css.tokenInput__balance}>
-          Balance: {tokenBalanceMap ? tokenBalanceMap[token.symbol!].displayBalance : "0"}
+        <div className={css.tokenInput__row}>
+          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(0.25)}>
+            25%
+          </button>
+          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(0.5)}>
+            50%
+          </button>
+          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(0.75)}>
+            75%
+          </button>
+          <button className={css.tokenInput__button} onClick={() => handlePercentageClick(1)}>
+            Max
+          </button>
+          <div className={css.tokenInput__balance}>
+            Balance: {tokenBalanceMap ? tokenBalanceMap[token.symbol!].displayBalance : "0"}
+          </div>
         </div>
       </TextField>
     </div>
@@ -580,18 +600,19 @@ function PoolListPane({
   setActivePairIndex: (idx: number) => void;
 }) {
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [searchResults, setSearchResults] = useState(pairList)
+  const [searchResults, setSearchResults] = useState(pairList);
   const { open } = useWalletModal();
   const { account } = useWallet();
 
-  useEffect( () => {
-    let results = pairList.filter((pair: sdk.Pair) =>
-    	pair.token0?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-      pair.token1?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase())
+  useEffect(() => {
+    let results = pairList.filter(
+      (pair: sdk.Pair) =>
+        pair.token0?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        pair.token1?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase())
     );
 
     setSearchResults(results);
-  }, [pairList, searchKeyword] );
+  }, [pairList, searchKeyword]);
 
   const handlePoolClick = (idx: number) => {
     if (!account) return;
@@ -599,7 +620,7 @@ function PoolListPane({
     setActivePairIndex(idx);
   };
 
-  const poolsLength = pairList?.length || 0
+  const poolsLength = pairList?.length || 0;
 
   return (
     <div className={css.poolPanel}>

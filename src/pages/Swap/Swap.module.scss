@@ -293,10 +293,29 @@
     }
   }
 
+  &__row {
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  &__button {
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 4px;
+    background: rgba(#fff, 0.1);
+    cursor: pointer;
+    margin-right: rhythm(0.5);
+    padding-left: rhythm(0.5);
+    padding-right: rhythm(0.5);
+    line-height: 20px;
+  }
+
   &__balance {
+    margin-left: auto;
     text-align: right;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 20px;
     font-weight: 500;
     color: rgba(#fff, 0.8);
   }
