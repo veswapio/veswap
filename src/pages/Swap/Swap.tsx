@@ -125,7 +125,11 @@ function TokenModal({
 
   const _tokenList = useMemo(() => {
     if (!searchKeyword) return tokenList;
-    return tokenList.filter((i: any) => i.symbol.toLowerCase().includes(searchKeyword.toLowerCase()));
+    return tokenList.filter(
+      (i: any) =>
+        i.symbol.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        i.address.toLowerCase().includes(searchKeyword.toLowerCase())
+    );
   }, [tokenList, searchKeyword]);
 
   return (
@@ -152,7 +156,7 @@ function TokenModal({
               </h2>
               <SearchBox
                 className={css.Modal__search}
-                placeholder="Search Token"
+                placeholder="Search Token Name or Address"
                 value={searchKeyword}
                 onChange={setSearchKeyword}
               />
@@ -604,20 +608,18 @@ function PoolListPane({
   setActivePairIndex: (idx: number) => void;
 }) {
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [searchResults, setSearchResults] = useState(pairList);
   const { open } = useWalletModal();
   const { account } = useWallet();
 
-  useEffect(() => {
-    let results = pairList.filter(
+  const _pairList = useMemo(() => {
+    if (!searchKeyword) return pairList;
+    return pairList.filter(
       (pair: sdk.Pair) =>
         pair.token0?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
         pair.token1?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
         pair.token0?.address?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
         pair.token1?.address?.toLowerCase().includes(searchKeyword.toLowerCase())
     );
-
-    setSearchResults(results);
   }, [pairList, searchKeyword]);
 
   const handlePoolClick = (idx: number) => {
@@ -640,7 +642,7 @@ function PoolListPane({
           onChange={setSearchKeyword}
         />
 
-        {searchResults.map((pair: sdk.Pair, idx: number) => (
+        {_pairList.map((pair: sdk.Pair, idx: number) => (
           <div className={css.pool} onClick={() => handlePoolClick(idx)} key={pair.liquidityToken.address}>
             <div className={css.pool__tokens}>
               <div className={css.pool__token}>{pair.token0.symbol && TOKEN_ICONS[pair.token0.symbol]}</div>
