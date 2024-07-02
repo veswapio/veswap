@@ -112,9 +112,9 @@ export default function Overview() {
       <section className={css.section}>
         <h2 className={css.section__heading}>
           Top Pools
-          <Link className={css.viewMore} to="/pools">
-            View More
-          </Link>
+          {/* <Link className={css.viewMore} to="/pools">
+          View More
+          </Link> */}
         </h2>
         <Table>
           <thead>
