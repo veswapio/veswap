@@ -612,7 +612,9 @@ function PoolListPane({
     let results = pairList.filter(
       (pair: sdk.Pair) =>
         pair.token0?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-        pair.token1?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase())
+        pair.token1?.symbol?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        pair.token0?.address?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        pair.token1?.address?.toLowerCase().includes(searchKeyword.toLowerCase())
     );
 
     setSearchResults(results);
