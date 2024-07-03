@@ -33,10 +33,10 @@ export default function Overview() {
     if (!tokenPrice || !overviewData) return null;
     return fixedBigNumber(
       overviewData.totalVolume.reduce((a: BigNumber, c: any) => {
-        console.log(
-          c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]).toString(),
-          c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]).toString()
-        );
+        // console.log(
+        //   c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]).toString(),
+        //   c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]).toString()
+        // );
         return a
           .plus(c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]))
           .plus(c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]));
