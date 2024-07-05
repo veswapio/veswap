@@ -2,8 +2,11 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useQuery } from "@tanstack/react-query";
 import BigNumber from "bignumber.js";
+import { BACKEND_URL } from "~/constants/link";
 
 dayjs.extend(relativeTime);
+
+const SWAP_PATH = '/subgraphs/name/swap/swap'
 
 export function useSwapRecords() {
   return useQuery({
@@ -11,7 +14,7 @@ export function useSwapRecords() {
     refetchInterval: 1000 * 60 * 3,
     queryFn: () => {
       return Promise.all([
-        fetch("https://34.92.107.27:8000/subgraphs/name/swap/swap", {
+        fetch(`${BACKEND_URL}${SWAP_PATH}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -60,7 +63,7 @@ export function useOverviewData() {
     refetchInterval: 1000 * 60 * 10,
     queryFn: () => {
       return Promise.all([
-        fetch("https://34.92.107.27:8000/subgraphs/name/swap/swap", {
+        fetch(`${BACKEND_URL}${SWAP_PATH}`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
