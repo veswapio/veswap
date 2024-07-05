@@ -1,1 +1,1 @@
-export const BACKEND_URL = 'http://subgraph.veswap.org'
+export const BACKEND_URL = 'https://subgraph.veswap.org'

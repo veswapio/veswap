@@ -152,7 +152,7 @@ export default function Overview() {
           <thead>
             <tr>
               <th>Actions</th>
-              <th>Account</th>
+              {/* <th>Account</th> */}
               <th>Token Amount</th>
               <th></th>
               <th>Token Amount</th>
@@ -163,11 +163,11 @@ export default function Overview() {
             {swapRecords?.map((record: any) => (
               <tr key={record.id}>
                 <td>Swap</td>
-                <td>
+                {/* <td>
                   <a href="" className={css.link}>
                     {record.account}
                   </a>
-                </td>
+                </td> */}
                 <td>
                   <div className={css.tokens}>
                     <div className={css.token}>{TOKEN_ICONS[record.fromToken.symbol]}</div>
