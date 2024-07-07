@@ -49,8 +49,8 @@ export function useSwapRecords() {
           date: dayjs(i.timestamp * 1000).fromNow(),
           amountIn: i.amount0In === "0" ? i.amount1In : i.amount0In,
           amountOut: i.amount0Out === "0" ? i.amount1Out : i.amount0Out,
-          fromToken: i.pair.token0,
-          toToken: i.pair.token1
+          fromToken:  i.amount0In !== "0" ? i.pair.token0 : i.pair.token1,
+          toToken: i.amount0Out !== "0" ? i.pair.token0 : i.pair.token1,
         };
       });
     }
