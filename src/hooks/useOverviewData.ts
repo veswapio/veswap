@@ -21,23 +21,25 @@ export function useSwapRecords() {
           },
           body: JSON.stringify({
             query: `{
-  swaps(first: 50, orderBy: timestamp, orderDirection: desc) {
-    id
-    timestamp
-    amount0In
-    amount1In
-    amount0Out
-    amount1Out
-    pair {
-      token0 {
-        symbol
-      }
-      token1 {
-        symbol
-      }
-    }
-  }
-}`
+              swaps(first: 50, orderBy: timestamp, orderDirection: desc) {
+                id
+                timestamp
+                amount0In
+                amount1In
+                amount0Out
+                amount1Out
+                pair {
+                  token0 {
+                    symbol
+                  }
+                  token1 {
+                    symbol
+                  }
+                }
+                from
+                to
+              }
+            }`
           })
         }).then((res: any) => res.json())
       ]);
@@ -51,6 +53,8 @@ export function useSwapRecords() {
           amountOut: i.amount0Out === "0" ? i.amount1Out : i.amount0Out,
           fromToken:  i.amount0In !== "0" ? i.pair.token0 : i.pair.token1,
           toToken: i.amount0Out !== "0" ? i.pair.token0 : i.pair.token1,
+          from: i.from,
+          to: i.to,
         };
       });
     }
@@ -70,17 +74,17 @@ export function useOverviewData() {
           },
           body: JSON.stringify({
             query: `{
-	pairs {
-    token0 {
-      symbol
-    }
-    volumeToken0,
-    token1 {
-      symbol
-    }
-    volumeToken1
-  }
-}`
+              pairs {
+                token0 {
+                  symbol
+                }
+                volumeToken0,
+                token1 {
+                  symbol
+                }
+                volumeToken1
+              }
+            }`
           })
         }).then((res: any) => res.json())
       ]);

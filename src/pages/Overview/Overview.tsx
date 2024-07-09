@@ -6,7 +6,7 @@ import Table from "~/components/Table";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
 import { useSwapRecords, useOverviewData } from "~/hooks/useOverviewData";
-import { fixedBigNumber } from "~/utils/helpers";
+import { fixedBigNumber, truncateAddress } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
 import css from "./Overview.module.scss";
@@ -152,7 +152,7 @@ export default function Overview() {
           <thead>
             <tr>
               <th>Actions</th>
-              {/* <th>Account</th> */}
+              <th>Account</th>
               <th>Token Amount</th>
               <th></th>
               <th>Token Amount</th>
@@ -163,11 +163,11 @@ export default function Overview() {
             {swapRecords?.map((record: any) => (
               <tr key={record.id}>
                 <td>Swap</td>
-                {/* <td>
-                  <a href="" className={css.link}>
-                    {record.account}
-                  </a>
-                </td> */}
+                <td>
+                  {/* <a href="" className={css.link}> */}
+                  {truncateAddress(record.from)}
+                  {/* </a> */}
+                </td>
                 <td>
                   <div className={css.tokens}>
                     <div className={css.token}>{TOKEN_ICONS[record.fromToken.symbol]}</div>
