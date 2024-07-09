@@ -23,7 +23,7 @@ export default function useTokenPrice() {
         )
       ]);
     },
-    select: (data: any) => {
+    select: (data: any): Record<string, number> => {
       const b3trPrice = BigNumber(data[0].decoded.reserve0)
         .div(data[0].decoded.reserve1)
         .times(data[1].vechain.usd)

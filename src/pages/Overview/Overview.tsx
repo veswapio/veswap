@@ -32,15 +32,13 @@ export default function Overview() {
     if (!tokenPrice || !overviewData) return null;
     const totalVolume = fixedBigNumber(
       overviewData.totalVolume.reduce((a: BigNumber, c: any) => {
-        return a
-          .plus(c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]))
-          .plus(c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]));
+        return a.plus(c.volume0.times(tokenPrice[c.token0])).plus(c.volume1.times(tokenPrice[c.token1]));
       }, BigNumber(0)),
       2
     );
     const todayVolume = fixedBigNumber(
       Object.entries(overviewData.todayVolume).reduce(
-        (a: BigNumber, c: any) => a.plus(BigNumber(tokenPrice[c[0] as "VET"]).times(c[1])),
+        (a: BigNumber, c: any) => a.plus(BigNumber(tokenPrice[c[0]]).times(c[1])),
         BigNumber(0)
       ),
       2
@@ -59,8 +57,8 @@ export default function Overview() {
       const token0 = tokens.find((token) => token.address.toLowerCase() === pair.token0Address.toLowerCase())!;
       const token1 = tokens.find((token) => token.address.toLowerCase() === pair.token1Address.toLowerCase())!;
 
-      const token0Price = tokenPrice[token0.symbol as "VET" | "VTHO"];
-      const token1Price = tokenPrice[token1.symbol as "VET" | "VTHO"];
+      const token0Price = tokenPrice[token0.symbol!];
+      const token1Price = tokenPrice[token1.symbol!];
 
       const token0Amount = new BigNumber(pair.reserve0).div(10 ** token0.decimals).times(token0Price);
       const token1Amount = new BigNumber(pair.reserve1).div(10 ** token1.decimals).times(token1Price);
