@@ -5,7 +5,7 @@ import BigNumber from "bignumber.js";
 import Table from "~/components/Table";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
-import { useSwapRecords, useOverviewData } from "~/hooks/useOverviewData";
+import { useOverviewData } from "~/hooks/useOverviewData";
 import { fixedBigNumber, truncateAddress } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
@@ -26,23 +26,30 @@ function getCurrentDateFormatted() {
 export default function Overview() {
   const { data: allPairList } = useAllPairList();
   const { data: tokenPrice } = useTokenPrice();
-  const { data: swapRecords } = useSwapRecords();
   const { data: overviewData } = useOverviewData();
 
-  const _totalVolume = useMemo(() => {
+  const _overview = useMemo(() => {
     if (!tokenPrice || !overviewData) return null;
-    return fixedBigNumber(
+    const totalVolume = fixedBigNumber(
       overviewData.totalVolume.reduce((a: BigNumber, c: any) => {
-        // console.log(
-        //   c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]).toString(),
-        //   c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]).toString()
-        // );
         return a
           .plus(c.volume0.times(tokenPrice[c.token0 as "VET" | "VTHO"]))
           .plus(c.volume1.times(tokenPrice[c.token1 as "VET" | "VTHO"]));
       }, BigNumber(0)),
       2
     );
+    const todayVolume = fixedBigNumber(
+      Object.entries(overviewData.todayVolume).reduce(
+        (a: BigNumber, c: any) => a.plus(BigNumber(tokenPrice[c[0] as "VET"]).times(c[1])),
+        BigNumber(0)
+      ),
+      2
+    );
+
+    return {
+      totalVolume,
+      todayVolume
+    };
   }, [overviewData, tokenPrice]);
 
   const _data = useMemo(() => {
@@ -86,11 +93,11 @@ export default function Overview() {
         <div className={css.overviewGroup}>
           <div className={css.overviewCard}>
             <div className={css.overviewCard__title}>TVL ({getCurrentDateFormatted()})</div>
-            <div className={css.overviewCard__value}>${_data?.totalTVL}</div>
+            <div className={css.overviewCard__value}>{_data ? `$${_data.totalTVL}` : "-"}</div>
           </div>
           <div className={css.overviewCard}>
             <div className={css.overviewCard__title}>Volume ({getCurrentDateFormatted()})</div>
-            <div className={css.overviewCard__value}>${_totalVolume}</div>
+            <div className={css.overviewCard__value}>{_overview ? `$${_overview.totalVolume}` : "-"}</div>
           </div>
         </div>
         <div className={css.overviewStatus}>
@@ -100,11 +107,11 @@ export default function Overview() {
           </div>
           <div className={css.status}>
             <div className={css.status__title}>LPs:</div>
-            <div className={css.status__value}>{_data?.totalLP}</div>
+            <div className={css.status__value}>{_data ? `$${_data.totalLP}` : "-"}</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>Volume Today:</div>
-            <div className={css.status__value}>-</div>
+            <div className={css.status__value}>{_overview ? `$${_overview.todayVolume}` : "-"}</div>
           </div>
         </div>
       </section>
@@ -160,7 +167,7 @@ export default function Overview() {
             </tr>
           </thead>
           <tbody>
-            {swapRecords?.map((record: any) => (
+            {overviewData?.swapList.map((record: any) => (
               <tr key={record.id}>
                 <td>Swap</td>
                 <td>
