@@ -22,8 +22,7 @@ export default function useAllPairList() {
             .fill(null)
             .map((_, i) => i);
           return Promise.all(
-            // only show the first (vtho / vet) pair for now
-            pairIndexList.splice(0, 1).map((i) =>
+            pairIndexList.map((i) =>
               connex.thor
                 .account(FACTORY_ADDRESS)
                 .method(find(IUniswapV2Factory.abi, { name: "allPairs" }))
@@ -63,8 +62,7 @@ export default function useAllPairList() {
         reserve1: i[0].decoded["reserve1"],
         lpTotalSupply: i[1].decoded["0"],
         token0Address: i[2].decoded["0"],
-        token1Address: i[3].decoded["0"],
-        pairAddress: i[4]
+        token1Address: i[3].decoded["0"]
       }));
     }
   });
