@@ -12,6 +12,7 @@ import LandingPage from "./pages/LandingPage";
 import Swap from "./pages/Swap";
 import Overview from "./pages/Overview";
 import Pools from "./pages/Pools";
+import Leaderboard from "./pages/Leaderboard";
 
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
 import type { WalletConnectOptions } from "@vechain/dapp-kit-react";
@@ -46,7 +47,11 @@ const router = createBrowserRouter([
       {
         path: "/pools",
         element: <Pools />
-      }
+      },
+      {
+        path: "/leaderboard",
+        element: <Leaderboard />
+      },
     ]
   },
   {
