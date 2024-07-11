@@ -62,6 +62,9 @@ export function useOverviewData() {
                 }
               }
             }
+            swapAddresses: swaps(first: 1000, orderBy: timestamp, orderDirection: desc) {
+              from
+            }
           }`
         })
       }).then((res: any) => res.json());
@@ -95,7 +98,8 @@ export function useOverviewData() {
             a[c.pair.token1.symbol] = BigNumber(a[c.pair.token0.symbol] || 0).plus(c.amount1In);
           }
           return a;
-        }, {})
+        }, {}),
+        traders: [...new Set(data.data.swapAddresses.map((item: any) => item.from))].length
       };
     }
   });

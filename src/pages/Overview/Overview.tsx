@@ -44,9 +44,12 @@ export default function Overview() {
       2
     );
 
+    const { traders } = overviewData;
+
     return {
       totalVolume,
-      todayVolume
+      todayVolume,
+      traders
     };
   }, [overviewData, tokenPrice]);
 
@@ -101,7 +104,7 @@ export default function Overview() {
         <div className={css.overviewStatus}>
           <div className={css.status}>
             <div className={css.status__title}>Traders:</div>
-            <div className={css.status__value}>-</div>
+            <div className={css.status__value}>{_overview ? `${_overview.traders}` : "-"}</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>LPs:</div>
