@@ -108,7 +108,7 @@ export default function Overview() {
           </div>
           <div className={css.status}>
             <div className={css.status__title}>LPs:</div>
-            <div className={css.status__value}>{_data ? `$${_data.totalLP}` : "-"}</div>
+            <div className={css.status__value}>{_data ? `${_data.totalLP}` : "-"}</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>Volume Today:</div>
