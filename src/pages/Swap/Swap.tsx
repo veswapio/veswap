@@ -653,7 +653,7 @@ function PoolListPane({
                 {pair.token0.symbol} / {pair.token1.symbol}
               </div>
               <div className={css.pool__value}>
-                {formatBigNumber(pair.reserve0.toExact())} / {formatBigNumber(pair.reserve1.toExact())}
+                {formatBigNumber(pair.reserve0.toExact(), 2)} / {formatBigNumber(pair.reserve1.toExact(), 2)}
               </div>
             </div>
           </div>
