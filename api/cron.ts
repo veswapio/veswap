@@ -16,7 +16,6 @@ export default async function handler(_request: VercelRequest, response: VercelR
     //   })
     // });
     // const data = await response.json();
-
     // TODO: Generate entries based on GraphQL queried data
     const entries = [
       ["0x1234567890123456789012345678901234567890", 50, 0.12345678, 0.87654321],
@@ -25,12 +24,13 @@ export default async function handler(_request: VercelRequest, response: VercelR
       .map((entry) => `('${entry[0]}', ${entry[1]}, ${entry[2]}, ${entry[3]})`)
       .join(", ");
 
-    await sql`INSERT INTO leaderboard (address, points, lp_value, swap_value)
-VALUES ${entries}
-ON CONFLICT (address) DO UPDATE
-  SET points = leaderboard.points + EXCLUDED.points,
-      lp_value = leaderboard.lp_value + EXCLUDED.lp_value,
-      swap_value = leaderboard.swap_value + EXCLUDED.swap_value;`;
+    await sql.query(`
+      INSERT INTO leaderboard (address, points, lp_value, swap_value)
+      VALUES ${entries}
+      ON CONFLICT (address) DO UPDATE
+      SET points = leaderboard.points + EXCLUDED.points,
+          lp_value = leaderboard.lp_value + EXCLUDED.lp_value,
+          swap_value = leaderboard.swap_value + EXCLUDED.swap_value;`);
 
     response.status(200).json({ success: true });
   } catch (error) {
