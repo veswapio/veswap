@@ -278,8 +278,8 @@ function SwapPanel() {
   const connex = useConnex();
 
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);
-  const [fromToken, setFromToken] = useState(tokens[1]);
-  const [toToken, setToToken] = useState(tokens[0]);
+  const [fromToken, setFromToken] = useState(tokens[0]);
+  const [toToken, setToToken] = useState(tokens[1]);
   const [fromTokenAmount, setFromTokenAmount] = useState("0");
   const [toTokenAmount, setToTokenAmount] = useState("0");
   const [slippage, setSlippage] = useState("3");
