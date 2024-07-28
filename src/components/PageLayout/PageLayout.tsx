@@ -53,6 +53,9 @@ export default function Home() {
         <NavLink to="/overview" className={css.nav__link}>
           Overview
         </NavLink>
+        <NavLink to="/leaderboard" className={css.nav__link}>
+          Leaderboard
+        </NavLink>
         {/* <NavLink to="/pools" className={css.nav__link}>
           Pools
         </NavLink> */}

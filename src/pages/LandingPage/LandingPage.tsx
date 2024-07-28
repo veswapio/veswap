@@ -26,6 +26,9 @@ export default function LandingPage() {
           <Link to="/overview" className={css.nav__link}>
             Charts
           </Link>
+          <Link to="/leaderboard" className={css.nav__link}>
+            Leaderboard
+          </Link>
           <Link to="https://medium.com/@VeSwaporg" className={css.nav__link}>
             Blogs
           </Link>
