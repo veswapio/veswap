@@ -11,7 +11,7 @@ export default function Leaderboard() {
           <p className={css.status__title}>
             1. For every 1,000 VET of equivalent LP volume provided for 12 hours, 1 point will be counted.
           </p>
-          <p className={css.status__title}>2. For every 100,000 VET of trading volume, 1 point will be counted.</p>
+          <p className={css.status__title}>2. For every 50,000 VET of trading volume, 1 point will be counted.</p>
         </div>
       </section>
 
