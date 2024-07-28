@@ -1,5 +1,6 @@
 import Table from "~/components/Table";
 import css from "./Leaderboard.module.scss";
+import { sortedPeriod1Data } from "~/data/period1";
 
 export default function Leaderboard() {
   return (
@@ -14,10 +15,10 @@ export default function Leaderboard() {
           <p className={css.status__title}>2. For every 50,000 VET of trading volume, 1 point will be counted.</p>
         </div>
       </section>
-
       {/* TODO: Show top 10 & Show All */}
       <section className={css.section}>
         <h2 className={css.section__heading}>Top Contributors</h2>
+        <p className={css.section__subheading}>* Points are updated every week</p>
         <Table>
           <thead>
             <tr>
@@ -26,13 +27,15 @@ export default function Leaderboard() {
               <th className={css.point}>Points Earned</th>
             </tr>
           </thead>
-          <tbody>
-            <tr key="-">
-              <td>1</td>
-              <td>-</td>
-              <td className={css.point}>-</td>
-            </tr>
-          </tbody>
+          {sortedPeriod1Data.map(item => (
+            <tbody key={item[0]}>
+              <tr key="-">
+                <td>-</td>
+                <td>{item[0]}</td>
+                <td className={css.point}>{Math.floor(item[1] / 50000)}</td>
+              </tr>
+            </tbody>
+          ))}
         </Table>
       </section>
     </div>

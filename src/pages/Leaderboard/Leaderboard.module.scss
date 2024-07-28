@@ -16,6 +16,17 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  &__subheading {
+    font-size: 12px;
+    color: #fffee0;
+    line-height: 16px;
+    font-weight: 400;
+    margin-bottom: rhythm(3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .viewMore {
