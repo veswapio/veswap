@@ -78,23 +78,21 @@ async function fetchGroupData(txidList) {
 
       if (addLiquidityClause) {
         addLiquidityAmount = BigNumber(addLiquidityClause.value);
-        // } else if (removeLiquidityClause) {
-        //   const removeReceipt = await fetch(`https://mainnet.vechain.org/transactions/${c.id}/receipt`).then((res) =>
-        //     res.json()
-        //   );
-
-        //   // TODO: not the correct way to get remove liqudity amount
-        //   try {
-        //     amount = BigNumber(removeReceipt.outputs[1].transfers[0].amount).times(-1);
-        //   } catch (error) {
-        //     console.log("--- Unable to get remove liquidity amount ---");
-        //     console.error(error);
       } else if (swapVetForTokensClause) {
         swapAmount = BigNumber(swapVetForTokensClause.value);
       } else if (swapTokensForVetClause) {
-        console.log("Swap tokens for vet ---- ", BigNumber(swapTokensForVetClause.value).toString());
+        try {
+          const receipt = await fetch(`https://mainnet.vechain.org/transactions/${c.id}/receipt`).then((res) =>
+            res.json()
+          );
+          const output = receipt.outputs.find((j) => j.transfers.length > 0);
+          swapAmount = BigNumber(output.transfers[0].amount);
+        } catch (error) {
+          console.log("--- Unable to get swap amount ---");
+          console.log(c.id);
+        }
       } else if (swapTokensForTokensClause) {
-        console.log("Swap vet for tokens ---- ", BigNumber(swapTokensForTokensClause.value).toString());
+        // todo
       } else {
         continue;
       }
@@ -133,6 +131,8 @@ for (let i = 0; i <= groupIndex; i++) {
   if (!group) continue;
   const groupResult = await fetchGroupData(group);
   result.push(groupResult);
+  console.log("Processed group", i, "of", groupIndex, "groups.");
 }
 
-console.log(result);
+fs.writeFileSync("./result.json", JSON.stringify(result, null, 2));
+console.log("Done!");
