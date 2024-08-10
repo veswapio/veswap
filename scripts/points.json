@@ -1,5 +1,4 @@
-// Base on csv file
-export const accumulatedData = [
+[
   [
     "0xd852aaa45c00a03bbb5a8c5dec9c28db14c9b647",
     3260

@@ -3,12 +3,12 @@ import { parse } from "csv-parse/sync";
 import BigNumber from "bignumber.js";
 
 // https://explore.vechain.org/accounts/0x3946ad2ca036489f5a90dbb4c72fb31aff98ef11/transfer
-// from June 05 00:00 to July 22 24:00
-const vetVthoTransactions = fs.readFileSync("./csv/vet-vtho-0.csv", "utf-8");
+// from July 30 00:00 to Aug 08 24:00
+const vetVthoTransactions = fs.readFileSync("./csv/vet-vtho-1.csv", "utf-8");
 
 // https://explore.vechain.org/accounts/0xc6de3b8e4a9bf4a6756e60f5cb6705cb7d3c1649/transfer
-// from June 05 00:00 to July 22 24:00
-const vetB3trTransactions = fs.readFileSync("./csv/vet-b3tr-0.csv", "utf-8");
+// from July 30 00:00 to Aug 08 24:00
+const vetB3trTransactions = fs.readFileSync("./csv/vet-b3tr-1.csv", "utf-8");
 
 const START_TIMESTAMP = new Date("2024-06-05 00:00:00").getTime();
 const PERIOD = 12 * 60 * 60 * 1000;
@@ -17,6 +17,12 @@ const ADD_LIQUIDITY_METHOD = "0xe8e33700";
 const ADD_LIQUIDITY_ETH_METHOD = "0xf305d719";
 const REMOVE_LIQUIDITY_METHOD = "0xbaa2abde";
 const REMOVE_LIQUIDITY_ETH_METHOD = "0x02751cec";
+const SWAP_ETH_FOR_EXACT_TOKENS = "0xfb3bdb41";
+const SWAP_EXACT_ETH_FOR_TOKENS = "0x7ff36ab5";
+const SWAP_EXACT_TOKENS_FOR_ETH = "0x18cbafe5";
+const SWAP_EXACT_TOKENS_FOR_TOKENS = "0x38ed1739";
+const SWAP_TOKENS_FOR_EXACT_ETH = "0x4a25d94a";
+const SWAP_TOKENS_FOR_EXACT_TOKENS = "0x8803dbee";
 
 const result = [];
 const transactionGroups = {};
@@ -51,40 +57,64 @@ async function fetchGroupData(txidList) {
     );
 
     const liquidityMap = {};
+    const swapMap = {};
 
     for (const c of list) {
       const address = c.origin;
       const addLiquidityClause = c.clauses.find((j) => j.data.startsWith(ADD_LIQUIDITY_ETH_METHOD));
-      const removeLiquidityClause = c.clauses.find((j) => j.data.startsWith(REMOVE_LIQUIDITY_ETH_METHOD));
+      // const removeLiquidityClause = c.clauses.find((j) => j.data.startsWith(REMOVE_LIQUIDITY_ETH_METHOD));
+      const swapVetForTokensClause = c.clauses.find(
+        (j) => j.data.startsWith(SWAP_ETH_FOR_EXACT_TOKENS) || j.data.startsWith(SWAP_EXACT_ETH_FOR_TOKENS)
+      );
+      const swapTokensForVetClause = c.clauses.find(
+        (j) => j.data.startsWith(SWAP_EXACT_TOKENS_FOR_ETH) || j.data.startsWith(SWAP_TOKENS_FOR_EXACT_ETH)
+      );
+      const swapTokensForTokensClause = c.clauses.find(
+        (j) => j.data.startsWith(SWAP_TOKENS_FOR_EXACT_TOKENS) || j.data.startsWith(SWAP_EXACT_TOKENS_FOR_TOKENS)
+      );
 
-      let amount;
+      let addLiquidityAmount;
+      let swapAmount;
 
       if (addLiquidityClause) {
-        amount = BigNumber(addLiquidityClause.value);
-      } else if (removeLiquidityClause) {
-        const removeReceipt = await fetch(`https://mainnet.vechain.org/transactions/${c.id}/receipt`).then((res) =>
-          res.json()
-        );
-
-        // TODO: not the correct way to get remove liqudity amount
+        addLiquidityAmount = BigNumber(addLiquidityClause.value);
+      } else if (swapVetForTokensClause) {
+        swapAmount = BigNumber(swapVetForTokensClause.value);
+      } else if (swapTokensForVetClause) {
         try {
-          amount = BigNumber(removeReceipt.outputs[1].transfers[0].amount).times(-1);
+          const receipt = await fetch(`https://mainnet.vechain.org/transactions/${c.id}/receipt`).then((res) =>
+            res.json()
+          );
+          const output = receipt.outputs.find((j) => j.transfers.length > 0);
+          swapAmount = BigNumber(output.transfers[0].amount);
         } catch (error) {
-          console.log("--- Unable to get remove liquidity amount ---");
-          console.error(error);
+          console.log("--- Unable to get swap amount ---");
+          console.log(c.id);
         }
+      } else if (swapTokensForTokensClause) {
+        // todo
       } else {
         continue;
       }
 
-      if (liquidityMap[address]) {
-        liquidityMap[address] = BigNumber(liquidityMap[address]).plus(amount);
-      } else {
-        liquidityMap[address] = amount;
+      if (addLiquidityAmount) {
+        if (liquidityMap[address]) {
+          liquidityMap[address] = BigNumber(liquidityMap[address]).plus(addLiquidityAmount);
+        } else {
+          liquidityMap[address] = addLiquidityAmount;
+        }
+      }
+
+      if (swapAmount) {
+        if (swapMap[address]) {
+          swapMap[address] = BigNumber(swapMap[address]).plus(swapAmount);
+        } else {
+          swapMap[address] = swapAmount;
+        }
       }
     }
 
-    return liquidityMap;
+    return { liquidityMap, swapMap };
   } catch (error) {
     console.error("Error fetching group data:", error);
     throw error;
@@ -94,11 +124,15 @@ async function fetchGroupData(txidList) {
 parseTransactions(vetVthoTransactions);
 parseTransactions(vetB3trTransactions);
 
+// console.log(await fetchGroupData(transactionGroups[groupIndex]));
+
 for (let i = 0; i <= groupIndex; i++) {
   const group = transactionGroups[i];
   if (!group) continue;
   const groupResult = await fetchGroupData(group);
   result.push(groupResult);
+  console.log("Processed group", i, "of", groupIndex, "groups.");
 }
 
-console.log(result);
+fs.writeFileSync("./result-1.json", JSON.stringify(result, null, 2));
+console.log("Done!");
