@@ -125,33 +125,37 @@ export default function Overview() {
       <section className={css.section}>
         <h2 className={css.section__heading}>VeBetterDAO</h2>
 
-        <div className={css.vote}>
-          {voterData?.hasVoted ? (
-            <>
-              <p className={css.vote__text}>You have voted on VeBetterDAO.</p>
-              <a
-                className={css.vote__button}
-                href={`https://governance.vebetterdao.org/rounds/${calcRound()}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Cast more votes
-              </a>
-            </>
-          ) : (
-            <>
-              <p className={css.vote__text}>You haven&apos;t voted on VeBetterDAO yet.</p>
-              <a
-                className={css.vote__button}
-                href={`https://governance.vebetterdao.org/rounds/${calcRound()}`}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Go to vote
-              </a>
-            </>
-          )}
-        </div>
+        {voterData?.hasVoted ? (
+          <div className={css.vote}>
+            <p className={css.vote__text}>You have voted on VeBetterDAO.</p>
+            <button className={css.vote__button}>
+              <span>Cast more votes</span>
+            </button>
+            {/* <a
+            className={css.vote__button}
+            href={`https://governance.vebetterdao.org/rounds/${calcRound()}`}
+            target="_blank"
+            rel="noreferrer"
+            >
+             Cast more votes
+             </a> */}
+          </div>
+        ) : (
+          <div className={css.vote}>
+            <p className={css.vote__text}>You haven&apos;t voted on VeBetterDAO yet.</p>
+            <button className={css.vote__button}>
+              <span>Go to vote</span>
+            </button>
+            {/* <a
+            className={css.vote__button}
+            href={`https://governance.vebetterdao.org/rounds/${calcRound()}`}
+            target="_blank"
+            rel="noreferrer"
+            >
+             Go to vote
+             </a> */}
+          </div>
+        )}
       </section>
 
       <section className={css.section}>

@@ -226,5 +226,17 @@
     padding-left: rhythm(2);
     padding-right: rhythm(2);
     white-space: nowrap;
+
+    &:hover {
+      cursor: default;
+
+      > span {
+        display: none;
+      }
+
+      &::after {
+        content: "Coming Soon...";
+      }
+    }
   }
 }
