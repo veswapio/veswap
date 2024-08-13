@@ -199,3 +199,44 @@
     margin-left: rhythm(1.5);
   }
 }
+
+.vote {
+  display: flex;
+  align-items: center;
+  padding: rhythm(2) rhythm(3);
+  border-radius: 12px;
+  background: rgba(#fff, 0.1);
+
+  &__text {
+    font-weight: 500;
+    padding-right: rhythm(3);
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  &__button {
+    margin-left: auto;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+    font-weight: 600;
+    border-radius: 8px;
+    height: rhythm(5);
+    line-height: rhythm(5);
+    font-size: 14px;
+    padding-left: rhythm(2);
+    padding-right: rhythm(2);
+    white-space: nowrap;
+
+    &:hover {
+      cursor: default;
+
+      > span {
+        display: none;
+      }
+
+      &::after {
+        content: "Coming Soon...";
+      }
+    }
+  }
+}
