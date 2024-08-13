@@ -2,13 +2,15 @@ import { useMemo } from "react";
 // import { Link } from "react-router-dom";
 // import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
 import BigNumber from "bignumber.js";
-import Table from "~/components/Table";
+import { useWallet } from "@vechain/dapp-kit-react";
 import useAllPairList from "~/hooks/useAllPairList";
 import useTokenPrice from "~/hooks/useTokenPrice";
+import useVoter, { calcRound } from "~/hooks/useVoter";
 import { useOverviewData } from "~/hooks/useOverviewData";
 import { fixedBigNumber, truncateAddress } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
+import Table from "~/components/Table";
 import css from "./Overview.module.scss";
 
 import IconArrow2 from "~/assets/arrow2.svg?react";
@@ -24,9 +26,12 @@ function getCurrentDateFormatted() {
 }
 
 export default function Overview() {
+  const { account } = useWallet();
+
   const { data: allPairList } = useAllPairList();
   const { data: tokenPrice } = useTokenPrice();
   const { data: overviewData } = useOverviewData();
+  const { data: voterData } = useVoter(account);
 
   const _overview = useMemo(() => {
     if (!tokenPrice || !overviewData) return null;
@@ -114,6 +119,38 @@ export default function Overview() {
             <div className={css.status__title}>Volume Today:</div>
             <div className={css.status__value}>{_overview ? `$${_overview.todayVolume}` : "-"}</div>
           </div>
+        </div>
+      </section>
+
+      <section className={css.section}>
+        <h2 className={css.section__heading}>VeBetterDAO</h2>
+
+        <div className={css.vote}>
+          {voterData?.hasVoted ? (
+            <>
+              <p className={css.vote__text}>You have voted on VeBetterDAO.</p>
+              <a
+                className={css.vote__button}
+                href={`https://governance.vebetterdao.org/rounds/${calcRound()}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Cast more votes
+              </a>
+            </>
+          ) : (
+            <>
+              <p className={css.vote__text}>You haven&apos;t voted on VeBetterDAO yet.</p>
+              <a
+                className={css.vote__button}
+                href={`https://governance.vebetterdao.org/rounds/${calcRound()}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Go to vote
+              </a>
+            </>
+          )}
         </div>
       </section>
 
