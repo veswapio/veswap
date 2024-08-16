@@ -41,7 +41,7 @@ import TOKEN_ICONS from "~/constants/tokenIcons";
 import Card from "~/components/Card";
 import Button from "~/components/Button";
 import DataEntry from "~/components/DataEntry";
-import Tooltip from "~/components/Tooltip";
+// import Tooltip from "~/components/Tooltip";
 import SearchBox from "~/components/SearchBox";
 import css from "./Swap.module.scss";
 
@@ -1137,15 +1137,21 @@ function ClaimPanel() {
   const { account } = useWallet();
 
   return (
-    <div className={css.claimPanel}>
-      <Card className={css.card}>
-        <h2 className={css.card__claimHeading}>
-          Claimable VTHO
-          <Tooltip content="Liquidity providers can safely claim VTHO rewards by providing VET asset." />
-        </h2>
-        <div className={css.card__claimValue}>0.00</div>
-      </Card>
-      {account ? <Button disabled>Claim</Button> : <Button onPress={open}>Connect Wallet</Button>}
+    <div className={css.claimGrid}>
+      <div className={css.claimPanel}>
+        <Card className={css.card}>
+          <h2 className={css.card__claimHeading}>Event 1 Heading</h2>
+          <div className={css.card__claimValue}>0.00</div>
+        </Card>
+        {account ? <Button disabled>Claim</Button> : <Button onPress={open}>Connect Wallet</Button>}
+      </div>
+      <div className={css.claimPanel}>
+        <Card className={css.card}>
+          <h2 className={css.card__claimHeading}>Event 2 Heading</h2>
+          <div className={css.card__claimValue}>0.00</div>
+        </Card>
+        {account ? <Button disabled>Claim</Button> : <Button onPress={open}>Connect Wallet</Button>}
+      </div>
     </div>
   );
 }
