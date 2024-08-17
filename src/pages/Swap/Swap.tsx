@@ -1136,6 +1136,15 @@ function ClaimPanel() {
   const { open } = useWalletModal();
   const { account } = useWallet();
 
+  useEffect(() => {
+    fetch("/api/reward-check", {
+      method: "POST",
+      body: JSON.stringify({ account })
+    }).then((result) => {
+      console.log("has reward?", result);
+    });
+  }, [account]);
+
   return (
     <div className={css.claimGrid}>
       <div className={css.claimPanel}>
