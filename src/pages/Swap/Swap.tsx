@@ -24,6 +24,7 @@ import {
 import { useWallet, useWalletModal, useConnex } from "@vechain/dapp-kit-react";
 import IUniswapV2Router from "~/abis/IUniswapV2Router02.json";
 import ABI_ERC20 from "~/abis/erc20.json";
+import ABI_MerkleDistributor from "~/abis/MerkleDistributor.json";
 // import ABI_FACTORY from "~/abis/factory.json";
 
 import sdk from "~/sdk";
@@ -1132,35 +1133,135 @@ function PoolPanel() {
   return <PoolListPane pairList={pairList!} setActivePane={setActivePane} setActivePairIndex={setActivePairIndex} />;
 }
 
+const round1Address = "0xd5DfE4d0810bB8bf18f12A63c029bD5873316D4F";
+const round2Address = "0x6A16f4376e09b4660a97d0dB0a69490C21b8Df27";
+
 function ClaimPanel() {
   const { open } = useWalletModal();
   const { account } = useWallet();
+  const connex = useConnex();
+  const [rewards, setRewards] = useState([]);
+  const [claimedRecord, setClaimedRecord] = useState([false, false]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [, setTransactionStatus] = useAtom(transactionStatusAtom);
 
   useEffect(() => {
-    fetch("/api/reward-check", {
-      method: "POST",
-      body: JSON.stringify({ account })
-    }).then((result) => {
-      console.log("has reward?", result);
+    async function fetchRewardData() {
+      setIsLoading(true);
+
+      try {
+        const { rewards } = await fetch("/api/reward-check", {
+          method: "POST",
+          body: JSON.stringify({ account })
+        }).then((res) => res.json());
+
+        const isRonud1Claimed =
+          rewards[0] &&
+          (await connex.thor
+            .account(round1Address)
+            .method(find(ABI_MerkleDistributor.abi, { name: "isClaimed" }))
+            .call(rewards[0].index));
+        const isRound2Claimed =
+          rewards[1] &&
+          (await connex.thor
+            .account(round2Address)
+            .method(find(ABI_MerkleDistributor.abi, { name: "isClaimed" }))
+            .call(rewards[1].index));
+
+        setClaimedRecord([isRonud1Claimed.decoded["0"], isRound2Claimed.decoded["0"]]);
+      } catch (error) {
+        console.log("fetch claimed data error:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    if (!!account && !!connex) {
+      fetchRewardData();
+    }
+  }, [account, connex, setRewards, setIsLoading, setClaimedRecord]);
+
+  const handleClaim = async (idx: number) => {
+    const reward: any = rewards[idx];
+    const distributor = idx === 0 ? round1Address : round2Address;
+    const method = connex.thor.account(distributor).method(find(ABI_MerkleDistributor.abi, { name: "claim" }));
+    const clause = method.asClause(
+      reward.index,
+      account,
+      BigNumber(reward.amount.replace(/^0x/, "")).toString(),
+      reward.proof
+    );
+
+    setTransactionStatus({
+      isPending: true,
+      isSuccessful: false,
+      isFailed: false,
+      transactionHash: null,
+      message: `Claim Reward`
     });
-  }, [account]);
+
+    connex.vendor
+      .sign("tx", clause)
+      .comment("Claim Reward")
+      .request()
+      .then((tx: any) => {
+        return poll(() => connex.thor.transaction(tx.txid).getReceipt());
+      })
+      .then((result: any) => {
+        const isSuccess = result.reverted === false;
+        setTransactionStatus({
+          isPending: false,
+          isSuccessful: isSuccess,
+          isFailed: !isSuccess,
+          transactionHash: result.meta.txID,
+          message: null
+        });
+        if (isSuccess) {
+          setClaimedRecord((prev) => {
+            const newRecord = [...prev];
+            newRecord[idx] = true;
+            return newRecord;
+          });
+        }
+      })
+      .catch((err: any) => {
+        console.log("ERROR");
+        console.log(err);
+        setTransactionStatus(undefined);
+      });
+  };
 
   return (
     <div className={css.claimGrid}>
-      <div className={css.claimPanel}>
-        <Card className={css.card}>
-          <h2 className={css.card__claimHeading}>Event 1 Heading</h2>
-          <div className={css.card__claimValue}>0.00</div>
-        </Card>
-        {account ? <Button disabled>Claim</Button> : <Button onPress={open}>Connect Wallet</Button>}
-      </div>
-      <div className={css.claimPanel}>
-        <Card className={css.card}>
-          <h2 className={css.card__claimHeading}>Event 2 Heading</h2>
-          <div className={css.card__claimValue}>0.00</div>
-        </Card>
-        {account ? <Button disabled>Claim</Button> : <Button onPress={open}>Connect Wallet</Button>}
-      </div>
+      {isLoading ? (
+        <div className={css.claimPanel}>
+          <Card className={css.card}>{account ? "Loading..." : "Please connect your wallet before proceeding."}</Card>
+        </div>
+      ) : rewards.length ? (
+        rewards.map((reward: any, idx: number) => (
+          <div className={css.claimPanel} key={`reward-${idx}`}>
+            <Card className={css.card}>
+              <h2 className={css.card__claimHeading}>Round #{idx + 1} Reward</h2>
+              <div className={css.card__claimValue}>
+                {BigNumber(reward.amount.repace(/^0x/, "")).div(1e18).toString()}
+              </div>
+            </Card>
+            {account ? (
+              claimedRecord[idx] ? (
+                <Button disabled>Already Claimed</Button>
+              ) : (
+                <Button onPress={() => handleClaim(idx)}>Claim</Button>
+              )
+            ) : (
+              <Button onPress={open}>Connect Wallet</Button>
+            )}
+          </div>
+        ))
+      ) : (
+        <div className={css.claimPanel}>
+          <Card className={css.card}>Sorry, you have no rewards at this time.</Card>
+        </div>
+      )}
     </div>
   );
 }
