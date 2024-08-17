@@ -1,5 +1,5 @@
-import round1Data from "../src/reward-data/round1-result.json";
-import round2Data from "../src/reward-data/round2-result.json";
+import round1Data from "../src/reward-data/round1-result.json" assert { type: "json" };
+import round2Data from "../src/reward-data/round2-result.json" assert { type: "json" };
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const round1List = Object.entries(round1Data.claims);
