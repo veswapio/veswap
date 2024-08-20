@@ -1133,6 +1133,7 @@ function PoolPanel() {
   return <PoolListPane pairList={pairList!} setActivePane={setActivePane} setActivePairIndex={setActivePairIndex} />;
 }
 
+const testAddress = "0xc4fc4454d54e9e0e0cb409560854114040d1cbb9";
 const round1Address = "0xd5DfE4d0810bB8bf18f12A63c029bD5873316D4F";
 const round2Address = "0x6A16f4376e09b4660a97d0dB0a69490C21b8Df27";
 
@@ -1141,7 +1142,7 @@ function ClaimPanel() {
   const { account } = useWallet();
   const connex = useConnex();
   const [rewards, setRewards] = useState([]);
-  const [claimedRecord, setClaimedRecord] = useState([false, false]);
+  const [claimedRecord, setClaimedRecord] = useState([false, false, false]);
   const [isLoading, setIsLoading] = useState(true);
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);
 
@@ -1155,20 +1156,27 @@ function ClaimPanel() {
           body: JSON.stringify({ account })
         }).then((res) => res.json());
 
-        const isRonud1Claimed =
+        const isTestClaimed =
           rewards[0] &&
+          (await connex.thor
+            .account(testAddress)
+            .method(find(ABI_MerkleDistributor.abi, { name: "isClaimed" }))
+            .call(rewards[0].index));
+        const isRonud1Claimed =
+          rewards[1] &&
           (await connex.thor
             .account(round1Address)
             .method(find(ABI_MerkleDistributor.abi, { name: "isClaimed" }))
-            .call(rewards[0].index));
+            .call(rewards[1].index));
         const isRound2Claimed =
-          rewards[1] &&
+          rewards[2] &&
           (await connex.thor
             .account(round2Address)
             .method(find(ABI_MerkleDistributor.abi, { name: "isClaimed" }))
-            .call(rewards[1].index));
+            .call(rewards[2].index));
 
-        setClaimedRecord([isRonud1Claimed.decoded["0"], isRound2Claimed.decoded["0"]]);
+        setRewards(rewards);
+        setClaimedRecord([isTestClaimed.decoded["0"], isRonud1Claimed.decoded["0"], isRound2Claimed.decoded["0"]]);
       } catch (error) {
         console.log("fetch claimed data error:", error);
       } finally {

@@ -1,0 +1,49 @@
+{
+    "merkleRoot": "0x816d61df7b623746f322a39d4529f1ee9615843ae37072246c85abcf98336930",
+    "tokenTotal": "0x05000000000000000000",
+    "claims": {
+        "0x284BA604C92aa55253fB9721DeA5574DCF07d129": {
+            "index": 0,
+            "amount": "0x01000000000000000000",
+            "proof": [
+                "0x4c88e690a2e51a26ad1450e8605e6f0beb036fc6f8cddbb61c2cc057f2105541",
+                "0x8f3fd90d7a547f38a7da18eddbcfbe4f496fa8f9333e846fb0436cb40ca35dcd",
+                "0xfbb9c9f656ea1e5acdd88c25ac2a0152252ffd1509a4f1a8bc54691cea037b59"
+            ]
+        },
+        "0x73630d29a1E0E6a9294e5EB6f19588e0b262A6Ba": {
+            "index": 1,
+            "amount": "0x01000000000000000000",
+            "proof": [
+                "0xaa240e2955cb8a05bac569c319410d3a916c1a30017620fa39ff3239d805078b",
+                "0xa549e381be2f47bcc494585faa1a622e73ac0875feedeaeca8ddad4b8172a06a",
+                "0xfbb9c9f656ea1e5acdd88c25ac2a0152252ffd1509a4f1a8bc54691cea037b59"
+            ]
+        },
+        "0x8d844e64a82Ef7E555CFAcA3D1B267EB0d7c042A": {
+            "index": 2,
+            "amount": "0x01000000000000000000",
+            "proof": [
+                "0x0d7769dd5cbe0dbc6e7b0d7deb2ad8ef5963843503a0f09bbeaff2914969709b",
+                "0x8f3fd90d7a547f38a7da18eddbcfbe4f496fa8f9333e846fb0436cb40ca35dcd",
+                "0xfbb9c9f656ea1e5acdd88c25ac2a0152252ffd1509a4f1a8bc54691cea037b59"
+            ]
+        },
+        "0x961271Aae9afE2898E02A33Bd80a13be8DE9BFE6": {
+            "index": 3,
+            "amount": "0x01000000000000000000",
+            "proof": [
+                "0x6547a1bcf504cf8290e32a5fbe699d6846c215b589d6db80e6866d87d9cb158e"
+            ]
+        },
+        "0xc931bF41bAD025650BfE2810a95BE39C5Dd615B5": {
+            "index": 4,
+            "amount": "0x01000000000000000000",
+            "proof": [
+                "0x8b94e36c4b52a960795a5ee0229a5f54ea36e1cd8fdc87c480da9db26813d76a",
+                "0xa549e381be2f47bcc494585faa1a622e73ac0875feedeaeca8ddad4b8172a06a",
+                "0xfbb9c9f656ea1e5acdd88c25ac2a0152252ffd1509a4f1a8bc54691cea037b59"
+            ]
+        }
+    }
+}
