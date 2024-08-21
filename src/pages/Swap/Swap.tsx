@@ -1138,9 +1138,9 @@ function PoolPanel() {
 }
 
 const claimAddresses = [
-  "0xc4fc4454d54e9e0e0cb409560854114040d1cbb9", // test
-  "0xd5DfE4d0810bB8bf18f12A63c029bD5873316D4F", // round1
-  "0x6A16f4376e09b4660a97d0dB0a69490C21b8Df27" // round2
+  "0x0fa367d0b916128a2e66a7744394a64e6af5f31b", // test
+  "0x53425ed53140c53b9fd7c024cc8b5bf8b6e09bf6", // round1
+  "0xF48B13252555eA5Ae5019ca24e0C30893Afb478C" // round2
 ];
 const claimHeadings = ["Test", "Launched the $B3TR/ $VET trading pair on VeSwap!", "2K followers"];
 
@@ -1247,15 +1247,13 @@ function ClaimPanel() {
           <Card className={css.card}>{account ? "Loading..." : "Please connect your wallet before proceeding."}</Card>
         </div>
       ) : Array.isArray(rewards) ? (
-        rewards.map((reward: any, idx: number) => {
+        rewards.slice(0, 2).map((reward: any, idx: number) => {
           if (!reward) return null;
           return (
             <div className={css.claimPanel} key={`reward-${idx}`}>
               <Card className={css.card}>
                 <h2 className={css.card__claimHeading}>{claimHeadings[idx]}</h2>
-                <div className={css.card__claimValue}>
-                  {BigNumber(reward.amount.replace(/^0x/, "")).div(1e18).toString()}
-                </div>
+                <div className={css.card__claimValue}>{BigNumber(reward.amount).div(1e18).toString()}</div>
               </Card>
               {account ? (
                 claimedRecord[idx] ? (
