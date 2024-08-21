@@ -1145,7 +1145,6 @@ const claimAddresses = [
 const claimHeadings = ["Test", "Launched the $B3TR/ $VET trading pair on VeSwap!", "2K followers"];
 
 function ClaimPanel() {
-  const { open } = useWalletModal();
   const { account } = useWallet();
   const connex = useConnex();
   const [claimedRecord, setClaimedRecord] = useState([false, false, false]);
@@ -1153,7 +1152,7 @@ function ClaimPanel() {
   const [, setTransactionStatus] = useAtom(transactionStatusAtom);
 
   const rewards = useMemo(() => {
-    if (!account) return undefined;
+    if (!account) return [];
     return [
       Object.entries(rewardTestData.claims).find(([key]) => key.toLowerCase() === account.toLowerCase())?.[1],
       Object.entries(rewardRonud1Data.claims).find(([key]) => key.toLowerCase() === account.toLowerCase())?.[1],
@@ -1240,38 +1239,48 @@ function ClaimPanel() {
       });
   };
 
+  if (!account) {
+    return (
+      <div className={css.claimPanel}>
+        <Card className={css.card}>Please connect your wallet before proceeding.</Card>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className={css.claimPanel}>
+        <Card className={css.card}>Loading...</Card>
+      </div>
+    );
+  }
+
+  if (!rewards.length || rewards.every((i) => !i)) {
+    return (
+      <div className={css.claimPanel}>
+        <Card className={css.card}>Sorry, you have no rewards at this time.</Card>
+      </div>
+    );
+  }
+
   return (
     <div className={css.claimGrid}>
-      {isLoading ? (
-        <div className={css.claimPanel}>
-          <Card className={css.card}>{account ? "Loading..." : "Please connect your wallet before proceeding."}</Card>
-        </div>
-      ) : Array.isArray(rewards) ? (
-        rewards.slice(0, 2).map((reward: any, idx: number) => {
-          if (!reward) return null;
-          return (
-            <div className={css.claimPanel} key={`reward-${idx}`}>
-              <Card className={css.card}>
-                <h2 className={css.card__claimHeading}>{claimHeadings[idx]}</h2>
-                <div className={css.card__claimValue}>{BigNumber(reward.amount).div(1e18).toString()}</div>
-              </Card>
-              {account ? (
-                claimedRecord[idx] ? (
-                  <Button disabled>Already Claimed</Button>
-                ) : (
-                  <Button onPress={() => handleClaim(idx)}>Claim</Button>
-                )
-              ) : (
-                <Button onPress={open}>Connect Wallet</Button>
-              )}
-            </div>
-          );
-        })
-      ) : (
-        <div className={css.claimPanel}>
-          <Card className={css.card}>Sorry, you have no rewards at this time.</Card>
-        </div>
-      )}
+      {rewards.slice(0, 2).map((reward: any, idx: number) => {
+        if (!reward) return null;
+        return (
+          <div className={css.claimPanel} key={`reward-${idx}`}>
+            <Card className={css.card}>
+              <h2 className={css.card__claimHeading}>{claimHeadings[idx]}</h2>
+              <div className={css.card__claimValue}>{BigNumber(reward.amount).div(1e18).toString()}</div>
+            </Card>
+            {claimedRecord[idx] ? (
+              <Button disabled>Already Claimed</Button>
+            ) : (
+              <Button onPress={() => handleClaim(idx)}>Claim</Button>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
