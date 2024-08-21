@@ -12,7 +12,13 @@
   margin: auto;
 }
 
+.claimGrid {
+  display: grid;
+  gap: rhythm(5);
+}
+
 .claimPanel {
+  width: 100%;
   max-width: 448px;
   margin: auto;
 }
@@ -79,13 +85,9 @@
   }
 
   &__claimHeading {
-    font-size: 16px;
-    line-height: 20px;
+    font-size: 18px;
+    line-height: 24px;
     font-weight: 500;
-    display: grid;
-    grid-template-columns: max-content auto;
-    gap: rhythm(1);
-    align-items: center;
   }
 
   &__claimValue {
@@ -93,7 +95,8 @@
     line-height: 48px;
     font-weight: 500;
     display: block;
-    padding-top: rhythm(3);
+    padding-top: rhythm(2);
+    color: rgba(#fff, 0.8);
   }
 
   &__swapToPane {
