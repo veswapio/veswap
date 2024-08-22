@@ -1265,7 +1265,7 @@ function ClaimPanel() {
 
   return (
     <div className={css.claimGrid}>
-      {rewards.slice(0, 2).map((reward: any, idx: number) => {
+      {rewards.map((reward: any, idx: number) => {
         if (!reward) return null;
         return (
           <div className={css.claimPanel} key={`reward-${idx}`}>
