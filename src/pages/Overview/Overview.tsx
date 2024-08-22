@@ -8,7 +8,7 @@ import useTokenPrice from "~/hooks/useTokenPrice";
 import useVoter from "~/hooks/useVoter";
 // import useVoter, { calcRound } from "~/hooks/useVoter";
 import { useOverviewData } from "~/hooks/useOverviewData";
-import { fixedBigNumber, truncateAddress } from "~/utils/helpers";
+import { formatBigNumber, fixedBigNumber, truncateAddress } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
 import Table from "~/components/Table";
@@ -222,7 +222,7 @@ export default function Overview() {
                   <div className={css.tokens}>
                     <div className={css.token}>{TOKEN_ICONS[record.fromToken.symbol]}</div>
                   </div>
-                  {record.amountIn}
+                  {formatBigNumber(record.amountIn, 4)}
                 </td>
                 <td>
                   <IconArrow2 className={css.iconArrow} />
@@ -231,7 +231,7 @@ export default function Overview() {
                   <div className={css.tokens}>
                     <div className={css.token}>{TOKEN_ICONS[record.toToken.symbol]}</div>
                   </div>
-                  {record.amountOut}
+                  {formatBigNumber(record.amountOut, 4)}
                 </td>
                 <td>{record.date}</td>
               </tr>
