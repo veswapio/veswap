@@ -1,6 +1,6 @@
 import Table from "~/components/Table";
 import css from "./Leaderboard.module.scss";
-import { accumulatedData } from "~/data/period1";
+import { accumulatedData } from "~/data/total-points";
 
 export default function Leaderboard() {
   return (
@@ -30,9 +30,9 @@ export default function Leaderboard() {
           {accumulatedData.map((item, index) => (
             <tbody key={item[0]}>
               <tr key="-">
-                <td>{index + 1}</td>
-                <td>{item[0]}</td>
-                <td className={css.point}>{(item[1])}</td>
+                <td className={css.mono}>{index + 1}</td>
+                <td className={css.mono}>{item[0]}</td>
+                <td className={css.point}>{item[1]}</td>
               </tr>
             </tbody>
           ))}
