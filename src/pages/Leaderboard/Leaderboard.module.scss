@@ -39,8 +39,17 @@
   }
 }
 
+.mono {
+  font-family: monospace;
+}
+
 .point {
+  font-family: monospace;
   text-align: right;
+
+  > .doubleIndicator {
+    margin-right: -6px;
+  }
 }
 
 .overviewGroup {
@@ -131,19 +140,18 @@
 .tabList {
   display: flex;
   align-items: center;
-  margin-bottom: rhythm(3);
+  margin-bottom: rhythm(2);
+  margin-top: rhythm(3);
 }
 
 .tabButton {
   font-weight: 500;
   line-height: 22px;
   font-size: 16px;
-  padding: 10px 16px;
-  border-radius: 37px;
+  padding: 10px 22px;
+  border-radius: 36px;
   outline: none;
   cursor: pointer;
-  margin-left: 8px;
-  margin-right: 8px;
 
   &[aria-selected="true"] {
     background: rgba(#fff, 0.1);
@@ -213,4 +221,16 @@
     height: 8px;
     margin-left: rhythm(1.5);
   }
+}
+
+.doubleIndicator {
+  background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+  border-radius: 4px;
+  margin-left: rhythm(1);
+  font-size: 13px;
+  line-height: 20px;
+  height: 20px;
+  display: inline-block;
+  padding-left: 6px;
+  padding-right: 6px;
 }
