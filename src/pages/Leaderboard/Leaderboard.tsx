@@ -66,7 +66,8 @@ export default function Leaderboard() {
                     <td className={css.mono}>{index + 1}</td>
                     <td className={css.mono}>
                       {item[0]}
-                      {!!item[2] && <span className={css.doubleIndicator}>VOTED x2</span>}
+                      {!!item[2] && <span className={css.doubleIndicator}>VOTED</span>}
+                      {!!item[2] && <span className={css.doubleIndicator}>x2</span>}
                     </td>
                     <td className={css.point}>{item[1]}</td>
                   </tr>
