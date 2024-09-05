@@ -1,0 +1,372 @@
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi-Regular.woff2") format("woff2"),
+    url("/fonts/Satoshi-Regular.woff") format("woff"),
+    url("/fonts/Satoshi-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi-Medium.woff2") format("woff2"),
+    url("/fonts/Satoshi-Medium.woff") format("woff"),
+    url("/fonts/Satoshi-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi-Bold.woff2") format("woff2"),
+    url("/fonts/Satoshi-Bold.woff") format("woff"),
+    url("/fonts/Satoshi-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src:
+    url("/fonts/Satoshi-Black.woff2") format("woff2"),
+    url("/fonts/Satoshi-Black.woff") format("woff"),
+    url("/fonts/Satoshi-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  outline: none;
+}
+
+:root {
+  line-height: 1;
+  font-size: 16px;
+  text-size-adjust: 100%;
+  font-family: "Satoshi", sans-serif;
+  color: #fff;
+  background: #0c0c0c;
+}
+
+body {
+  margin: 0;
+  background: url("/bg.svg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+dl,
+dd {
+  margin: 0;
+}
+
+button,
+input {
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  background: transparent;
+  border: 0;
+  outline: none;
+  appearance: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+img {
+  vertical-align: bottom;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.toast {
+  font-size: 14px;
+  line-height: 16px;
+  font-family: inherit;
+}
+
+.loader {
+  --b: 8px;
+  width: 50px;
+  margin: 16px auto 24px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%, #00ffcb) content-box;
+  -webkit-mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+    radial-gradient(farthest-side, #0000 calc(100% - var(--b) - 1px), #000 calc(100% - var(--b)));
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: l4 1s infinite steps(10);
+
+  &:only-child {
+    margin: 16px auto !important;
+  }
+}
+
+@keyframes l4 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0 0 0 / 0.75);
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding: 17.5vh rhythm(2.5) rhythm(2.5);
+  z-index: 100;
+
+  &[data-entering] {
+    animation: modal-fade 200ms;
+  }
+
+  // &[data-exiting] {
+  //   animation: modal-fade 150ms reverse ease-in;
+  // }
+}
+
+.Modal {
+  box-shadow: 0 8px 20px rgba(0 0 0 / 0.1);
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+  outline: none;
+  max-width: 428px;
+  max-height: 70vh;
+  width: 100%;
+  padding: rhythm(2.5);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: max-content max-content 1fr;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: rhythm(3);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+
+    &.center {
+      justify-content: center;
+      font-weight: 600;
+    }
+  }
+
+  &__search {
+    margin-bottom: rhythm(3);
+  }
+
+  &__content {
+    overflow: auto;
+    margin: 0 rhythm(-3);
+    padding: 0 rhythm(3);
+  }
+
+  &__subheading {
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    margin-top: rhythm(-2);
+    opacity: 0.75;
+    margin-bottom: rhythm(2);
+  }
+
+  &__bgroup {
+    display: flex;
+    gap: rhythm(2);
+    justify-content: center;
+    margin-top: rhythm(-1);
+    margin-bottom: rhythm(1);
+  }
+
+  &__link {
+    flex: 1;
+    text-align: center;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+    font-size: 14px;
+    line-height: 40px;
+    font-weight: 600;
+    padding-left: rhythm(2);
+    padding-right: rhythm(2);
+    white-space: nowrap;
+  }
+
+  &__close {
+    flex: 1;
+    font-size: 14px;
+    line-height: 40px;
+    font-weight: 600;
+    padding-left: rhythm(3);
+    padding-right: rhythm(3);
+    border-radius: 8px;
+    background: rgba(#fff, 0.1);
+  }
+
+  &__successIcon,
+  &__errorIcon {
+    width: 40px;
+    height: 40px;
+    margin: rhythm(1) auto rhythm(2);
+  }
+
+  &__successIcon {
+    path {
+      fill: #00ffcb;
+    }
+  }
+
+  &__errorIcon {
+    path {
+      fill: #ff0000cc;
+    }
+  }
+}
+
+.tokenInput {
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__label {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+  }
+
+  &__bottom {
+    margin-top: rhythm(1);
+    background: rgba(#fff, 0.1);
+    border-radius: 12px;
+    padding: rhythm(1.5) rhythm(2);
+
+    &.error {
+      background: #ff00002a;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 500;
+    display: block;
+
+    &::placeholder {
+      color: rgba(#fff, 0.5);
+    }
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  &__button {
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 4px;
+    background: rgba(#fff, 0.1);
+    cursor: pointer;
+    margin-right: rhythm(0.5);
+    padding-left: rhythm(0.5);
+    padding-right: rhythm(0.5);
+    line-height: 20px;
+  }
+
+  &__balance {
+    margin-left: auto;
+    text-align: right;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: rgba(#fff, 0.8);
+  }
+}
+
+.tokenTrigger {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &.disabled,
+  &[data-disabled] {
+    cursor: default;
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+
+  &__name {
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: 0.25px;
+    font-weight: 500;
+  }
+
+  &__arrow {
+    width: 14px;
+    height: 8px;
+    margin-left: rhythm(1);
+  }
+}

@@ -1,0 +1,36 @@
+.claimGrid {
+  display: grid;
+  gap: rhythm(5);
+}
+
+.claimPanel {
+  width: 100%;
+  max-width: 448px;
+  margin: auto;
+}
+
+.card {
+  margin-bottom: rhythm(3);
+
+  &__claimHeading {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+    display: grid;
+    grid-template-columns: max-content auto;
+    gap: rhythm(0.5);
+
+    > button {
+      margin-top: 2px;
+    }
+  }
+
+  &__claimValue {
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 500;
+    display: block;
+    padding-top: rhythm(2);
+    color: rgba(#fff, 0.8);
+  }
+}

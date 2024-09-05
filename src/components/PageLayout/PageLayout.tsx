@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { useWallet, useWalletModal, useConnex } from "@vechain/dapp-kit-react";
@@ -49,6 +50,12 @@ export default function Home() {
         </NavLink>
         <NavLink to="/swap" className={css.nav__link}>
           Swap
+        </NavLink>
+        <NavLink to="/pool" className={css.nav__link}>
+          Pool
+        </NavLink>
+        <NavLink to="/reward" className={clsx(css.nav__link, css.earn)}>
+          Reward
         </NavLink>
         <NavLink to="/overview" className={css.nav__link}>
           Overview

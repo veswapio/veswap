@@ -33,10 +33,10 @@
     height: rhythm(5);
     display: flex;
     align-items: center;
-    padding: 0 rhythm(2.5);
+    padding: 0 rhythm(2);
     font-size: 15px;
     font-weight: 500;
-    border-radius: 10px;
+    border-radius: 8px;
 
     &[aria-current] {
       background: #252525;
@@ -45,6 +45,23 @@
 
   &__link {
     margin-right: rhythm(1);
+
+    &.earn {
+      &::after {
+        content: "earn";
+        position: relative;
+        top: -6px;
+        right: -6px;
+        text-transform: uppercase;
+        background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 14px;
+        padding-left: rhythm(0.5);
+        padding-right: rhythm(0.5);
+        border-radius: 3px;
+      }
+    }
   }
 
   &__wallet {
