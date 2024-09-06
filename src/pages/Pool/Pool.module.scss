@@ -1,0 +1,285 @@
+.poolPanel {
+  width: 100%;
+  max-width: 448px;
+  margin: auto;
+}
+
+.loadingCard {
+  max-width: 400px;
+  height: 120px;
+  margin: 26vh auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  margin-bottom: rhythm(3);
+
+  &__poolHeading {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: rhythm(2);
+    position: relative;
+  }
+
+  &__poolBackButton {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+
+    > svg {
+      width: 20px;
+      height: 20px;
+      transform: rotate(180deg);
+    }
+  }
+
+  &__search {
+    margin-bottom: rhythm(2);
+  }
+}
+
+.verticalButtonGroup {
+  display: grid;
+  gap: rhythm(2);
+}
+
+.poolSection {
+  padding-top: rhythm(2);
+  padding-bottom: rhythm(1);
+
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: rhythm(2);
+
+    > a {
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid rgba(#fff, 0.05);
+  }
+}
+
+.pool {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: rhythm(1.75) rhythm(2);
+  border-radius: 12px;
+  background: rgba(#fff, 0.1);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 16px;
+
+  &__text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__tokens {
+    display: flex;
+    margin-right: 6px;
+  }
+
+  &__token {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 2px;
+  }
+
+  &__name {
+    font-weight: 500;
+  }
+
+  &__value {
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px rgba(#fff, 0.3);
+  }
+
+  @include responsive("mobile") {
+    &__text {
+      display: block;
+    }
+
+    &__tokens {
+      margin-right: 8px;
+    }
+
+    &__token {
+      width: 22px;
+      height: 22px;
+      margin-right: 4px;
+    }
+
+    &__name {
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    &__value {
+      font-size: 12px;
+      line-height: 16px;
+    }
+  }
+}
+
+.liquidityPlus {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: rhythm(3) auto rhythm(2);
+}
+
+.slider {
+  display: grid;
+  grid-template-areas:
+    "label output"
+    "track track";
+  grid-template-columns: 1fr auto;
+
+  &__heading {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 36px;
+  }
+
+  &__output {
+    grid-area: output;
+    font-weight: 500;
+    padding: 10px 16px;
+    background: #ffffff1a;
+    border-radius: 8px;
+
+    &::after {
+      content: "%";
+    }
+  }
+
+  &__track {
+    grid-area: track;
+    position: relative;
+    margin-top: 12px;
+    margin-left: 12px;
+    margin-right: 12px;
+    width: calc(100% - 24px) !important;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      background: #fff;
+      border-radius: 2px;
+    }
+  }
+
+  &__fill {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    margin: auto;
+    border-radius: 2px;
+    background: #00ffcb;
+  }
+
+  &__thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    forced-color-adjust: none;
+    position: relative;
+    z-index: 2;
+
+    &[data-dragging] {
+      background: #fff;
+    }
+
+    // &[data-focus-visible] {
+    //   outline: 2px solid var(--focus-ring-color);
+    // }
+  }
+
+  &[data-orientation="horizontal"] {
+    flex-direction: column;
+
+    .slider__track {
+      height: 30px;
+      width: 100%;
+
+      &:before {
+        height: 4px;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #ffffff3a;
+      }
+    }
+
+    .slider__thumb {
+      top: 50%;
+    }
+  }
+}
+
+.sliderButtonGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 20px;
+  color: #ffffff80;
+  margin-top: rhythm(1);
+  margin-bottom: rhythm(5);
+
+  &__button {
+    text-align: center;
+    border: 1px solid transparent;
+    padding: rhythm(0.25) rhythm(1);
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: center;
+
+    &.active {
+      border: 1px solid #ffffff80;
+    }
+  }
+}

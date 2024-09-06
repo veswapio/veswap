@@ -1,4 +1,4 @@
-import "./styles/global.css";
+import "./styles/global.scss";
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -9,9 +9,14 @@ import { queryClient } from "~/query";
 import PageLayout from "./components/PageLayout";
 import NotMatchPage from "./components/NotMatchPage";
 import LandingPage from "./pages/LandingPage";
+
+import SwapLayout from "./components/SwapLayout";
 import Swap from "./pages/Swap";
+import Pool from "./pages/Pool";
+import Reward from "./pages/Reward";
+
+// import Pools from "./pages/Pools";
 import Overview from "./pages/Overview";
-import Pools from "./pages/Pools";
 import Leaderboard from "./pages/Leaderboard";
 
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
@@ -37,21 +42,31 @@ const router = createBrowserRouter([
     element: <PageLayout />,
     children: [
       {
-        path: "/swap",
-        element: <Swap />
+        path: "/",
+        element: <SwapLayout />,
+        children: [
+          {
+            path: "/swap",
+            element: <Swap />
+          },
+          {
+            path: "/pool",
+            element: <Pool />
+          },
+          {
+            path: "/reward",
+            element: <Reward />
+          }
+        ]
       },
       {
         path: "/overview",
         element: <Overview />
       },
       {
-        path: "/pools",
-        element: <Pools />
-      },
-      {
         path: "/leaderboard",
         element: <Leaderboard />
-      },
+      }
     ]
   },
   {

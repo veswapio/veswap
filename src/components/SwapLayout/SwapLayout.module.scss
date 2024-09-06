@@ -1,0 +1,12 @@
+.SwapLayout {
+  max-width: 480px;
+  padding: rhythm(10) rhythm(3);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  @include responsive("mobile") {
+    max-width: 464px;
+    padding: rhythm(5) rhythm(2);
+  }
+}
