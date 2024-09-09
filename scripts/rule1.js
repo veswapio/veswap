@@ -3,12 +3,12 @@ import { parse } from "csv-parse/sync";
 import BigNumber from "bignumber.js";
 
 // https://explore.vechain.org/accounts/0x3946ad2ca036489f5a90dbb4c72fb31aff98ef11/transfer
-// from Aug 19 00:00 to Aug 24 24:00
-const vetVthoTransactions = fs.readFileSync("./csv/vet-vtho-3.csv", "utf-8");
+// from Aug 25 00:00 to Sept 08 24:00
+const vetVthoTransactions = fs.readFileSync("./csv/vet-vtho-4.csv", "utf-8");
 
 // https://explore.vechain.org/accounts/0xc6de3b8e4a9bf4a6756e60f5cb6705cb7d3c1649/transfer
-// from Aug 19 00:00 to Aug 24 24:00
-const vetB3trTransactions = fs.readFileSync("./csv/vet-b3tr-3.csv", "utf-8");
+// from Aug 25 00:00 to Sept 08 24:00
+const vetB3trTransactions = fs.readFileSync("./csv/vet-b3tr-4.csv", "utf-8");
 
 const START_TIMESTAMP = new Date("2024-06-05 00:00:00").getTime();
 const PERIOD = 12 * 60 * 60 * 1000;
@@ -135,5 +135,5 @@ for (let i = 0; i <= groupIndex; i++) {
   console.log("Processed group", i, "of", groupIndex, "groups.");
 }
 
-fs.writeFileSync("./result-3.json", JSON.stringify(result, null, 2));
+fs.writeFileSync("./result-4.json", JSON.stringify(result, null, 2));
 console.log("Done!");

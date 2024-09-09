@@ -1,18 +1,19 @@
 import fs from "fs";
 
-const START_TIMESTAMP = new Date("2024-06-05 00:00:00").getTime();
+const INIT_TIMESTAMP = new Date("2024-06-05 00:00:00").getTime();
 const PERIOD = 12 * 60 * 60 * 1000;
 
 const result0 = JSON.parse(fs.readFileSync("./result-0.json", "utf-8"));
 const result1 = JSON.parse(fs.readFileSync("./result-1.json", "utf-8"));
 const result2 = JSON.parse(fs.readFileSync("./result-2.json", "utf-8"));
 const result3 = JSON.parse(fs.readFileSync("./result-3.json", "utf-8"));
+const result4 = JSON.parse(fs.readFileSync("./result-4.json", "utf-8"));
 
-const startTimestamp = new Date("2024-08-19 00:00:00").getTime();
+const startTimestamp = new Date("2024-09-02 00:00:00").getTime();
 const appId = "0x899de0d0f0b39e484c8835b2369194c4c102b230c813862db383d44a4efe14d3"; // Cleanify
 
 // total data
-const totalArr = result0.concat(result1).concat(result2).concat(result3);
+const totalArr = result0.concat(result1).concat(result2).concat(result3).concat(result4);
 
 let pointsArray = {};
 let swapAccumulatedMap = {};
@@ -56,9 +57,9 @@ const sortedPointsArray = Object.entries(pointsArray)
   .sort((a, b) => b[1] - a[1]);
 
 // weekly data
-const startIndex = Math.floor((startTimestamp - START_TIMESTAMP) / PERIOD);
+const startIndex = Math.floor((startTimestamp - INIT_TIMESTAMP) / PERIOD);
 const endIndex = startIndex + 2 * 7;
-const weeklyArr = result3.filter((item) => item.index >= startIndex && item.index < endIndex);
+const weeklyArr = result4.filter((item) => item.index >= startIndex && item.index < endIndex);
 
 let weeklyPointsArray = {};
 let weeklySwapAccumulatedMap = {};
