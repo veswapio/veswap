@@ -8,12 +8,14 @@ import css from "./PageLayout.module.scss";
 import IconLogo from "~/assets/logo.svg?react";
 import IconBlock from "~/assets/block.svg?react";
 import IconChain from "~/assets/chain.svg?react";
+import IconMenu from "~/assets/menu.svg?react";
 
 export default function Home() {
   const { account } = useWallet();
   const { open, onConnectionStatusChange } = useWalletModal();
   const [buttonText, setButtonText] = useState("Connect Wallet");
   const [blockNumber, setBlockNumber] = useState("-");
+  const [menuOpen, setMenuOpen] = useState(false);
   const connex = useConnex();
 
   useEffect(() => {
@@ -44,33 +46,40 @@ export default function Home() {
 
   return (
     <div className={css.root}>
-      <nav className={css.nav}>
+      <nav className={clsx(css.nav, menuOpen && css.open)}>
         <NavLink to="/" className={css.nav__logo}>
           <IconLogo />
         </NavLink>
-        <NavLink to="/swap" className={css.nav__link}>
-          Swap
-        </NavLink>
-        <NavLink to="/pool" className={css.nav__link}>
-          Pool
-        </NavLink>
-        <NavLink to="/reward" className={clsx(css.nav__link, css.earn)}>
-          Reward
-        </NavLink>
-        <NavLink to="/overview" className={css.nav__link}>
-          Overview
-        </NavLink>
-        <NavLink to="/leaderboard" className={css.nav__link}>
-          Leaderboard
-        </NavLink>
-        {/* <NavLink to="/pools" className={css.nav__link}>
-          Pools
-        </NavLink> */}
-        {/*<NavLink to="/search" className={css.nav__link}>
-        Search
-        </NavLink>*/}
+
+        <div className={clsx(css.nav__menu, menuOpen && css.open)} onClick={() => setMenuOpen(false)}>
+          <NavLink to="/swap" className={css.nav__link}>
+            Swap
+          </NavLink>
+          <NavLink to="/pool" className={css.nav__link}>
+            Pool
+          </NavLink>
+          <NavLink to="/reward" className={clsx(css.nav__link, css.earn)}>
+            Reward
+          </NavLink>
+          <NavLink to="/overview" className={css.nav__link}>
+            Overview
+          </NavLink>
+          <NavLink to="/leaderboard" className={css.nav__link}>
+            Leaderboard
+          </NavLink>
+          {/* <NavLink to="/pools" className={css.nav__link}>
+                Pools
+                </NavLink> */}
+          {/*<NavLink to="/search" className={css.nav__link}>
+          Search
+          </NavLink>*/}
+        </div>
         <button className={css.nav__wallet} onClick={open}>
           {buttonText}
+        </button>
+
+        <button className={css.nav__trigger} onClick={() => setMenuOpen(!menuOpen)}>
+          <IconMenu />
         </button>
       </nav>
 

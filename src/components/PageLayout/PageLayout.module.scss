@@ -11,11 +11,16 @@
   top: 0;
   left: 0;
   right: 0;
+  height: 100%;
   display: flex;
   align-items: center;
   height: rhythm(10);
   padding: 0 rhythm(6);
   backdrop-filter: blur(20px);
+
+  &.open {
+    background: #000;
+  }
 
   &__logo {
     flex: none;
@@ -28,15 +33,22 @@
     }
   }
 
+  &__menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
   &__link,
-  &__wallet {
-    height: rhythm(5);
+  &__wallet,
+  &__trigger {
+    height: rhythm(4.5);
     display: flex;
     align-items: center;
     padding: 0 rhythm(2);
     font-size: 15px;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 6px;
 
     &[aria-current] {
       background: #252525;
@@ -64,12 +76,49 @@
     }
   }
 
-  &__wallet {
+  &__wallet,
+  &__trigger {
     margin-left: auto;
     background: #252525;
 
     &:hover {
       background: rgba(#fff, 0.25);
+    }
+  }
+
+  &__trigger {
+    margin-left: rhythm(2);
+    padding: 0 rhythm(1.5);
+    display: none;
+
+    > svg {
+      width: rhythm(2);
+      height: rhythm(2);
+      fill: currentcolor;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    background: rgba(#000, 0.75);
+
+    &__menu {
+      position: absolute;
+      z-index: 2;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: none;
+      height: auto;
+
+      &.open {
+        display: block;
+        background: #131313;
+        padding: rhythm(2);
+      }
+    }
+
+    &__trigger {
+      display: block;
     }
   }
 

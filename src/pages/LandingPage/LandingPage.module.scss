@@ -64,7 +64,6 @@
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: rhythm(10);
   padding: 0 rhythm(3);
 
@@ -73,12 +72,13 @@
   }
 
   &__logo {
-    height: rhythm(3);
-    min-width: max-content;
-    margin-right: rhythm(3);
+    width: 100px;
+    height: 24px;
+    margin-right: rhythm(2);
   }
 
   &__links {
+    margin-left: auto;
     display: flex;
     gap: rhythm(5);
 
