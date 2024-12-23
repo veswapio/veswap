@@ -13,6 +13,7 @@ async function fetchTransactions(index) {
     body: JSON.stringify({
       query: `{
         transactions(orderDirection: asc, orderBy: timestamp, first: 500, skip: ${index}) {
+          id
           burns {
             timestamp
             amount0
@@ -80,7 +81,8 @@ async function fetchTransactions(index) {
                 type: "REMOVE_LIQUIDITY",
                 timestamp: burn.timestamp,
                 account: burn.sender,
-                amount
+                amount,
+                txHash: c.id
               };
             })
           );
@@ -100,7 +102,8 @@ async function fetchTransactions(index) {
                 type: "ADD_LIQUIDITY",
                 timestamp: mint.timestamp,
                 account: mint.to,
-                amount
+                amount,
+                txHash: c.id
               };
             })
           );
@@ -120,7 +123,8 @@ async function fetchTransactions(index) {
                 type: "SWAP",
                 timestamp: swap.timestamp,
                 account: swap.to,
-                amount
+                amount,
+                txHash: c.id
               };
             })
           );
