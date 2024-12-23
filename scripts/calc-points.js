@@ -1,12 +1,11 @@
 import fs from "fs";
 import BigNumber from "bignumber.js";
 import transactionRecords from "./transaction-records.json" with { type: "json" };
-import pointRecords from "./point-records.json" with { type: "json" };
 
-const END_TIMESTAMP = Math.ceil(new Date("2024-09-01 23:59:59.999").getTime() / 1000);
+const END_TIMESTAMP = Math.ceil(new Date("2024-12-22 23:59:59.999").getTime() / 1000);
 
 async function fetchTransactions(index) {
-  return await fetch(`https://subgraph.veswap.org/subgraphs/name/swap/swap`, {
+  return await fetch(`http://34.92.148.112/subgraphs/name/swap/swap`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -219,39 +218,39 @@ fs.writeFileSync(
   )
 );
 
-let participantsIndex = 0;
+// let participantsIndex = 0;
 let allParticipants = [];
-let reachedEndParticipants = false;
-const round = calcRound();
+// let reachedEndParticipants = false;
+// const round = calcRound();
 
-console.log(`Starting to fetch participants of round ${round}...`);
+// console.log(`Starting to fetch participants of round ${round}...`);
 
-while (!reachedEndParticipants) {
-  try {
-    const participants = await fetchVoteParticipants(round, participantsIndex);
+// while (!reachedEndParticipants) {
+//   try {
+//     const participants = await fetchVoteParticipants(round, participantsIndex);
 
-    if (participants.length === 0) {
-      break;
-    }
+//     if (participants.length === 0) {
+//       break;
+//     }
 
-    for (const participant of participants) {
-      if (participant.timestamp > END_TIMESTAMP) {
-        reachedEndParticipants = true;
-        break;
-      }
-      allParticipants.push(participant);
-      participantsIndex += 1;
-    }
+//     for (const participant of participants) {
+//       if (participant.timestamp > END_TIMESTAMP) {
+//         reachedEndParticipants = true;
+//         break;
+//       }
+//       allParticipants.push(participant);
+//       participantsIndex += 1;
+//     }
 
-    if (reachedEndParticipants || participants.length < 500) {
-      console.log("All participants has been fetched!");
-      break;
-    }
-  } catch (error) {
-    console.error("Error fetching participants:", error);
-    break;
-  }
-}
+//     if (reachedEndParticipants || participants.length < 500) {
+//       console.log("All participants has been fetched!");
+//       break;
+//     }
+//   } catch (error) {
+//     console.error("Error fetching participants:", error);
+//     break;
+//   }
+// }
 
 console.log("Starting to calculate user points...");
 
@@ -262,16 +261,11 @@ const CURRENT_PERIOD_INDEX = Math.ceil((END_TIMESTAMP - START_TIMESTAMP) / PERIO
 const LIQUIDITY_BASE = 1000;
 const SWAP_BASE = 50000;
 
-let periodIndex = 0;
-let weeklyPoints = {};
-
 const allPoints = allTransactions.reduce((a, c) => {
-  if (Math.ceil((c.timestamp - START_TIMESTAMP) / PERIOD) > periodIndex) {
-    periodIndex = Math.ceil(c.timestamp / PERIOD);
-  }
+  let currentIndex = Math.ceil((c.timestamp - START_TIMESTAMP) / PERIOD);
 
   const isLastWeek = c.timestamp > WEEK_START_TIMESTAMP;
-  const isDouble = isLastWeek && allParticipants.includes(c.account);
+  const isDoubled = isLastWeek && allParticipants.includes(c.account);
 
   const user = a[c.account] || {
     addLiquidityPoints: [],
@@ -285,7 +279,7 @@ const allPoints = allTransactions.reduce((a, c) => {
   if (c.type === "ADD_LIQUIDITY") {
     if (c.amount > LIQUIDITY_BASE) {
       const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-      user.addLiquidityPoints.push([isDouble ? point * 2 : point, periodIndex]);
+      user.addLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
       user.addLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
     } else if (user.addLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
       const point = BigNumber(user.addLiquidityTempBalance)
@@ -293,7 +287,7 @@ const allPoints = allTransactions.reduce((a, c) => {
         .dividedBy(LIQUIDITY_BASE)
         .integerValue(BigNumber.ROUND_DOWN)
         .toNumber();
-      user.addLiquidityPoints.push([point, periodIndex]);
+      user.addLiquidityPoints.push([point, currentIndex]);
       user.addLiquidityTempBalance = (user.addLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
     } else {
       user.addLiquidityTempBalance = BigNumber(user.addLiquidityTempBalance).plus(c.amount).toNumber();
@@ -301,7 +295,7 @@ const allPoints = allTransactions.reduce((a, c) => {
   } else if (c.type === "REMOVE_LIQUIDITY") {
     if (c.amount > LIQUIDITY_BASE) {
       const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-      user.removeLiquidityPoints.push([isDouble ? point * 2 : point, periodIndex]);
+      user.removeLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
       user.removeLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
     } else if (user.removeLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
       const point = BigNumber(user.removeLiquidityTempBalance)
@@ -309,7 +303,7 @@ const allPoints = allTransactions.reduce((a, c) => {
         .dividedBy(LIQUIDITY_BASE)
         .integerValue(BigNumber.ROUND_DOWN)
         .toNumber();
-      user.removeLiquidityPoints.push([point, periodIndex]);
+      user.removeLiquidityPoints.push([point, currentIndex]);
       user.removeLiquidityTempBalance = (user.removeLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
     } else {
       user.removeLiquidityTempBalance = BigNumber(user.removeLiquidityTempBalance).plus(c.amount).toNumber();
@@ -317,7 +311,7 @@ const allPoints = allTransactions.reduce((a, c) => {
   } else if (c.type === "SWAP") {
     if (c.amount > SWAP_BASE) {
       const point = BigNumber(c.amount).dividedBy(SWAP_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-      user.swapPoints += isDouble ? point * 2 : point;
+      user.swapPoints += isDoubled ? point * 2 : point;
       user.swapTempBalance = c.amount % SWAP_BASE;
     } else if (user.swapTempBalance + c.amount > SWAP_BASE) {
       const point = BigNumber(user.swapTempBalance)
@@ -333,57 +327,132 @@ const allPoints = allTransactions.reduce((a, c) => {
   }
 
   a[c.account] = user;
-  if (isLastWeek) weeklyPoints[c.account] = user;
-
   return a;
-}, pointRecords);
+}, {});
 
-console.log("Writing results to the point-records.json file...");
+console.log("Starting to calculate user weekly points...");
 
+const allWeeklyPoints = allTransactions
+  .filter((i) => i.timestamp >= WEEK_START_TIMESTAMP)
+  .reduce((a, c) => {
+    let currentIndex = Math.ceil((c.timestamp - START_TIMESTAMP) / PERIOD);
+    const isDoubled = allParticipants.includes(c.account);
+
+    const user = a[c.account] || {
+      addLiquidityPoints: [],
+      addLiquidityTempBalance: 0,
+      removeLiquidityPoints: [],
+      removeLiquidityTempBalance: 0,
+      swapPoints: 0,
+      swapTempBalance: 0,
+      isDoubled
+    };
+
+    if (c.type === "ADD_LIQUIDITY") {
+      if (c.amount > LIQUIDITY_BASE) {
+        const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
+        user.addLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
+        user.addLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
+      } else if (user.addLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
+        const point = BigNumber(user.addLiquidityTempBalance)
+          .plus(c.amount)
+          .dividedBy(LIQUIDITY_BASE)
+          .integerValue(BigNumber.ROUND_DOWN)
+          .toNumber();
+        user.addLiquidityPoints.push([point, currentIndex]);
+        user.addLiquidityTempBalance = (user.addLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
+      } else {
+        user.addLiquidityTempBalance = BigNumber(user.addLiquidityTempBalance).plus(c.amount).toNumber();
+      }
+    } else if (c.type === "REMOVE_LIQUIDITY") {
+      if (c.amount > LIQUIDITY_BASE) {
+        const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
+        user.removeLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
+        user.removeLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
+      } else if (user.removeLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
+        const point = BigNumber(user.removeLiquidityTempBalance)
+          .plus(c.amount)
+          .dividedBy(LIQUIDITY_BASE)
+          .integerValue(BigNumber.ROUND_DOWN)
+          .toNumber();
+        user.removeLiquidityPoints.push([point, currentIndex]);
+        user.removeLiquidityTempBalance = (user.removeLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
+      } else {
+        user.removeLiquidityTempBalance = BigNumber(user.removeLiquidityTempBalance).plus(c.amount).toNumber();
+      }
+    } else if (c.type === "SWAP") {
+      if (c.amount > SWAP_BASE) {
+        const point = BigNumber(c.amount).dividedBy(SWAP_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
+        user.swapPoints += isDoubled ? point * 2 : point;
+        user.swapTempBalance = c.amount % SWAP_BASE;
+      } else if (user.swapTempBalance + c.amount > SWAP_BASE) {
+        const point = BigNumber(user.swapTempBalance)
+          .plus(c.amount)
+          .dividedBy(SWAP_BASE)
+          .integerValue(BigNumber.ROUND_DOWN)
+          .toNumber();
+        user.swapPoints += point;
+        user.swapTempBalance = (user.swapTempBalance + c.amount) % SWAP_BASE;
+      } else {
+        user.swapTempBalance = BigNumber(user.swapTempBalance).plus(c.amount).toNumber();
+      }
+    }
+
+    a[c.account] = user;
+    return a;
+  }, {});
+
+// only for debug
 fs.writeFileSync("./point-records.json", JSON.stringify(allPoints, null, 2));
 
 console.log("Starting to sort user points...");
 
 const sortedPointsArray = Object.entries(allPoints)
-  .map((account, data) => {
+  .map(([account, data]) => {
     const addedPoints = data.addLiquidityPoints.reduce((a, c) => {
       const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
       return BigNumber(a).plus(point);
-    }, 0);
+    }, BigNumber(0));
 
     const removedPoints = data.removeLiquidityPoints.reduce((a, c) => {
       const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
       return BigNumber(a).plus(point);
-    }, 0);
+    }, BigNumber(0));
 
-    const swapsPoints = data.swapPoints.reduce((a, c) => {
-      const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
-      return BigNumber(a).plus(point);
-    }, 0);
+    if (removedPoints.isGreaterThan(addedPoints)) {
+      console.log(account);
+    }
 
     return {
       account: account,
-      points: addedPoints.minus(removedPoints).plus(swapsPoints)
+      points: addedPoints.minus(removedPoints).plus(data.swapPoints)
     };
   })
-  .sort((a, b) => a.points - b.points);
+  .filter((i) => i.points.isGreaterThan(0))
+  .sort((a, b) => b.points.minus(a.points).toNumber());
 
-const addedPoints = data.addLiquidityPoints.reduce((a, c) => {
-  const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
-  return BigNumber(a).plus(point);
-}, 0);
+console.log("Starting to sort user weekly points...");
 
-const removedPoints = data.removeLiquidityPoints.reduce((a, c) => {
-  const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
-  return BigNumber(a).plus(point);
-}, 0);
+const weeklySortedWeeklyPointsArray = Object.entries(allWeeklyPoints)
+  .map(([account, data]) => {
+    const addedPoints = data.addLiquidityPoints.reduce((a, c) => {
+      const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
+      return BigNumber(a).plus(point);
+    }, BigNumber(0));
 
-const swapsPoints = data.swapPoints.reduce((a, c) => {
-  const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
-  return BigNumber(a).plus(point);
-}, 0);
+    const removedPoints = data.removeLiquidityPoints.reduce((a, c) => {
+      const point = BigNumber(c[0]).times(CURRENT_PERIOD_INDEX - c[1]);
+      return BigNumber(a).plus(point);
+    }, BigNumber(0));
 
-console.log(weeklySortedWeeklyPointsArray); // TODO
+    return {
+      account: account,
+      points: addedPoints.minus(removedPoints).plus(data.swapPoints),
+      isDoubled: data.isDoubled
+    };
+  })
+  .filter((i) => i.points.isGreaterThan(0))
+  .sort((a, b) => b.points.minus(a.points).toNumber());
 
 console.log("Writing points to the src/data/points.json file...");
 
