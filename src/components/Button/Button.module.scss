@@ -1,0 +1,26 @@
+.Button {
+  width: 100%;
+  height: rhythm(7);
+  border-radius: 10px;
+  background: linear-gradient(90deg, #007adf 0%, #00ffcb 100%);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #fff;
+
+  &.outline {
+    background: none;
+    border: 1px solid #fff;
+    color: #fff;
+  }
+
+  &.small {
+    border-radius: 8px;
+    height: rhythm(5);
+    font-size: 14px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

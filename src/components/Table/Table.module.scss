@@ -1,0 +1,32 @@
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.Table {
+  min-width: 100%;
+  width: max-content;
+
+  th,
+  td {
+    padding: rhythm(2);
+  }
+
+  thead {
+    text-align: left;
+
+    th {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 700;
+    }
+  }
+
+  tbody {
+    td {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      border-top: 1px solid rgba(#fff, 0.1);
+    }
+  }
+}

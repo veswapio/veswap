@@ -1,0 +1,159 @@
+.page {
+  padding: rhythm(3) rhythm(2);
+}
+
+.swapPanel {
+  max-width: 448px;
+  margin: auto;
+}
+
+.loadingPanel {
+  max-width: 448px;
+  margin: auto;
+
+  > .card {
+    min-height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.card {
+  margin-bottom: rhythm(3);
+
+  &__swapToPane {
+    margin-bottom: rhythm(4);
+  }
+}
+
+.swapButton {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: rhythm(2.5) auto rhythm(1);
+  cursor: pointer;
+}
+
+.slippage {
+  display: flex;
+  align-items: center;
+
+  &__option {
+    padding: 4px 12px;
+    border-radius: rhythm(2);
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    cursor: pointer;
+
+    &[data-selected="true"] {
+      background: rgba(#fff, 0.1);
+    }
+  }
+}
+
+.tokenEntry {
+  display: flex;
+  align-items: center;
+  padding-top: rhythm(1);
+  padding-bottom: rhythm(1);
+  margin-bottom: rhythm(1);
+  cursor: pointer;
+
+  &:hover {
+    margin-left: rhythm(-3);
+    margin-right: rhythm(-3);
+    padding-left: rhythm(3);
+    padding-right: rhythm(3);
+    background: rgba(#fff, 0.05);
+  }
+
+  &__icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(#fff, 0.2);
+    margin-right: rhythm(1);
+  }
+
+  &__name {
+    > strong {
+      display: block;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+    }
+
+    > span {
+      display: block;
+      font-size: 12px;
+      line-height: 16px;
+      color: #c7c7c7;
+    }
+  }
+
+  &__balance {
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.close {
+  width: 12px;
+  height: 12px;
+}
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: rhythm(3);
+
+  @include responsive("mobile") {
+    gap: rhythm(2);
+  }
+}
+
+.red {
+  opacity: 0.5;
+}
+
+.slippageGroup {
+  display: flex;
+  align-items: center;
+}
+
+.customSlippage {
+  padding: 4px 12px;
+  border-radius: rhythm(2);
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+  cursor: text;
+  background: rgba(#fff, 0.1);
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+
+  &__input {
+    width: 40px;
+    text-align: right;
+    margin-right: 4px;
+
+    &::placeholder {
+      color: rgba(#fff, 0.5);
+    }
+  }
+}

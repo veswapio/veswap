@@ -1,0 +1,75 @@
+.TooltipTrigger {
+  user-select: none;
+  width: rhythm(2);
+  height: rhythm(2);
+}
+
+.Tooltip {
+  box-shadow: 0 8px 20px rgba(0 0 0 / 0.1);
+  border-radius: 4px;
+  background: #000;
+  color: #fff;
+  forced-color-adjust: none;
+  outline: none;
+  padding: 10px;
+  max-width: 200px;
+  transform: translate3d(0, 0, 0);
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  &[data-placement="top"] {
+    margin-bottom: 8px;
+    --origin: translateY(4px);
+  }
+
+  &[data-placement="bottom"] {
+    margin-top: 8px;
+    --origin: translateY(-4px);
+    & .Tooltip__overlay svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &[data-placement="right"] {
+    margin-left: 8px;
+    --origin: translateX(-4px);
+    & .Tooltip__overlay svg {
+      transform: rotate(90deg);
+    }
+  }
+
+  &[data-placement="left"] {
+    margin-right: 8px;
+    --origin: translateX(4px);
+    & .Tooltip__overlay svg {
+      transform: rotate(-90deg);
+    }
+  }
+
+  & .Tooltip__overlay svg {
+    display: block;
+    fill: #000;
+  }
+
+  &[data-entering] {
+    animation: slide 200ms;
+  }
+
+  &[data-exiting] {
+    animation: slide 200ms reverse ease-in;
+  }
+}
+
+@keyframes slide {
+  from {
+    transform: var(--origin);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,24 @@
+.SearchBox {
+  display: flex;
+  align-items: center;
+  padding: rhythm(1.75) rhythm(2);
+  background: rgba(#fff, 0.1);
+  border-radius: 12px;
+
+  &__icon {
+    width: rhythm(2);
+    height: rhythm(2);
+    margin-right: rhythm(1);
+  }
+
+  &__input {
+    flex: 1;
+    color: #fff;
+    font-size: 16px;
+    line-height: 18px;
+
+    &::placeholder {
+      color: rgba(#fff, 0.75);
+    }
+  }
+}

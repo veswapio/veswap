@@ -1,0 +1,24 @@
+.Card {
+  position: relative;
+  padding: rhythm(2.75);
+  border-radius: rhythm(2.5);
+  background: rgba(#000, 0.05);
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -1px;
+    background: linear-gradient(153.91deg, #ffffff 5%, rgba(255, 255, 255, 0) 35%);
+    border-radius: rhythm(3);
+  }
+
+  @include responsive("tablet") {
+    border-radius: rhythm(2);
+    padding: rhythm(2.5) rhythm(2);
+
+    &::before {
+      border-radius: rhythm(2.5) rhythm(2);
+    }
+  }
+}
