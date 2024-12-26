@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
 import Table from "~/components/Table";
-import { totalPoints, weeklyPoints } from "~/data/points";
+import { totalPoints, weeklyPoints } from "~/data/pointsV2";
 import css from "./Leaderboard.module.scss";
 
 export default function Leaderboard() {
