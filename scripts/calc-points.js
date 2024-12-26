@@ -1,6 +1,10 @@
 import fs from "fs";
 import BigNumber from "bignumber.js";
-import transactionRecords from "./transaction-records.json" with { type: "json" };
+import transactionRecords from "./transaction-recordsV2.json" with { type: "json" };
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 
 const END_TIMESTAMP = Math.ceil(new Date("2024-12-22 23:59:59.999").getTime() / 1000);
 
@@ -135,56 +139,21 @@ async function fetchTransactions(index) {
     });
 }
 
-async function fetchVoteParticipants(round, index) {
-  return await fetch(`https://graph.vet/subgraphs/name/vebetter/dao`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      query: `{
-        round(id: "${round}") {
-          id
-          apps {
-            participants(
-              where: {app: "0x899de0d0f0b39e484c8835b2369194c4c102b230c813862db383d44a4efe14d3"}
-              first: 500,
-              skip: ${index}
-            ) {
-              id
-              app {
-                name
-              }
-            }
-          }
-        }
-      }`
-    })
-  })
-    .then((res) => res.json())
-    .then(({ data }) => {
-      const { participants } = data.round.apps.find((i) => !!i.participants.length);
-      return participants.map((i) => i.id.split("/")[0]);
-    });
-}
-
-function calcRound() {
-  const startTime = 1719792000; // Mon Jul 01 2024 00:00:00 GMT+0000
-  const currentTime = Math.floor(Date.now() / 1000);
-  const interval = 60 * 60 * 24 * 7; // 1 week
-  return Math.ceil((currentTime - startTime) / interval) - 1;
-}
-
 let transactionIndex = transactionRecords.transactionIndex || 0;
 let allTransactions = transactionRecords.allTransactions || [];
 let reachedEndTime = false;
 
 console.log(`Starting to fetch transactions from index ${transactionIndex}`);
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 while (!reachedEndTime) {
   try {
     const transactions = await fetchTransactions(transactionIndex);
-
+    
     if (transactions.length === 0) {
       break;
     }
@@ -208,10 +177,12 @@ while (!reachedEndTime) {
   }
 }
 
-console.log("Writing results to the transaction-records.json file...");
+console.log("Writing results to the transaction-recordsV2.json file...");
+
+const txV2DataPath = path.join(__dirname, './transaction-recordsV2.json');
 
 fs.writeFileSync(
-  "./transaction-records.json",
+  txV2DataPath,
   JSON.stringify(
     {
       transactionIndex,
@@ -281,50 +252,38 @@ const allPoints = allTransactions.reduce((a, c) => {
   };
 
   if (c.type === "ADD_LIQUIDITY") {
-    if (c.amount > LIQUIDITY_BASE) {
-      const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-      user.addLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
-      user.addLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
-    } else if (user.addLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
+    if (user.addLiquidityTempBalance + Number(c.amount) > LIQUIDITY_BASE) {
       const point = BigNumber(user.addLiquidityTempBalance)
         .plus(c.amount)
         .dividedBy(LIQUIDITY_BASE)
         .integerValue(BigNumber.ROUND_DOWN)
         .toNumber();
       user.addLiquidityPoints.push([point, currentIndex]);
-      user.addLiquidityTempBalance = (user.addLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
+      user.addLiquidityTempBalance = (user.addLiquidityTempBalance + Number(c.amount)) % LIQUIDITY_BASE;
     } else {
       user.addLiquidityTempBalance = BigNumber(user.addLiquidityTempBalance).plus(c.amount).toNumber();
     }
   } else if (c.type === "REMOVE_LIQUIDITY") {
-    if (c.amount > LIQUIDITY_BASE) {
-      const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-      user.removeLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
-      user.removeLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
-    } else if (user.removeLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
+    if (user.removeLiquidityTempBalance + Number(c.amount) > LIQUIDITY_BASE) {
       const point = BigNumber(user.removeLiquidityTempBalance)
         .plus(c.amount)
         .dividedBy(LIQUIDITY_BASE)
         .integerValue(BigNumber.ROUND_DOWN)
         .toNumber();
       user.removeLiquidityPoints.push([point, currentIndex]);
-      user.removeLiquidityTempBalance = (user.removeLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
+      user.removeLiquidityTempBalance = (user.removeLiquidityTempBalance + Number(c.amount)) % LIQUIDITY_BASE;
     } else {
       user.removeLiquidityTempBalance = BigNumber(user.removeLiquidityTempBalance).plus(c.amount).toNumber();
     }
   } else if (c.type === "SWAP") {
-    if (c.amount > SWAP_BASE) {
-      const point = BigNumber(c.amount).dividedBy(SWAP_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-      user.swapPoints += isDoubled ? point * 2 : point;
-      user.swapTempBalance = c.amount % SWAP_BASE;
-    } else if (user.swapTempBalance + c.amount > SWAP_BASE) {
+    if (user.swapTempBalance + Number(c.amount) > SWAP_BASE) {
       const point = BigNumber(user.swapTempBalance)
         .plus(c.amount)
         .dividedBy(SWAP_BASE)
         .integerValue(BigNumber.ROUND_DOWN)
         .toNumber();
       user.swapPoints += point;
-      user.swapTempBalance = (user.swapTempBalance + c.amount) % SWAP_BASE;
+      user.swapTempBalance = (user.swapTempBalance + Number(c.amount)) % SWAP_BASE;
     } else {
       user.swapTempBalance = BigNumber(user.swapTempBalance).plus(c.amount).toNumber();
     }
@@ -353,50 +312,38 @@ const allWeeklyPoints = allTransactions
     };
 
     if (c.type === "ADD_LIQUIDITY") {
-      if (c.amount > LIQUIDITY_BASE) {
-        const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-        user.addLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
-        user.addLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
-      } else if (user.addLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
+      if (user.addLiquidityTempBalance + Number(c.amount) > LIQUIDITY_BASE) {
         const point = BigNumber(user.addLiquidityTempBalance)
           .plus(c.amount)
           .dividedBy(LIQUIDITY_BASE)
           .integerValue(BigNumber.ROUND_DOWN)
           .toNumber();
         user.addLiquidityPoints.push([point, currentIndex]);
-        user.addLiquidityTempBalance = (user.addLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
+        user.addLiquidityTempBalance = (user.addLiquidityTempBalance + Number(c.amount)) % LIQUIDITY_BASE;
       } else {
         user.addLiquidityTempBalance = BigNumber(user.addLiquidityTempBalance).plus(c.amount).toNumber();
       }
     } else if (c.type === "REMOVE_LIQUIDITY") {
-      if (c.amount > LIQUIDITY_BASE) {
-        const point = BigNumber(c.amount).dividedBy(LIQUIDITY_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-        user.removeLiquidityPoints.push([isDoubled ? point * 2 : point, currentIndex]);
-        user.removeLiquidityTempBalance = c.amount % LIQUIDITY_BASE;
-      } else if (user.removeLiquidityTempBalance + c.amount > LIQUIDITY_BASE) {
+      if (user.removeLiquidityTempBalance + Number(c.amount) > LIQUIDITY_BASE) {
         const point = BigNumber(user.removeLiquidityTempBalance)
           .plus(c.amount)
           .dividedBy(LIQUIDITY_BASE)
           .integerValue(BigNumber.ROUND_DOWN)
           .toNumber();
         user.removeLiquidityPoints.push([point, currentIndex]);
-        user.removeLiquidityTempBalance = (user.removeLiquidityTempBalance + c.amount) % LIQUIDITY_BASE;
+        user.removeLiquidityTempBalance = (user.removeLiquidityTempBalance + Number(c.amount)) % LIQUIDITY_BASE;
       } else {
         user.removeLiquidityTempBalance = BigNumber(user.removeLiquidityTempBalance).plus(c.amount).toNumber();
       }
     } else if (c.type === "SWAP") {
-      if (c.amount > SWAP_BASE) {
-        const point = BigNumber(c.amount).dividedBy(SWAP_BASE).integerValue(BigNumber.ROUND_DOWN).toNumber();
-        user.swapPoints += isDoubled ? point * 2 : point;
-        user.swapTempBalance = c.amount % SWAP_BASE;
-      } else if (user.swapTempBalance + c.amount > SWAP_BASE) {
+     if (user.swapTempBalance + Number(c.amount) > SWAP_BASE) {
         const point = BigNumber(user.swapTempBalance)
           .plus(c.amount)
           .dividedBy(SWAP_BASE)
           .integerValue(BigNumber.ROUND_DOWN)
           .toNumber();
         user.swapPoints += point;
-        user.swapTempBalance = (user.swapTempBalance + c.amount) % SWAP_BASE;
+        user.swapTempBalance = (user.swapTempBalance + Number(c.amount)) % SWAP_BASE;
       } else {
         user.swapTempBalance = BigNumber(user.swapTempBalance).plus(c.amount).toNumber();
       }
@@ -407,7 +354,8 @@ const allWeeklyPoints = allTransactions
   }, {});
 
 // only for debug
-fs.writeFileSync("./point-records.json", JSON.stringify(allPoints, null, 2));
+const pointRcV2DataPath = path.join(__dirname, './point-recordsV2.json');
+fs.writeFileSync(pointRcV2DataPath, JSON.stringify(allPoints, null, 2));
 
 console.log("Starting to sort user points...");
 
@@ -432,7 +380,7 @@ const sortedPointsArray = Object.entries(allPoints)
       points: addedPoints.minus(removedPoints).plus(data.swapPoints)
     };
   })
-  .filter((i) => i.points.isGreaterThan(0))
+  // .filter((i) => i.points.isGreaterThan(0))
   .sort((a, b) => b.points.minus(a.points).toNumber());
 
 console.log("Starting to sort user weekly points...");
@@ -455,15 +403,19 @@ const weeklySortedWeeklyPointsArray = Object.entries(allWeeklyPoints)
       isDoubled: data.isDoubled
     };
   })
-  .filter((i) => i.points.isGreaterThan(0))
+  // .filter((i) => i.points.isGreaterThan(0))
   .sort((a, b) => b.points.minus(a.points).toNumber());
 
-console.log("Writing points to the src/data/points.json file...");
+console.log("Writing points to the src/data/pointsV2.json file...");
+
+const pointsV2DataPath = path.join(__dirname, '../src/data/pointsV2.ts');
+console.log(pointsV2DataPath);
+
 
 fs.writeFileSync(
-  "../src/data/points.ts",
+  pointsV2DataPath,
   `export const totalPoints = ${JSON.stringify(sortedPointsArray)};
-  export const weeklyPoints = ${JSON.stringify(weeklySortedWeeklyPointsArray)};`
+   export const weeklyPoints = ${JSON.stringify(weeklySortedWeeklyPointsArray)};`
 );
 
 console.log("All Done!");
