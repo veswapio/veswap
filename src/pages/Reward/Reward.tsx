@@ -17,6 +17,9 @@ import css from "./Reward.module.scss";
 
 import rewardRonud1Data from "../../reward-data/round1-result.json";
 import rewardRonud2Data from "../../reward-data/round2-result.json";
+import rewardRound23Data from "../../reward-data/round23.json";
+import rewardRound24Data from "../../reward-data/round24.json";
+import rewardRound25Data from "../../reward-data/round25.json";
 
 const roundList = [
   {
@@ -30,6 +33,24 @@ const roundList = [
     tooltip: "",
     address: "0xF48B13252555eA5Ae5019ca24e0C30893Afb478C",
     userList: rewardRonud2Data.claims
+  },
+  {
+    title: "Round 23",
+    tooltip: "",
+    address: "0xac6445fdfe797a90f276312d1537e98bbfd03a6c",
+    userList: rewardRound23Data.claims
+  },
+  {
+    title: "Round 24",
+    tooltip: "",
+    address: "0x0ec54cca20ff5029d4d0a4e0481fead5053af211",
+    userList: rewardRound24Data.claims
+  },
+  {
+    title: "Round 25",
+    tooltip: "",
+    address: "0xf4b3a8deb843050d638c1123df103a61cab0324b",
+    userList: rewardRound25Data.claims
   }
 ];
 
