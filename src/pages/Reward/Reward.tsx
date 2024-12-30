@@ -174,7 +174,7 @@ export default function Reward() {
                 {round.title}
                 {!!round.tooltip && <Tooltip content={round.tooltip} />}
               </h2>
-              <div className={css.card__claimValue}>{BigNumber(round.myClaimData.amount).div(1e18).toString()}</div>
+              <div className={css.card__claimValue}>{BigNumber(round.myClaimData.amount).div(1e18).toFixed(6)}</div>
             </Card>
             {claimedRecord[idx] ? (
               <Button disabled>Already Claimed</Button>
