@@ -5,7 +5,7 @@ import transactionRecords from "./transaction-recordsV2.json" with { type: "json
 import path from "path";
 import { fileURLToPath } from "url";
 
-const END_TIMESTAMP = Math.ceil(new Date("2025-01-05 23:59:59.999").getTime() / 1000);
+const END_TIMESTAMP = Math.ceil(new Date("2025-01-12 23:59:59.999").getTime() / 1000);
 
 async function fetchTransactions(index) {
   return await fetch(`http://34.92.148.112/subgraphs/name/swap/swap`, {

@@ -20,8 +20,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 752,
-    "swapTempBalance": 48103.186083681016
+    "swapPoints": 803,
+    "swapTempBalance": 27546.26537097956
   },
   "0xb51ffeb066da5ff200ba52dcbb3c88d39edff55b": {
     "addLiquidityPoints": [],
@@ -96,9 +96,17 @@
       [
         124,
         418
+      ],
+      [
+        86,
+        431
+      ],
+      [
+        2,
+        441
       ]
     ],
-    "addLiquidityTempBalance": 506.3154158865218,
+    "addLiquidityTempBalance": 23.278152886520274,
     "removeLiquidityPoints": [
       [
         1,
@@ -115,11 +123,19 @@
       [
         3,
         417
+      ],
+      [
+        132,
+        431
+      ],
+      [
+        51,
+        444
       ]
     ],
-    "removeLiquidityTempBalance": 196.33508678392536,
+    "removeLiquidityTempBalance": 329.83760368699586,
     "swapPoints": 0,
-    "swapTempBalance": 31570.908103502148
+    "swapTempBalance": 39444.949348201575
   },
   "0x9cd315551c2f96bb978ed24687f6cea6b4097995": {
     "addLiquidityPoints": [],
@@ -205,9 +221,17 @@
       [
         18,
         424
+      ],
+      [
+        8,
+        436
+      ],
+      [
+        10,
+        436
       ]
     ],
-    "addLiquidityTempBalance": 416.6902020000016,
+    "addLiquidityTempBalance": 342.47923777153846,
     "removeLiquidityPoints": [
       [
         4,
@@ -216,9 +240,13 @@
       [
         20,
         429
+      ],
+      [
+        23,
+        444
       ]
     ],
-    "removeLiquidityTempBalance": 310.41025448819346,
+    "removeLiquidityTempBalance": 834.4199817188673,
     "swapPoints": 0,
     "swapTempBalance": 0
   },
@@ -227,8 +255,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 4,
-    "swapTempBalance": 31554.982505780918
+    "swapPoints": 5,
+    "swapTempBalance": 14335.257505780923
   },
   "0x9a536685fbc1198696677c4316245e860b212c90": {
     "addLiquidityPoints": [
@@ -562,7 +590,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 117.28418359601127,
     "swapPoints": 0,
-    "swapTempBalance": 1945.3778077449044
+    "swapTempBalance": 2023.5786428109784
   },
   "0x5476f5f81e1c4fc9a2da620474bb4bff38c592a8": {
     "addLiquidityPoints": [],
@@ -577,8 +605,8 @@
     "addLiquidityTempBalance": 0.920483,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 75,
-    "swapTempBalance": 9814.490645291604
+    "swapPoints": 76,
+    "swapTempBalance": 26486.21605966375
   },
   "0x7b212dea4f024b41d854a69a7a132fcd1c941432": {
     "addLiquidityPoints": [],
@@ -594,7 +622,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 7943.419860850821
+    "swapTempBalance": 8177.251193498016
   },
   "0xc6de3b8e4a9bf4a6756e60f5cb6705cb7d3c1649": {
     "addLiquidityPoints": [],
@@ -602,15 +630,15 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 3,
-    "swapTempBalance": 25363.12303631246
+    "swapTempBalance": 28250.324205635887
   },
   "0xdcf848eb82aa227b4e5a907532249d2e7b0d75fc": {
     "addLiquidityPoints": [],
-    "addLiquidityTempBalance": 0.552695,
+    "addLiquidityTempBalance": 2.752943,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 43,
-    "swapTempBalance": 27588.26113982444
+    "swapPoints": 44,
+    "swapTempBalance": 12988.26113982444
   },
   "0x22e14b199e0bd524fda275b5665056a4cd0675f6": {
     "addLiquidityPoints": [],
@@ -737,8 +765,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 123,
-    "swapTempBalance": 11014.730000000003
+    "swapPoints": 148,
+    "swapTempBalance": 11092.73000000001
   },
   "0xade7dfe6a090dd140b45b534da261a99f2cfc69d": {
     "addLiquidityPoints": [],
@@ -770,7 +798,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2779.429392533572
+    "swapTempBalance": 10881.188506736686
   },
   "0x9a49d11d9fb9fed13af7ceedd6d659176da86d5d": {
     "addLiquidityPoints": [],
@@ -956,7 +984,7 @@
     ],
     "removeLiquidityTempBalance": 702.8727664808648,
     "swapPoints": 0,
-    "swapTempBalance": 15909.503492643891
+    "swapTempBalance": 15911.69972821498
   },
   "0xea4dfed2c5e4022166fd5d8b8b6abf565b23cd7d": {
     "addLiquidityPoints": [],
@@ -1137,7 +1165,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 682.2234994774301,
     "swapPoints": 0,
-    "swapTempBalance": 3454.6012087021086
+    "swapTempBalance": 3456.257493582589
   },
   "0x5a801ad4c1a426b2b2d6bfa1751ebe026a94664b": {
     "addLiquidityPoints": [],
@@ -1283,7 +1311,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 833.2588905410328,
     "swapPoints": 0,
-    "swapTempBalance": 24008.776432
+    "swapTempBalance": 24014.156817
   },
   "0xb452fdb1219400b24842ab72caabe49631a57c76": {
     "addLiquidityPoints": [],
@@ -1376,7 +1404,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 75.78085092268662,
     "swapPoints": 0,
-    "swapTempBalance": 6779.147094
+    "swapTempBalance": 10257.773411
   },
   "0xcd0f13c009a92dc79a1bcaabf691facb523e0fff": {
     "addLiquidityPoints": [],
@@ -1407,8 +1435,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 5,
-    "swapTempBalance": 38374.54675350537
+    "swapPoints": 6,
+    "swapTempBalance": 16434.969033134174
   },
   "0x557f28e912ba393aeb92cb0c1fd178fdd3e70e13": {
     "addLiquidityPoints": [
@@ -1478,7 +1506,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 3,
-    "swapTempBalance": 17120.101446086555
+    "swapTempBalance": 19223.923150086554
   },
   "0xa537def1cc02a2cab4a3fba9f8f4cc9ccd0a2f47": {
     "addLiquidityPoints": [],
@@ -1638,9 +1666,25 @@
       [
         46,
         430
+      ],
+      [
+        287,
+        432
+      ],
+      [
+        16,
+        433
+      ],
+      [
+        3,
+        434
+      ],
+      [
+        14,
+        441
       ]
     ],
-    "addLiquidityTempBalance": 460.0441343231505,
+    "addLiquidityTempBalance": 105.86148564734867,
     "removeLiquidityPoints": [
       [
         6,
@@ -1665,9 +1709,37 @@
       [
         5,
         427
+      ],
+      [
+        282,
+        431
+      ],
+      [
+        3,
+        433
+      ],
+      [
+        24,
+        433
+      ],
+      [
+        29,
+        433
+      ],
+      [
+        256,
+        433
+      ],
+      [
+        4,
+        434
+      ],
+      [
+        13,
+        441
       ]
     ],
-    "removeLiquidityTempBalance": 770.4119155777225,
+    "removeLiquidityTempBalance": 588.973582343031,
     "swapPoints": 0,
     "swapTempBalance": 45126.5544236787
   },
@@ -1921,12 +1993,17 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 94,
-    "swapTempBalance": 17879.000000000007
+    "swapPoints": 96,
+    "swapTempBalance": 46052.000000000015
   },
   "0x87474101bf2d1e1e542a1abc2f2906f62f36c156": {
-    "addLiquidityPoints": [],
-    "addLiquidityTempBalance": 0,
+    "addLiquidityPoints": [
+      [
+        31,
+        432
+      ]
+    ],
+    "addLiquidityTempBalance": 800.3048219999982,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
@@ -2867,9 +2944,109 @@
       [
         124,
         428
+      ],
+      [
+        20,
+        432
+      ],
+      [
+        2,
+        433
+      ],
+      [
+        10,
+        433
+      ],
+      [
+        541,
+        433
+      ],
+      [
+        181,
+        433
+      ],
+      [
+        377,
+        434
+      ],
+      [
+        377,
+        434
+      ],
+      [
+        7,
+        434
+      ],
+      [
+        5,
+        434
+      ],
+      [
+        3,
+        434
+      ],
+      [
+        2,
+        434
+      ],
+      [
+        9,
+        434
+      ],
+      [
+        7,
+        434
+      ],
+      [
+        7,
+        435
+      ],
+      [
+        14,
+        435
+      ],
+      [
+        13,
+        435
+      ],
+      [
+        42,
+        435
+      ],
+      [
+        11,
+        435
+      ],
+      [
+        1,
+        435
+      ],
+      [
+        886,
+        436
+      ],
+      [
+        6,
+        436
+      ],
+      [
+        900,
+        438
+      ],
+      [
+        2,
+        438
+      ],
+      [
+        40,
+        443
+      ],
+      [
+        6,
+        443
       ]
     ],
-    "addLiquidityTempBalance": 594.3643958534813,
+    "addLiquidityTempBalance": 309.98823399964294,
     "removeLiquidityPoints": [
       [
         2,
@@ -2906,11 +3083,115 @@
       [
         149,
         430
+      ],
+      [
+        755,
+        434
+      ],
+      [
+        3,
+        434
+      ],
+      [
+        455,
+        436
+      ],
+      [
+        457,
+        436
+      ],
+      [
+        902,
+        438
+      ],
+      [
+        9,
+        439
+      ],
+      [
+        9,
+        439
+      ],
+      [
+        9,
+        439
+      ],
+      [
+        9,
+        439
+      ],
+      [
+        9,
+        439
+      ],
+      [
+        8,
+        439
+      ],
+      [
+        9,
+        440
+      ],
+      [
+        8,
+        440
+      ],
+      [
+        9,
+        440
+      ],
+      [
+        8,
+        440
+      ],
+      [
+        9,
+        440
+      ],
+      [
+        45,
+        441
+      ],
+      [
+        8,
+        442
+      ],
+      [
+        9,
+        442
+      ],
+      [
+        17,
+        442
+      ],
+      [
+        8,
+        442
+      ],
+      [
+        9,
+        442
+      ],
+      [
+        8,
+        442
+      ],
+      [
+        140,
+        442
+      ],
+      [
+        719,
+        443
+      ],
+      [
+        47,
+        444
       ]
     ],
-    "removeLiquidityTempBalance": 466.65172033174895,
-    "swapPoints": 9,
-    "swapTempBalance": 7293.931566346815
+    "removeLiquidityTempBalance": 527.2705010704303,
+    "swapPoints": 13,
+    "swapTempBalance": 20151.19497795861
   },
   "0x631b69df86e3d27ee5937a4ae84b10e643037903": {
     "addLiquidityPoints": [],
@@ -3222,7 +3503,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 911.924624
+    "swapTempBalance": 975.72293471316
   },
   "0xd89246a7225f90f5162247a510aa46bfe053ec7a": {
     "addLiquidityPoints": [],
@@ -3302,7 +3583,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 21.099426141549113,
     "swapPoints": 0,
-    "swapTempBalance": 417.4939810080947
+    "swapTempBalance": 441.7393010080947
   },
   "0x8037cb7505445a666a86f49a0dc7b35fab388be8": {
     "addLiquidityPoints": [],
@@ -3604,8 +3885,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 9,
-    "swapTempBalance": 35816.17443634265
+    "swapPoints": 10,
+    "swapTempBalance": 47133.74811333399
   },
   "0x4c0b7a79cc86d17a2dd9d8fb0c8f74ff755be87f": {
     "addLiquidityPoints": [],
@@ -3842,8 +4123,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 19,
-    "swapTempBalance": 36859.1257034363
+    "swapPoints": 20,
+    "swapTempBalance": 3258.330972134728
   },
   "0x07f16c9399ddfa8044a166fce3163644def5b49d": {
     "addLiquidityPoints": [],
@@ -4157,7 +4438,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 86.928800550733
+    "swapTempBalance": 2916.928800550733
   },
   "0xe45965e7b7d3d391d09914eb913a21683bb75d97": {
     "addLiquidityPoints": [],
@@ -4733,11 +5014,11 @@
   },
   "0x59c3607a033f4d9f56c37bcbbd282429757ead87": {
     "addLiquidityPoints": [],
-    "addLiquidityTempBalance": 0,
+    "addLiquidityTempBalance": 683.610771,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2360
+    "swapTempBalance": 2382
   },
   "0x491c69f96ceceb78be8be080b51467f6b0562797": {
     "addLiquidityPoints": [],
@@ -4897,7 +5178,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 9281.754380648023
+    "swapTempBalance": 15416.767372463903
   },
   "0xbf512db4c5e0ff951154e70ac978388329773dd6": {
     "addLiquidityPoints": [],
@@ -4915,8 +5196,13 @@
       ]
     ],
     "addLiquidityTempBalance": 61.48803300000009,
-    "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [
+      [
+        1,
+        440
+      ]
+    ],
+    "removeLiquidityTempBalance": 954.0595788449064,
     "swapPoints": 0,
     "swapTempBalance": 10000
   },
@@ -4995,7 +5281,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 2,
-    "swapTempBalance": 595.3954193781465
+    "swapTempBalance": 1851.8081897399359
   },
   "0xb6595b82e1520c69554cddc044da85a83493f854": {
     "addLiquidityPoints": [],
@@ -5180,7 +5466,7 @@
         368
       ]
     ],
-    "addLiquidityTempBalance": 195.03703753106447,
+    "addLiquidityTempBalance": 607.4797215310645,
     "removeLiquidityPoints": [
       [
         1,
@@ -5301,7 +5587,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 24419.547861285322
+    "swapTempBalance": 24425.13543597037
   },
   "0x1e3cf576973ec03ac821868b4fd8b83b06e6af92": {
     "addLiquidityPoints": [],
@@ -5415,7 +5701,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 4.240819801241039,
     "swapPoints": 0,
-    "swapTempBalance": 2153.851
+    "swapTempBalance": 2375.592802027747
   },
   "0x35946c0202d0fef43d0a44631937fce372f6309f": {
     "addLiquidityPoints": [],
@@ -5497,7 +5783,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1240.046242
+    "swapTempBalance": 1249.309816
   },
   "0x46f7123d70532128240efab081abd37ef84c5fa0": {
     "addLiquidityPoints": [],
@@ -5596,11 +5882,20 @@
       [
         70,
         420
+      ],
+      [
+        52,
+        431
       ]
     ],
-    "addLiquidityTempBalance": 917.0477170000086,
-    "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "addLiquidityTempBalance": 423.384241000007,
+    "removeLiquidityPoints": [
+      [
+        75,
+        431
+      ]
+    ],
+    "removeLiquidityTempBalance": 35.07252607717237,
     "swapPoints": 0,
     "swapTempBalance": 30
   },
@@ -5685,7 +5980,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 334.824962
+    "swapTempBalance": 342.824962
   },
   "0x8b9da59cfe908eea3595f8d451d32dfd8d8360dd": {
     "addLiquidityPoints": [],
@@ -5709,7 +6004,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 5,
-    "swapTempBalance": 11675.177092105421
+    "swapTempBalance": 28396.52499145884
   },
   "0x35b1a738acdb1a7e321e15076e3a8cddb5a8909f": {
     "addLiquidityPoints": [],
@@ -5733,7 +6028,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 30967.74101347891
+    "swapTempBalance": 32888.684562588685
   },
   "0xd7d8425db8c89cd13eb1b776ade0cdbcf5419bea": {
     "addLiquidityPoints": [],
@@ -5863,7 +6158,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 2920.6358470000046
+    "swapTempBalance": 3049.7087720000045
   },
   "0x3df2bb7faac80b1cba2f11ee560bdc57cc98ace3": {
     "addLiquidityPoints": [],
@@ -6120,8 +6415,8 @@
       ]
     ],
     "removeLiquidityTempBalance": 68.54662100806513,
-    "swapPoints": 9,
-    "swapTempBalance": 42077.83552075521
+    "swapPoints": 10,
+    "swapTempBalance": 35479.69120540953
   },
   "0xba0beb43bc269071ed9b1341e316336c9869dab0": {
     "addLiquidityPoints": [
@@ -6168,7 +6463,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2092.085020063114
+    "swapTempBalance": 21305.475660063115
   },
   "0x6e5eb61b32dc61470eb2d095d073a78fc334b35c": {
     "addLiquidityPoints": [],
@@ -6232,7 +6527,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 2,
-    "swapTempBalance": 27193.41044599999
+    "swapTempBalance": 27198.48984184894
   },
   "0xac4be91d2c4dc8aac71e3bc1409986555d6fdd99": {
     "addLiquidityPoints": [],
@@ -6240,7 +6535,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 30266.899130582875
+    "swapTempBalance": 42030.19351082813
   },
   "0x79b350ec673a433473676f2342a79c661131e3d6": {
     "addLiquidityPoints": [],
@@ -6384,7 +6679,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 15.557819
+    "swapTempBalance": 5519.16708
   },
   "0xdfa2e419d991c8ce78de52dbfaff692c9557c934": {
     "addLiquidityPoints": [],
@@ -6448,7 +6743,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 33022.82410517979
+    "swapTempBalance": 33030.39473017979
   },
   "0x1f527a79c63601f3067a6a7e98c437fd0b959aac": {
     "addLiquidityPoints": [],
@@ -6496,7 +6791,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1233
+    "swapTempBalance": 1278
   },
   "0x247fffd00014c1f4cf43d05d8c0c958fe18ba753": {
     "addLiquidityPoints": [],
@@ -6552,7 +6847,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 9.955404
+    "swapTempBalance": 12.83996
   },
   "0xd2ad02053d867b34ada18d9039ae037406bdfc07": {
     "addLiquidityPoints": [],
@@ -6704,7 +6999,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 552
+    "swapTempBalance": 718.657876
   },
   "0xa85c155b598b59d43a80366c219ee2ca4f8529a9": {
     "addLiquidityPoints": [],
@@ -6934,7 +7229,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 121
+    "swapTempBalance": 145
   },
   "0xe9ed4efaeea69e897a703192cde5202f26cdd5bb": {
     "addLiquidityPoints": [],
@@ -6958,7 +7253,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 6313.9
+    "swapTempBalance": 7683.02
   },
   "0x9ad0f25d7c138cd97eb05399d26c644990d4138e": {
     "addLiquidityPoints": [],
@@ -6974,7 +7269,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 7513.009925
+    "swapTempBalance": 8589.009925
   },
   "0x5cbf66821450b3ce0c61b2c571c6b22cc1b48068": {
     "addLiquidityPoints": [],
@@ -7126,7 +7421,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 28512.079994660264
+    "swapTempBalance": 28516.424537660263
   },
   "0x8a5f4d31fd59b1dec32a9e49579dd50de994c9dc": {
     "addLiquidityPoints": [],
@@ -7566,7 +7861,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3092.087824
+    "swapTempBalance": 3562.113021
   },
   "0x937fe33449e3f4e1b6271f537fd01676c618c0ab": {
     "addLiquidityPoints": [],
@@ -7606,7 +7901,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 9770.909911156372
+    "swapTempBalance": 9773.682675156371
   },
   "0xe8cae67c74b883313455466dd91073d88abe66ae": {
     "addLiquidityPoints": [],
@@ -7842,8 +8137,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 388,
-    "swapTempBalance": 40120.288763247176
+    "swapPoints": 414,
+    "swapTempBalance": 45980.24322025743
   },
   "0xcadd334715080554530ae6b48ef2a126f56ecb71": {
     "addLiquidityPoints": [],
@@ -8307,7 +8602,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 4592.924182
+    "swapTempBalance": 4809.889411
   },
   "0xfd567cad33634b3a96b9880437f3325cbe72628d": {
     "addLiquidityPoints": [],
@@ -8363,7 +8658,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 4,
-    "swapTempBalance": 18120.240168000008
+    "swapTempBalance": 23082.09274200001
   },
   "0x7756d02006f04dc47c2147fc6c5ef3c933b56f56": {
     "addLiquidityPoints": [],
@@ -8403,7 +8698,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 5,
-    "swapTempBalance": 26415.684303
+    "swapTempBalance": 28415.684303
   },
   "0x548948102051c3cb1a996786144b3be6a3f9bc29": {
     "addLiquidityPoints": [],
@@ -8651,7 +8946,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 3,
-    "swapTempBalance": 37637.693826703864
+    "swapTempBalance": 46178.98978427991
   },
   "0xb5b263232fdb731b423af964b3ae55f85d820c86": {
     "addLiquidityPoints": [],
@@ -8659,7 +8954,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 5618
+    "swapTempBalance": 11617
   },
   "0x415f07f069bbf9352c2f48dd942a5203458a326b": {
     "addLiquidityPoints": [],
@@ -8867,7 +9162,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 450.244617
+    "swapTempBalance": 610.174251
   },
   "0x37534b349c69b23beabca5e441f8569774302bd0": {
     "addLiquidityPoints": [],
@@ -8875,7 +9170,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 2,
-    "swapTempBalance": 19559.32203092069
+    "swapTempBalance": 27718.32203092069
   },
   "0x1d829c9422e5b7287d23ae7fd24b411b4118d55d": {
     "addLiquidityPoints": [],
@@ -8987,7 +9282,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 17655.362018391625
+    "swapTempBalance": 17665.362018391625
   },
   "0x2e6a121abfd537876e8a6d27863d78e4d5d6b617": {
     "addLiquidityPoints": [],
@@ -9099,7 +9394,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 2,
-    "swapTempBalance": 12091.17911162019
+    "swapTempBalance": 17646.12650462019
   },
   "0x0dab423f26384ba02ed6f31c02db4d75d899097f": {
     "addLiquidityPoints": [],
@@ -9147,7 +9442,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 131.623322
+    "swapTempBalance": 262.516621
   },
   "0x667dc507c6667841721a35a4d8be3eb278a32ad7": {
     "addLiquidityPoints": [],
@@ -9555,7 +9850,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2464.505917
+    "swapTempBalance": 2472.719273
   },
   "0xd2231754253d38bb5d0ce6b322983516b7c14da1": {
     "addLiquidityPoints": [],
@@ -9611,7 +9906,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 513.835138
+    "swapTempBalance": 522.132759
   },
   "0xbdbd5c71c51aae80fc3d8427923bc2f5fe4381e1": {
     "addLiquidityPoints": [],
@@ -9627,7 +9922,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 12473.056426999992
+    "swapTempBalance": 13770.056426999992
   },
   "0xd6c2868329a264c6302c351246024d77e77fc1bb": {
     "addLiquidityPoints": [],
@@ -9987,7 +10282,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 3820.686254
+    "swapTempBalance": 4841.874775
   },
   "0xb3b9854f155fd77288df1999b86a4390d051d0ea": {
     "addLiquidityPoints": [],
@@ -9995,7 +10290,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1788.775422
+    "swapTempBalance": 3290.461775
   },
   "0xbddc7b3d06e0d95b1e366d1f4587a53e93f7387a": {
     "addLiquidityPoints": [],
@@ -10155,7 +10450,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3121.770152042538
+    "swapTempBalance": 3179.211251931405
   },
   "0x6d5d2c21dfcd00f56bb0e46d41b5fe171c007057": {
     "addLiquidityPoints": [],
@@ -10235,7 +10530,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 2,
-    "swapTempBalance": 23795.627617608854
+    "swapTempBalance": 35505.73361749093
   },
   "0xd6109fdaf1d5e72f4d234e2c7d427eb1762573e9": {
     "addLiquidityPoints": [],
@@ -10267,7 +10562,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 2,
-    "swapTempBalance": 32091.9508652914
+    "swapTempBalance": 37041.9508652914
   },
   "0xb1fd8528fee8eb1364fd0e8448cc23a981b3d9bd": {
     "addLiquidityPoints": [],
@@ -10275,7 +10570,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 30791.039926
+    "swapTempBalance": 30853.777116
   },
   "0x4b2efd1be4af1d1cc8a3034d92545bf8ea70ff6f": {
     "addLiquidityPoints": [],
@@ -10283,7 +10578,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 23776.44366242799
+    "swapTempBalance": 27090.64320642799
   },
   "0x0ed021a91e4523571171ccbeae54d2fbec20d182": {
     "addLiquidityPoints": [],
@@ -10347,7 +10642,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1206.4970929761228
+    "swapTempBalance": 1208.4970929761228
   },
   "0x10730eed30a0bf9d37b08edb2da05d35d490ad2d": {
     "addLiquidityPoints": [],
@@ -10379,7 +10674,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 28557.23786415165
+    "swapTempBalance": 31557.23786415165
   },
   "0x2aeeb54525df61fcb112c00b9044a70cd0d82c0e": {
     "addLiquidityPoints": [],
@@ -10451,7 +10746,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 41058.294175
+    "swapTempBalance": 47669.914953
   },
   "0x95cd7a87bc089f37a2b7a1aa4a9b6fa647fe3b7e": {
     "addLiquidityPoints": [],
@@ -10715,7 +11010,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 19.022485
+    "swapTempBalance": 50.022485
   },
   "0x39d8ac25b3e697b61d26f34d107d93b5501635d9": {
     "addLiquidityPoints": [],
@@ -10723,7 +11018,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 220.370737
+    "swapTempBalance": 221.747905
   },
   "0x98f117fbc85cd1eb230a71fe4b021502fafde789": {
     "addLiquidityPoints": [],
@@ -10755,7 +11050,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 19104.079313
+    "swapTempBalance": 30124.988407
   },
   "0x241487dd7138e1891921c3f54a98ac515f8d6d5e": {
     "addLiquidityPoints": [],
@@ -10893,7 +11188,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 20212.501931
+    "swapTempBalance": 21056.501931
   },
   "0x7b27963aa767eec2c6692d6f7290ddb156160834": {
     "addLiquidityPoints": [],
@@ -10989,7 +11284,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 894.9358134844251
+    "swapTempBalance": 2632.176928607901
   },
   "0x535db12246b41ae4f23329a0899db4ec6f2e2903": {
     "addLiquidityPoints": [],
@@ -11013,7 +11308,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 354.584573
+    "swapTempBalance": 404.584573
   },
   "0x4f091ca3dbddc705909ce0adab28a8a7cb75becf": {
     "addLiquidityPoints": [],
@@ -11053,7 +11348,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1589.8495731993237
+    "swapTempBalance": 2778.7652374755335
   },
   "0xfa9abc223460da37cf85fc2ea1b9fc2a3d3d7b0f": {
     "addLiquidityPoints": [],
@@ -11133,7 +11428,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 306.780261
+    "swapTempBalance": 4147.506699
   },
   "0x877a285728707d170a8f9e3a9dddd4129e62c257": {
     "addLiquidityPoints": [],
@@ -11229,7 +11524,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 237.77011022215575
+    "swapTempBalance": 1335.9301102221557
   },
   "0xc6b0211146d2c5338bba34c62db7ab083ebe10ec": {
     "addLiquidityPoints": [],
@@ -11309,7 +11604,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 45334.89990039782
+    "swapTempBalance": 45374.89990039782
   },
   "0xcc82f0451ab8adba827ececea3c020c504a09e36": {
     "addLiquidityPoints": [],
@@ -11532,9 +11827,17 @@
       [
         2,
         363
+      ],
+      [
+        1,
+        432
+      ],
+      [
+        1,
+        433
       ]
     ],
-    "addLiquidityTempBalance": 197.4559646638653,
+    "addLiquidityTempBalance": 510.09748301043226,
     "removeLiquidityPoints": [
       [
         2,
@@ -11559,7 +11862,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 38023.63797248237
+    "swapTempBalance": 38075.18736848237
   },
   "0x3b7f1a4333dc213c31baf7a55afe3f3d03dd1251": {
     "addLiquidityPoints": [],
@@ -11631,7 +11934,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 6244
+    "swapTempBalance": 7641.814698
   },
   "0xf4c28e8d119a6936a6636f2dcf31db1296d0ff09": {
     "addLiquidityPoints": [],
@@ -11735,7 +12038,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 23526.329217
+    "swapTempBalance": 24531.411074
   },
   "0xf850816730a3b8ea57e0cf38edd8d8b42e266b97": {
     "addLiquidityPoints": [],
@@ -11751,7 +12054,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 13131.626958
+    "swapTempBalance": 13483.494848
   },
   "0xabc7f7d0b9fe2514eccb185bcd993019fc3ceafc": {
     "addLiquidityPoints": [],
@@ -11767,7 +12070,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 748.6454291000244,
     "swapPoints": 0,
-    "swapTempBalance": 2452
+    "swapTempBalance": 2771.02200224791
   },
   "0x0fb6a9930b05e728609761261f1b488f3b52987b": {
     "addLiquidityPoints": [],
@@ -11967,7 +12270,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2130.344381
+    "swapTempBalance": 2723.932951
   },
   "0x0920f175e75e70bef0d6518fdf3f340c0b919944": {
     "addLiquidityPoints": [],
@@ -11975,7 +12278,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 6697.651197997753
+    "swapTempBalance": 6712.231833997753
   },
   "0x9fce86d246c56c9de29734dc8475ef1750d768f4": {
     "addLiquidityPoints": [],
@@ -12007,7 +12310,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 4651.259407
+    "swapTempBalance": 7767.074582
   },
   "0x2a7f79f5bd095dd790e0637540aeb92e568faf77": {
     "addLiquidityPoints": [],
@@ -12103,7 +12406,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 30538.933195
+    "swapTempBalance": 31357.783136
   },
   "0x94f8901294cf47e8271688d273fbcfa0b2348cc2": {
     "addLiquidityPoints": [],
@@ -12127,7 +12430,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 43812.6523305116
+    "swapTempBalance": 43982.2320205116
   },
   "0x3ab1cc2cf23fbb1eca4b16ee03c35472cb1f92fb": {
     "addLiquidityPoints": [],
@@ -12207,7 +12510,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 5
+    "swapTempBalance": 10
   },
   "0x728e249785f41348f6c14c45052475f848783ade": {
     "addLiquidityPoints": [],
@@ -12215,7 +12518,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 24495.28887475212
+    "swapTempBalance": 26766.15482575212
   },
   "0x03805855bdb4cb4e59229577c3789e8345a3a99c": {
     "addLiquidityPoints": [],
@@ -12231,7 +12534,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 71
+    "swapTempBalance": 91
   },
   "0x1415974669202603c9e808aef538437337298cc4": {
     "addLiquidityPoints": [],
@@ -12271,7 +12574,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 100
+    "swapTempBalance": 164
   },
   "0x7b6812768711930791a6637aa179874fd8e1258d": {
     "addLiquidityPoints": [],
@@ -12303,7 +12606,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 71
+    "swapTempBalance": 82
   },
   "0xf589589104125fcb92cd3941c31cbc27ec4f486c": {
     "addLiquidityPoints": [],
@@ -12311,7 +12614,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 44694.005058
+    "swapTempBalance": 45761.012928
   },
   "0x7b7b1f1e6f42d47e13c81aa60f38fe7a9b01563e": {
     "addLiquidityPoints": [],
@@ -12343,7 +12646,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 12121.00500820956
+    "swapTempBalance": 12153.10212420956
   },
   "0xd97afcec57b452e81b63f73faa0debf0ac71a36f": {
     "addLiquidityPoints": [],
@@ -12359,7 +12662,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 5532.301266
+    "swapTempBalance": 7346.688923
   },
   "0x0c0fd5c6c34ebfd178d8e097316b8df38645ae0a": {
     "addLiquidityPoints": [],
@@ -12423,7 +12726,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 32665.73197039802
+    "swapTempBalance": 32670.42197039802
   },
   "0xd9d0a85ff0f73d3032b4d046d8a75bc6c8b393ed": {
     "addLiquidityPoints": [],
@@ -12479,7 +12782,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 8000
+    "swapTempBalance": 23000
   },
   "0xec08f6628d3c769f81826f98659dc6f7f41dd68b": {
     "addLiquidityPoints": [],
@@ -12567,7 +12870,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 515.7
+    "swapTempBalance": 537.7584321908539
   },
   "0x81c8318f2c734d4d4c30440933d73db1d6d969e8": {
     "addLiquidityPoints": [],
@@ -12583,7 +12886,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 15823.827864
+    "swapTempBalance": 26023.566516
   },
   "0xa8569fd9900ce9a5e565d213caa1baace3314479": {
     "addLiquidityPoints": [],
@@ -12735,7 +13038,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 1,
-    "swapTempBalance": 847.4148730000015
+    "swapTempBalance": 5140.149747000001
   },
   "0xdd66fb20b2537f7502ab3b63740c576c674701ac": {
     "addLiquidityPoints": [],
@@ -12759,7 +13062,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 12225.81963
+    "swapTempBalance": 16908.841104
   },
   "0x91d314b2f184fcc0316970ac4e5af2a067bad8db": {
     "addLiquidityPoints": [],
@@ -13247,7 +13550,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1424.5174882784434
+    "swapTempBalance": 1830.7312272784436
   },
   "0xe481a7949fec35c58100675257a7836e9e89190a": {
     "addLiquidityPoints": [],
@@ -13295,7 +13598,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 226.304007
+    "swapTempBalance": 260.958344
   },
   "0x7f2acf66dc5c192488e78c9e8d262ec8f6f37919": {
     "addLiquidityPoints": [],
@@ -13335,7 +13638,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 807.017115
+    "swapTempBalance": 1152.975427
   },
   "0x42a76e815ff251d0719c118e52ad9bc60d0025ca": {
     "addLiquidityPoints": [],
@@ -13375,7 +13678,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1203.052861
+    "swapTempBalance": 1321.9792330174691
   },
   "0x8df2ceaa48310676b305a03d784a7bbf514c5c55": {
     "addLiquidityPoints": [],
@@ -13423,7 +13726,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 38177.777321792
+    "swapTempBalance": 38179.082542792
   },
   "0xdb4cf4dc974d14b1b6a59b9587f44efaceb69f67": {
     "addLiquidityPoints": [],
@@ -13609,7 +13912,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1236.310121184001
+    "swapTempBalance": 1237.5772264874329
   },
   "0x59f363c039a0a9cb6b385982caa4963f517434a1": {
     "addLiquidityPoints": [],
@@ -13680,8 +13983,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 4,
-    "swapTempBalance": 3063.132661000079
+    "swapPoints": 5,
+    "swapTempBalance": 25454.338124325346
   },
   "0xfaa2e9ddb2cab97af2739a0da2039c996232e2e3": {
     "addLiquidityPoints": [],
@@ -13881,7 +14184,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 142.48415
+    "swapTempBalance": 143.48415
   },
   "0xa1638f5bde916a0cf465d127c09c985050b94462": {
     "addLiquidityPoints": [],
@@ -14034,7 +14337,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 9164.945
+    "swapTempBalance": 9265.076861836615
   },
   "0x6aeb56a870c928d201d0d7253a3a33e1e807ef36": {
     "addLiquidityPoints": [
@@ -14209,7 +14512,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 30.290785450407974
+    "swapTempBalance": 4354.709767024888
   },
   "0xc463046abc7db41814e69e99559645f8ff3ab98d": {
     "addLiquidityPoints": [],
@@ -14353,7 +14656,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 4.615711
+    "swapTempBalance": 106.68374848512846
   },
   "0x19239e537c20a4db47353e92964a9fef0d7522bc": {
     "addLiquidityPoints": [
@@ -14433,7 +14736,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 11987.909910130313
+    "swapTempBalance": 12018.539952763858
   },
   "0x354f7248a60eb78faf1b933e2b2128b90ee42f75": {
     "addLiquidityPoints": [],
@@ -14489,7 +14792,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 17431.790713864604
+    "swapTempBalance": 19633.343729533135
   },
   "0x87f251f0193fab0c77b22dd55e619cac2462bde4": {
     "addLiquidityPoints": [],
@@ -14505,7 +14808,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 12953.565137708127
+    "swapTempBalance": 16671.880137708125
   },
   "0x131a87d6500139181117e4bd2ab3f22a584c9439": {
     "addLiquidityPoints": [],
@@ -14553,7 +14856,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1.1
+    "swapTempBalance": 2.526586
   },
   "0x0df3a66dbc2e5b3216c9bbb731e74a7b9cc55f0d": {
     "addLiquidityPoints": [],
@@ -14771,7 +15074,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 868.9796534916172
+    "swapTempBalance": 1099.4365225303054
   },
   "0xe0711b068539bd9d0d75fccdf97add961ab476c4": {
     "addLiquidityPoints": [],
@@ -14933,7 +15236,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 15.181383
+    "swapTempBalance": 5720.571177600324
   },
   "0xfbc2e13e2782e5b895b5112bcf999cebaa270f7f": {
     "addLiquidityPoints": [],
@@ -15037,7 +15340,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 5599.865177
+    "swapTempBalance": 5691.417936
   },
   "0x375dfd9743acf7151036eade3f9550877a80e491": {
     "addLiquidityPoints": [],
@@ -15133,7 +15436,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 13140.435951
+    "swapTempBalance": 16359.19435
   },
   "0x111b456671a535e0031f7bfb3c824ea3e5860a9b": {
     "addLiquidityPoints": [],
@@ -15242,7 +15545,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 90.89813482332214
+    "swapTempBalance": 92.57568582332215
   },
   "0x5c98a31544908dcca1d6744b00eb82c7a9b9af2c": {
     "addLiquidityPoints": [],
@@ -15406,7 +15709,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 9
+    "swapTempBalance": 14
   },
   "0x3b31bea5c61735986cbeeffbb4c9b1d7eccfed63": {
     "addLiquidityPoints": [],
@@ -15476,7 +15779,7 @@
     ],
     "removeLiquidityTempBalance": 831.0856041303596,
     "swapPoints": 0,
-    "swapTempBalance": 5970
+    "swapTempBalance": 34629.880787327274
   },
   "0x9934f48aacb1009ef00250a0f0508fcd8900b0c9": {
     "addLiquidityPoints": [],
@@ -15548,7 +15851,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2454.296542
+    "swapTempBalance": 4015.011929
   },
   "0x04424dea78bca184624bcdce8eb5d7d4ef26a480": {
     "addLiquidityPoints": [],
@@ -15556,7 +15859,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 96.50796842276388
+    "swapTempBalance": 171.16286442276387
   },
   "0x2cf9d7a8e2145ee4c173c56483c0e71c426b46ea": {
     "addLiquidityPoints": [],
@@ -15580,7 +15883,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 15000
+    "swapTempBalance": 15337.077613494595
   },
   "0x050ef735d3f36cbda09cee5e66b17bd0d69e7cbe": {
     "addLiquidityPoints": [],
@@ -15623,9 +15926,13 @@
       [
         2,
         419
+      ],
+      [
+        1,
+        441
       ]
     ],
-    "addLiquidityTempBalance": 501.1296329333363,
+    "addLiquidityTempBalance": 530.5342999333361,
     "removeLiquidityPoints": [
       [
         1,
@@ -15904,7 +16211,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1702.92855
+    "swapTempBalance": 1984.827379
   },
   "0x2de764f5751595dcd05a4d746603697f8012421d": {
     "addLiquidityPoints": [],
@@ -15976,7 +16283,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1425.36
+    "swapTempBalance": 1925.36
   },
   "0x6e75457113aaa1315c6dc9406d8ae223b43deb77": {
     "addLiquidityPoints": [],
@@ -16016,7 +16323,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 11250.520523921454
+    "swapTempBalance": 17220.520523921456
   },
   "0x7ccf3ca4d9aecb1fc8465516fab48d8d835d7964": {
     "addLiquidityPoints": [],
@@ -16152,7 +16459,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3226.681802
+    "swapTempBalance": 4218.2648
   },
   "0xfdfd72c8902e6cefd548259ed473e67cda10fc6a": {
     "addLiquidityPoints": [],
@@ -16184,7 +16491,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 4560.7
+    "swapTempBalance": 6090.7
   },
   "0x9b0e5ef9f5eb8e9500718e512cf07a8819836a1b": {
     "addLiquidityPoints": [],
@@ -16264,7 +16571,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 4997.685582234362
+    "swapTempBalance": 6397.685582234362
   },
   "0x4ffbb4117a0a617b76c701df2ed147011d657017": {
     "addLiquidityPoints": [],
@@ -16280,7 +16587,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 347.331294
+    "swapTempBalance": 551.451146
   },
   "0x3fe7c5a1d07e3c8c9196d73e65e9fedfb9496cf1": {
     "addLiquidityPoints": [],
@@ -16336,7 +16643,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 20.580606
+    "swapTempBalance": 24.580606
   },
   "0xb7b9758a87b7c7446b04cd451017cb29884d6289": {
     "addLiquidityPoints": [],
@@ -16554,7 +16861,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 559.1900000059162
+    "swapTempBalance": 942.0791525986745
   },
   "0xe53cd9f9a03f6094910d803ab472be71bb3ea887": {
     "addLiquidityPoints": [],
@@ -16626,7 +16933,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 5305.807304
+    "swapTempBalance": 5425.623029
   },
   "0xb314576846a6ed34907323a8e1da59997418c91d": {
     "addLiquidityPoints": [],
@@ -16650,7 +16957,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3716.2658398713756
+    "swapTempBalance": 6862.1321141049475
   },
   "0x03d5cea2a5cf4a1e0c0e87b29fec10856a7c03a5": {
     "addLiquidityPoints": [],
@@ -16690,7 +16997,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3166.792674
+    "swapTempBalance": 3239.802488
   },
   "0xffd8c7a33439f72c3758e50ffb230dacb1344205": {
     "addLiquidityPoints": [],
@@ -16722,7 +17029,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3000
+    "swapTempBalance": 7498.360508
   },
   "0x56099e2a08dee9dbe0652b808682d8b14a82308a": {
     "addLiquidityPoints": [],
@@ -16741,12 +17048,17 @@
     "swapTempBalance": 2001
   },
   "0x566cceee233f543f2cb8e5b66446a44e2d5d885b": {
-    "addLiquidityPoints": [],
-    "addLiquidityTempBalance": 0,
+    "addLiquidityPoints": [
+      [
+        50,
+        435
+      ]
+    ],
+    "addLiquidityTempBalance": 623.7956348283333,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2124.813894140978
+    "swapTempBalance": 27429.337536287025
   },
   "0x4d4ce6d8c946dc727315bb70545a230bef4a5836": {
     "addLiquidityPoints": [],
@@ -16834,7 +17146,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 17685.051148
+    "swapTempBalance": 18076.186506
   },
   "0x0e04a263d63297a71f248b8bb605ae361f40833b": {
     "addLiquidityPoints": [],
@@ -16858,7 +17170,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 33
+    "swapTempBalance": 41.970295
   },
   "0x7c1b536d9a41362460fff74dc7f4102d0e5e5318": {
     "addLiquidityPoints": [],
@@ -17024,7 +17336,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1937.366763
+    "swapTempBalance": 2689.366763
   },
   "0x7e2dd73767e183b9d40250a1ecbf0a551d259824": {
     "addLiquidityPoints": [],
@@ -17078,7 +17390,7 @@
     "addLiquidityPoints": [],
     "addLiquidityTempBalance": 530.0256108393272,
     "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "removeLiquidityTempBalance": 799.0454425413188,
     "swapPoints": 0,
     "swapTempBalance": 0
   },
@@ -17086,7 +17398,7 @@
     "addLiquidityPoints": [],
     "addLiquidityTempBalance": 496.6834895025381,
     "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "removeLiquidityTempBalance": 752.7848016971973,
     "swapPoints": 0,
     "swapTempBalance": 0
   },
@@ -17102,7 +17414,7 @@
     "addLiquidityPoints": [],
     "addLiquidityTempBalance": 499.9999998486382,
     "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "removeLiquidityTempBalance": 765.4653878777427,
     "swapPoints": 0,
     "swapTempBalance": 0
   },
@@ -17120,7 +17432,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1537.6435239250247
+    "swapTempBalance": 1630.0798549250246
   },
   "0xbba4f105eb2a9e732aae1c941c1afced5c2f56de": {
     "addLiquidityPoints": [],
@@ -17272,7 +17584,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 11.067765
+    "swapTempBalance": 13.067765
   },
   "0x55470910a4c508c51712fcfd1b92959187820dcb": {
     "addLiquidityPoints": [],
@@ -17328,7 +17640,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 4255.797763
+    "swapTempBalance": 4407.260578
   },
   "0xb48cb1206dc579554fe50279c1c1529828788820": {
     "addLiquidityPoints": [],
@@ -17432,7 +17744,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 7141.133774
+    "swapTempBalance": 7209.632528
   },
   "0x1b0b6dbd9c0c98a0d1c9b1ed04eafd897e1ed7e5": {
     "addLiquidityPoints": [],
@@ -17472,7 +17784,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1408.878606668771
+    "swapTempBalance": 4158.867135731682
   },
   "0x45ec4da6ea598893b58d35076afdc463ea29eb1b": {
     "addLiquidityPoints": [],
@@ -17600,7 +17912,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1.4530897186254845
+    "swapTempBalance": 70.17333163141615
   },
   "0x68161e7f04a15bd4052411767347ffa8ab0bada0": {
     "addLiquidityPoints": [],
@@ -17616,7 +17928,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 20000
+    "swapTempBalance": 21592.919984164768
   },
   "0x1d0543743d49eb67b70e6c55e3d9ee1463e569a9": {
     "addLiquidityPoints": [],
@@ -17624,7 +17936,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 510.6422919696606
+    "swapTempBalance": 5873.409128567115
   },
   "0x9c93c2de18fed724d131ad74fba63557c282c51d": {
     "addLiquidityPoints": [],
@@ -17640,7 +17952,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 216.39858085517363
+    "swapTempBalance": 345.25192285517363
   },
   "0x60db218671960988ece5e7a60d1e7d37aeb968a5": {
     "addLiquidityPoints": [],
@@ -17720,7 +18032,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2403.252999741861
+    "swapTempBalance": 5681.371272468665
   },
   "0x55ecb471ae49133e4a78584ea77a80d89a50e13c": {
     "addLiquidityPoints": [],
@@ -17768,7 +18080,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 160.66959
+    "swapTempBalance": 634.337791
   },
   "0x37650482bb36a14a74dfa3b99beb40a674740f9e": {
     "addLiquidityPoints": [],
@@ -17848,7 +18160,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 680.83106
+    "swapTempBalance": 1045.806793
   },
   "0xcf913d834703a1ebc725e686cb12851c436bf179": {
     "addLiquidityPoints": [],
@@ -17872,7 +18184,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 307.334174
+    "swapTempBalance": 332.562743
   },
   "0xc91de92a44c966bc3373158d908026ee37440d17": {
     "addLiquidityPoints": [],
@@ -17904,7 +18216,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 50.723124
+    "swapTempBalance": 52.723124
   },
   "0x9dd25d7976c4a5ce40386e876dad44efc60b9e57": {
     "addLiquidityPoints": [],
@@ -17978,7 +18290,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1352.9066769919539
+    "swapTempBalance": 3366.1979133803125
   },
   "0xd2ba2ee3cd09ad649db21689bd8be775ef26a348": {
     "addLiquidityPoints": [],
@@ -18145,8 +18457,8 @@
     "addLiquidityTempBalance": 0,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
-    "swapPoints": 2,
-    "swapTempBalance": 46945.67502801231
+    "swapPoints": 3,
+    "swapTempBalance": 26387.83302801231
   },
   "0x62cbfe4352a0f3517b012a7a261c677ab0800042": {
     "addLiquidityPoints": [],
@@ -18234,7 +18546,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 382.3125893499123
+    "swapTempBalance": 395.73100973904644
   },
   "0xe4f597ba15260e1a14a0c4b826216c275f85f2e8": {
     "addLiquidityPoints": [],
@@ -18258,7 +18570,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 110.33474882720739
+    "swapTempBalance": 120.33474882720739
   },
   "0x52f2bbf451bce28f0aff8b284e9fc6f5b89615c9": {
     "addLiquidityPoints": [],
@@ -18266,7 +18578,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 13.942484
+    "swapTempBalance": 27.942484
   },
   "0x775b202085eb47af96dcfbb0a243786ac0bce9a5": {
     "addLiquidityPoints": [],
@@ -18330,7 +18642,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 5.566214583317906
+    "swapTempBalance": 8.403225229074065
   },
   "0x69d3e60f17f101cc188b4120a4a64593228b4efa": {
     "addLiquidityPoints": [],
@@ -18338,7 +18650,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 130.98083842144578
+    "swapTempBalance": 170.48510848068503
   },
   "0xad4e01f3f64216c9a1bb3206b3583770ca2d25d4": {
     "addLiquidityPoints": [],
@@ -18362,7 +18674,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 333.6002665618113
+    "swapTempBalance": 390.83599193809926
   },
   "0xfcb181b7193dd42a3db9b314fccbe58fb5c6038a": {
     "addLiquidityPoints": [],
@@ -18378,7 +18690,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1081.287212
+    "swapTempBalance": 4835.442908
   },
   "0xa9ddacb6d2117d2aa91b1582dd3a99d36d2de254": {
     "addLiquidityPoints": [],
@@ -18466,7 +18778,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 23.03617477539267
+    "swapTempBalance": 6739.286174775392
   },
   "0x1d323075098440fb926c945507dfa31073ab47c1": {
     "addLiquidityPoints": [],
@@ -18490,7 +18802,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 339.8136265113402
+    "swapTempBalance": 2839.1156649161267
   },
   "0x4cf28535921748f52ae901de8e49fa5c5d7070bd": {
     "addLiquidityPoints": [],
@@ -18506,7 +18818,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 236.3087698871234
+    "swapTempBalance": 478.15840861493706
   },
   "0x8004ebf06d661fd32ed50ac3b0b52cdb47063005": {
     "addLiquidityPoints": [],
@@ -18514,7 +18826,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3
+    "swapTempBalance": 8
   },
   "0x30ac46c10da498207f67c90ecfa069220827e7ff": {
     "addLiquidityPoints": [],
@@ -18570,7 +18882,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1170.925831
+    "swapTempBalance": 1417.603223
   },
   "0x8166c06878421f56761d0765193025e18dc00a0f": {
     "addLiquidityPoints": [],
@@ -18594,7 +18906,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 8.948914
+    "swapTempBalance": 838.879733
   },
   "0x90fe00a63861201949b3166db552f20620ca3304": {
     "addLiquidityPoints": [],
@@ -18634,7 +18946,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 265.28307886374444
+    "swapTempBalance": 308.2637862138147
   },
   "0xcf164cae35ade4554cf8127ee965a7354145c264": {
     "addLiquidityPoints": [],
@@ -18874,7 +19186,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2934.093331
+    "swapTempBalance": 4999.325749
   },
   "0xeeca4b54530617a235084f917160a342ea954156": {
     "addLiquidityPoints": [],
@@ -18914,7 +19226,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 7250.809009693077
+    "swapTempBalance": 7302.917595913744
   },
   "0xed15ed72f9cbd4689c2cb05834f72f04049ae0b2": {
     "addLiquidityPoints": [],
@@ -18945,9 +19257,21 @@
       [
         11,
         405
+      ],
+      [
+        4,
+        444
+      ],
+      [
+        5,
+        444
+      ],
+      [
+        56,
+        444
       ]
     ],
-    "addLiquidityTempBalance": 720.0957670000007,
+    "addLiquidityTempBalance": 221.35699900000327,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
@@ -18975,7 +19299,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2306.933131
+    "swapTempBalance": 2309.745862
   },
   "0xa90ffb8b8f3c673149acd8439b0fb0a88c7d8221": {
     "addLiquidityPoints": [],
@@ -19015,7 +19339,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 267.129861
+    "swapTempBalance": 303.019233
   },
   "0xf76b39d680d006e6350376ac08e1654f4799d63a": {
     "addLiquidityPoints": [],
@@ -19047,7 +19371,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 17
+    "swapTempBalance": 414.945697
   },
   "0x4e66bc47c0c5316171f0b3b626f13cd479ae51a5": {
     "addLiquidityPoints": [],
@@ -19055,7 +19379,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 150
+    "swapTempBalance": 2150
   },
   "0x7a0282d7b0aa81d7d443de0ac5cb4a84b43a4a52": {
     "addLiquidityPoints": [],
@@ -19087,7 +19411,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1250
+    "swapTempBalance": 5062.84
   },
   "0xccb4116bc28eef3c21e636aca0cbb2fc77e02908": {
     "addLiquidityPoints": [],
@@ -19111,7 +19435,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2995.746
+    "swapTempBalance": 5635.915116253896
   },
   "0x8c0fa41ba69f4ef91707974432aeec4c6c2f52ce": {
     "addLiquidityPoints": [],
@@ -19119,7 +19443,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1790.053729869442
+    "swapTempBalance": 2849.5790736938097
   },
   "0x0bf53a407e5327d63f5aed61e099701d73399637": {
     "addLiquidityPoints": [],
@@ -19255,7 +19579,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1237.420845
+    "swapTempBalance": 1547.289163
   },
   "0xb252cac4280a637de16aec8abf991f455e0767a3": {
     "addLiquidityPoints": [],
@@ -19263,7 +19587,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 278.657601
+    "swapTempBalance": 336.509522
   },
   "0x9420d6b5922fdbc01e84ece134dddefd51eed5a9": {
     "addLiquidityPoints": [],
@@ -19287,7 +19611,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 68.754813
+    "swapTempBalance": 69.574642
   },
   "0x3aa76d7187119bf32c6d45bc7d9ac32fa54c2c3a": {
     "addLiquidityPoints": [],
@@ -19367,7 +19691,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2288.5
+    "swapTempBalance": 2493.0011407174684
   },
   "0x2b716e47f195646364d5710759c7a1bfdd5733a2": {
     "addLiquidityPoints": [],
@@ -19399,7 +19723,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 7.269074
+    "swapTempBalance": 244.532741
   },
   "0xbeb2605b75d87fdd7245c4f41dbf58855d59aee2": {
     "addLiquidityPoints": [],
@@ -19438,9 +19762,29 @@
       [
         1,
         428
+      ],
+      [
+        1,
+        432
+      ],
+      [
+        6,
+        435
+      ],
+      [
+        1,
+        437
+      ],
+      [
+        5,
+        440
+      ],
+      [
+        1,
+        442
       ]
     ],
-    "addLiquidityTempBalance": 409.67104517618,
+    "addLiquidityTempBalance": 96.22071753654495,
     "removeLiquidityPoints": [
       [
         8,
@@ -19453,9 +19797,13 @@
       [
         7,
         429
+      ],
+      [
+        2,
+        433
       ]
     ],
-    "removeLiquidityTempBalance": 620.6416688558411,
+    "removeLiquidityTempBalance": 106.23445683410864,
     "swapPoints": 0,
     "swapTempBalance": 0
   },
@@ -19513,7 +19861,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 340.76
+    "swapTempBalance": 348.67
   },
   "0x93f59ed7262734f390328d248e103a93c033e913": {
     "addLiquidityPoints": [],
@@ -19537,7 +19885,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 279.54678
+    "swapTempBalance": 1305.26791
   },
   "0xfc8b589af465140a7ef68223c350dec4035e2723": {
     "addLiquidityPoints": [],
@@ -19593,7 +19941,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 43.734887529633056
+    "swapTempBalance": 129.31735221742883
   },
   "0x6e64ef1a99666d80d53c464098ce79b63a1e792f": {
     "addLiquidityPoints": [],
@@ -19601,7 +19949,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 82.71439174394325
+    "swapTempBalance": 166.08195937076087
   },
   "0x4df7bb9de61eaa0e4242c61d882cb3bea653b066": {
     "addLiquidityPoints": [],
@@ -19609,7 +19957,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 13662.085257
+    "swapTempBalance": 14529.085257
   },
   "0x7ccf8476d43aa54844378da5eec25ae2aa40393c": {
     "addLiquidityPoints": [],
@@ -19633,7 +19981,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 58.52409892246856
+    "swapTempBalance": 91.38469997939826
   },
   "0x2de398df29a5d668eee6fef7ff15619a39f7fe07": {
     "addLiquidityPoints": [],
@@ -19689,7 +20037,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 594.94752
+    "swapTempBalance": 1264.983558
   },
   "0x89236262678c8b97770ba423a3451f5462bd3ae7": {
     "addLiquidityPoints": [],
@@ -19721,7 +20069,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 963.493461
+    "swapTempBalance": 994.484786
   },
   "0x2958c1de13fee8739aa8ba165de9dc930b7c910c": {
     "addLiquidityPoints": [],
@@ -19846,7 +20194,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 5250
+    "swapTempBalance": 5265
   },
   "0x055eec6a3c80a646daf3d9b331f0b40fd3543d5e": {
     "addLiquidityPoints": [],
@@ -19918,7 +20266,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3189.8380502003606
+    "swapTempBalance": 4184.83805020036
   },
   "0xb8461620e1ccce281327edce7bf741b435f857ad": {
     "addLiquidityPoints": [],
@@ -19937,11 +20285,28 @@
       [
         1,
         419
+      ],
+      [
+        15,
+        438
+      ],
+      [
+        56,
+        438
+      ],
+      [
+        10,
+        438
       ]
     ],
-    "addLiquidityTempBalance": 499.99999996446036,
-    "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "addLiquidityTempBalance": 794.5925818367796,
+    "removeLiquidityPoints": [
+      [
+        14,
+        432
+      ]
+    ],
+    "removeLiquidityTempBalance": 880.8528300675498,
     "swapPoints": 0,
     "swapTempBalance": 0
   },
@@ -19983,7 +20348,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 243.350139
+    "swapTempBalance": 412.784235
   },
   "0x48c62dfb99dd02c35b4211be6b1d3a0f05948c4d": {
     "addLiquidityPoints": [],
@@ -20031,7 +20396,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1180.8680424318266
+    "swapTempBalance": 3214.5656124927036
   },
   "0x492d9b580a23e45a57a94934eb46d13e0b295e61": {
     "addLiquidityPoints": [],
@@ -20071,7 +20436,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3034.273605
+    "swapTempBalance": 8676.606215
   },
   "0x0d6340d4fffbab52e1a81a73349a31630db6f4e2": {
     "addLiquidityPoints": [],
@@ -20159,7 +20524,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2.403868
+    "swapTempBalance": 1041.798908
   },
   "0x93c45a1f71e0a789b4bad14ae8e43e17ab397767": {
     "addLiquidityPoints": [],
@@ -20239,7 +20604,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3341.08
+    "swapTempBalance": 5657.70765
   },
   "0x1d2a76b6045c9f5ebe2a7c1be87bc3d5243d0566": {
     "addLiquidityPoints": [],
@@ -20263,7 +20628,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 3.603363
+    "swapTempBalance": 999.950722
   },
   "0x94cba6df5540cc08f6b930c19f1da5dc10c8a74f": {
     "addLiquidityPoints": [],
@@ -20319,7 +20684,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 23.733993
+    "swapTempBalance": 31.344187
   },
   "0x5d6d1d60c41db51e5970c915f3791b06ed4c88b4": {
     "addLiquidityPoints": [],
@@ -20369,10 +20734,15 @@
       ]
     ],
     "addLiquidityTempBalance": 201.51055999999994,
-    "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [
+      [
+        1,
+        441
+      ]
+    ],
+    "removeLiquidityTempBalance": 477.4622655351304,
     "swapPoints": 0,
-    "swapTempBalance": 0
+    "swapTempBalance": 987.04
   },
   "0xa8d8362bf732125ac28d8461ed41e558b885f9ec": {
     "addLiquidityPoints": [],
@@ -20388,7 +20758,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2
+    "swapTempBalance": 3
   },
   "0xf63c8191c04e60a3d73edd7302444ec3aaa8c221": {
     "addLiquidityPoints": [],
@@ -20396,7 +20766,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2433.910648
+    "swapTempBalance": 8093.910648
   },
   "0x42d2e9c0cc7bd9d2e624d7b8b8913af543c9219c": {
     "addLiquidityPoints": [],
@@ -20412,7 +20782,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1062.066713
+    "swapTempBalance": 1065.066713
   },
   "0x0bc8fadcdc3702a4902e7db935c3f64214c301d1": {
     "addLiquidityPoints": [],
@@ -20436,7 +20806,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 4785.868193049852
+    "swapTempBalance": 4892.868193049852
   },
   "0xf27f8d91c7e32aa2ce2971c7d9579aabfd307b26": {
     "addLiquidityPoints": [],
@@ -20460,7 +20830,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 32.972166
+    "swapTempBalance": 259.9101971178745
   },
   "0xb49b3f9dbb56829ef96750ceec1361cfb8cc1cc9": {
     "addLiquidityPoints": [],
@@ -20514,7 +20884,7 @@
     "addLiquidityPoints": [],
     "addLiquidityTempBalance": 198.66758,
     "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 18.30054785209303,
+    "removeLiquidityTempBalance": 216.95588566651546,
     "swapPoints": 0,
     "swapTempBalance": 400
   },
@@ -20532,7 +20902,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 3.708110122816581,
     "swapPoints": 0,
-    "swapTempBalance": 8
+    "swapTempBalance": 18
   },
   "0x88722c3947d30ee92ad97d5dfd7d6cd8fa1c2ee2": {
     "addLiquidityPoints": [],
@@ -20544,7 +20914,7 @@
   },
   "0xe4bae5b50eebd7e19880d0cecabbf9d9eef45a81": {
     "addLiquidityPoints": [],
-    "addLiquidityTempBalance": 5.704686,
+    "addLiquidityTempBalance": 96.14185,
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
@@ -20564,7 +20934,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1755.8259856956372
+    "swapTempBalance": 6871.107049058471
   },
   "0xe17711cfd29cff173148ffff109d7473e33268f5": {
     "addLiquidityPoints": [],
@@ -20660,7 +21030,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1000
+    "swapTempBalance": 6000
   },
   "0x8052a41030506c21adadc1a5653bc1ff09416210": {
     "addLiquidityPoints": [],
@@ -20668,7 +21038,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 388.06149305503453
+    "swapTempBalance": 710.863627275974
   },
   "0x37d386ba762b5b0dac14edb56c5dd9fcb3fd4364": {
     "addLiquidityPoints": [],
@@ -20748,7 +21118,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1542.423888
+    "swapTempBalance": 8613.702248
   },
   "0x8143ce34c83a6a209cb64c61e9d889a2aa3ffc5b": {
     "addLiquidityPoints": [],
@@ -20772,7 +21142,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 260.1978633087651
+    "swapTempBalance": 1693.662637611593
   },
   "0x8d938074dc071ba6868b467a5c96be62732b0ede": {
     "addLiquidityPoints": [],
@@ -20780,7 +21150,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 12.92014
+    "swapTempBalance": 133.327195
   },
   "0x26191a7cd14753f989a0b6f7747c356479bd4e0c": {
     "addLiquidityPoints": [],
@@ -20796,7 +21166,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 16.145373
+    "swapTempBalance": 842.16628
   },
   "0xc4528318e709a70a6a13e349f58ae088036fb4ac": {
     "addLiquidityPoints": [],
@@ -20836,7 +21206,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 6114
+    "swapTempBalance": 6772
   },
   "0x59c1ba2216c5eb1d6bae1cfe446d23836d0d2716": {
     "addLiquidityPoints": [],
@@ -20868,7 +21238,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 0.594936
+    "swapTempBalance": 198.108584
   },
   "0x9da26534c87ac810807a26c3a8e7984caeb91a76": {
     "addLiquidityPoints": [],
@@ -20892,7 +21262,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1500
+    "swapTempBalance": 3800
   },
   "0x07ae8aabc74830afeea186aed7d5c4febdbdff1b": {
     "addLiquidityPoints": [],
@@ -20900,7 +21270,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 1.96
+    "swapTempBalance": 6.96
   },
   "0xd6252baa84f569813416b5cd32d6a50857d570e5": {
     "addLiquidityPoints": [],
@@ -20928,11 +21298,11 @@
   },
   "0xfc5804f43c97844eada94964e2135465bcb89f53": {
     "addLiquidityPoints": [],
-    "addLiquidityTempBalance": 0,
+    "addLiquidityTempBalance": 285.7417847540298,
     "removeLiquidityPoints": [],
-    "removeLiquidityTempBalance": 0,
+    "removeLiquidityTempBalance": 290.89348655608035,
     "swapPoints": 0,
-    "swapTempBalance": 41.98156510393986
+    "swapTempBalance": 6077.814045885716
   },
   "0xa4cc98344a131579fcf3f6e98c88f8000941bb9a": {
     "addLiquidityPoints": [],
@@ -21012,7 +21382,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 0.6
+    "swapTempBalance": 13.6
   },
   "0x26b8895ee9ad53ea1725f8373c7380c39e0b2ab9": {
     "addLiquidityPoints": [],
@@ -21076,7 +21446,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 64.6426985696379
+    "swapTempBalance": 113.61820661532164
   },
   "0x1d5a5d69f5223ef197d6b0aadc907103d6eeea49": {
     "addLiquidityPoints": [],
@@ -21084,7 +21454,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 2370.415442
+    "swapTempBalance": 11256.414313
   },
   "0xbef300d742d0b83b24f2e5bc0519fec612aa3091": {
     "addLiquidityPoints": [],
@@ -21092,7 +21462,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 116.664057
+    "swapTempBalance": 406.842973
   },
   "0xd0adf5983e924d07585164d6ee0f10c04d12e6f2": {
     "addLiquidityPoints": [],
@@ -21156,7 +21526,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 6.464565
+    "swapTempBalance": 7.464565
   },
   "0x7c40569b83d5f8edaabc398d079b0bd331b9e209": {
     "addLiquidityPoints": [],
@@ -21201,7 +21571,7 @@
     "removeLiquidityPoints": [],
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
-    "swapTempBalance": 12633.135487
+    "swapTempBalance": 25972.824991
   },
   "0xe5a168e6308020bc84651618c28a2601a0195d47": {
     "addLiquidityPoints": [],
@@ -21218,5 +21588,2105 @@
     "removeLiquidityTempBalance": 0,
     "swapPoints": 0,
     "swapTempBalance": 6.468792
+  },
+  "0x15988c9fc46c4cfaf0ff2d38b77ed8f000a0e8e5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 59.89822
+  },
+  "0x91df80af2bf65170ad661b866ca7baa8e58b6a5f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3802.921097
+  },
+  "0xba067f23fd7be531736f0fcb339098080620b7d9": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 581.2471002753003
+  },
+  "0x3f6db602f699148d361a0d65efdd3f985e49e8f4": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2.3
+  },
+  "0xc04a2470ad6774610321f454314cfa61848590a0": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3
+  },
+  "0x76d50ce26347ce1a2efa6186c08513107038882d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2
+  },
+  "0xdcfa885bb6058d4c902c5639003e7fec0583840d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1
+  },
+  "0x108c76e9a284a3d60f537c666e3114a0be3e04fe": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1
+  },
+  "0x0bc693b31339238e9fd4b2b7c6399751b17d386d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 17.23
+  },
+  "0x2e87655a81cf587470736ddf30d70d4c328db6a4": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1498.216422357553
+  },
+  "0x0e5210e28669634f32da5ccbdaa7b8233de2ea51": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 220.671867
+  },
+  "0x10e6fa4a94516c5e65675d6e828822c1dc52a150": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 33.88418441333268
+  },
+  "0x35fcb20e00c7d655e2dbfd3011b8f12ff5474824": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1492.5
+  },
+  "0x3b72a43d49219db2fa2f32b7e36cf7dd364fdc45": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 71.772961
+  },
+  "0x269404bfcaa2aca2e7d0872c059d0f47222a679c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4211.835
+  },
+  "0x76691d5e3a01fcd209b49f92a0ca84bfd3664c14": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 150
+  },
+  "0x31b254da329fbb20646909828197bc4b20357900": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 65.83236116408958
+  },
+  "0x56530d9d48544b1a4bdeaaceddd66c0646a575c2": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 547.25
+  },
+  "0x3f5a1611cbfccf64532e27df8fc45833f6018604": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 485.32364711260044
+  },
+  "0x8a508e2973ffadfed8232dbd36c4718600537a76": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3
+  },
+  "0x8df468429b63c1840c98f732f9f91a79d66ca0b8": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 14.925
+  },
+  "0x0b8fa93658706e8716150e8816dbfe644709d556": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 520.0118352003482
+  },
+  "0x529ee8bfdd81cc6a8de82671739ccb90eef1f1c8": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5
+  },
+  "0xe7424b87ea303a684e90887a22a35b330369d458": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2.649863
+  },
+  "0x526823962f616a0e44d17117c499d131792868af": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4
+  },
+  "0x0c0eec069ffe8e51bdf5729c2138a345382d49d2": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5
+  },
+  "0x3ff9845d2e81cceaac25633c4615d0727867af48": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1764.348448
+  },
+  "0xe0e6b802f0a37ba0b72954623cb38507bab68202": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 454.94961
+  },
+  "0xfcaa5699e167002e7d2d6721e578e084d6ee563a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 19.4
+  },
+  "0x83102f608a750b36049d88effbbc2f77b5adec8d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1262.0851635
+  },
+  "0x494c54af8fe157f4eb015dc118710cfa0f44f33a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3073.429472930962
+  },
+  "0x649114c3d06eca9f273a4d7e841a9db573728619": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 12.712681210679785
+  },
+  "0xb040cb20083457495dd472d16d270580573a993c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2780.209252
+  },
+  "0x016d2e11d1b65f58cb85356da54bd981592e4107": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 591.866677
+  },
+  "0x8c91fcd5796fa54646bfd076b3464d478037691f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2182.573209
+  },
+  "0xf91095ef88659383ac99cb950d3ac2c0fe42969d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 382.197307
+  },
+  "0x4d37676542d2170f464557455563c093e1ba1429": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10
+  },
+  "0x290cd900dc1bbfe263c29588507883f65338150f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 465.835124
+  },
+  "0x69450525aa9b0a4663ebfd0c7f1b1444563dee46": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 430.75253190049756
+  },
+  "0x0a5c908cb5f3ea97c59cc6a648cc03689617b690": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 766.8528385748839
+  },
+  "0x978f37c372d8d595b3f1495ea24c68255c7352e5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 597
+  },
+  "0x5bdeb1b88a842384421ec4ff84ce2eb848a35ea7": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10
+  },
+  "0xbb4d8a602db00775953704049c2e56c7983a5cd7": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.32
+  },
+  "0x86e2af80135975e941422d50894e0b4159a209c1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.25
+  },
+  "0x8a24b6017f94352d8c39536563882b02ae4923f1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0x2d6e77f464511a7f9b20017da3dbe51bb7ebc907": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0xdaa8ddce60c258884d1e920e2a25567e9bbcf26f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0xbea181d5c35f15ff0b9aba5adb97b968ba3f52af": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.3
+  },
+  "0xab6c0f6411eab68cd5f547c9a91c25f870e8a946": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0xb224cef69eaf37113a94bdd61b2e33199d1d44ee": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 633.2037994408876
+  },
+  "0x575f036e589a386644def2edbe0c83bad60aa5b2": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0x0310d460b1f85812d8cbb7d38a1457e4c365ecfa": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0x51eedd1430f49c60514e6aab77d1d88dcdef4d14": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0xa76f07ac4b6138a7b21196120ebc267c750b7c5e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0x4da4b71f40cf85507886f1b4b3df4028ffa9791e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0x0241a81e2db677911d83d0ac83f3c83ccd419f6d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0xae37eef8dfd4dd830b1a99882c0c393caf81dc02": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.945155475
+  },
+  "0xad5ec9575fe6f50fd881d9a18a301894f75b3313": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 70.426985
+  },
+  "0xe137f628e2d0f0b5fd7a43ed01ab891fea5b3444": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.3
+  },
+  "0xec286167e5e7f1bf059d6a54f0e075ffbe87aa8d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.2
+  },
+  "0x9e93216c5ec33ffaabee1ed06a4c8315c0a2af8c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1.7
+  },
+  "0xb80ff9d524771cd53ad1281aabec3fd893060b63": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1.17
+  },
+  "0x23ebc841f209a25a7222d7f6d9ace0d097c755cd": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 8
+  },
+  "0xfa01becc3343fb9e6ed5498ecf673e239e54fb09": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 665.069251631637
+  },
+  "0x519b7b00171a0788d585b68a1f1ba3ba8553e706": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 343.946625
+  },
+  "0x6f41a6b1af9d0343643eebf2806ae010fee6b3fe": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 389.142176892332
+  },
+  "0x278761e2ca89684d6b95ddc8a2fa164ffb763d5c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1377.3914564297402
+  },
+  "0x577911da3d3e900b02034c074ed58471ef4d68b8": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3.7
+  },
+  "0xc1dd4fb4d4647f758fc1ea7eb0dfde3f4c1ae078": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 7.143682
+  },
+  "0x6f397ceee5fb92f9dd0fa3aba39d700eb9583d2a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3094.45
+  },
+  "0x1f3eff6ca1510e9e6ddd6d3c092b8e109e757dde": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 995
+  },
+  "0x5aabbe3559cca37eec280ec8de70cd6a9705fa80": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4471.745843925922
+  },
+  "0xeb81ff4800931493920d013adf81b4af00bd38fa": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 9984.386256903896
+  },
+  "0xebe33bf00050f7c1f51fb192dc5dc952dfe3cdbf": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 90.36007679765356
+  },
+  "0xccc02025ea35dc6f253e7623e4188503e80b8ddc": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 93.08181421720697
+  },
+  "0xfff1c0a45ebde4bd164c3bd2c5de2a56a75ea097": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 94.62147269671812
+  },
+  "0x06f31f4b6bee226ebe2b83a2ce1d6fa937049b24": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1990
+  },
+  "0x13aca672bc12560d81c6af4aa3617aca894bd2c9": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 21.365063
+  },
+  "0x744a6bc5548a4799fa071bc0f47ef70fe0414a45": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 92.48571803532381
+  },
+  "0xe33251460b2ae49470fc592661c8926ad8cbc3ee": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1195.6367103091757
+  },
+  "0xe3f6525aa7fd4476a36fa2667205802ac2ada015": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 9999.999716
+  },
+  "0x81c40a18efb7d8342ea4368a8dcc467209fabf07": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 9725.338128070172
+  },
+  "0x752d82f7f045e0cb02a6e17fd77cae8242ba36e9": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 9594.6968752579
+  },
+  "0x7e7d8867cde67213350877f31a81dacdda1444c0": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 235.1251460428
+  },
+  "0xf46c3d4c886d64f5bb16e591ec990a794d8a4ce4": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 497.5
+  },
+  "0x6a5076f9bdd5c798683f9821da8b2e5d16179713": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 271.8888183882162
+  },
+  "0x14cd2785a9f0487cd2623802d73118ebed1a633c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4763.718010545038
+  },
+  "0xa4a810316ee7c3c9ae7f2a81daee6cec98ec171d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4.9
+  },
+  "0xb9592b56bd2d0f995a48e128594be3b32cf8bc58": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 40
+  },
+  "0xf507e74399012f1fdeab1813c024775e38b9d13b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2.39
+  },
+  "0x986d555c8e0dc3213d69e048e8ac8d0a33fbb731": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2065.456487990624
+  },
+  "0x5f2e50286867d76318e55a5fa0103526e7e6cd0e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10
+  },
+  "0xca36f65c0063f4fcd2cedb620d3fd6be4df9a41f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1966.12
+  },
+  "0x2ee618637a23d2fee9fac050f393f05621c8f2fd": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 235.815
+  },
+  "0xa69904c7c1cbcbc99a1cd43d3294a94ebe56b37c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 541.8706579618361,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 542.2389846477894,
+    "swapPoints": 0,
+    "swapTempBalance": 693.136266
+  },
+  "0x735e6aad807e4bb8b2b5c543d82f9d2484d140c1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 660.0846043597807
+  },
+  "0x009b0d96010e70f166993c3cac958857b0824144": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1489.47847753995
+  },
+  "0xce0aaf3ebaef52a35759a306e2c8a58d9820ba51": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 7
+  },
+  "0xea3d47d54200467f602c17c397af86da6223dbf5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 99.5
+  },
+  "0x9736ad8190b4f8af66132bac0da7aabfa2a7edb1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 12
+  },
+  "0x0197d6d3cd41a133007fc1a0d2c645ebf370b21a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 83.38046360405019
+  },
+  "0x32aff1dae1f094c1977c1175b4e8f23659cefa70": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3.04
+  },
+  "0x97e5bc822cbd098bc51ce07c8f898a534639100e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2
+  },
+  "0xab08c051b8e142e684975343f74a7e2719e9f0ed": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 30765.582637
+  },
+  "0xe6f1392a0ad40dc0a462c01d3bb7655796f7dd9e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1050.005909568013
+  },
+  "0x1418c6c30ca4e8819162072ec65fef855a25299e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10.3
+  },
+  "0x0ec56793010affb71cd6de35fbefbe950b848a98": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1309.5124966619605
+  },
+  "0x9b13bdb78e9b7b9677fa5fe8cd8b9c354d25a7e1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2.45
+  },
+  "0xb2bab2bb10d7e564d74a0e28b3d71e9c4d591f20": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 241.984995
+  },
+  "0x443aa69b88a527a6e2f2c950f80b0c8c838820ee": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 6
+  },
+  "0xdfbb8e0aad6a964c22ca6cf731c29fe8fb797577": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2
+  },
+  "0xba5fe4b5b8d517635a0c6379ebd7dea21bc90069": {
+    "addLiquidityPoints": [
+      [
+        4,
+        434
+      ]
+    ],
+    "addLiquidityTempBalance": 5.038610000000062,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5088.076921529603
+  },
+  "0x91181ce6807af94b42992cdbac7c032626fa4dc5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 13376.67001744272
+  },
+  "0xddf2af23288773816d470d879fab1ec64bf2732e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10141.453696733619
+  },
+  "0xf88dac24263c9451786912f6cde06ee80f8c42b3": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2073.1852329278754
+  },
+  "0xe7471c1748d65a6bf37ba14f23e8b0c021079031": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 596.3963665937
+  },
+  "0x9feb0d4353dfdb9946dd599ea6da772e8e947dcf": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 206
+  },
+  "0x54b4e1b7e4d166761f279529129eb87fe5e20c27": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1249.570423308584
+  },
+  "0x9ffd2896424f25ac2a92ab85545135e778cdfc0b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2103.016068820174
+  },
+  "0x5619d3362cebf41babdc89b088cf1320490685e5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 9950
+  },
+  "0x22600a6a6ae8d136c2dc40f945390d388259b6f5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 581.962298
+  },
+  "0xf6c5dcb5bd38e189dfa1c2087a661e0ee1728afb": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.971966
+  },
+  "0xa926ab53e1c6e459759cf50772693a3586d7d942": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1733.9745710081825
+  },
+  "0x69c603c0532fc053dacb1567512cec413fc81759": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 57.1663540118875
+  },
+  "0x9d03832a1e051b03239a20e09ce1cc3ef8dd3538": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 29.353885
+  },
+  "0xae1f46de7dc9ae73514d7ee1ac6a71541eff5a6a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 14.146902
+  },
+  "0x98b4bc4c05aa78a01a25630e91e6a03d8fb2497d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0.6352839016170638,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0.6352611182162385,
+    "swapPoints": 0,
+    "swapTempBalance": 0
+  },
+  "0xff141a7c78a38bb5886ca812c0c5c188fec4c819": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 14.381519
+  },
+  "0x65b56e829212ee8e4cb279930c93686efe82d2be": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1.4216578471688397
+  },
+  "0xd55247da73cbbd4e26672012d8e9b3d155f85b87": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4975
+  },
+  "0xb327a5ec2a1fa8616049b67dc0b07d99669c71ef": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 2,
+    "swapTempBalance": 21035.017458571074
+  },
+  "0x4583ea4b63c51747a6d062c5f135c93d34f25531": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2.5
+  },
+  "0xd06e76e0dcbd77341000189edc9e2518fd130545": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2617.85
+  },
+  "0x784d847decb086a0139e393bb0ccb14cb856e407": {
+    "addLiquidityPoints": [
+      [
+        2,
+        437
+      ]
+    ],
+    "addLiquidityTempBalance": 45.59740600000009,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2050
+  },
+  "0x8b99a3d44d06afeeabe5c3f722273c07c800766f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 516.4954668949418
+  },
+  "0x0c8ed9bc4acec994efa502ce32f10119872a48fb": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 94.316692844625
+  },
+  "0xce4a0ace6214a27a7cbf98b213c1698791e8804d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1.4863779225719254
+  },
+  "0x0caad9f6a2afb69e0f4430296c26c2e024ae1c61": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10
+  },
+  "0xd34cd315e5222fbf74a348efc93d17cca62ba78f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 143.451473
+  },
+  "0xce1fc71445876745241852852bdc3a3198e71d08": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 943.3576083767966
+  },
+  "0xdfe8e7a1e95e6ca82641b7c127e8cdf0515dd27f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 6188.884441793164
+  },
+  "0x526db1c78617c90ecd60ad7d26f38c699d2c0d48": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1990.00199
+  },
+  "0xed2f7f2cc5f86ea724f7001bd3487db096772849": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4710.04983951169
+  },
+  "0x3b4deac7e1074587d25c80c2e4630b4417cfca1b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 1,
+    "swapTempBalance": 29363.53
+  },
+  "0xcdc4d6704a8fca194a3167f341c480e3fa86b8f9": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 9.95
+  },
+  "0x78a555009f7e239510540469c9852152dba78aff": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 14.145500343535437
+  },
+  "0xc22769d56077365e1538b1e2004c5a992a4f1a25": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 183.1
+  },
+  "0xa4f749a9c8a048776fc374e76fca99dc8c48dc27": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 1,
+    "swapTempBalance": 11468.03569301773
+  },
+  "0x6b00f6edf9b039931f172eb9a276f6978f1d80db": {
+    "addLiquidityPoints": [
+      [
+        1,
+        441
+      ]
+    ],
+    "addLiquidityTempBalance": 609.8200429779947,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 179.66253668231644,
+    "swapPoints": 0,
+    "swapTempBalance": 4498.736934
+  },
+  "0xe41dd9139a37c90bec032e631440a0bb580932ab": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1975.075
+  },
+  "0xa2f9a339b8a54c2a47c245854016420fb86f57fb": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 9950
+  },
+  "0x9a03fb92e7bd62f537e45ef2a1f646c2213c9bda": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 11144
+  },
+  "0x27fd8556a6f5541a20ed29367101656c993d132b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1901.342475294147
+  },
+  "0x43291a8cbc336d2e34418bf0c7c62542512654af": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 272.921289
+  },
+  "0x8fecde4ed754b9f502848cdcdc89203d711934d8": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 474.58142188311365
+  },
+  "0x8e3958048eaef6185a30804281a07cbf64eb323b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1.485133
+  },
+  "0x67788aff55632056540983975a825e366410436c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 11.164233558631537
+  },
+  "0x6926f5244495cb218f58cbed4dc0f06c58c1b4f7": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 153.629989
+  },
+  "0x6b0cd3bdd122b5c83f4caeb284bb56df8b7cf21c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 15000
+  },
+  "0xc4a7157900756e585507ce650563874210e247e4": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 95.788584
+  },
+  "0xd676a3c480ac9483e8ca83affc28ca8aac4da8d5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 62.719322
+  },
+  "0x3d353d7ebd37e6dcaa69cab3ce9a3b5f91de1db1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4732.895486410183
+  },
+  "0x50a5573a22dffc1bb4f7bbc877ce9c161114d45c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 26.467201
+  },
+  "0x01b85cae5005a8675d0f6e3149b5cacd77870ee4": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 562.258592
+  },
+  "0x38506b692a558ef21f24d4fdff0c433e6a36e921": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 266.625537
+  },
+  "0x8b7313e73a63267809c30e09f646089f10133eb9": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1.297369
+  },
+  "0x26621331d237890d00c4ba7a0b540daf9d1ba336": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 70
+  },
+  "0x8f13ab7b75e0c75c4f52944d36bbaca303e362e5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 132.02681131242437
+  },
+  "0xe0b0a6cc40a9770cd93f6dd382e93934642df88a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 531.197369
+  },
+  "0x3428f5def3a3e14f50845b34505dff30037bb577": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 29227.473592
+  },
+  "0x9e887ecb5e73d8aa4a706c9809645517342c0572": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4975
+  },
+  "0x5b60aacaff98daa8863b8b3bd40094b21bc92d56": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 18340.944617704823
+  },
+  "0x1784abff7f2782c5dab9a92864ddf022211cd72a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 214.8113310942813
+  },
+  "0xafa0d5b8852158d77ac121f572ab8284ad875330": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1672.16715
+  },
+  "0x00fdcee0923ac58a9f28d45caf2e83f41dcf43a8": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1592
+  },
+  "0xe55a2c621a6d4e403a57356d97e706ce9b85f8d5": {
+    "addLiquidityPoints": [
+      [
+        1,
+        442
+      ]
+    ],
+    "addLiquidityTempBalance": 122.9766359911348,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0
+  },
+  "0x57ca670823b59b1b15c7ef06bab0422c5d4dfab2": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 156
+  },
+  "0x65c4806b861283c3ca24aceec2e673c04a651d92": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 8532.29726559375
+  },
+  "0xee4c7e323f7b260c1163702f2cad3da543c072f5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 4.999999451819048,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0
+  },
+  "0x60fd330582213618321a6ec03990abf5c879ccaf": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 276.867728
+  },
+  "0xaedc97205259b7065999663e381ad914a72f0424": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 746.25
+  },
+  "0x5b758bccf7a7550dcd65dd446b84217a2569ce25": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2878.7810141478203
+  },
+  "0x67a0e6bc7b3a15a3040a211c4dc2619bec03d2fa": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 2.644826,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3.000003
+  },
+  "0x3c526e9d1d5640b3d90131408a2aa202d4c36a5c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 474.830682
+  },
+  "0xc47b78d39ff70f34b658a7b41049619cab1389de": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2377.643445853551
+  },
+  "0xbc45f7d18f2e420aa2914048252bc39325159f90": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 596.8910421828946
+  },
+  "0xca2cfe5eb6b8c9f37a929e595c68db65b1219815": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 102.77722918924583
+  },
+  "0x30db537cf4f70d60749d39e0e032016e1af23da1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 7.772666
+  },
+  "0x34b24f3fc8c1f4c07cf5fc8d5f6d0697d9f8165d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1000
+  },
+  "0xf7260a9776cb912cd0eafd4c753b9c4abce20a67": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 48016.5
+  },
+  "0x311f185a5696f443fd86b97f4dfa33bd78197610": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 15.848350343662267
+  },
+  "0xcde874cabd89d75bb1efa79221acfe1150a8b118": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1918.871906
+  },
+  "0x1da719ba0ffcc3822f7eb3282fa2d8d3568dd193": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 192.11742934504534
+  },
+  "0xe2bdcf3455d3c4d1e93f12ff8b199980e5a13863": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 231.741404
+  },
+  "0x36c352dc8a828902e62299eb460054c3ca61dbe1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 55.957926
+  },
+  "0x73f3e03a8a5c9df9145cf62ace3f712aad8e563f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 70.051236
+  },
+  "0x7b6a2e0a014703866f045c5081b6d8ec880a0733": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4908.653208039925
+  },
+  "0xb4dcd65d05e1356d7587557d5c1b877444d41fc4": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 58.859086538800334
+  },
+  "0xa919272d045715cd1faa9b7e3f5ab2266c39024c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 93.96428294393039
+  },
+  "0xfad8dd19fba4b4ccae5b74af44f0a51d0fb97a73": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 164.321029
+  },
+  "0x27545f9bc5d6a51f19e3f049773469319c01e1a3": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 43.86252424414728
+  },
+  "0x067f4f973b3af92efc20cec465fc754513294588": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 257.703347
+  },
+  "0xf922dcaeb1ee8435b4882c83f6cc32ca3f8fff96": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 189.617149
+  },
+  "0x760e80f20510df75aeef642d27b972ebd5b3e4bb": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10
+  },
+  "0x0e135b76849d82698a1ed2439b16cfdb294b48ed": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 32.93827043387008
+  },
+  "0x4e7251dcdcf0a15c7bb5f6268bd27af02669ec56": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 447.75
+  },
+  "0x69507887f1fa59cb0b205b6877bfd1e541e8e91c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2117.80961601062
+  },
+  "0xca7a29f4349875ea2e7ddc453a01a2495af2e2d5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 130.19738384796756
+  },
+  "0x726f85781c1ca8a06a5cb9d7d6396ebc4bde86de": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 48.0394451039975
+  },
+  "0x28b9894a6ec2289c5e0b321f516a9e3507c87c9b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 21.064512
+  },
+  "0xc26ab8cd5e48514ce1953f1260a2efc438d7b7a6": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 135.748862
+  },
+  "0xb927e64d88e28d20a77e09e3bed439fcb3e57800": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5
+  },
+  "0x74e483d47416ed77bf31a2f526fc909b7483a6e8": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 6.87
+  },
+  "0x1c0425fef2b71fcc22f04d21ea64cdf0641f04b7": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4136.170929960727
+  },
+  "0x8cc349b2072298f7ed2c7ce9bf96abc9e6889b7a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.34895415721672624
+  },
+  "0x775dc588ea63e63ff79aee20d65881ea0be06803": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5913.493061171475
+  },
+  "0xf3a978747618478e09d9457d338a7e3825d77e73": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5
+  },
+  "0x49c64de02aa4578b9e43219d0846a8567c08cca1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1960.6111825
+  },
+  "0x11114fd0d3aebe43491b73a62cd416c02e629e60": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2319.345
+  },
+  "0xf78fed79994f0c26d90809f6bf9a57c81a413f5b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 11940
+  },
+  "0x0a5114d4c80e8fae2108b746e0ff802da447dda5": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 621.494381
+  },
+  "0x3d692bac0803a10a7bf023bf8a25d02350b9f791": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 157.85019919665282
+  },
+  "0x4818481abc0475e26f54bedc28cd83704d0e081d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 219.69074240161564
+  },
+  "0xd2bf535f4ebcc7a2c8c34e12e5c5ef1cf58ad83c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1213.406622272125
+  },
+  "0x706c571903f2483a36aacd3217cb7545ea27d392": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5348.318126340875
+  },
+  "0x3c5e6aaf0b7d346667c0f6d9f29b8fe753dec6a7": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.5
+  },
+  "0xec55611a25e17151722f7e493f6ad6fc6a410b02": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2264.1938639268874
+  },
+  "0xd85e97afee5924a78de9c0d171dcfcb780e2f84b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 329.97243
+  },
+  "0x56e98fadf371fc1ff0e2889194bf243721c860cd": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 20
+  },
+  "0x7f927291ee6a306a712884ea4e31926305ecae5c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1058.7551903903334
+  },
+  "0xc4887b21f4e1096161936d446130eab27f00c254": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 965.0712423530781
+  },
+  "0xc6794dd900cdb983eb96f128eabd6d735fbf2ec1": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4669.862389080594
+  },
+  "0x69e86b071fd87487cf25d42f27685acb962918c2": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 13
+  },
+  "0xeab267752c79dd73fa578aabaac3e4072ee401fb": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 500.005228
+  },
+  "0xbcdaedf799969e59d90aefd6480524feab712a2a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2
+  },
+  "0x269b62374cb0141f4425b99094a7c14e2eac992f": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4422.12379735676
+  },
+  "0xab76d2bc9ba95ffab13afd696d5527731dbbe5fc": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2834.180544083751
+  },
+  "0x390b036023365523b9037adf3dc8e642d30ccf9d": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 106.01986676865874
+  },
+  "0xbe68e25933f566d534b2b8aa09b13975c16e7d7a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 297.49817499554183
+  },
+  "0xc42e2040e36883cc037da396d60cab0854f2925b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 10
+  },
+  "0xfdea16e96de57786c9d057001c25384be1e4bd42": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1.7
+  },
+  "0x327f1b64ba57bef958e8f7723cd869e124a19348": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 310.18314700318723
+  },
+  "0xcdedc3fdde136b84fa66602dec718704d8409158": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 69.15969254525226
+  },
+  "0x14e912ecc8ebee808d864788d94d5295ccedabf0": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3000
+  },
+  "0xe2cd7b22ea081958e7621c1c33aae65c69a69b17": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 13
+  },
+  "0xfd0c0e34c4a98bba6b77d95fa54000208d531e71": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 188.17971046800696
+  },
+  "0x9d3875c4e714001a566451d534b8adbeede9d127": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 784.0641776224747
+  },
+  "0xedb09f5686d638b3d1ca6924374b1d375eba2558": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3193.9301
+  },
+  "0x96f251479d7159238ed95d2c51dc720834ba9969": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2607.51744
+  },
+  "0xbea6d4ba55299b0f5520237fe13380034d66148a": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 5
+  },
+  "0x02fb77f4e0e60cfcdf275d8e80ac3fbc0b06119b": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2500
+  },
+  "0x0c43913cab6adfb3f2df23903429b0675d8308ea": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 1756.1006048563663
+  },
+  "0x37797e271a37eb8e2e1263aa34988c29ee23b9ce": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 243.209237
+  },
+  "0xd412abd9bbdd7e6ad927798e1e602ce7019ce456": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2000
+  },
+  "0x4f5ac5d8934717d27523fee584406dcc241ffb48": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 706.876277
+  },
+  "0x38608dec7789bd432100baddbf31b8a9d1e6ea3c": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 255.190926102175
+  },
+  "0xb54f356b03b7d7d660e5fc1374f0578ab54f5b78": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 4.532319
+  },
+  "0x7ba5c69bf91eae9a137c4e708b4720443b4f8f6e": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 0.5
+  },
+  "0xf493139f5b0a968e2d057502bd8400572930d574": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 2487.5
+  },
+  "0xa299339e9c7f547bcc3173a15dde4bbf99813633": {
+    "addLiquidityPoints": [],
+    "addLiquidityTempBalance": 0,
+    "removeLiquidityPoints": [],
+    "removeLiquidityTempBalance": 0,
+    "swapPoints": 0,
+    "swapTempBalance": 3
   }
 }
