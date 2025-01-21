@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
 import Table from "~/components/Table";
-import { totalPoints, weeklyPoints } from "~/data/pointsV2";
+import { totalPoints, weeklyPoints } from "~/data/pointsV3";
 import css from "./Leaderboard.module.scss";
 
 export default function Leaderboard() {
@@ -32,11 +32,14 @@ export default function Leaderboard() {
       <section className={css.section}>
         <h2 className={css.section__heading}>LeaderBoard</h2>
         <div>
-          <p className={css.status__title}>Points are calculated according to the following rules:</p>
-          <p className={css.status__title}>
-            1. For every 1,000 VET of equivalent LP volume provided for 12 hours, 1 point will be counted.
+          <h4 className={css.status__title}>Point Calculation Rules:</h4>
+          <h5 className={css.status__subTitle}>For Trading:</h5>
+          <p className={css.status__subTitle}>Trade 10,000 $VET to earn 1 VeSwap Point. Max 4 points per day.</p>
+          <h5 className={css.status__subTitle}>For Providing Liqudity:</h5>
+          <p className={css.status__subTitle}>
+            Provide 1,000 $VET liquidity for 24 hrs x 7 days = 14 points. Max 140 points per week (Liquidity duration
+            should be continuous for 7 days).
           </p>
-          <p className={css.status__title}>2. For every 50,000 VET of trading volume, 1 point will be counted.</p>
         </div>
       </section>
       {/* TODO: Show top 10 & Show All */}
@@ -89,11 +92,7 @@ export default function Leaderboard() {
                 <tbody key={item.account}>
                   <tr key="-">
                     <td className={css.mono}>{index + 1}</td>
-                    <td className={css.mono}>
-                      {item.account}
-                      {item.isDoubled && <span className={css.doubleIndicator}>VOTED</span>}
-                      {item.isDoubled && <span className={css.doubleIndicator}>x2</span>}
-                    </td>
+                    <td className={css.mono}>{item.account}</td>
                     <td className={css.point}>{item.points}</td>
                   </tr>
                 </tbody>

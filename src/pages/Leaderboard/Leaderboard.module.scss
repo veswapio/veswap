@@ -120,8 +120,16 @@
 
   &__title {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 20px;
     margin-right: rhythm(1);
+    margin-top: rhythm(1.5);
+    opacity: 0.9;
+  }
+
+  &__subTitle {
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: rhythm(1);
   }
 
   &__value {

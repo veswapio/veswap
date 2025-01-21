@@ -1,0 +1,26 @@
+{
+  "transactionIndex": 87921,
+  "allTransactions": [
+    {
+      "type": "ADD_LIQUIDITY",
+      "timestamp": "1735787670",
+      "account": "0xe55a2c621a6d4e403a57356d97e706ce9b85f8d5",
+      "amount": "2400",
+      "txHash": ""
+    },
+    {
+      "type": "REMOVE_LIQUIDITY",
+      "timestamp": "1736651670",
+      "account": "0xe55a2c621a6d4e403a57356d97e706ce9b85f8d5",
+      "amount": "1000",
+      "txHash": ""
+    },
+    {
+      "type": "SWAP",
+      "timestamp": "1737141890",
+      "account": "0xe55a2c621a6d4e403a57356d97e706ce9b85f8d5",
+      "amount": "30000",
+      "txHash": ""
+    }
+  ]
+}
