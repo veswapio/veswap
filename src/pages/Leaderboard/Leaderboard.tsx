@@ -37,7 +37,7 @@ export default function Leaderboard() {
           <p className={css.status__subTitle}>Trade 10,000 $VET to earn 1 VeSwap Point. Max 4 points per day.</p>
           <h5 className={css.status__subTitle}>For Providing Liqudity:</h5>
           <p className={css.status__subTitle}>
-            Provide 1,000 $VET liquidity for 24 hrs x 7 days = 14 points. Max 140 points per week (Liquidity duration
+            Provide 10,000 $VET liquidity for 24 hrs x 7 days = 14 points. Max 140 points per week (Liquidity duration
             should be continuous for 7 days).
           </p>
         </div>

@@ -195,7 +195,7 @@ function buildSegmentsForUser(transactions, account) {
 }
 
 /**
- * 结算：对持有区间内，每满7天发一次积分 => 14 * floor(amount / 1000)
+ * 结算：对持有区间内，每满7天发一次积分 => 14 * floor(amount / 10000)
  * 关键改动：
  *   - 如果 awardingTimeUnix == segment.end (且该 end 落在最后一周)，
  *     则 awardingTimeUnix-- (往前挪1秒)，以确保它被记到此周的周日 23:59:59
@@ -204,10 +204,10 @@ function settleSegmentsForUser(account) {
   const segs = segments[account] || [];
   segs.forEach((seg) => {
     const { start, end, amount } = seg;
-    if (amount < 1000) return;
+    if (amount < 10000) return;
 
-    // 7天周期发放：一次 = 14 * floor(amount/1000)
-    const chunkPoints = 14 * Math.floor(amount / 1000);
+    // 7天周期发放：一次 = 14 * floor(amount/10000)
+    const chunkPoints = 14 * Math.floor(amount / 10000);
     const durationSec = end - start;
     const fullCycles = Math.floor(durationSec / SEVEN_DAYS_SECONDS);
 
