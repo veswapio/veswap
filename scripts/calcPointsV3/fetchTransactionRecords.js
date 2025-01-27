@@ -5,10 +5,10 @@ import BigNumber from "bignumber.js";
 import { END_TIME } from "./config.js";
 import transactionRecords from "./_transaction-recordsV3.json" with { type: "json" };
 
-const END_TIMESTAMP = Math.ceil(new Date(END_TIME).getTime() / 1000);;
+const END_TIMESTAMP = Math.ceil(new Date(END_TIME).getTime() / 1000);
 
 async function fetchTransactions(index) {
-  return await fetch(`http://34.92.148.112/subgraphs/name/swap/swap`, {
+  return await fetch(`http://34.150.69.63/subgraphs/name/swap/swap`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
