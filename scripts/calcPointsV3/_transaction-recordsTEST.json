@@ -21,6 +21,27 @@
       "account": "0xe55a2c621a6d4e403a57356d97e706ce9b85f8d5",
       "amount": "30000",
       "txHash": ""
+    },
+    {
+      "type": "ADD_LIQUIDITY",
+      "timestamp": "1720250190",
+      "account": "0xaf68b2051e8050ea5c140677acbf48614608c263",
+      "amount": "1.999999973407601911",
+      "txHash": "0xb44695c07a5bc729c7a48a2a8698a1f6fa8b0925a37cf3e13f85508bce8cea05"
+    },
+    {
+      "type": "SWAP",
+      "timestamp": "1725646050",
+      "account": "0xaf68b2051e8050ea5c140677acbf48614608c263",
+      "amount": "10100",
+      "txHash": "0xb2803236597e4325b0106f40df17b47dcf08cede02d11e143b5794737dbf59a2"
+    },
+    {
+      "type": "ADD_LIQUIDITY",
+      "timestamp": "1725646140",
+      "account": "0xaf68b2051e8050ea5c140677acbf48614608c263",
+      "amount": "9999",
+      "txHash": "0x3e8c3681975e0dae977d54904aee9ee8c5b40e9e048e15f82f91adf29f10ad91"
     }
   ]
 }
