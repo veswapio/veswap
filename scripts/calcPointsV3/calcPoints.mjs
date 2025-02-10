@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import moment from "moment";
-import { END_TIME } from "./config.js";
+import { END_TIME, ENABLE_DEBUG, DEBUG_ADDRESS } from "./config.js";
 // import transactionRecords from "./_transaction-recordsTEST.json" with { type: "json" };
 import transactionRecords from "./_transaction-recordsV3.json" with { type: "json" };
 
@@ -157,24 +157,59 @@ function addUnitsToUser(owner, timestampSec, amount) {
 }
 
 function removeUnitsFromUser(owner, amount) {
-  // 用户想移除多少整份(10k)？
-  const fullCount = Math.floor(amount / 10000);
-  if (fullCount <= 0) return;
+  // 确保有初始 leftover
+  if (!userLeftoverMap[owner]) {
+    userLeftoverMap[owner] = 0;
+  }
 
-  // 逐个回收
+  let leftover = userLeftoverMap[owner];
+
+  // 1) 先尝试用 leftover 抵扣
+  if (leftover >= amount) {
+    // leftover 足够直接扣，扣减后退出
+    userLeftoverMap[owner] = leftover - amount;
+    return;
+  } else {
+    // leftover 不足，则先用 leftover 抵一部分
+    amount -= leftover;
+    leftover = 0; // leftover 用光
+  }
+
+  // 2) 用整份 (10k) 的方式回收
+  //    需要回收多少份？
+  //    为了覆盖 amount，需要向上取整
+  const fullCount = Math.ceil(amount / 10000);
+
+  // 开始回收单元
   let toRemove = fullCount;
+  let removedCount = 0;
 
   for (let unit of unitList) {
     if (toRemove <= 0) break;
     if (!unit.isActive) continue;
     if (unit.owner !== owner) continue;
 
-    // 回收
     unit.isActive = false;
     toRemove--;
+    removedCount++;
   }
 
-  // 如果还有余量(不够回收那么多份)，就放弃，因为 partial < 10k 不单独计份
+  // 当实际回收的数量 * 10k 大于等于 amount 时，说明“拆多了”
+  // 多拆出来的部分要成为新的 leftover
+  const totalRemoved = removedCount * 10000;
+  if (totalRemoved >= amount) {
+    // 剩余部分变成 leftover
+    leftover += totalRemoved - amount;
+  } else {
+    // totalRemoved < amount 说明用户单元不够
+    // 实际上无法满足移除 amount 的需求
+    // 此时要不要报错，或者只允许部分移除，看业务要求
+    // 下面示例：只移除掉能移除的部分，leftover 保持 0
+    leftover += 0;
+  }
+
+  // 3) 更新 leftoverMap
+  userLeftoverMap[owner] = leftover;
 }
 
 /**
@@ -222,9 +257,6 @@ function settleAllUnits() {
 
 // ---------------------- 读取 & 处理交易 ----------------------
 const allTx = transactionRecords.allTransactions || [];
-// const allTx =
-//   transactionRecords.allTransactions.filter((i) => i.account === "0xf9a1bc92e0eeee598b9fdb45397107b1f05f6cc1") || [];
-// console.log("Account 0xf9a1bc92e0eeee598b9fdb45397107b1f05f6cc1");
 
 /**
  * (1) 统计每日 SWAP (并初始化 userPoints)
@@ -266,20 +298,26 @@ allTx
 
     if (type === "ADD_LIQUIDITY") {
       addUnitsToUser(account, unixTS, Number(amount));
-      // console.log(
-      //   "ADD_LIQUIDITY   ",
-      //   moment.unix(unixTS).utc().format("YYYY-MM-DD HH:mm:ss"),
-      //   Number(amount),
-      //   userLeftoverMap[account]
-      // );
+
+      if (ENABLE_DEBUG && account === DEBUG_ADDRESS) {
+        console.log(
+          "ADD_LIQUIDITY   ",
+          moment.unix(unixTS).utc().format("YYYY-MM-DD HH:mm:ss"),
+          Number(amount),
+          userLeftoverMap[account]
+        );
+      }
     } else if (type === "REMOVE_LIQUIDITY") {
       removeUnitsFromUser(account, Number(amount));
-      // console.log(
-      //   "REMOVE_LIQUIDITY",
-      //   moment.unix(unixTS).utc().format("YYYY-MM-DD HH:mm:ss"),
-      //   Number(amount),
-      //   userLeftoverMap[account]
-      // );
+
+      if (ENABLE_DEBUG && account === DEBUG_ADDRESS) {
+        console.log(
+          "REMOVE_LIQUIDITY",
+          moment.unix(unixTS).utc().format("YYYY-MM-DD HH:mm:ss"),
+          Number(amount),
+          userLeftoverMap[account]
+        );
+      }
     }
   });
 
@@ -293,7 +331,20 @@ settleAllUnits();
  */
 Object.keys(userDailySwapVolumes).forEach((account) => {
   const dailyMap = userDailySwapVolumes[account];
-  // console.log("SWAP\n", dailyMap);
+
+  if (ENABLE_DEBUG && account === DEBUG_ADDRESS) {
+    Object.entries(dailyMap)
+      .sort(([a], [b]) => new Date(a) - new Date(b))
+      .forEach(([data, value]) => {
+        console.log(
+          "SWAP            ",
+          `${data}         `,
+          `${Math.min(MAX_SWAP_POINTS_PER_DAY, Math.floor(value / 10000))}   `,
+          value
+        );
+      });
+  }
+
   Object.keys(dailyMap).forEach((dayStr) => {
     const volume = dailyMap[dayStr];
     // 当天 SWAP 每满 10,000 => +1 分, 封顶 4 分
@@ -423,11 +474,77 @@ function transformBreakdownWithCustomWeeks(userWeeklyPointsBreakdown) {
 
 const customWeeklyData = transformBreakdownWithCustomWeeks(userWeeklyPointsBreakdown);
 
+// ---------------------- 交易数据统计 ----------------------
+
+const tradingStatistics = allTx.reduce(
+  (acc, current) => {
+    // 获取时间戳并转换为日期
+    const timestamp = parseInt(current.timestamp) * 1000;
+    const date = new Date(timestamp);
+
+    // Swap 交易统计
+    if (current.type === "SWAP") {
+      // 总 Swap 交易统计
+      acc.totalSwapVolume += parseFloat(current.amount);
+      acc.totalSwapTransactions++;
+
+      // 唯一交易账户统计
+      if (!acc.uniqueTraders.includes(current.account)) {
+        acc.uniqueTraders.push(current.account);
+      }
+    }
+
+    // 2025年后的月度统计
+    if (date.getFullYear() >= 2025) {
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+
+      // 初始化月度统计
+      if (!acc.monthlyStats[monthKey]) {
+        acc.monthlyStats[monthKey] = {
+          transactions: 0,
+          volume: 0,
+          uniqueTraders: 0,
+          traders: new Set()
+        };
+      }
+
+      // 月度交易统计
+      acc.monthlyStats[monthKey].transactions++;
+      acc.monthlyStats[monthKey].volume += parseFloat(current.amount);
+
+      // 月度唯一交易者统计
+      if (!acc.monthlyStats[monthKey].traders.has(current.account)) {
+        acc.monthlyStats[monthKey].traders.add(current.account);
+        acc.monthlyStats[monthKey].uniqueTraders++;
+      }
+    }
+
+    return acc;
+  },
+  {
+    totalSwapVolume: 0,
+    totalSwapTransactions: 0,
+    uniqueTraders: [],
+    monthlyStats: {}
+  }
+);
+
+// 最终处理
+tradingStatistics.uniqueTraders = tradingStatistics.uniqueTraders.length;
+
+// 处理月度统计（移除 traders 集合，只保留数量）
+Object.keys(tradingStatistics.monthlyStats).forEach((month) => {
+  delete tradingStatistics.monthlyStats[month].traders;
+});
+
+// ---------------------- 写入文件 ----------------------
+
 fs.writeFileSync(
   path.join(__dirname, "../../src/data/pointsV3.ts"),
   `export const totalPoints = ${JSON.stringify(sortedPointsArray)};
   export const weeklyPoints = ${JSON.stringify(weeklySortedWeeklyPointsArray)};
-  export const pointsLog: Record<string, any> = ${JSON.stringify(customWeeklyData)};`
+  export const pointsLog: Record<string, any> = ${JSON.stringify(customWeeklyData)};
+  export const tradingStatistics = ${JSON.stringify(tradingStatistics)}`
 );
 
 console.log("All Done!");
