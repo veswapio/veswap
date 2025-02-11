@@ -144,9 +144,11 @@
 .token {
   width: 20px;
   height: 20px;
-  border-radius: 50%;
-  background: rgba(#fff, 0.2);
   margin-right: 2px;
+
+  > img {
+    vertical-align: 0;
+  }
 }
 
 .link {
