@@ -8,7 +8,7 @@ import transactionRecords from "./_transaction-recordsV3.json" with { type: "jso
 const END_TIMESTAMP = Math.ceil(new Date(END_TIME).getTime() / 1000);
 
 async function fetchTransactions(index) {
-  return await fetch(`https://subgraph.aplus.gold/subgraphs/name/swap/swap`, {
+  return await fetch(`https://subgraph.veswap.org/subgraphs/name/swap/swap`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

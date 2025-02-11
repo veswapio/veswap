@@ -17,6 +17,7 @@ import Reward from "./pages/Reward";
 
 // import Pools from "./pages/Pools";
 import Overview from "./pages/Overview";
+import Monthly from "./pages/Overview/Monthly";
 import Leaderboard from "./pages/Leaderboard";
 
 import { DAppKitProvider } from "@vechain/dapp-kit-react";
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/overview",
         element: <Overview />
+      },
+      {
+        path: "/monthly",
+        element: <Monthly />
       },
       {
         path: "/leaderboard",

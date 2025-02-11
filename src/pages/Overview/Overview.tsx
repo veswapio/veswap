@@ -8,7 +8,7 @@ import useTokenPrice from "~/hooks/useTokenPrice";
 import useVoter from "~/hooks/useVoter";
 // import useVoter, { calcRound } from "~/hooks/useVoter";
 import { useOverviewData } from "~/hooks/useOverviewData";
-import { formatBigNumber, fixedBigNumber, truncateAddress } from "~/utils/helpers";
+import { formatBigNumber, truncateAddress } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
 import Table from "~/components/Table";
@@ -122,7 +122,7 @@ export default function Overview() {
             <div className={css.overviewCard__value}>{_data ? `$${_data.totalTVL}` : "-"}</div>
           </div>
           <div className={css.overviewCard}>
-            <div className={css.overviewCard__title}>Volume ({getCurrentDateFormatted()})</div>
+            <div className={css.overviewCard__title}>Total Volume ({getCurrentDateFormatted()})</div>
             <div className={css.overviewCard__value}>{_overview ? `$${_overview.totalVolume}` : "-"}</div>
           </div>
           <div className={css.overviewCard}>
@@ -137,50 +137,15 @@ export default function Overview() {
               {BigNumber(tradingStatistics.totalSwapTransactions).toFormat()}
             </div>
           </div>
-        </div>
-        <div className={css.overviewStatus}>
-          <div className={css.status}>
-            <div className={css.status__title}>Traders:</div>
-            <div className={css.status__value}>{_overview ? `${tradingStatistics.uniqueTraders}` : "-"}</div>
+          <div className={css.overviewCard}>
+            <div className={css.overviewCard__title}>Traders: ({lastWeekDates.end})</div>
+            <div className={css.overviewCard__value}>{BigNumber(tradingStatistics.uniqueTraders).toFormat()}</div>
           </div>
-          <div className={css.status}>
-            <div className={css.status__title}>LPs:</div>
-            <div className={css.status__value}>{_data ? `${_data.totalLP}` : "-"}</div>
-          </div>
-          <div className={css.status}>
-            <div className={css.status__title}>Volume Today:</div>
-            <div className={css.status__value}>{_overview ? `$${_overview.todayVolume}` : "-"}</div>
+          <div className={css.overviewCard}>
+            <div className={css.overviewCard__title}>Volume Today ({getCurrentDateFormatted()})</div>
+            <div className={css.overviewCard__value}>{_overview ? `$${_overview.todayVolume}` : "-"}</div>
           </div>
         </div>
-      </section>
-
-      <section className={css.section}>
-        <h2 className={css.section__heading}>SWAP Statistics</h2>
-        <Table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>SWAP Volume</th>
-              <th>SWAP Transactions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Object.entries(tradingStatistics.monthlyStats)
-              .sort(([a], [b]) => a.localeCompare(b))
-              .map(([month, value]: any) => (
-                <tr key={month}>
-                  <td>
-                    {new Date(month).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long"
-                    })}
-                  </td>
-                  <td>{BigNumber(value.volume).toFormat(2)}</td>
-                  <td>{BigNumber(value.transactions).toFormat()}</td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
       </section>
 
       <section className={css.section}>
