@@ -12,6 +12,7 @@ import { formatBigNumber, fixedBigNumber, truncateAddress } from "~/utils/helper
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
 import Table from "~/components/Table";
+import { tradingStatistics } from "~/data/pointsV3";
 import css from "./Overview.module.scss";
 
 import IconArrow2 from "~/assets/arrow2.svg?react";
@@ -20,10 +21,11 @@ import IconArrow2 from "~/assets/arrow2.svg?react";
 
 function getCurrentDateFormatted() {
   const date = new Date();
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}/${month}/${day}`;
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric"
+  });
 }
 
 export default function Overview() {
@@ -34,21 +36,38 @@ export default function Overview() {
   const { data: overviewData } = useOverviewData();
   const { data: voterData } = useVoter(account);
 
+  const lastWeekDates = useMemo(() => {
+    const today = new Date();
+    const lastMonday = new Date(today);
+    lastMonday.setDate(today.getDate() - today.getDay() - 6);
+
+    const lastSunday = new Date(lastMonday);
+    lastSunday.setDate(lastMonday.getDate() + 6);
+
+    const formatDate = (date: Date) => {
+      return date.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    };
+
+    return {
+      start: formatDate(lastMonday),
+      end: formatDate(lastSunday)
+    };
+  }, []);
+
   const _overview = useMemo(() => {
     if (!tokenPrice || !overviewData) return null;
-    const totalVolume = fixedBigNumber(
-      overviewData.totalVolume.reduce((a: BigNumber, c: any) => {
+    const totalVolume = overviewData.totalVolume
+      .reduce((a: BigNumber, c: any) => {
         return a.plus(c.volume0.times(tokenPrice[c.token0])).plus(c.volume1.times(tokenPrice[c.token1]));
-      }, BigNumber(0)),
-      2
-    );
-    const todayVolume = fixedBigNumber(
-      Object.entries(overviewData.todayVolume).reduce(
-        (a: BigNumber, c: any) => a.plus(BigNumber(tokenPrice[c[0]]).times(c[1])),
-        BigNumber(0)
-      ),
-      2
-    );
+      }, BigNumber(0))
+      .toFormat(2);
+    const todayVolume = Object.entries(overviewData.todayVolume)
+      .reduce((a: BigNumber, c: any) => a.plus(BigNumber(tokenPrice[c[0]]).times(c[1])), BigNumber(0))
+      .toFormat(2);
 
     const { traders } = overviewData;
 
@@ -106,11 +125,23 @@ export default function Overview() {
             <div className={css.overviewCard__title}>Volume ({getCurrentDateFormatted()})</div>
             <div className={css.overviewCard__value}>{_overview ? `$${_overview.totalVolume}` : "-"}</div>
           </div>
+          <div className={css.overviewCard}>
+            <div className={css.overviewCard__title}>Total SWAP Volume ({lastWeekDates.end})</div>
+            <div className={css.overviewCard__value}>
+              {BigNumber(tradingStatistics.totalSwapVolume).toFormat(2)} VET
+            </div>
+          </div>
+          <div className={css.overviewCard}>
+            <div className={css.overviewCard__title}>Total SWAP Transactions ({lastWeekDates.end})</div>
+            <div className={css.overviewCard__value}>
+              {BigNumber(tradingStatistics.totalSwapTransactions).toFormat()}
+            </div>
+          </div>
         </div>
         <div className={css.overviewStatus}>
           <div className={css.status}>
             <div className={css.status__title}>Traders:</div>
-            <div className={css.status__value}>{_overview ? `${_overview.traders}` : "-"}</div>
+            <div className={css.status__value}>{_overview ? `${tradingStatistics.uniqueTraders}` : "-"}</div>
           </div>
           <div className={css.status}>
             <div className={css.status__title}>LPs:</div>
@@ -121,6 +152,35 @@ export default function Overview() {
             <div className={css.status__value}>{_overview ? `$${_overview.todayVolume}` : "-"}</div>
           </div>
         </div>
+      </section>
+
+      <section className={css.section}>
+        <h2 className={css.section__heading}>SWAP Statistics</h2>
+        <Table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>SWAP Volume</th>
+              <th>SWAP Transactions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(tradingStatistics.monthlyStats)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([month, value]: any) => (
+                <tr key={month}>
+                  <td>
+                    {new Date(month).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long"
+                    })}
+                  </td>
+                  <td>{BigNumber(value.volume).toFormat(2)}</td>
+                  <td>{BigNumber(value.transactions).toFormat()}</td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
       </section>
 
       <section className={css.section}>
