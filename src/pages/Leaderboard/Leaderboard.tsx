@@ -32,7 +32,7 @@ export default function Leaderboard() {
 
   const myPoints = useMemo(() => {
     if (!account) return [];
-    return pointsLog[account] || [];
+    return pointsLog[account.toLowerCase()] || [];
   }, [account]);
 
   return (
