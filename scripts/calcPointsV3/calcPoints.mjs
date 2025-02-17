@@ -9,6 +9,10 @@ import transactionRecords from "./_transaction-recordsV3.json" with { type: "jso
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+if (ENABLE_DEBUG) {
+  console.log("Account: ", DEBUG_ADDRESS);
+}
+
 // ---------------------- 全局配置(UTC + 周日截止) ----------------------
 moment.updateLocale("en", {
   // dow=1 => 周一是一周第一天 (因此周日是一周最后一天)

@@ -1,3 +1,3 @@
-export const END_TIME = "2025-02-09 23:59:59.999Z";
+export const END_TIME = "2025-02-16 23:59:59.999Z";
 export const ENABLE_DEBUG = false;
-export const DEBUG_ADDRESS = "0x90cd59c1127e03b7632863af30a83052f0ba9b4f";
+export const DEBUG_ADDRESS = "0x557f28e912ba393aeb92cb0c1fd178fdd3e70e13".toLowerCase();
