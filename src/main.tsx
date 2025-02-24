@@ -11,11 +11,10 @@ import NotMatchPage from "./components/NotMatchPage";
 import LandingPage from "./pages/LandingPage";
 
 import SwapLayout from "./components/SwapLayout";
-import Swap from "./pages/Swap";
+import Swap, { USDSwap } from "./pages/Swap";
 import Pool from "./pages/Pool";
 import Reward from "./pages/Reward";
 
-// import Pools from "./pages/Pools";
 import Overview from "./pages/Overview";
 import Monthly from "./pages/Overview/Monthly";
 import Leaderboard from "./pages/Leaderboard";
@@ -49,6 +48,10 @@ const router = createBrowserRouter([
           {
             path: "/swap",
             element: <Swap />
+          },
+          {
+            path: "/usdswap",
+            element: <USDSwap />
           },
           {
             path: "/pool",
