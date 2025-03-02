@@ -9,6 +9,8 @@ import transactionRecords from "./_transaction-recordsV3.json" with { type: "jso
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const THRESHOLD = 9999;
+
 if (ENABLE_DEBUG) {
   console.log("Account: ", DEBUG_ADDRESS);
 }
@@ -30,7 +32,7 @@ const SEVEN_DAYS_SECONDS = 7 * ONE_DAY_SECONDS;
 
 /** 每周流动性积分封顶 */
 const MAX_WEEKLY_LIQ_POINTS = 140;
-/** 每 7 天、每 10000 元 => 14 分 */
+/** 每 7 天、每 10000 (THRESHOLD) 元 => 14 分 */
 const LIQ_POINTS_PER_7D_PER_10K = 14;
 /** 每日最多可得 SWAP 积分 4 分 */
 const MAX_SWAP_POINTS_PER_DAY = 4;
@@ -142,8 +144,8 @@ function addUnitsToUser(owner, timestampSec, amount) {
   let combined = userLeftoverMap[owner] + amount;
 
   // 2) 计算能拆出多少个 10k
-  const fullCount = Math.floor(combined / 10000);
-  const leftover = combined % 10000;
+  const fullCount = Math.floor(combined / THRESHOLD);
+  const leftover = combined % THRESHOLD;
 
   // 3) 对于每个 10k 单元，都创建记录
   for (let i = 0; i < fullCount; i++) {
@@ -182,7 +184,7 @@ function removeUnitsFromUser(owner, amount) {
   // 2) 用整份 (10k) 的方式回收
   //    需要回收多少份？
   //    为了覆盖 amount，需要向上取整
-  const fullCount = Math.ceil(amount / 10000);
+  const fullCount = Math.ceil(amount / THRESHOLD);
 
   // 开始回收单元
   let toRemove = fullCount;
@@ -200,7 +202,7 @@ function removeUnitsFromUser(owner, amount) {
 
   // 当实际回收的数量 * 10k 大于等于 amount 时，说明“拆多了”
   // 多拆出来的部分要成为新的 leftover
-  const totalRemoved = removedCount * 10000;
+  const totalRemoved = removedCount * THRESHOLD;
   if (totalRemoved >= amount) {
     // 剩余部分变成 leftover
     leftover += totalRemoved - amount;
@@ -343,7 +345,7 @@ Object.keys(userDailySwapVolumes).forEach((account) => {
         console.log(
           "SWAP            ",
           `${data}         `,
-          `${Math.min(MAX_SWAP_POINTS_PER_DAY, Math.floor(value / 10000))}   `,
+          `${Math.min(MAX_SWAP_POINTS_PER_DAY, Math.floor(value / THRESHOLD))}   `,
           value
         );
       });
@@ -352,7 +354,7 @@ Object.keys(userDailySwapVolumes).forEach((account) => {
   Object.keys(dailyMap).forEach((dayStr) => {
     const volume = dailyMap[dayStr];
     // 当天 SWAP 每满 10,000 => +1 分, 封顶 4 分
-    const raw = Math.floor(volume / 10000);
+    const raw = Math.floor(volume / THRESHOLD);
     const swapPts = Math.min(raw, MAX_SWAP_POINTS_PER_DAY);
 
     if (swapPts > 0) {

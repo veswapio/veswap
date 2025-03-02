@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { stringify } from "csv-stringify/sync";
 import { fileURLToPath } from "url";
 import BigNumber from "bignumber.js";
 import { END_TIME } from "./config.js";
@@ -36,6 +37,7 @@ async function fetchTransactions(index) {
             amount0
             amount1
             to
+            origin
             pair {
               token0 {
                 symbol
@@ -52,6 +54,7 @@ async function fetchTransactions(index) {
             amount1In
             amount1Out
             to
+            origin
             pair {
               token0 {
                 symbol
@@ -85,7 +88,8 @@ async function fetchTransactions(index) {
                 timestamp: burn.timestamp,
                 account: burn.sender,
                 amount,
-                txHash: c.id
+                txHash: c.id,
+                pair: burn.pair.token0.symbol + "/" + burn.pair.token1.symbol
               };
             })
           );
@@ -104,9 +108,10 @@ async function fetchTransactions(index) {
               return {
                 type: "ADD_LIQUIDITY",
                 timestamp: mint.timestamp,
-                account: mint.to,
+                account: mint.origin,
                 amount,
-                txHash: c.id
+                txHash: c.id,
+                pair: mint.pair.token0.symbol + "/" + mint.pair.token1.symbol
               };
             })
           );
@@ -125,9 +130,10 @@ async function fetchTransactions(index) {
               return {
                 type: "SWAP",
                 timestamp: swap.timestamp,
-                account: swap.to,
+                account: swap.origin,
                 amount,
-                txHash: c.id
+                txHash: c.id,
+                pair: swap.pair.token0.symbol + "/" + swap.pair.token1.symbol
               };
             })
           );
@@ -174,10 +180,20 @@ while (!reachedEndTime) {
   }
 }
 
-const txV2DataPath = path.join(__dirname, "./_transaction-recordsV3.json");
+// Write the data to a CSV file
+const txV3CsvPath = path.join(__dirname, "./_transaction-recordsV3.csv");
+const transactionIndexPath = path.join(__dirname, "./_transaction-indexV3.json");
+const headers = ["type", "timestamp", "account", "amount", "txHash", "pair"];
+const rows = allTransactions.map((tx) => [tx.type, tx.timestamp, tx.account, tx.amount, tx.txHash, tx.pair]);
+rows.unshift(headers);
+const csvContent = stringify(rows);
+fs.writeFileSync(txV3CsvPath, csvContent);
+fs.writeFileSync(transactionIndexPath, JSON.stringify({ transactionIndex }, null, 2));
 
+// Write the data to a JSON file
+const txV3JsonPath = path.join(__dirname, "./_transaction-recordsV3.json");
 fs.writeFileSync(
-  txV2DataPath,
+  txV3JsonPath,
   JSON.stringify(
     {
       transactionIndex,
@@ -188,4 +204,4 @@ fs.writeFileSync(
   )
 );
 
-console.log("Finished writing results to the _transaction-recordsV3.json file.");
+console.log("Finished writing results.");
