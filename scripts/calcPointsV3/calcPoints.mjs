@@ -6,6 +6,9 @@ import { END_TIME, ENABLE_DEBUG, DEBUG_ADDRESS } from "./config.js";
 // import transactionRecords from "./_transaction-recordsTEST.json" with { type: "json" };
 import transactionRecords from "./_transaction-recordsV3.json" with { type: "json" };
 
+// export const END_TIME = "2024-12-22 23:59:59.999Z";
+// const round = 25;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -552,5 +555,15 @@ fs.writeFileSync(
   export const pointsLog: Record<string, any> = ${JSON.stringify(customWeeklyData)};
   export const tradingStatistics = ${JSON.stringify(tradingStatistics)}`
 );
+
+// fs.writeFileSync(
+//   path.join(__dirname, `../../src/data/round-${round}--total.txt`),
+//   sortedPointsArray.map((item, idx) => `${idx + 1}: ${item.account}, ${item.points}`).join("\n")
+// );
+
+// fs.writeFileSync(
+//   path.join(__dirname, `../../src/data/round-${round}--weekly.txt`),
+//   weeklySortedWeeklyPointsArray.map((item, idx) => `${idx + 1}: ${item.account}, ${item.points}`).join("\n")
+// );
 
 console.log("All Done!");
