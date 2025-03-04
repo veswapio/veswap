@@ -123,6 +123,7 @@
     line-height: 20px;
     margin-right: rhythm(1);
     margin-top: rhythm(1.5);
+    margin-bottom: rhythm(1.5);
     opacity: 0.9;
   }
 
@@ -130,6 +131,13 @@
     font-size: 14px;
     line-height: 16px;
     margin-top: rhythm(1);
+
+    + ul {
+      padding: 8px 0 8px 16px;
+      font-size: 14px;
+      line-height: 20px;
+      list-style: "- ";
+    }
   }
 
   &__value {

@@ -7,7 +7,8 @@ import { findKey } from "lodash";
 
 const MAINNET_TOKENS = [
   new sdk.Token(sdk.ChainId.MAINNET, "0x0000000000000000000000000000456E65726779", 18, "VTHO", "VeThor"),
-  new sdk.Token(sdk.ChainId.MAINNET, "0x5ef79995FE8a89e0812330E4378eB2660ceDe699", 18, "B3TR", "B3TR")
+  new sdk.Token(sdk.ChainId.MAINNET, "0x5ef79995FE8a89e0812330E4378eB2660ceDe699", 18, "B3TR", "B3TR"),
+  new sdk.Token(sdk.ChainId.MAINNET, "0x170F4BA8e7ACF6510f55dB26047C83D13498AF8A", 18, "WOV", "WorldOfV")
 ];
 
 export const ALL_TOKENS = [
