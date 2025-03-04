@@ -32,7 +32,8 @@ export default function useTokenPrice() {
         VET: data[1].vechain.usd,
         VVET: data[1].vechain.usd,
         VTHO: data[1]["vethor-token"].usd,
-        B3TR: b3trPrice
+        B3TR: b3trPrice,
+        WOV: data[1].vechain.usd / 12.656
       };
     }
   });
