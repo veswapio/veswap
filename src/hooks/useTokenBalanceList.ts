@@ -49,7 +49,10 @@ export default function useTokenBalanceList() {
           const decimals = tokens.find((t) => t.symbol === c.symbol)!.decimals;
           a[c.symbol] = {
             rawBalance: value,
-            displayBalance: value.div(10 ** decimals).toFormat(6),
+            displayBalance: value
+              .div(10 ** decimals)
+              .toFormat(6)
+              .replace(/\.?0+$/, ""),
             address: c.address,
             allowance: c.allowance
           };
