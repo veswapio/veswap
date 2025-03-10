@@ -76,9 +76,9 @@ async function fetchTransactions(index) {
             ...c.burns.map((burn) => {
               let amount;
               if (burn.pair.token0.symbol === "VVET") {
-                amount = BigNumber(burn.amount0);
+                amount = BigNumber(burn.amount0).times(2);
               } else if (burn.pair.token1.symbol === "VVET") {
-                amount = BigNumber(burn.amount1);
+                amount = BigNumber(burn.amount1).times(2);
               } else {
                 throw new Error("VTHO/B3TR Pair");
               }
@@ -98,9 +98,9 @@ async function fetchTransactions(index) {
             ...c.mints.map((mint) => {
               let amount;
               if (mint.pair.token0.symbol === "VVET") {
-                amount = BigNumber(mint.amount0);
+                amount = BigNumber(mint.amount0).times(2);
               } else if (mint.pair.token1.symbol === "VVET") {
-                amount = BigNumber(mint.amount1);
+                amount = BigNumber(mint.amount1).times(2);
               } else {
                 throw new Error("VTHO/B3TR Pair");
               }
@@ -179,16 +179,6 @@ while (!reachedEndTime) {
     break;
   }
 }
-
-// Write the data to a CSV file
-const txV3CsvPath = path.join(__dirname, "./_transaction-recordsV3.csv");
-const transactionIndexPath = path.join(__dirname, "./_transaction-indexV3.json");
-const headers = ["type", "timestamp", "account", "amount", "txHash", "pair"];
-const rows = allTransactions.map((tx) => [tx.type, tx.timestamp, tx.account, tx.amount, tx.txHash, tx.pair]);
-rows.unshift(headers);
-const csvContent = stringify(rows);
-fs.writeFileSync(txV3CsvPath, csvContent);
-fs.writeFileSync(transactionIndexPath, JSON.stringify({ transactionIndex }, null, 2));
 
 // Write the data to a JSON file
 const txV3JsonPath = path.join(__dirname, "./_transaction-recordsV3.json");
