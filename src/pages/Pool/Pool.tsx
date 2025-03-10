@@ -30,6 +30,13 @@ import IconArrow2 from "~/assets/arrow2.svg?react";
 import IconLink from "~/assets/link.svg?react";
 import IconPlus from "~/assets/plus.svg?react";
 
+const percentageList = [
+  { name: "25%", value: 0.25 },
+  { name: "50%", value: 0.5 },
+  { name: "75%", value: 0.75 },
+  { name: "Max", value: 1 }
+];
+
 function PoolDetailPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePane: (name: string) => void }) {
   const { open } = useWalletModal();
   const { account } = useWallet();
@@ -250,17 +257,28 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
               onBlur={() => (token0Amount === "" || token0Amount === ".") && setToken0Amount("0")}
               onFocus={() => token0Amount === "0" && setToken0Amount("")}
             />
-            <div
-              className="tokenInput__balance"
-              style={{ cursor: "pointer" }}
-              onClick={() =>
-                handleToken0Input(
-                  undefined,
-                  tokenBalanceMap?.[token0.symbol!].rawBalance.div(10 ** token1.decimals).toString() || "0"
-                )
-              }
-            >
-              Balance: {tokenBalanceMap?.[token0.symbol!].displayBalance || "0"}
+            <div className="tokenInput__row">
+              {percentageList.map((item) => (
+                <button
+                  key={item.value}
+                  className="tokenInput__button"
+                  onClick={() =>
+                    handleToken0Input(
+                      undefined,
+                      tokenBalanceMap?.[token0.symbol!].rawBalance
+                        .div(10 ** token0.decimals)
+                        .times(item.value)
+                        .toString() || "0"
+                    )
+                  }
+                >
+                  {item.name}
+                </button>
+              ))}
+
+              <div className="tokenInput__balance">
+                Balance: {tokenBalanceMap?.[token0.symbol!].displayBalance || "0"}
+              </div>
             </div>
           </TextField>
         </div>
@@ -280,17 +298,27 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
               onBlur={() => (token1Amount === "" || token1Amount === ".") && setToken1Amount("0")}
               onFocus={() => token1Amount === "0" && setToken1Amount("")}
             />
-            <div
-              className="tokenInput__balance"
-              style={{ cursor: "pointer" }}
-              onClick={() =>
-                handleToken1Input(
-                  undefined,
-                  tokenBalanceMap?.[token1.symbol!].rawBalance.div(10 ** token1.decimals).toString() || "0"
-                )
-              }
-            >
-              Balance: {tokenBalanceMap?.[token1.symbol!].displayBalance || "0"}
+            <div className="tokenInput__row">
+              {percentageList.map((item) => (
+                <button
+                  key={item.value}
+                  className="tokenInput__button"
+                  onClick={() =>
+                    handleToken0Input(
+                      undefined,
+                      tokenBalanceMap?.[token1.symbol!].rawBalance
+                        .div(10 ** token1.decimals)
+                        .times(item.value)
+                        .toString() || "0"
+                    )
+                  }
+                >
+                  {item.name}
+                </button>
+              ))}
+              <div className="tokenInput__balance">
+                Balance: {tokenBalanceMap?.[token1.symbol!].displayBalance || "0"}
+              </div>
             </div>
           </TextField>
         </div>
