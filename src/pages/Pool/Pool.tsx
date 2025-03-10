@@ -110,8 +110,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     return BigNumber(pair.reserve0.toExact()).div(pair.reserve1.toExact());
   }, [pair]);
 
-  const handleToken0Input = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleToken0Input = (e: any, maxValue?: string) => {
+    const value = e?.target.value || maxValue!;
     if (/^\d*\.?\d*$/.test(value)) {
       setToken0Amount(value);
       const rawToken1Amount = BigNumber(value).div(_price);
@@ -120,8 +120,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
     }
   };
 
-  const handleToken1Input = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleToken1Input = (e: any, maxValue?: string) => {
+    const value = e?.target.value || maxValue!;
     if (/^\d*\.?\d*$/.test(value)) {
       setToken1Amount(value);
       const rawToken0Amount = BigNumber(value).times(_price);
@@ -250,7 +250,16 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
               onBlur={() => (token0Amount === "" || token0Amount === ".") && setToken0Amount("0")}
               onFocus={() => token0Amount === "0" && setToken0Amount("")}
             />
-            <div className="tokenInput__balance">
+            <div
+              className="tokenInput__balance"
+              style={{ cursor: "pointer" }}
+              onClick={() =>
+                handleToken0Input(
+                  undefined,
+                  tokenBalanceMap?.[token0.symbol!].rawBalance.div(10 ** token1.decimals).toString() || "0"
+                )
+              }
+            >
               Balance: {tokenBalanceMap?.[token0.symbol!].displayBalance || "0"}
             </div>
           </TextField>
@@ -271,7 +280,16 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
               onBlur={() => (token1Amount === "" || token1Amount === ".") && setToken1Amount("0")}
               onFocus={() => token1Amount === "0" && setToken1Amount("")}
             />
-            <div className="tokenInput__balance">
+            <div
+              className="tokenInput__balance"
+              style={{ cursor: "pointer" }}
+              onClick={() =>
+                handleToken1Input(
+                  undefined,
+                  tokenBalanceMap?.[token1.symbol!].rawBalance.div(10 ** token1.decimals).toString() || "0"
+                )
+              }
+            >
               Balance: {tokenBalanceMap?.[token1.symbol!].displayBalance || "0"}
             </div>
           </TextField>
