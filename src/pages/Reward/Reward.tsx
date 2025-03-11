@@ -171,7 +171,7 @@ export default function Reward() {
     }
   }, [connex, myRewards, setIsLoading, setClaimedRecord]);
 
-  const handleClaim = async (idx: number) => {
+  const handleClaim = async (idx: number, round: any) => {
     const { address, myClaimData } = myRewards[idx];
     const method = connex.thor.account(address).method(find(ABI_MerkleDistributor.abi, { name: "claim" }));
     const clause = method.asClause(myClaimData.index, account, myClaimData.amount, myClaimData.proof);
@@ -198,7 +198,11 @@ export default function Reward() {
           isSuccessful: isSuccess,
           isFailed: !isSuccess,
           transactionHash: result.meta.txID,
-          message: null
+          message: null,
+          rewardData: {
+            round: round.title.match(/\d+/g)?.[0],
+            amount: BigNumber(round.myClaimData.amount).div(1e18).toFixed(0)
+          }
         });
         if (isSuccess) {
           setClaimedRecord((prev) => {
@@ -256,7 +260,7 @@ export default function Reward() {
             {claimedRecord[idx] ? (
               <Button disabled>Already Claimed</Button>
             ) : (
-              <Button onPress={() => handleClaim(idx)}>Claim</Button>
+              <Button onPress={() => handleClaim(idx, round)}>Claim</Button>
             )}
           </div>
         );

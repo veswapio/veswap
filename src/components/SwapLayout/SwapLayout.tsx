@@ -35,6 +35,17 @@ export default function SwapLayout() {
               </>
             )}
             {!!transactionStatus.message && <p className="Modal__subheading">{transactionStatus.message}</p>}
+            {!!transactionStatus.rewardData && (
+              <a
+                style={{ marginBottom: "24px" }}
+                className="Modal__link"
+                href={`https://x.com/intent/post?text=Just%20claimed%20my%20rewards%20from%20VeBetterDAO%20Round%20${transactionStatus.rewardData.round}!%20🎉%20%0A%0AEarned%20${transactionStatus.rewardData.amount}%20$B3TR%20on%20@veswaporg_ ,%20the%20No.1%20Sustainable%20DEX!%20🌍💚%0A%0ATrade%20%26%20earn%20while%20supporting%20a%20greener%20future!%20🌱🚀%0A👉%20veswap.io`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Share on Twitter
+              </a>
+            )}
             {!transactionStatus.isPending && (
               <div className="Modal__bgroup">
                 <a

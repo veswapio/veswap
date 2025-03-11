@@ -7,6 +7,7 @@ export const transactionStatusAtom = atom<
       isFailed: boolean;
       transactionHash: string | null;
       message: string | null;
+      rewardData?: any;
     }
   | undefined
 >(undefined);
