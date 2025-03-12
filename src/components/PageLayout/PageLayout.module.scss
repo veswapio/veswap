@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   height: rhythm(10);
-  padding: 0 rhythm(6);
+  padding: 0 rhythm(4);
   backdrop-filter: blur(20px);
 
   &.open {
@@ -23,7 +23,7 @@
 
   &__logo {
     flex: none;
-    margin-right: rhythm(8);
+    margin-right: rhythm(4);
     display: block;
     height: rhythm(3);
 
@@ -44,7 +44,7 @@
     height: rhythm(4.5);
     display: flex;
     align-items: center;
-    padding: 0 rhythm(2);
+    padding: 0 rhythm(1.5);
     font-size: 15px;
     font-weight: 500;
     border-radius: 6px;

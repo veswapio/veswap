@@ -55,6 +55,9 @@ export default function Home() {
           <NavLink to="/swap" className={css.nav__link}>
             Swap
           </NavLink>
+          <NavLink to="/usdswap" className={css.nav__link}>
+            USD Swap
+          </NavLink>
           <NavLink to="/pool" className={css.nav__link}>
             Pool
           </NavLink>
