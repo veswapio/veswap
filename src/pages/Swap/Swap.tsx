@@ -84,10 +84,10 @@ function TokenModal({
 
   return (
     <DialogTrigger>
-      <AriaButton className="tokenTrigger" isDisabled={!tokenBalanceMap || disabled}>
+      <AriaButton className="tokenTrigger" isDisabled={!tokenBalanceMap || tokenList.length === 1 || disabled}>
         <div className="tokenTrigger__icon">{token.symbol && TOKEN_ICONS[token.symbol]}</div>
         <div className="tokenTrigger__name">{token.symbol}</div>
-        {token.symbol !== "VET" && <IconArrow className="tokenTrigger__arrow" />}
+        {tokenList.length !== 1 && <IconArrow className="tokenTrigger__arrow" />}
       </AriaButton>
       <Modal className="ModalOverlay">
         <Dialog className="Modal">
@@ -236,9 +236,17 @@ export default function Swap() {
   const [isExactIn, setIsExactIn] = useState(true);
   const [deadline, _setDeadline] = useState<number>(DEFAULT_DEADLINE_FROM_NOW);
 
-  const tokenList = useMemo(() => {
-    return tokens.filter((i: any) => i.symbol !== fromToken.symbol && i.symbol !== toToken.symbol);
-  }, [fromToken.symbol, toToken.symbol]);
+  const fromTokenList = useMemo(() => {
+    if (toToken.symbol === "VET") return tokens.filter((i: any) => i.symbol !== "VET");
+    if (toToken.symbol === "USDGLO") return tokens.filter((i: any) => i.symbol === "VET" || i.symbol === "B3TR");
+    return tokens.filter((i: any) => i.symbol === "VET");
+  }, [toToken.symbol]);
+
+  const toTokenList = useMemo(() => {
+    if (fromToken.symbol === "VET") return tokens.filter((i: any) => i.symbol !== "VET");
+    if (fromToken.symbol === "USDGLO") return tokens.filter((i: any) => i.symbol === "VET" || i.symbol === "B3TR");
+    return tokens.filter((i: any) => i.symbol === "VET");
+  }, [fromToken.symbol]);
 
   const _fromReserve = useMemo(() => {
     if (!pairData) return BigNumber(0);
@@ -434,15 +442,10 @@ export default function Swap() {
           amount={_amountIn}
           onAmountChange={handleFromTokenChange}
           onTokenChange={(token: sdk.Token) => {
-            // TODO: remove later
             setFromToken(token);
-            if (token.symbol === "B3TR") {
-              setToToken(tokens[0]);
-            }
           }}
-          tokenList={tokenList}
+          tokenList={fromTokenList}
           error={_fromTokenError}
-          disabled={toToken.symbol === "B3TR" || toToken.symbol === "VTHO"}
         />
         <button className={css.swapButton} onClick={handleSwapTokens} tabIndex={-1}>
           <IconSwap />
@@ -453,15 +456,10 @@ export default function Swap() {
           amount={_amountOut}
           onAmountChange={handleToTokenChange}
           onTokenChange={(token: sdk.Token) => {
-            // TODO: remove later
             setToToken(token);
-            if (token.symbol === "B3TR") {
-              setFromToken(tokens[0]);
-            }
           }}
-          tokenList={tokenList}
+          tokenList={toTokenList}
           className={css.card__swapToPane}
-          disabled={fromToken.symbol === "B3TR" || fromToken.symbol === "VTHO"}
         />
 
         <DataEntry

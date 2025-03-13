@@ -231,6 +231,66 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
           setTransactionStatus(undefined);
         });
     } else {
+      const addLiquidityMethod = connex.thor
+        .account(ROUTER_ADDRESS)
+        .method(find(IUniswapV2Router.abi, { name: "addLiquidity" }));
+
+      const swapClause = addLiquidityMethod.asClause(
+        token0.address,
+        token1.address,
+        token0AmountWei,
+        token1AmountWei,
+        BigNumber(token0AmountWei).times(0.97).toFixed(0, 1),
+        BigNumber(token0AmountWei).times(0.97).toFixed(0, 1),
+        account,
+        Math.ceil(Date.now() / 1000) + 60 * 20
+      );
+
+      const approveToken0Method = connex.thor.account(token0.address).method(find(ABI_ERC20, { name: "approve" }));
+      const approveToken0Clause = approveToken0Method.asClause(ROUTER_ADDRESS, token0AmountWei);
+
+      const approveToken1Method = connex.thor.account(token1.address).method(find(ABI_ERC20, { name: "approve" }));
+      const approveToken1Clause = approveToken1Method.asClause(ROUTER_ADDRESS, token1AmountWei);
+
+      const clauses = [approveToken0Clause, approveToken1Clause, swapClause];
+
+      setTransactionStatus({
+        isPending: true,
+        isSuccessful: false,
+        isFailed: false,
+        transactionHash: null,
+        message: `Add liquidity ${token0Amount} ${token0.symbol} and ${token1Amount} ${token1.symbol}`
+      });
+
+      connex.vendor
+        .sign("tx", clauses)
+        .comment("Add Liquidity")
+        .request()
+        .then((tx: any) => {
+          return poll(() => connex.thor.transaction(tx.txid).getReceipt());
+        })
+        .then((result: any) => {
+          const isSuccess = result.reverted === false;
+          setTransactionStatus({
+            isPending: false,
+            isSuccessful: isSuccess,
+            isFailed: !isSuccess,
+            transactionHash: result.meta.txID,
+            message: null
+          });
+          if (isSuccess) {
+            setToken0Amount("0");
+            setToken1Amount("0");
+            queryClient.refetchQueries({
+              queryKey: ["token-balance-list"]
+            });
+          }
+        })
+        .catch((err: any) => {
+          console.log("ERROR");
+          console.log(err);
+          setTransactionStatus(undefined);
+        });
     }
   };
 

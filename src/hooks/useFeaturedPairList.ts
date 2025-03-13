@@ -14,7 +14,8 @@ export default function useFeaturedPairList() {
         sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex),
         sdk.Fetcher.fetchPairData(tokens[0], tokens[2], connex),
         sdk.Fetcher.fetchPairData(tokens[0], tokens[3], connex),
-        sdk.Fetcher.fetchPairData(tokens[0], tokens[4], connex)
+        sdk.Fetcher.fetchPairData(tokens[0], tokens[4], connex),
+        sdk.Fetcher.fetchPairData(tokens[2], tokens[4], connex)
       ]);
     },
     select: (data: any) => {
