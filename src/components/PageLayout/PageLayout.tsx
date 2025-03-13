@@ -59,7 +59,7 @@ export default function Home() {
             USD Swap
           </NavLink>
           <NavLink to="/pool" className={css.nav__link}>
-            Pool
+            Pools
           </NavLink>
           <NavLink to="/reward" className={clsx(css.nav__link, css.earn)}>
             Reward

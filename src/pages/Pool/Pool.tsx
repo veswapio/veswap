@@ -119,8 +119,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
 
   const handleToken0Input = (e: any, maxValue?: string) => {
     const value = e?.target.value || maxValue!;
-    if (/^\d*\.?\d*$/.test(value)) {
-      setToken0Amount(value);
+    if (/^\d*\.?\d*$/.test(value) || !value) {
+      setToken0Amount(value || "");
       const rawToken1Amount = BigNumber(value).div(_price);
       const token1Amount = rawToken1Amount.isNaN() ? "0" : fixedBigNumber(rawToken1Amount);
       setToken1Amount(token1Amount);
@@ -129,8 +129,8 @@ function AddLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActivePa
 
   const handleToken1Input = (e: any, maxValue?: string) => {
     const value = e?.target.value || maxValue!;
-    if (/^\d*\.?\d*$/.test(value)) {
-      setToken1Amount(value);
+    if (/^\d*\.?\d*$/.test(value) || !value) {
+      setToken1Amount(value || "");
       const rawToken0Amount = BigNumber(value).times(_price);
       const token0Amount = rawToken0Amount.isNaN() ? "0" : fixedBigNumber(rawToken0Amount);
       setToken0Amount(token0Amount);
@@ -551,7 +551,7 @@ function PoolListPane({
   return (
     <div className={css.poolPanel}>
       <Card className={css.card}>
-        <h2 className={css.card__poolHeading}>All Pool ({poolsLength})</h2>
+        <h2 className={css.card__poolHeading}>All Pools ({poolsLength})</h2>
 
         <SearchBox
           className={css.card__search}

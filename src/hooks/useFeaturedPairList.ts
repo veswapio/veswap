@@ -13,7 +13,8 @@ export default function useFeaturedPairList() {
       return Promise.all([
         sdk.Fetcher.fetchPairData(tokens[0], tokens[1], connex),
         sdk.Fetcher.fetchPairData(tokens[0], tokens[2], connex),
-        sdk.Fetcher.fetchPairData(tokens[0], tokens[3], connex)
+        sdk.Fetcher.fetchPairData(tokens[0], tokens[3], connex),
+        sdk.Fetcher.fetchPairData(tokens[0], tokens[4], connex)
       ]);
     },
     select: (data: any) => {
