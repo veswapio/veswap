@@ -112,7 +112,11 @@ export default function Swap() {
   const _fromTokenError = useMemo(() => {
     return BigNumber(fromTokenAmount)
       .times(10 ** VEUSD.decimals)
-      .isGreaterThan(balanceData?.veusdBalance || 0);
+      .isGreaterThan(
+        balanceData?.veusdBalance !== undefined && balanceData?.convertBalance !== undefined
+          ? BigNumber.min(balanceData.veusdBalance, balanceData.convertBalance)
+          : 0
+      );
   }, [fromTokenAmount, balanceData]);
 
   const handleSwap = () => {
@@ -170,6 +174,12 @@ export default function Swap() {
 
   return (
     <div className={css.swapPanel}>
+      {balanceData?.convertBalance.lte(10) && (
+        <p className={clsx(css.remaining, balanceData?.convertBalance.lte(1) && css.remaining__empty)}>
+          Remaining Convertible: <strong>{balanceData?.convertDisplayBalance}</strong> USDGLO
+        </p>
+      )}
+
       <Card className={css.card}>
         <TokenInput
           label="From"

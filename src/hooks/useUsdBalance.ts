@@ -20,7 +20,8 @@ export default function useUsdBalance() {
       return Promise.all([
         veusdContract.method(find(ABI_ERC20, { name: "balanceOf" })).call(account),
         veusdContract.method(find(ABI_ERC20, { name: "allowance" })).call(account, VEUSD_ROUTER_ADDRESS),
-        usdgloContract.method(find(ABI_ERC20, { name: "balanceOf" })).call(account)
+        usdgloContract.method(find(ABI_ERC20, { name: "balanceOf" })).call(account),
+        usdgloContract.method(find(ABI_ERC20, { name: "balanceOf" })).call(VEUSD_ROUTER_ADDRESS)
       ]);
     },
     select: (data) => {
@@ -33,6 +34,11 @@ export default function useUsdBalance() {
         veusdAllowance: BigNumber(data[1].decoded["0"]),
         usdgloBalance: BigNumber(data[2].decoded["0"]),
         usdgloDisplayBalance: BigNumber(data[2].decoded["0"])
+          .div(10 ** USDGLO.decimals)
+          .toFormat(6)
+          .replace(/\.?0+$/, ""),
+        convertBalance: BigNumber(data[3].decoded["0"]),
+        convertDisplayBalance: BigNumber(data[3].decoded["0"])
           .div(10 ** USDGLO.decimals)
           .toFormat(6)
           .replace(/\.?0+$/, "")

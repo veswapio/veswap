@@ -27,6 +27,23 @@
   }
 }
 
+.remaining {
+  text-align: center;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600px;
+  background: rgba(yellow, 0.3);
+  border: 1px solid rgba(yellow, 0.25);
+  padding: rhythm(2) 0;
+  border-radius: rhythm(10);
+  margin-bottom: rhythm(3);
+
+  &__empty {
+    background: rgba(red, 0.3);
+    border: 1px solid rgba(red, 0.25);
+  }
+}
+
 .swapButton {
   display: block;
   width: 20px;
