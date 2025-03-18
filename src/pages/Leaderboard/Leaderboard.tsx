@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useWallet } from "@vechain/dapp-kit-react";
 import { Tabs, TabList, Tab, TabPanel } from "react-aria-components";
 import Table from "~/components/Table";
-import { totalPoints, weeklyPoints, pointsLog } from "~/data/pointsV3";
+import { totalPoints, weeklyPoints, pointsLog } from "~/data/pointsV4";
 import css from "./Leaderboard.module.scss";
 
 export default function Leaderboard() {
@@ -39,23 +39,32 @@ export default function Leaderboard() {
     <div className={css.page}>
       <section className={css.section}>
         <h2 className={css.section__heading}>LeaderBoard</h2>
-        <div>
+        <div className={css.points}>
           <h4 className={css.status__title}>Point Calculation Rules:</h4>
           <h5 className={css.status__subTitle}>For Trading:</h5>
           <ul>
-            <li>Trade 10,000 $VET to earn 1 VeSwap Point.</li>
-            <li>Max 4 points per day.</li>
+            <li>Each 10,000 $VET traded earns 1 VeSwap Point.</li>
+            <li>Max 4 points per day (trading 40,000 $VET in one transaction also counts).</li>
           </ul>
-          <h5 className={css.status__subTitle}>For Providing Liquidity (B3TR/VET, VTHO/VET):</h5>
+          <h5 className={css.status__subTitle}>For Providing Liquidity:</h5>
+          <h6>Snapshots are taken every 6 hours (4 times per day) to measure liquidity.</h6>
           <ul>
-            <li>Provide 10,000 $VET-equivalent liquidity for 24 hrs x 7 days = 14 points.</li>
-            <li>Max 140 points per week (Liquidity duration should be continuous for 7 days).</li>
+            <li>
+              <h6>B3TR/VET:</h6>
+              <ul>
+                <li>Earn 0.5 points per 10,000 $VET-equivalent liquidity, up to 5 points per snapshot.</li>
+                <li>Max 140 points per week.</li>
+              </ul>
+            </li>
+            <li>
+              <h6>VTHO/VET, WOV/VET:</h6>
+              <ul>
+                <li>Earn 0.05 points per 10,000 $VET-equivalent liquidity, up to 0.5 points per snapshot.</li>
+                <li>Max 14 points per week.</li>
+              </ul>
+            </li>
           </ul>
-          <h5 className={css.status__subTitle}>For Providing Liquidity (WOV/VET):</h5>
-          <ul>
-            <li>Provide 100,000 $VET-equivalent liquidity for 24 hrs x 7 days = 14 points.</li>
-            <li>Max 14 points per week (Liquidity duration should be continuous for 7 days).</li>
-          </ul>
+          <h6>ℹ️ Liquidity must be present at the time of the snapshot to earn points.</h6>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 import Table from "~/components/Table";
-import { tradingStatistics } from "~/data/pointsV3";
+import { tradingStatistics } from "~/data/pointsV4";
 import css from "./Overview.module.scss";
 
 export default function Monthly() {

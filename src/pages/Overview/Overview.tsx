@@ -12,7 +12,7 @@ import { formatBigNumber, truncateAddress } from "~/utils/helpers";
 import tokens from "~/constants/tokens";
 import TOKEN_ICONS from "~/constants/tokenIcons";
 import Table from "~/components/Table";
-import { tradingStatistics } from "~/data/pointsV3";
+import { tradingStatistics } from "~/data/pointsV4";
 import css from "./Overview.module.scss";
 
 import IconArrow2 from "~/assets/arrow2.svg?react";
