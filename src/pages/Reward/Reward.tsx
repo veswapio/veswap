@@ -31,6 +31,7 @@ import rewardRound33Data from "../../reward-data/round33.json";
 import rewardRound34Data from "../../reward-data/round34.json";
 import rewardRound35Data from "../../reward-data/round35.json";
 import rewardRound36Data from "../../reward-data/round36.json";
+import rewardRound37Data from "../../reward-data/round37.json";
 
 const roundList = [
   {
@@ -128,6 +129,12 @@ const roundList = [
     tooltip: "",
     address: "0xdf3af04d6741754f2bd35ce1acd29b4ac23b58aa",
     userList: rewardRound36Data.claims
+  },
+  {
+    title: "Round 37",
+    tooltip: "",
+    address: "0x25c93067a1eac288aa34d8b8d6fa0647d98d0e71",
+    userList: rewardRound37Data.claims
   }
 ];
 
