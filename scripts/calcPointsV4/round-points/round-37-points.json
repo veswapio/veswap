@@ -914,8 +914,8 @@
     "VTHO/VVET": 0
   },
   "0x2b25881f670163866a665acde8ed000bf3a337e3": {
-    "liquidityTotalPoints": 0,
-    "VVET/B3TR": 0,
+    "liquidityTotalPoints": 140,
+    "VVET/B3TR": 140,
     "VTHO/VVET": 0,
     "daily": [
       0,
@@ -1375,8 +1375,8 @@
     "swapTotalPoints": 0
   },
   "0x6aeb56a870c928d201d0d7253a3a33e1e807ef36": {
-    "liquidityTotalPoints": 1.4000000000000006,
-    "VTHO/VVET": 1.4000000000000006,
+    "liquidityTotalPoints": 2.800000000000001,
+    "VTHO/VVET": 2.800000000000001,
     "VVET/B3TR": 0
   },
   "0xcb2cb555458dfa22a6650dc2a777b12be4b6e4f7": {
@@ -1577,8 +1577,8 @@
     "VTHO/VVET": 0
   },
   "0xaa6ff331df20b5a63209f3eabcab05f87c880bbe": {
-    "liquidityTotalPoints": 9.799999999999995,
-    "VTHO/VVET": 9.799999999999995
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14
   },
   "0x7b20efd956d749f76faf33d7a214043989595d1e": {
     "liquidityTotalPoints": 0,
@@ -1598,8 +1598,8 @@
     "VVET/B3TR": 0
   },
   "0x96ce5306a3fbb30b0b207e78e5154653fc06ba80": {
-    "liquidityTotalPoints": 56,
-    "VVET/B3TR": 56,
+    "liquidityTotalPoints": 98,
+    "VVET/B3TR": 98,
     "daily": [
       3,
       4,
@@ -1610,8 +1610,8 @@
     "swapTotalPoints": 19
   },
   "0x664d2624843d48690e1ab8eb2fb459c63364daf0": {
-    "liquidityTotalPoints": 8.25,
-    "VTHO/VVET": 8.25,
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14,
     "daily": [
       0,
       0,
@@ -1728,9 +1728,9 @@
     "VVET/B3TR": 0
   },
   "0x784d847decb086a0139e393bb0ccb14cb856e407": {
-    "liquidityTotalPoints": 14,
+    "liquidityTotalPoints": 28,
     "VTHO/VVET": 0,
-    "VVET/B3TR": 14,
+    "VVET/B3TR": 28,
     "daily": [
       0,
       0,
@@ -1836,28 +1836,28 @@
     "VVET/B3TR": 0
   },
   "0xec3c434f24d77285fbddb35c01fed66aef78ec50": {
-    "liquidityTotalPoints": 0,
-    "VTHO/VVET": 0
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14
   },
   "0x77650da029a34ba186999e763621eaac5d6e204c": {
-    "liquidityTotalPoints": 7.100000000000004,
-    "VTHO/VVET": 7.100000000000004
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14
   },
   "0x4beece65b0316785931e62ac5ca9b32405c99c4a": {
-    "liquidityTotalPoints": 7.400000000000004,
-    "VTHO/VVET": 7.400000000000004
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14
   },
   "0x97beb590b7b6fd818ea8b568e88d354f4911223b": {
-    "liquidityTotalPoints": 7.400000000000004,
-    "VTHO/VVET": 7.400000000000004
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14
   },
   "0xb048cf8677a497f1eb2d5fa866e3707a3973b48e": {
-    "liquidityTotalPoints": 7.400000000000004,
-    "VTHO/VVET": 7.400000000000004
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14
   },
   "0xf5c59f761c4b8ce666455175a9c423b89f607715": {
-    "liquidityTotalPoints": 7.400000000000004,
-    "VTHO/VVET": 7.400000000000004
+    "liquidityTotalPoints": 14,
+    "VTHO/VVET": 14
   },
   "0x57ff0b1e1d636322c7d45b412e0f8bddfeed78c5": {
     "liquidityTotalPoints": 0,

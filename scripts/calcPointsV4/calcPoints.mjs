@@ -89,7 +89,7 @@ pastRecords.forEach((record) => {
   if (type === "ADD_LIQUIDITY") {
     userLiquidity[account][pair] = userLiquidity[account][pair].plus(amountBN);
   } else if (type === "REMOVE_LIQUIDITY") {
-    userLiquidity[account][pair] = userLiquidity[account][pair].minus(amountBN);
+    userLiquidity[account][pair] = BigNumber.maximum(userLiquidity[account][pair].minus(amountBN), BigNumber(0));
   }
 });
 
@@ -125,7 +125,7 @@ liquiditySlots.forEach((slotEndTime, slotIndex) => {
     if (type === "ADD_LIQUIDITY") {
       userLiquidity[account][pair] = userLiquidity[account][pair].plus(amountBN);
     } else if (type === "REMOVE_LIQUIDITY") {
-      userLiquidity[account][pair] = userLiquidity[account][pair].minus(amountBN);
+      userLiquidity[account][pair] = BigNumber.maximum(userLiquidity[account][pair].minus(amountBN), BigNumber(0));
     }
 
     if (ENABLE_DEBUG && account.toLowerCase() === DEBUG_ADDRESS) {
