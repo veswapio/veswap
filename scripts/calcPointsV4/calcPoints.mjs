@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 import moment from "moment";
 import BigNumber from "bignumber.js";
 import { parse } from "csv-parse/sync";
-import { totalPoints, pointsLog } from "./lockedPoints.js";
+import { totalPoints, pointsLog } from "../../src/data/pointsV4.ts";
 import { END_TIME, ENABLE_DEBUG, DEBUG_ADDRESS } from "./config.js";
 // import { proviousWovPoints } from "./lockedWovLiquidityPoints.js";
 
@@ -311,17 +311,17 @@ _totalPoints.sort((a, b) => b.points - a.points);
 // _totalPoints.sort((a, b) => b.points - a.points);
 
 // weekly points
-const _weeklyPoinst = [];
+const _weeklyPoints = [];
 Object.entries(userPoints).forEach(([account, points]) => {
   const liquidityTotalPoints = points.liquidityTotalPoints || 0;
   const swapTotalPoints = points.swapTotalPoints || 0;
   if (liquidityTotalPoints + swapTotalPoints === 0) return;
-  _weeklyPoinst.push({
+  _weeklyPoints.push({
     account,
     points: +(liquidityTotalPoints + swapTotalPoints).toFixed(2)
   });
 });
-_weeklyPoinst.sort((a, b) => b.points - a.points);
+_weeklyPoints.sort((a, b) => b.points - a.points);
 
 // user points log
 const _pointsLog = pointsLog;
@@ -396,10 +396,12 @@ Object.keys(_tradingStatistics.monthlyStats).forEach((month) => {
   delete _tradingStatistics.monthlyStats[month].traders;
 });
 
-fs.writeFileSync(
-  path.join(__dirname, "../../src/data/pointsV4.ts"),
-  `export const totalPoints = ${JSON.stringify(_totalPoints)};
-export const weeklyPoints = ${JSON.stringify(_weeklyPoinst)};
+if (!ENABLE_DEBUG) {
+  fs.writeFileSync(
+    path.join(__dirname, "../../src/data/pointsV4.ts"),
+    `export const totalPoints = ${JSON.stringify(_totalPoints)};
+export const weeklyPoints = ${JSON.stringify(_weeklyPoints)};
 export const pointsLog: Record<string, any> = ${JSON.stringify(_pointsLog)};
 export const tradingStatistics = ${JSON.stringify(_tradingStatistics)};`
-);
+  );
+}
