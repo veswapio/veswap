@@ -503,7 +503,69 @@ function RemoveLiquidityPane({ pair, setActivePane }: { pair: sdk.Pair; setActiv
           setTransactionStatus(undefined);
         });
     } else {
-      // TODO: removeLiquidity
+      // Remove none VET token pair liquidity
+      const removeLiquidityMethod = connex.thor
+        .account(ROUTER_ADDRESS)
+        .method(find(IUniswapV2Router.abi, { name: "removeLiquidity" }));
+
+      const balance = myPairShare.myLpBalance.times(value / 100).toFixed(0, 1);
+
+      const amountAMin = bigNumberToWei(_receiveToken0.times(0.97), pair.token0.decimals);
+      const amountBMin = bigNumberToWei(_receiveToken1.times(0.97), pair.token1.decimals);
+      const clause = removeLiquidityMethod.asClause(
+        pair.token0.address,
+        pair.token1.address,
+        balance,
+        amountAMin,
+        amountBMin,
+        account,
+        Math.ceil(Date.now() / 1000) + 60 * 20
+      );
+
+      let approveClause;
+      if (BigNumber(balance).isGreaterThan(myPairShare.myLpAllowance)) {
+        const approveMethod = connex.thor
+          .account(pair.liquidityToken.address)
+          .method(find(ABI_ERC20, { name: "approve" }));
+        approveClause = approveMethod.asClause(ROUTER_ADDRESS, balance);
+      }
+
+      setTransactionStatus({
+        isPending: true,
+        isSuccessful: false,
+        isFailed: false,
+        transactionHash: null,
+        message: `Remove liquidity ${value}%`
+      });
+
+      connex.vendor
+        .sign("tx", approveClause ? [{ ...approveClause }, { ...clause }] : [{ ...clause }])
+        .comment("Remove Liquidity")
+        .request()
+        .then((tx: any) => {
+          return poll(() => connex.thor.transaction(tx.txid).getReceipt());
+        })
+        .then((result: any) => {
+          const isSuccess = result.reverted === false;
+          setTransactionStatus({
+            isPending: false,
+            isSuccessful: isSuccess,
+            isFailed: !isSuccess,
+            transactionHash: result.meta.txID,
+            message: null
+          });
+          if (isSuccess) {
+            setValue(0);
+            queryClient.refetchQueries({
+              queryKey: ["token-balance-list"]
+            });
+          }
+        })
+        .catch((err: any) => {
+          console.log("ERROR");
+          console.log(err);
+          setTransactionStatus(undefined);
+        });
     }
   };
 
